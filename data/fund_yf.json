@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-09-29T22:29:21+00:00",
+  "actualizado": "2026-09-29T22:39:52+00:00",
   "empresas": {
     "VIST": {
       "cierre": "2026-06-30",
@@ -15,7 +15,7 @@
       "deuda_neta_musd": 3146.997,
       "acciones_mm": 110.617402,
       "mcap_yahoo_musd": 7379.28704,
-      "minoritarios_musd": 0.0,
+      "minoritarios_musd": 189.99,
       "moneda_origen": "USD",
       "moneda_verificar": false,
       "fuente": "Yahoo Finance vía yfinance (VIST), últimos 4 trimestres al 2026-06-30"
@@ -40,23 +40,23 @@
       "fuente": "Yahoo Finance vía yfinance (YPF), últimos 4 trimestres al 2026-06-30"
     },
     "EOG": {
-      "cierre": "2026-06-30",
-      "capex_musd_ttm": 6744.0,
-      "dda_musd_ttm": 4847.0,
-      "costo_ventas_musd_ttm": 9223.0,
-      "ingresos_musd_ttm": 26637.0,
-      "tasa_impuesto_efectiva": 0.21756941283568504,
-      "sga_musd_ttm": 6449.0,
-      "intereses_musd_ttm": 270.0,
-      "deuda_musd": 8250.0,
-      "caja_musd": 4907.0,
-      "deuda_neta_musd": 3343.0,
-      "acciones_mm": 524.529176,
-      "mcap_yahoo_musd": 73255.747584,
+      "cierre": "2026-03-31",
+      "capex_musd_ttm": 6755.0,
+      "dda_musd_ttm": 4641.0,
+      "costo_ventas_musd_ttm": 8725.0,
+      "ingresos_musd_ttm": 23498.0,
+      "tasa_impuesto_efectiva": 0.21917613636363636,
+      "sga_musd_ttm": 5688.0,
+      "intereses_musd_ttm": 254.0,
+      "deuda_musd": 8306.0,
+      "caja_musd": 3849.0,
+      "deuda_neta_musd": 4457.0,
+      "acciones_mm": 532.62853,
+      "mcap_yahoo_musd": 74386.907136,
       "minoritarios_musd": 0.0,
       "moneda_origen": "USD",
       "moneda_verificar": false,
-      "fuente": "Yahoo Finance vía yfinance (EOG), últimos 4 trimestres al 2026-06-30"
+      "fuente": "Yahoo Finance vía yfinance (EOG), últimos 4 trimestres al 2026-03-31"
     },
     "COP": {
       "cierre": "2026-06-30",
