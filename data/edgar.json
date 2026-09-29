@@ -1,45 +1,57 @@
 {
-  "actualizado": "2026-09-21T05:50:40+00:00",
-  "hasta": "2026-09-21",
+  "actualizado": "2026-09-29T22:30:28+00:00",
+  "hasta": "2026-09-29",
   "empresas": {
     "VIST": {
       "docs": {
         "release": {
-          "url": "https://www.sec.gov/Archives/edgar/data/1762506/000119312526306731/d101768dex1.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1762506/000119312526306139/d151775dex1.htm",
           "form": "6-K",
-          "fecha": "2026-07-17",
+          "fecha": "2026-07-16",
           "periodo": "2026-06-30",
           "dias": 91
         }
       },
       "valores": {
         "total_kboed": {
-          "valor": 156.0,
+          "valor": 156.061,
           "doc": "release",
-          "texto": "156 Mboe/d Production"
+          "texto": "Total (boe/d) 156,061"
         },
         "crudo_kbd": {
-          "valor": 135.0,
+          "valor": 135.427,
           "doc": "release",
-          "texto": "135 Mbbl/d Oil Production"
+          "texto": "Oil (bbl/d) 135,427"
+        },
+        "p_crudo": {
+          "valor": 89.4,
+          "doc": "release",
+          "texto": "Oil ($/bbl) (1) 89.4"
+        },
+        "p_gas_mmbtu": {
+          "valor": 3.0,
+          "doc": "release",
+          "texto": "Natural Gas ($/MMBTU) 3.0"
         },
         "lifting_boe": {
           "valor": 4.5,
           "doc": "release",
-          "texto": "4.5 $/boe Lifting Cost"
+          "texto": "Lifting cost ($/boe) 4.5"
         },
-        "retenciones_musd": {
-          "valor": 50.6,
+        "regalias_kusd": {
+          "valor": 186744.0,
           "doc": "release",
-          "texto": "export duties of 50.6 $MM in Q"
+          "texto": "Royalties and others (186,744"
         },
         "ingresos_musd": {
-          "valor": 1212.0,
+          "valor": 1154.4,
           "doc": "release",
-          "texto": "Revenues were 1,212 $MM in Q"
+          "texto": "Total revenues in Q2 2026 were 1,154.4 $MM"
         }
       },
-      "fallas": []
+      "fallas": [
+        "reservas_mmboe: no encontrado"
+      ]
     },
     "YPF": {
       "docs": {
@@ -93,7 +105,9 @@
           "texto": "Adj. EBITDA Upstream 1,725 1,148 50% 786 119% 2,873 1,568 83% Midstream & Downstream 967"
         }
       },
-      "fallas": []
+      "fallas": [
+        "reservas_mmboe: no encontrado"
+      ]
     },
     "EOG": {
       "docs": {
@@ -167,7 +181,9 @@
           "texto": "Taxes Other Than Income 431"
         }
       },
-      "fallas": []
+      "fallas": [
+        "reservas_mmboe: no encontrado"
+      ]
     },
     "COP": {
       "docs": {
@@ -246,7 +262,9 @@
           "texto": "Depreciation, depletion and amortization 2,983"
         }
       },
-      "fallas": []
+      "fallas": [
+        "reservas_mmboe: no encontrado"
+      ]
     },
     "PBR": {
       "docs": {
@@ -270,6 +288,11 @@
           "valor": 2689.0,
           "doc": "produccion",
           "texto": "Crude oil and NGLs (mbpd)(1) 2,689"
+        },
+        "brasil_kboed": {
+          "valor": 3308.0,
+          "doc": "produccion",
+          "texto": "Crude oil, NGL and natural gas production - Brazil (mboed) 3,308"
         },
         "gas_kboed": {
           "valor": 619.0,
@@ -312,7 +335,9 @@
           "texto": "Natural gas sales price - Brazil (US$/bbl) 59.10"
         }
       },
-      "fallas": []
+      "fallas": [
+        "reservas_mmboe: no encontrado"
+      ]
     }
   },
   "errores": {}
