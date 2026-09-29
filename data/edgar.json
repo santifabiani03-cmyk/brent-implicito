@@ -1,0 +1,319 @@
+{
+  "actualizado": "2026-09-21T05:50:40+00:00",
+  "hasta": "2026-09-21",
+  "empresas": {
+    "VIST": {
+      "docs": {
+        "release": {
+          "url": "https://www.sec.gov/Archives/edgar/data/1762506/000119312526306731/d101768dex1.htm",
+          "form": "6-K",
+          "fecha": "2026-07-17",
+          "periodo": "2026-06-30",
+          "dias": 91
+        }
+      },
+      "valores": {
+        "total_kboed": {
+          "valor": 156.0,
+          "doc": "release",
+          "texto": "156 Mboe/d Production"
+        },
+        "crudo_kbd": {
+          "valor": 135.0,
+          "doc": "release",
+          "texto": "135 Mbbl/d Oil Production"
+        },
+        "lifting_boe": {
+          "valor": 4.5,
+          "doc": "release",
+          "texto": "4.5 $/boe Lifting Cost"
+        },
+        "retenciones_musd": {
+          "valor": 50.6,
+          "doc": "release",
+          "texto": "export duties of 50.6 $MM in Q"
+        },
+        "ingresos_musd": {
+          "valor": 1212.0,
+          "doc": "release",
+          "texto": "Revenues were 1,212 $MM in Q"
+        }
+      },
+      "fallas": []
+    },
+    "YPF": {
+      "docs": {
+        "release": {
+          "url": "https://www.sec.gov/Archives/edgar/data/904851/000155485526001760/MainDocument.htm",
+          "form": "6-K",
+          "fecha": "2026-08-11",
+          "periodo": "2026-06-30",
+          "dias": 91
+        }
+      },
+      "valores": {
+        "crudo_kbd": {
+          "valor": 265.5,
+          "doc": "release",
+          "texto": "Crude Oil (Kbbl/d) 265.5"
+        },
+        "ngl_kbd": {
+          "valor": 44.6,
+          "doc": "release",
+          "texto": "NGL (Kbbl/d) 44.6"
+        },
+        "total_kboed": {
+          "valor": 544.4,
+          "doc": "release",
+          "texto": "Total Production (Kboed) 544.4"
+        },
+        "p_crudo": {
+          "valor": 91.1,
+          "doc": "release",
+          "texto": "Crude Oil Price (US$/bbl) 91.1"
+        },
+        "p_gas_mmbtu": {
+          "valor": 4.2,
+          "doc": "release",
+          "texto": "Natural Gas Price (US$/MBTU) 4.2"
+        },
+        "lifting_boe": {
+          "valor": 8.4,
+          "doc": "release",
+          "texto": "Total Lifting Cost (US$/boe) (2) 8.4"
+        },
+        "regalias_boe": {
+          "valor": 8.5,
+          "doc": "release",
+          "texto": "Royalties and other taxes 8.5"
+        },
+        "ebitda_no_up_q": {
+          "valor": 967.0,
+          "doc": "release",
+          "texto": "Adj. EBITDA Upstream 1,725 1,148 50% 786 119% 2,873 1,568 83% Midstream & Downstream 967"
+        }
+      },
+      "fallas": []
+    },
+    "EOG": {
+      "docs": {
+        "periodico": {
+          "url": "https://www.sec.gov/Archives/edgar/data/821189/000082118926000149/eog-20260630.htm",
+          "form": "10-Q",
+          "fecha": "2026-08-04",
+          "periodo": "2026-06-30",
+          "dias": 91
+        }
+      },
+      "valores": {
+        "crudo_kbd": {
+          "valor": 548.8,
+          "doc": "periodico",
+          "texto": "Crude Oil and Condensate Volumes (MBbld) (1) United States 546.2 503.1 Trinidad 2.1 1.1 Other International (2) 0.5 — Total 548.8"
+        },
+        "ngl_kbd": {
+          "valor": 346.8,
+          "doc": "periodico",
+          "texto": "Natural Gas Liquids Volumes (MBbld) (1) United States 346.8 258.4 Total 346.8"
+        },
+        "gas_mmcfd": {
+          "valor": 3089.0,
+          "doc": "periodico",
+          "texto": "Natural Gas Volumes (MMcfd) (1) United States 2,784 1,977 Trinidad 293 252 Other International (2) 12 — Total 3,089"
+        },
+        "total_kboed": {
+          "valor": 1410.4,
+          "doc": "periodico",
+          "texto": "Crude Oil Equivalent Volumes (MBoed) (4) United States 1,357.1 1,090.9 Trinidad 50.9 43.2 Other International 2.4 — Total 1,410.4"
+        },
+        "p_crudo": {
+          "valor": 98.15,
+          "doc": "periodico",
+          "texto": "Average Crude Oil and Condensate Prices ($/Bbl) (3) United States $ 98.18 $ 64.84 Trinidad 88.87 54.50 Other International 103.40 — Composite 98.15"
+        },
+        "p_ngl": {
+          "valor": 24.41,
+          "doc": "periodico",
+          "texto": "Average Natural Gas Liquids Prices ($/Bbl) (3) United States $ 24.41"
+        },
+        "p_gas_mcf": {
+          "valor": 2.89,
+          "doc": "periodico",
+          "texto": "Average Natural Gas Prices ($/Mcf) (3) United States $ 2.77 $ 2.87 Trinidad 3.99 3.65 Other International (2) 3.27 — Composite 2.89"
+        },
+        "lifting_boe": {
+          "valor": 3.64,
+          "doc": "periodico",
+          "texto": "costs per barrel of oil equivalent (Boe) for the three-month periods ended June 30, 2026 and 2025: Three Months Ended June 30, 2026 2025 Lease and Well $ 3.64"
+        },
+        "gpt_boe": {
+          "valor": 5.27,
+          "doc": "periodico",
+          "texto": "(GP&T) 5.27"
+        },
+        "ga_boe": {
+          "valor": 1.66,
+          "doc": "periodico",
+          "texto": "General and Administrative (G&A) 1.66"
+        },
+        "dda_boe": {
+          "valor": 9.27,
+          "doc": "periodico",
+          "texto": "(DD&A) - Oil and Gas Properties 9.27"
+        },
+        "toti_musd": {
+          "valor": 431.0,
+          "doc": "periodico",
+          "texto": "Taxes Other Than Income 431"
+        }
+      },
+      "fallas": []
+    },
+    "COP": {
+      "docs": {
+        "periodico": {
+          "url": "https://www.sec.gov/Archives/edgar/data/1163165/000116316526000032/cop-20260630.htm",
+          "form": "10-Q",
+          "fecha": "2026-08-06",
+          "periodo": "2026-06-30",
+          "dias": 91
+        }
+      },
+      "valores": {
+        "crudo_kbd": {
+          "valor": 1094.0,
+          "doc": "periodico",
+          "texto": "Average Net Production Crude oil (MBD) Consolidated operations 1,092 1,144 1,096 1,149 Equity affiliates 2 11 6 12 Total crude oil 1,094"
+        },
+        "bitumen_kbd": {
+          "valor": 115.0,
+          "doc": "periodico",
+          "texto": "Bitumen (MBD) 115"
+        },
+        "ngl_kbd": {
+          "valor": 420.0,
+          "doc": "periodico",
+          "texto": "Total natural gas liquids 420"
+        },
+        "gas_mmcfd": {
+          "valor": 3710.0,
+          "doc": "periodico",
+          "texto": "Total natural gas 3,710"
+        },
+        "total_kboed": {
+          "valor": 2248.0,
+          "doc": "periodico",
+          "texto": "Total Production (MBOED) 2,248"
+        },
+        "total_mmboe": {
+          "valor": 205.0,
+          "doc": "periodico",
+          "texto": "Total Production (MMBOE) 205"
+        },
+        "p_crudo": {
+          "valor": 99.4,
+          "doc": "periodico",
+          "texto": "Average Sales Prices Crude oil (per BBL) Consolidated operations $ 99.47 64.21 86.70 67.92 Equity affiliates 66.95 65.87 68.46 71.15 Total crude oil 99.40"
+        },
+        "p_ngl": {
+          "valor": 24.54,
+          "doc": "periodico",
+          "texto": "Natural gas liquids (per BBL) Consolidated operations 24.43 20.51 22.29 22.60 Equity affiliates 45.20 48.93 45.97 50.72 Total natural gas liquids 24.54"
+        },
+        "p_gas_mcf": {
+          "valor": 2.58,
+          "doc": "periodico",
+          "texto": "Natural gas (per MCF) Consolidated operations 1.60 2.99 2.47 3.88 Equity affiliates 5.62 6.91 5.76 7.24 Total natural gas $ 2.58"
+        },
+        "opex_musd": {
+          "valor": 2431.0,
+          "doc": "periodico",
+          "texto": "Production and operating expenses 2,431"
+        },
+        "sga_musd": {
+          "valor": 188.0,
+          "doc": "periodico",
+          "texto": "Selling, general and administrative expenses 188"
+        },
+        "toti_musd": {
+          "valor": 793.0,
+          "doc": "periodico",
+          "texto": "Taxes other than income taxes 793"
+        },
+        "dda_musd": {
+          "valor": 2983.0,
+          "doc": "periodico",
+          "texto": "Depreciation, depletion and amortization 2,983"
+        }
+      },
+      "fallas": []
+    },
+    "PBR": {
+      "docs": {
+        "resultados": {
+          "url": "https://www.sec.gov/Archives/edgar/data/1119639/000129281426004129/pbrrmf2q26usd_6k.htm",
+          "form": "6-K",
+          "fecha": "2026-08-07",
+          "periodo": "2026-06-30",
+          "dias": 91
+        },
+        "produccion": {
+          "url": "https://www.sec.gov/Archives/edgar/data/1119639/000129281426003948/pbr20260728_6k.htm",
+          "form": "6-K",
+          "fecha": "2026-07-29",
+          "periodo": "2026-06-30",
+          "dias": 91
+        }
+      },
+      "valores": {
+        "crudo_kbd": {
+          "valor": 2689.0,
+          "doc": "produccion",
+          "texto": "Crude oil and NGLs (mbpd)(1) 2,689"
+        },
+        "gas_kboed": {
+          "valor": 619.0,
+          "doc": "produccion",
+          "texto": "Natural gas (Mboed) 619"
+        },
+        "total_kboed": {
+          "valor": 3336.0,
+          "doc": "produccion",
+          "texto": "Total production (mboed) 3,336"
+        },
+        "lifting_boe": {
+          "valor": 6.33,
+          "doc": "resultados",
+          "texto": "Lifting cost Brazil (US$/boe) 6.33"
+        },
+        "lifting_pt_boe": {
+          "valor": 23.88,
+          "doc": "resultados",
+          "texto": "Lifting cost + Production taxes 23.88"
+        },
+        "brent_q": {
+          "valor": 104.52,
+          "doc": "resultados",
+          "texto": "Brent crude (US$/bbl) 104.52"
+        },
+        "ebitda_rtm_q": {
+          "valor": 3562.0,
+          "doc": "resultados",
+          "texto": "RTM RESULTS Variation (%) (1) US$ million 2Q26 1Q26 2Q25 1H26 1H25 2Q26 X 1Q26 2Q26 X 2Q25 1H26 X 1H25 Sales revenues 32,351 22,297 19,795 54,648 39,784 45.1 63"
+        },
+        "ebitda_glce_q": {
+          "valor": 419.0,
+          "doc": "resultados",
+          "texto": "G&LCE RESULTS Variation (%) (1) US$ million 2Q26 1Q26 2Q25 1H26 1H25 2Q26 X 1Q26 2Q26 X 2Q25 1H26 X 1H25 Sales revenues 2,406 2,205 2,176 4,611 4,036 9.1 10.6 1"
+        },
+        "p_gas_boe": {
+          "valor": 59.1,
+          "doc": "resultados",
+          "texto": "Natural gas sales price - Brazil (US$/bbl) 59.10"
+        }
+      },
+      "fallas": []
+    }
+  },
+  "errores": {}
+}

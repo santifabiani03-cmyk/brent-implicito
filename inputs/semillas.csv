@@ -1,0 +1,10 @@
+empresa,trimestre,fecha_publicacion,variable,valor,unidad,fuente_url,pagina_o_tabla,cargado_por,verificado_por
+EOG,FY2025,2026-02-24,prod_crudo_kbd,521.9,kbbl/d,https://investors.eogresources.com/2026-02-24-EOG-Resources-Reports-Fourth-Quarter-and-Full-Year-2025-Results-Announces-2026-Capital-Plan,Crude oil & condensate FY2025,Claude (semilla),
+EOG,FY2025,2026-02-24,prod_otros_kboed,710.3,kboe/d,https://investors.eogresources.com/2026-02-24-EOG-Resources-Reports-Fourth-Quarter-and-Full-Year-2025-Results-Announces-2026-Capital-Plan,Total 1232.2 − crudo 521.9 (NGL 288.2 + gas 2533 MMcfd),Claude (semilla),
+EOG,FY2025,2026-02-24,reservas_1p_mmboe,5514,MMboe,https://www.stocktitan.net/sec-filings/EOG/10-k-eog-resources-inc-files-annual-report-2c4e314909cb.html,10-K 2025 proved reserves,Claude (semilla),
+COP,FY2025,2026-02-17,reservas_1p_mmboe,7637,MMboe,https://www.stocktitan.net/sec-filings/COP/10-k-conocophillips-files-annual-report-aad59f7b8893.html,10-K 2025 proved reserves,Claude (semilla),
+PRIO,2T2026,2026-08-01,prod_crudo_kbd,172,kbbl/d,https://euqueroinvestir.com/mercados/resultado-prio-2t26,Produção média 2T26 (total; gas no desagregado),Claude (semilla),
+PRIO,2T2026,2026-08-01,lifting_usd_boe,8.90,USD/bbl,https://euqueroinvestir.com/mercados/resultado-prio-2t26,Lifting cost 2T26,Claude (semilla),
+PRIO,2026-01-01,2026-01-30,reservas_1p_mmboe,757.3,MMbbl,https://safras.com.br/prio-divulga-nova-certificacao-de-reservas-e-capex-associado/,Certificación D&M 1P al 01/01/2026,Claude (semilla),
+PBR,FY2025,2026-01-29,reservas_1p_mmboe,12100,MMboe,https://agencia.petrobras.com.br/en/w/petrobras-aumenta-reservas-provadas-em-2025,Reservas probadas SEC 31/12/2025 (12.1 bn boe),Claude (semilla),
+PRIO,2T2026,2026-08-01,p_crudo,94.60,USD/bbl,https://euqueroinvestir.com/mercados/resultado-prio-2t26,Preço realizado 2T26,Claude (semilla),

@@ -1,0 +1,282 @@
+<title>Barril Implícito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F2F5F4; --surface:#FFFFFF; --ink:#15201D; --muted:#5B6964; --line:#D5DDDA; --soft:#E7EDEB;
+  --accent:#0E6B65; --accent-soft:#D6ECE9; --crude:#A86A12; --crude-soft:#F6E7CF;
+  --ok:#2E7D4F; --warn:#A86A12; --bad:#B23A3A; --pending:#6B6F8A;
+  --f-disp:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1513; --surface:#15201D; --ink:#E3EAE7; --muted:#93A39E; --line:#2A3834; --soft:#1C2926;
+  --accent:#4DB6AB; --accent-soft:#173532; --crude:#E0A548; --crude-soft:#3A2B14;
+  --ok:#5FBF86; --warn:#E0A548; --bad:#E07070; --pending:#A3A7C4;}}
+:root[data-theme="dark"]{
+  --bg:#0E1513; --surface:#15201D; --ink:#E3EAE7; --muted:#93A39E; --line:#2A3834; --soft:#1C2926;
+  --accent:#4DB6AB; --accent-soft:#173532; --crude:#E0A548; --crude-soft:#3A2B14;
+  --ok:#5FBF86; --warn:#E0A548; --bad:#E07070; --pending:#A3A7C4;}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body);padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-disp);text-wrap:balance;margin:0;letter-spacing:-.01em}
+.num,.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.lbl{font:600 11px/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+a{color:var(--accent)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:14px 0}
+.brand{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;justify-content:space-between}
+.brand h1{font-size:26px;font-weight:700}
+.brand h1 span{color:var(--crude)}
+.brand p{margin:0;color:var(--muted);font-size:13px}
+nav.tabs{display:flex;gap:4px;margin-top:12px;overflow-x:auto}
+nav.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:8px 12px;cursor:pointer;color:var(--muted);font-weight:600;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--accent)}
+main{padding-top:24px;display:grid;gap:28px}
+section[role=tabpanel]{display:grid;gap:24px}
+/* tape */
+.tape{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.tape>div{background:var(--surface);padding:14px 16px;display:grid;gap:4px}
+.tape .v{font:500 26px/1.1 var(--f-mono)}
+.tape .s{font-size:12px;color:var(--muted)}
+.banner{border:1px solid var(--line);border-left:4px solid var(--pending);background:var(--surface);padding:12px 16px;border-radius:4px;font-size:14px}
+.banner.warn{border-left-color:var(--warn)}
+.banner strong{font-family:var(--f-disp)}
+/* rail */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px}
+.panel h2{font-size:20px;margin-bottom:4px}
+.panel .sub{color:var(--muted);font-size:13px;margin:0 0 14px}
+.chart{width:100%;overflow-x:auto}
+.chart svg{display:block;width:100%;height:auto;min-width:520px}
+.chart text{fill:var(--muted);font:11px var(--f-mono)}
+/* grid of companies */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px;display:grid;gap:10px;cursor:pointer;text-align:left}
+.card:hover{border-color:var(--accent)}
+.card .head{display:flex;justify-content:space-between;align-items:start;gap:8px}
+.card h3{font-size:19px}
+.card .tk{font:500 12px var(--f-mono);color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:600 11px/1 var(--f-body);letter-spacing:.04em;padding:5px 8px;border-radius:99px;background:var(--soft);color:var(--muted);white-space:nowrap}
+.chip.pure{background:var(--accent-soft);color:var(--accent)}
+.chip.int{background:var(--crude-soft);color:var(--crude)}
+.chip.pend{background:transparent;border:1px dashed var(--pending);color:var(--pending)}
+.chip.ok{background:transparent;border:1px solid var(--ok);color:var(--ok)}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px}
+.kv div{display:grid;gap:2px}
+.kv .v{font:500 16px var(--f-mono)}
+.implied{display:flex;align-items:baseline;gap:8px;border-top:1px solid var(--line);padding-top:10px}
+.implied .v{font:500 22px var(--f-mono);color:var(--crude)}
+.spark{height:36px;width:100%}
+/* empresa */
+.sel{display:flex;flex-wrap:wrap;gap:6px}
+.sel button{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:7px 12px;cursor:pointer;font-weight:600}
+.sel button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.prose p{margin:0 0 10px;max-width:68ch}
+.note{font-size:13px;color:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 11px var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+td input{width:110px;padding:4px 6px;border:1px solid var(--line);border-radius:3px;background:var(--bg);font-family:var(--f-mono);text-align:right}
+td input.miss{border-style:dashed;border-color:var(--pending)}
+td input.edited{border-color:var(--crude);background:var(--crude-soft)}
+.tbl{overflow-x:auto}
+.orig{font:600 10px var(--f-body);letter-spacing:.05em;text-transform:uppercase;padding:3px 6px;border-radius:3px}
+.orig.automatico{color:var(--accent);background:var(--accent-soft)}
+.orig.parametro{color:var(--muted);background:var(--soft)}
+.orig.derivado{color:var(--accent);border:1px dashed var(--accent)}
+.orig.semilla{color:var(--crude);background:var(--crude-soft)}
+.orig.edgar{color:#fff;background:var(--accent)}
+.orig.macro{color:var(--accent);background:var(--accent-soft)}
+.orig.supuesto{color:var(--warn);border:1px dashed var(--warn)}
+.orig.equipo{color:var(--ok);border:1px solid var(--ok)}
+.orig.faltante{color:var(--pending);border:1px dashed var(--pending)}
+.orig.sintetico{color:var(--bad);border:1px solid var(--bad)}
+.result{display:grid;gap:8px;padding:16px;border-radius:6px;background:var(--soft)}
+.result .big{font:500 40px/1 var(--f-mono);color:var(--crude)}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:1px solid var(--line);background:var(--surface);padding:7px 12px;border-radius:4px;cursor:pointer;font-weight:600;font-size:13px}
+.btn.danger{border-color:var(--bad);color:var(--bad)}
+.range{display:grid;gap:6px}
+.range input{width:100%;accent-color:var(--crude)}
+/* cómo funciona */
+.chain{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.chain .step{flex:1 1 130px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:10px 12px;display:grid;gap:3px}
+.chain .step b{font-family:var(--f-disp);font-size:15px}
+.chain .step span{font-size:12px;color:var(--muted)}
+.chain .arrow{align-self:center;color:var(--muted);font-family:var(--f-mono)}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.flow>div{border:1px solid var(--line);border-radius:6px;padding:14px;background:var(--surface);display:grid;gap:6px;align-content:start}
+.flow h3{font-size:16px}
+.flow ul{margin:0;padding-left:18px;font-size:13px}
+.st{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:var(--pending)}
+.st.ok{background:var(--ok)}.st.desactualizado{background:var(--warn)}.st.sin{background:var(--bad)}
+@media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}}
+:root{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s6:#008300}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300}}
+:root[data-theme="dark"]{--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:end;margin-bottom:12px}
+.ctrl label{display:grid;gap:4px}
+.ctrl input,.ctrl select{padding:5px 8px;border:1px solid var(--line);border-radius:4px;background:var(--bg);font:13px var(--f-mono);text-transform:none;letter-spacing:0;color:var(--ink)}
+.chips-sel{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chips-sel button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:4px 10px;font:600 12px var(--f-body);cursor:pointer;color:var(--ink)}
+.chips-sel button[aria-pressed="false"]{opacity:.45}
+.chips-sel i{width:14px;height:3px;border-radius:2px;display:inline-block}
+.hchart{position:relative}
+.hchart svg{min-width:600px}
+.tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:8px 10px;font:12px var(--f-mono);box-shadow:0 4px 12px rgba(0,0,0,.12);min-width:170px;z-index:2}
+.tip div{display:flex;justify-content:space-between;gap:12px}
+.tip b{font-family:var(--f-body)}
+.brand{align-items:center}
+.btn-notas{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--crude);background:var(--crude-soft);color:var(--ink);font-weight:600;font-size:13px;padding:7px 12px;border-radius:4px;cursor:pointer}
+.btn-notas:hover{border-color:var(--ink)}
+.badge{font:600 11px/1 var(--f-mono);background:var(--crude);color:var(--surface);padding:3px 6px;border-radius:99px}
+dialog#notas{width:min(760px,calc(100vw - 32px));max-height:calc(100vh - 48px);border:1px solid var(--line);border-radius:8px;padding:0;background:var(--surface);color:var(--ink)}
+dialog#notas::backdrop{background:rgba(10,20,18,.45)}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px 0}
+.dlg-head h2{font-size:22px}
+#notas-fecha{padding:0 20px;margin:4px 0 0}
+.dlg-tabs{display:flex;gap:4px;padding:8px 20px 0;border-bottom:1px solid var(--line);overflow-x:auto}
+.dlg-tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:8px 10px;cursor:pointer;color:var(--muted);font-weight:600;white-space:nowrap}
+.dlg-tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--crude)}
+.dlg-body{padding:16px 20px 20px;display:grid;gap:12px}
+.imp{border-left:3px solid var(--crude);padding:2px 0 2px 12px}
+.imp h3{font-size:16px;margin-bottom:2px}
+.imp p{margin:0;font-size:14px;max-width:70ch}
+.pen{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.pen:last-child{border-bottom:0}
+.pri{font:600 10px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;padding:4px 6px;border-radius:3px;white-space:nowrap}
+.pri.alta{background:var(--bad);color:var(--surface)}.pri.media{background:var(--crude-soft);color:var(--crude)}.pri.baja{background:var(--soft);color:var(--muted)}
+.est{font-size:12px;color:var(--muted);white-space:nowrap}
+.pen.resuelto .txt{text-decoration:line-through;color:var(--muted)}
+.pen .area{display:block;font-size:12px;color:var(--muted)}
+.filtros{display:flex;flex-wrap:wrap;gap:6px}
+.filtros button{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:4px 10px;font-size:12px;cursor:pointer}
+.filtros button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="brand">
+    <div class="brand-l"><h1>Barril <span>Implícito</span></h1>
+    <p>Qué precio del Brent está pagando el mercado en seis petroleras · TIF Finanzas UADE 2C2026</p></div>
+    <button class="btn-notas" id="b-notas" aria-haspopup="dialog">Estado y pendientes <span class="badge" id="n-pend">—</span></button>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-panel" aria-selected="true" data-tab="panel">Panel</button>
+    <button role="tab" id="tab-serie" aria-selected="false" data-tab="serie">Serie histórica</button>
+    <button role="tab" id="tab-empresa" aria-selected="false" data-tab="empresa">Empresa</button>
+    <button role="tab" id="tab-como" aria-selected="false" data-tab="como">Cómo funciona</button>
+    <button role="tab" id="tab-fuentes" aria-selected="false" data-tab="fuentes">Datos y fuentes</button>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <section role="tabpanel" id="panel">
+    <div class="tape" id="tape"></div>
+    <div class="banner" id="estado-banner"></div>
+    <div class="panel">
+      <h2>Los seis implícitos contra la curva</h2>
+      <p class="sub">Cada marca es el Brent que iguala la valuación de la empresa con su capitalización. La línea es la curva de futuros ICE Brent; el punto, el spot.</p>
+      <div class="chart" id="rail"></div>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section role="tabpanel" id="serie" hidden>
+    <div class="panel">
+      <h2>Brent implícito día por día</h2>
+      <p class="sub">Cada balance trimestral configura el modelo desde el día en que se publicó; entre balances solo se mueve la capitalización bursátil. Las marcas de abajo son los días en que entró un balance nuevo.</p>
+      <div class="ctrl">
+        <label class="lbl" for="h-desde">Desde <input type="date" id="h-desde"></label>
+        <label class="lbl" for="h-hasta">Hasta <input type="date" id="h-hasta"></label>
+        <div class="btns" id="h-presets"></div>
+        <label class="lbl" for="h-ref">Brent de referencia
+          <select id="h-ref"><option value="brent_1l">1ª línea ICE (futuro)</option><option value="brent_spot">Spot Dated (FRED)</option></select></label>
+      </div>
+      <div class="chips-sel" id="h-emp"></div>
+      <div class="chart hchart" id="h-chart"><div class="tip" id="h-tip" hidden></div></div>
+      <p class="note" id="h-nota"></p>
+    </div>
+    <div class="panel">
+      <h2>Test 1 · ¿el implícito sigue al Brent?</h2>
+      <p class="sub">Sobre el rango elegido. Sesgo = implícito − referencia (promedio); un sesgo estable es un diferencial mal calibrado, corregible. La correlación de variaciones semanales mide si el implícito se mueve con el crudo aunque el nivel esté corrido.</p>
+      <div class="tbl"><table id="h-test"></table></div>
+    </div>
+    <div class="panel">
+      <h2>Balances usados</h2>
+      <p class="sub">Qué reporte configuró cada tramo de la serie. "Arrastrado" = el dato no estaba en ese reporte y se mantuvo el del anterior (máximo 2 trimestres; reservas, 4).</p>
+      <div class="tbl"><table id="h-cal"></table></div>
+    </div>
+  </section>
+
+  <section role="tabpanel" id="empresa" hidden>
+    <div class="sel" id="sel"></div>
+    <div class="two">
+      <div class="panel prose" id="ficha"></div>
+      <div class="panel" id="resultado"></div>
+    </div>
+    <div class="panel">
+      <h2>Inputs del modelo</h2>
+      <p class="sub">Se completan solos desde el último balance cuando hay fuente automática (yfinance, SEC, CVM, Secretaría de Energía); los que no tienen API salen del último reporte citado. Cualquier campo se puede pisar para simular: cambia de color y el resultado se recalcula al instante. Para que un cambio quede fijo, se carga en <span class="mono">inputs/operativos.csv</span>.</p>
+      <div class="btns" style="margin-bottom:12px">
+        <button class="btn" id="b-reset">Volver a los datos cargados</button>
+        <button class="btn danger" id="b-sint">Probar con caso sintético</button>
+      </div>
+      <div class="tbl"><table id="inputs"></table></div>
+    </div>
+  </section>
+
+  <section role="tabpanel" id="como" hidden>
+    <div class="panel prose">
+      <h2>La valuación, corrida al revés</h2>
+      <p class="sub">Una valuación normal parte del precio del crudo y llega al valor de la empresa. Acá se parte de la cotización y se despeja el precio.</p>
+      <div class="chain">
+        <div class="step"><b>Brent</b><span>constante en el tiempo</span></div><div class="arrow">→</div>
+        <div class="step"><b>Precio de realización</b><span>Brent × (1 − diferencial)</span></div><div class="arrow">→</div>
+        <div class="step"><b>Ingreso</b><span>× producción (crudo + gas/NGL)</span></div><div class="arrow">→</div>
+        <div class="step"><b>Margen</b><span>− regalías, retenciones, lifting, otros costos</span></div><div class="arrow">→</div>
+        <div class="step"><b>Flujo libre</b><span>− impuestos − capex</span></div><div class="arrow">→</div>
+        <div class="step"><b>Valor del patrimonio</b><span>VP al WACC − deuda neta</span></div>
+      </div>
+      <p style="margin-top:14px">El despeje busca, por bisección entre USD 10 y 300, el Brent en el que <b>valor del patrimonio = capitalización bursátil</b>. Funciona porque en una productora el valor crece siempre con el precio: hay un único cruce. En una integrada (YPF, Petrobras) el downstream amortigua esa relación y el resultado se informa con banda más ancha.</p>
+      <p><b>Modo proyección:</b> la misma cadena hacia adelante. Fijás un Brent y ves a qué precio debería cotizar la acción.</p>
+      <p><b>Banda:</b> el implícito se recalcula con WACC ±1 pp, diferencial ±5 pp y lifting ±15 %. Es provisoria, hasta que Metodología defina el método.</p>
+      <p class="note">Qué queda afuera: eventos posteriores al balance (litigios, cambios de management, regulación no anticipada). Si una empresa da un implícito raro, la primera hipótesis es un evento que el modelo no ve, no que el mercado se equivocó con el petróleo.</p>
+    </div>
+    <div class="flow">
+      <div><span class="lbl">Todos los días hábiles · automático</span><h3>Mercado</h3><ul><li>Cotizaciones: Yahoo Finance</li><li>Brent spot: FRED (EIA)</li><li>Curva ICE Brent: Yahoo</li><li>USD/BRL: BCB PTAX</li></ul></div>
+      <div><span class="lbl">Cada trimestre · SEC EDGAR</span><h3>Operativos</h3><ul><li>Encuentra el último 10-Q/10-K (EOG, COP) o release 6-K (YPF, VIST, PBR)</li><li>Lee producción, precio realizado, lifting, costos por boe, impuestos a la producción, EBITDA de segmentos</li><li>Calcula diferencial vs Brent del trimestre, regalías, precio de gas/NGL</li></ul></div>
+      <div><span class="lbl">Cada trimestre · automático</span><h3>Balance y costo de capital</h3><ul><li>Capex, DD&A, SG&A, intereses, deuda, acciones: yfinance, SEC y CVM</li><li>rf (FRED), ERP, riesgo país, betas y múltiplos (Damodaran)</li><li>PRIO (sin SEC): CVM + yfinance + último release citado</li></ul></div>
+      <div><span class="lbl">Orquestación</span><h3>GitHub Actions</h3><ul><li>19:30 ART: baja datos, corre tests y motor</li><li>Escribe data.json y publica la web</li><li>Cada corrida queda como commit: evidencia para el Anexo III</li></ul></div>
+    </div>
+  </section>
+
+  <section role="tabpanel" id="fuentes" hidden>
+    <div class="panel"><h2>Estado de las fuentes</h2><p class="sub" id="gen"></p><div class="tbl"><table id="t-fuentes"></table></div></div>
+    <div class="panel"><h2>Documentos leídos en EDGAR</h2><p class="sub">Último reporte de resultados de cada empresa. Si un patrón no encuentra un dato (porque cambió el formato del reporte), queda listado acá y el campo pasa al siguiente nivel de fuente.</p><div class="tbl"><table id="t-edgar"></table></div></div>
+    <div class="panel"><h2>Datos de balance tomados automáticamente</h2><p class="sub">Deuda neta = deuda financiera − caja e inversiones corrientes. Hay que verificarla contra el filing antes de usarla en el TIF.</p><div class="tbl"><table id="t-fund"></table></div></div>
+    <div class="banner warn"><strong>Bloomberg.</strong> El Reglamento exige Bloomberg/FinLab como fuente. La web usa APIs abiertas porque la licencia no permite redistribuir. El backtest del TIF se corre con la serie de Bloomberg exportada, y la diferencia queda declarada.</div>
+  </section>
+</main>
+<dialog id="notas" aria-labelledby="notas-t">
+  <div class="dlg-head"><h2 id="notas-t">Estado y pendientes</h2><button class="btn" id="b-cerrar" aria-label="Cerrar">Cerrar</button></div>
+  <p class="note" id="notas-fecha"></p>
+  <nav class="dlg-tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-n="n-imp" id="nt-imp">Importante</button>
+    <button role="tab" aria-selected="false" data-n="n-pen" id="nt-pen">Pendientes</button>
+    <button role="tab" aria-selected="false" data-n="n-aut" id="nt-aut">Alertas de datos</button>
+  </nav>
+  <div id="n-imp" class="dlg-body"></div>
+  <div id="n-pen" class="dlg-body" hidden></div>
+  <div id="n-aut" class="dlg-body" hidden></div>
+</dialog>
+<script>/*__ENGINE__*/</script>
+<script id="datos" type="application/json">/*__DATA__*/</script>
+<script>/*__APP__*/</script>

@@ -1,0 +1,174 @@
+{
+  "_nota": "Se edita a mano. Se muestra en la página (botón 'Estado y pendientes'). estado: pendiente | en curso | resuelto. prioridad: alta | media | baja.",
+  "actualizado": "2026-09-21",
+  "importante": [
+    {
+      "titulo": "Todo el pipeline es automático",
+      "texto": "EDGAR (10-Q/10-K y releases 6-K) → producción, precios realizados, costos por boe, impuestos a la producción, EBITDA de segmentos. yfinance, SEC y CVM → capex, deuda, acciones. FRED y Damodaran → rf, ERP, riesgo país, betas, múltiplos. Secretaría de Energía → Medanito y regalías. Corre sola cada día hábil; cualquier campo se puede pisar."
+    },
+    {
+      "titulo": "Serie histórica día por día",
+      "texto": "Cada balance trimestral configura el modelo desde su fecha de publicación (sin look-ahead) y cada día se despeja con la capitalización de ese día. Pestaña 'Serie histórica': rango editable, Brent spot o 1ª línea como referencia, marcas de recalibración y Test 1 (sesgo, desvío y correlación de variaciones) para el rango elegido."
+    },
+    {
+      "titulo": "Los implícitos todavía no son interpretables",
+      "texto": "En el caso base la producción es plana y el horizonte termina con las reservas probadas (EOG ~11 años, Vista ~7). El valor de los recursos no probados no entra, así que el modelo necesita un Brent más alto para llegar a la cotización: sesgo al alza en todos los pure-plays. Es el error de calibración que debe detectar el Test 1."
+    },
+    {
+      "titulo": "Vista: riesgo argentino dentro del implícito",
+      "texto": "WACC 13,7 % con prima país 9,7 % (Damodaran) y reservas de la Secretaría de Energía en base operada, no por participación. El implícito de VIST (158,5) mezcla expectativa de crudo con riesgo país: es el contraargumento central de la defensa."
+    },
+    {
+      "titulo": "Petrobras sale bajo por el downstream",
+      "texto": "El valor de refinación se estima con el EBITDA del 2T26 × 4 × EV/EBITDA sectorial, y ese trimestre está inflado por ganancias de inventario. El downstream queda sobrevaluado y el implícito de PBR (52,0) sale bajo."
+    },
+    {
+      "titulo": "¿Contra qué Brent se compara?",
+      "texto": "El 15/09/2026 el Brent spot Dated (FRED) cerró en 130,80 y la 1ª línea ICE en ~97,5. Elegir spot, 1ª línea o promedio de la curva cambia la lectura: es una decisión metodológica, no un detalle."
+    },
+    {
+      "titulo": "Fuentes y límites",
+      "texto": "PRIO no es registrante SEC (usa CVM + yfinance + release citado). Yahoo no es fuente institucional: sirve para la web en vivo; el TIF cita Bloomberg/FinLab, que se analiza más adelante. El choque con el tutor por el alcance quedó resuelto."
+    }
+  ],
+  "pendientes": [
+    {
+      "tarea": "Serie histórica: el sesgo es grande y persistente (EOG +39, COP +30, VIST +75, YPF +99 USD/bbl vs 1ª línea) con correlación de variaciones baja (0,2–0,4): recalibrar perfil de producción y horizonte antes de interpretar",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Modelo"
+    },
+    {
+      "tarea": "Petrobras antes de 2T25: los reportes de producción están en PDF (EDGAR no los lee como texto); cargar esos trimestres a mano o leer el PDF",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Datos"
+    },
+    {
+      "tarea": "PRIO: cargar releases trimestrales históricos en inputs/semillas.csv (hoy la serie arranca en ago-2026)",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Datos"
+    },
+    {
+      "tarea": "YPF: saltos grandes en la serie al entrar cada balance (downstream × múltiplo y riesgo país Damodaran: 16 % en 2025 vs 9,7 % en 2026)",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Modelo"
+    },
+    {
+      "tarea": "Subir el repo a GitHub y activar Pages (pasos en GUIA-GITHUB.md; hace falta 'Read and write permissions' en Actions)",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Web"
+    },
+    {
+      "tarea": "Reemplazar 'producción plana hasta agotar reservas' por un perfil calibrado con la guía de producción de cada empresa",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Modelo"
+    },
+    {
+      "tarea": "Agregar una segunda banda con reservas probadas + probables (2P)",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Modelo"
+    },
+    {
+      "tarea": "Definir el Brent de referencia: spot Dated, 1ª línea o promedio de la curva",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Metodología"
+    },
+    {
+      "tarea": "Backtest 3T2024–1T2026 (Test 1): la serie diaria y la tabla ya corren solas; falta la muestra de control 2022–2023 (python -m pipeline.historia --desde 2021-12-31) y leer resultados",
+      "prioridad": "alta",
+      "estado": "en curso",
+      "area": "Modelo"
+    },
+    {
+      "tarea": "Downstream de YPF y Petrobras: EBITDA normalizado sin efecto inventario y múltiplo específico de refinación",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Modelo"
+    },
+    {
+      "tarea": "Reservas y producción de VIST e YPF por participación (20-F), no por operador",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Datos"
+    },
+    {
+      "tarea": "Rehacer ~70 % del marco teórico para el enfoque de Brent implícito (DCF inverso, sensibilidad al crudo, diferenciales, valor relativo)",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "TIF"
+    },
+    {
+      "tarea": "Reescribir el criterio de universo: en EOG y COP el crudo es ~42–45 % (gas y NGL con precio fijo exógeno)",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "TIF"
+    },
+    {
+      "tarea": "Unificar documentos: ventana 3T2024–1T2026 y dato de brecha (47,9 vs 51 USD/bbl)",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "TIF"
+    },
+    {
+      "tarea": "Planteamiento v2: sacar la cita a Fattouh (2011), sacar metodología de la pregunta principal y alinear las secundarias",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "TIF"
+    },
+    {
+      "tarea": "Diferencial de Petrobras (hoy supuesto 0: no publica precio realizado de crudo)",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Datos"
+    },
+    {
+      "tarea": "PRIO: gas no desagregado (hoy 0) y regalías sin participación especial",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Datos"
+    },
+    {
+      "tarea": "Revisar capex TTM de PRIO: el 4T2025 incluye una adquisición (~R$ 10.600 M)",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Datos"
+    },
+    {
+      "tarea": "Vista: releases históricos leídos desde EDGAR (tabla del press release)",
+      "prioridad": "media",
+      "estado": "resuelto",
+      "area": "Datos"
+    },
+    {
+      "tarea": "Verificar ratios ADR (VIST, YPF, PBR) y moneda de los estados de yfinance para YPF y PBR",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Datos"
+    },
+    {
+      "tarea": "Analizar la información de Bloomberg y contrastarla con las APIs abiertas",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Datos"
+    },
+    {
+      "tarea": "Actualizar TIF-ESTADO y TIF-DECISIONES (congelados al 11/8)",
+      "prioridad": "baja",
+      "estado": "pendiente",
+      "area": "Equipo"
+    },
+    {
+      "tarea": "Alinear el alcance con el tutor",
+      "prioridad": "alta",
+      "estado": "resuelto",
+      "area": "TIF"
+    }
+  ]
+}

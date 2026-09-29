@@ -1,0 +1,12 @@
+{
+  "_nota": "Parámetros de mercado comunes. VALORES VACÍOS A PROPÓSITO: los define el equipo con fuente (Bloomberg/FinLab, Damodaran, BCRA/JP Morgan EMBI). Ningún valor se completa por defecto.",
+  "rf": {"valor": null, "descripcion": "Tasa libre de riesgo (UST 10 años)", "fuente": null},
+  "erp": {"valor": null, "descripcion": "Prima de riesgo de mercado", "fuente": null},
+  "crp": {
+    "Argentina": {"valor": null, "descripcion": "Diferencial soberano (EMBI Argentina)", "fuente": null},
+    "Brasil": {"valor": null, "descripcion": "Diferencial soberano (EMBI Brasil)", "fuente": null},
+    "Norteamérica": {"valor": 0, "descripcion": "Mercado desarrollado: sin prima", "fuente": "Supuesto del diseño (ALCANCE §5c)"}
+  },
+  "lambda_crp": {"valor": 1, "descripcion": "Exposición unitaria como caso base (MT 7.2.2, Pereiro 2006)", "fuente": "Decisión metodológica del equipo"},
+  "brent_referencia": {"valor": "primera_linea", "opciones": ["spot", "primera_linea", "promedio_curva_12m"], "descripcion": "⚠️ Decisión abierta: contra qué Brent se contrasta el implícito"}
+}

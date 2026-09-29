@@ -1,0 +1,36 @@
+{
+  "actualizado": "2026-09-21T05:27:17+00:00",
+  "produccion": {
+    "VIST": {
+      "prod_crudo_kbd": 80.7059559480456,
+      "prod_otros_kboed": 8.228022337892492,
+      "meses": [
+        "2026-04",
+        "2026-05",
+        "2026-06"
+      ],
+      "fuente": "http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/85d6e021-a00d-4997-b74e-0b9b43c547fe/download/produccin-de-pozos-de-gas-y-petrleo-2026-ddjj-abiertas-y-cerradas-.csv (operado; promedio 2026-04 a 2026-06)"
+    },
+    "YPF": {
+      "prod_crudo_kbd": 362.819244062232,
+      "prod_otros_kboed": 182.66319662031137,
+      "meses": [
+        "2026-04",
+        "2026-05",
+        "2026-06"
+      ],
+      "fuente": "http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/85d6e021-a00d-4997-b74e-0b9b43c547fe/download/produccin-de-pozos-de-gas-y-petrleo-2026-ddjj-abiertas-y-cerradas-.csv (operado; promedio 2026-04 a 2026-06)"
+    }
+  },
+  "reservas": {
+    "YPF": {
+      "reservas_1p_mmboe": 2042.7656745001334,
+      "fuente": "http://www.energia.gob.ar/contenidos/archivos/Reorganizacion/informacion_del_mercado/mercado_hidrocarburos/informacion_estadistica/reservas/reservas_al_31-12-2025.zip (comprobadas, operado)"
+    },
+    "VIST": {
+      "reservas_1p_mmboe": 424.6037740678489,
+      "fuente": "http://www.energia.gob.ar/contenidos/archivos/Reorganizacion/informacion_del_mercado/mercado_hidrocarburos/informacion_estadistica/reservas/reservas_al_31-12-2025.zip (comprobadas, operado)"
+    }
+  },
+  "errores": {}
+}

@@ -1,0 +1,89 @@
+{
+  "actualizado": "2026-09-21T05:10:18+00:00",
+  "empresas": {
+    "EOG": {
+      "fecha": "2026-06-30",
+      "acciones_mm": 524.529176,
+      "deuda_musd": 7926.0,
+      "caja_musd": 4907.0,
+      "deuda_neta_musd": 3019.0,
+      "minoritarios_musd": 0.0,
+      "detalle": {
+        "acciones": {
+          "tag": "dei:EntityCommonStockSharesOutstanding",
+          "end": "2026-07-28",
+          "form": "10-Q",
+          "accn": "0000821189-26-000149"
+        },
+        "deuda_lp": {
+          "tag": "us-gaap:LongTermDebtNoncurrent",
+          "end": "2026-06-30",
+          "form": "10-Q",
+          "accn": "0000821189-26-000149"
+        },
+        "deuda_cp": {
+          "tag": "us-gaap:LongTermDebtCurrent",
+          "end": "2026-06-30",
+          "form": "10-Q",
+          "accn": "0000821189-26-000149"
+        },
+        "caja": {
+          "tag": "us-gaap:CashAndCashEquivalentsAtCarryingValue",
+          "end": "2026-06-30",
+          "form": "10-Q",
+          "accn": "0000821189-26-000149"
+        },
+        "inversiones_cp": null,
+        "minoritarios": null
+      },
+      "fuente": "SEC EDGAR companyfacts CIK 821189"
+    },
+    "COP": {
+      "fecha": "2026-06-30",
+      "acciones_mm": 1201.337479,
+      "deuda_musd": 23259.0,
+      "caja_musd": 7692.0,
+      "deuda_neta_musd": 15567.0,
+      "minoritarios_musd": 0.0,
+      "detalle": {
+        "acciones": {
+          "tag": "dei:EntityCommonStockSharesOutstanding",
+          "end": "2026-06-30",
+          "form": "10-Q",
+          "accn": "0001163165-26-000032"
+        },
+        "deuda_lp": {
+          "tag": "us-gaap:LongTermDebt",
+          "end": "2021-09-30",
+          "form": "10-Q",
+          "accn": "0001562762-21-000409"
+        },
+        "deuda_cp": {
+          "tag": "us-gaap:DebtCurrent",
+          "end": "2026-06-30",
+          "form": "10-Q",
+          "accn": "0001163165-26-000032"
+        },
+        "caja": {
+          "tag": "us-gaap:CashAndCashEquivalentsAtCarryingValue",
+          "end": "2026-06-30",
+          "form": "10-Q",
+          "accn": "0001163165-26-000032"
+        },
+        "inversiones_cp": {
+          "tag": "us-gaap:ShortTermInvestments",
+          "end": "2026-06-30",
+          "form": "10-Q",
+          "accn": "0001163165-26-000032"
+        },
+        "minoritarios": {
+          "tag": "us-gaap:MinorityInterest",
+          "end": "2021-03-31",
+          "form": "10-Q",
+          "accn": "0001562762-21-000193"
+        }
+      },
+      "fuente": "SEC EDGAR companyfacts CIK 1163165"
+    }
+  }
+}

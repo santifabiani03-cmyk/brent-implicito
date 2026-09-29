@@ -1,0 +1,27 @@
+{
+  "actualizado": "2026-09-21T05:10:20+00:00",
+  "empresas": {
+    "PRIO": {
+      "fecha": "2026-06-30",
+      "ptax_cierre": 5.1766,
+      "deuda_musd": 4918.802882200673,
+      "caja_musd": 713.4849128771781,
+      "deuda_neta_musd": 4205.317969323494,
+      "acciones_mm": 798.178706,
+      "on_mm": 798.178706,
+      "pn_mm": 0.0,
+      "fuente": "CVM Dados Abertos ITR 2026 (consolidado), cuentas 2.01.04+2.02.01−1.01.01−1.01.02; PTAX 2026-06-30"
+    },
+    "PBR": {
+      "fecha": "2026-06-30",
+      "ptax_cierre": 5.1766,
+      "deuda_musd": 70805.74122010586,
+      "caja_musd": 10385.967623536684,
+      "deuda_neta_musd": 60419.77359656918,
+      "acciones_mm": 12888.732761,
+      "on_mm": 7442.231382,
+      "pn_mm": 5446.501379,
+      "fuente": "CVM Dados Abertos ITR 2026 (consolidado), cuentas 2.01.04+2.02.01−1.01.01−1.01.02; PTAX 2026-06-30"
+    }
+  }
+}
