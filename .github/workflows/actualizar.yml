@@ -30,7 +30,7 @@ jobs:
           git config user.name "bot-actualizacion"; git config user.email "actions@github.com"
           git add data/ web/data.json
           git diff --cached --quiet || git commit -m "datos $(date -u +%F)"
-          git pull --rebase -q   # por si alguien pusheó inputs/ mientras corría
+          git pull --rebase --autostash -q   # por si alguien pusheó inputs/ mientras corría (autostash: run_all regenera web/ sin commitearlo)
           git push
       - uses: actions/upload-pages-artifact@v3
         with: { path: web }
