@@ -9,11 +9,15 @@ permissions:
   contents: write
   pages: write
   id-token: write
+concurrency:                  # una corrida por vez: dos en paralelo chocan al hacer push de data/
+  group: actualizar-datos
+  cancel-in-progress: false
 jobs:
   actualizar:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with: { ref: "${{ github.ref }}" }   # punta de la rama al arrancar, no el commit que disparó la corrida
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - uses: actions/setup-node@v4
@@ -26,6 +30,7 @@ jobs:
           git config user.name "bot-actualizacion"; git config user.email "actions@github.com"
           git add data/ web/data.json
           git diff --cached --quiet || git commit -m "datos $(date -u +%F)"
+          git pull --rebase -q   # por si alguien pusheó inputs/ mientras corría
           git push
       - uses: actions/upload-pages-artifact@v3
         with: { path: web }
