@@ -1,9 +1,11 @@
 {
-  "actualizado": "2026-10-06T02:29:49+00:00",
-  "errores": {},
+  "actualizado": "2026-10-07T01:48:34+00:00",
+  "errores": {
+    "argentina": "tuple.index(x): x not in tuple"
+  },
   "rf": {
-    "valor": 0.0528,
-    "fecha": "2026-10-02",
+    "valor": 0.053099999999999994,
+    "fecha": "2026-10-05",
     "fuente": "FRED DGS10 (UST 10 años)"
   },
   "damodaran": {
@@ -53,154 +55,5 @@
         "fuente": "Damodaran (NYU Stern), ctryprem.xlsx, betas.xls y vebitda.xls, actualización 2026-01-01 — Oil/Gas (Integrated)"
       }
     }
-  },
-  "argentina": {
-    "serie": [
-      {
-        "mes": "2024-06",
-        "medanito_usd_bbl": 71.35457167924632,
-        "brent_usd_bbl": 82.72785795083057,
-        "regalias_pct_neuquen": 0.1188172084244077
-      },
-      {
-        "mes": "2024-07",
-        "medanito_usd_bbl": 75.13868036677722,
-        "brent_usd_bbl": 83.86724729877199,
-        "regalias_pct_neuquen": 0.1159645408098735
-      },
-      {
-        "mes": "2024-08",
-        "medanito_usd_bbl": 69.66027196237312,
-        "brent_usd_bbl": 78.70259213520384,
-        "regalias_pct_neuquen": 0.11777413176781885
-      },
-      {
-        "mes": "2024-09",
-        "medanito_usd_bbl": 66.4500987724039,
-        "brent_usd_bbl": 73.25177898378577,
-        "regalias_pct_neuquen": 0.11803313410405324
-      },
-      {
-        "mes": "2024-10",
-        "medanito_usd_bbl": 67.30740638502432,
-        "brent_usd_bbl": 75.37987056780784,
-        "regalias_pct_neuquen": 0.12069294979328922
-      },
-      {
-        "mes": "2024-11",
-        "medanito_usd_bbl": 66.49515243929595,
-        "brent_usd_bbl": 73.3079693634936,
-        "regalias_pct_neuquen": 0.11650371326399925
-      },
-      {
-        "mes": "2024-12",
-        "medanito_usd_bbl": 66.46168132355628,
-        "brent_usd_bbl": 73.1698743625166,
-        "regalias_pct_neuquen": 0.11862427382235757
-      },
-      {
-        "mes": "2025-01",
-        "medanito_usd_bbl": 70.39790987841816,
-        "brent_usd_bbl": 78.20551788989869,
-        "regalias_pct_neuquen": 0.11757710468232967
-      },
-      {
-        "mes": "2025-02",
-        "medanito_usd_bbl": 68.80927980042266,
-        "brent_usd_bbl": 74.98337124862326,
-        "regalias_pct_neuquen": 0.11825503966913264
-      },
-      {
-        "mes": "2025-03",
-        "medanito_usd_bbl": 65.9556832481191,
-        "brent_usd_bbl": 71.44987731586457,
-        "regalias_pct_neuquen": 0.11890500241009228
-      },
-      {
-        "mes": "2025-04",
-        "medanito_usd_bbl": 61.479501377489804,
-        "brent_usd_bbl": 67.09988478508764,
-        "regalias_pct_neuquen": 0.11834204731155304
-      },
-      {
-        "mes": "2025-05",
-        "medanito_usd_bbl": 59.22635874563328,
-        "brent_usd_bbl": 64.03689004445094,
-        "regalias_pct_neuquen": 0.11666362007841467
-      },
-      {
-        "mes": "2025-06",
-        "medanito_usd_bbl": 63.12582328379353,
-        "brent_usd_bbl": 69.60988047526008,
-        "regalias_pct_neuquen": 0.11634773755362092
-      },
-      {
-        "mes": "2025-07",
-        "medanito_usd_bbl": 64.03233161157549,
-        "brent_usd_bbl": 69.47988069847825,
-        "regalias_pct_neuquen": 0.11565233747464258
-      },
-      {
-        "mes": "2025-08",
-        "medanito_usd_bbl": 61.91550562298997,
-        "brent_usd_bbl": 67.70488374626467,
-        "regalias_pct_neuquen": 0.11581305269606247
-      },
-      {
-        "mes": "2025-09",
-        "medanito_usd_bbl": 61.572119592194866,
-        "brent_usd_bbl": 67.64988384070313,
-        "regalias_pct_neuquen": 0.1160244929506475
-      },
-      {
-        "mes": "2025-10",
-        "medanito_usd_bbl": 57.960564304675145,
-        "brent_usd_bbl": 64.07683997585427,
-        "regalias_pct_neuquen": 0.11607092527293698
-      },
-      {
-        "mes": "2025-11",
-        "medanito_usd_bbl": 57.086263930142856,
-        "brent_usd_bbl": 63.97339015348443,
-        "regalias_pct_neuquen": 0.11510570618752662
-      },
-      {
-        "mes": "2025-12",
-        "medanito_usd_bbl": 54.70597476926565,
-        "brent_usd_bbl": 61.5237943596014,
-        "regalias_pct_neuquen": 0.11502722590300304
-      },
-      {
-        "mes": "2026-01",
-        "medanito_usd_bbl": 57.121165213680605,
-        "brent_usd_bbl": 64.30034413753754,
-        "regalias_pct_neuquen": 0.11505778946798725
-      },
-      {
-        "mes": "2026-02",
-        "medanito_usd_bbl": 61.120995668721186,
-        "brent_usd_bbl": 69.74888023658835,
-        "regalias_pct_neuquen": 0.11532602887072044
-      },
-      {
-        "mes": "2026-03",
-        "medanito_usd_bbl": 82.14306541589785,
-        "brent_usd_bbl": 97.6789231879598,
-        "regalias_pct_neuquen": 0.121550973413783
-      },
-      {
-        "mes": "2026-04",
-        "medanito_usd_bbl": 94.79386251524292,
-        "brent_usd_bbl": 102.38436965385304,
-        "regalias_pct_neuquen": 0.11667927934156826
-      },
-      {
-        "mes": "2026-05",
-        "medanito_usd_bbl": 96.9593857912101,
-        "brent_usd_bbl": 103.05696590155908,
-        "regalias_pct_neuquen": 0.11661807249915813
-      }
-    ],
-    "fuente": "http://www.energia.gob.ar/contenidos/archivos/Reorganizacion/informacion_del_mercado/mercado_hidrocarburos/informacion_estadistica/regalias/Regalias_CRUDO.zip (Informe de Regalías, SE; últimos 2 meses provisorios excluidos)"
   }
 }
