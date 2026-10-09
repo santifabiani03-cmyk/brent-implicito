@@ -1,58 +1,7 @@
 {
-  "actualizado": "2026-10-08T02:17:19+00:00",
-  "hasta": "2026-10-08",
+  "actualizado": "2026-10-09T02:30:05+00:00",
+  "hasta": "2026-10-09",
   "empresas": {
-    "VIST": {
-      "docs": {
-        "release": {
-          "url": "https://www.sec.gov/Archives/edgar/data/1762506/000119312526306139/d151775dex1.htm",
-          "form": "6-K",
-          "fecha": "2026-07-16",
-          "periodo": "2026-06-30",
-          "dias": 91
-        }
-      },
-      "valores": {
-        "total_kboed": {
-          "valor": 156.061,
-          "doc": "release",
-          "texto": "Total (boe/d) 156,061"
-        },
-        "crudo_kbd": {
-          "valor": 135.427,
-          "doc": "release",
-          "texto": "Oil (bbl/d) 135,427"
-        },
-        "p_crudo": {
-          "valor": 89.4,
-          "doc": "release",
-          "texto": "Oil ($/bbl) (1) 89.4"
-        },
-        "p_gas_mmbtu": {
-          "valor": 3.0,
-          "doc": "release",
-          "texto": "Natural Gas ($/MMBTU) 3.0"
-        },
-        "lifting_boe": {
-          "valor": 4.5,
-          "doc": "release",
-          "texto": "Lifting cost ($/boe) 4.5"
-        },
-        "regalias_kusd": {
-          "valor": 186744.0,
-          "doc": "release",
-          "texto": "Royalties and others (186,744"
-        },
-        "ingresos_musd": {
-          "valor": 1154.4,
-          "doc": "release",
-          "texto": "Total revenues in Q2 2026 were 1,154.4 $MM"
-        }
-      },
-      "fallas": [
-        "reservas_mmboe: no encontrado"
-      ]
-    },
     "YPF": {
       "docs": {
         "release": {
@@ -340,5 +289,7 @@
       ]
     }
   },
-  "errores": {}
+  "errores": {
+    "VIST": "GET falló: https://efts.sec.gov/LATEST/search-index?q=%22Total+%28boe%2Fd%29%22&ciks=0001762506&forms=6-K&startdt=2026-05-12&enddt=2026-10-09 → 500 Server Error: Internal Server Error for url: https://efts.sec.gov/LATEST/search-index?q=%22Total+%28boe%2Fd%29%22&ciks=0001762506&forms=6-K&startdt=2026-05-12&enddt=2026-10-09"
+  }
 }
