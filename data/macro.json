@@ -1,11 +1,11 @@
 {
-  "actualizado": "2026-10-09T02:30:01+00:00",
+  "actualizado": "2026-10-10T01:57:49+00:00",
   "errores": {
     "argentina": "tuple.index(x): x not in tuple"
   },
   "rf": {
-    "valor": 0.0528,
-    "fecha": "2026-10-07",
+    "valor": 0.052199999999999996,
+    "fecha": "2026-10-08",
     "fuente": "FRED DGS10 (UST 10 años)"
   },
   "damodaran": {
