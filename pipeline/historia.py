@@ -15,6 +15,8 @@ from .common import RAIZ, get, guardar, ahora_iso, companias, cargar
 from .fetch_edgar import extraer_periodo
 from .fetch_macro import damodaran, argentina
 from .derivar import derivar
+from .recetas import RECETAS
+from . import bloomberg
 from engine import model
 
 HIST = RAIZ / "data" / "historia"
@@ -191,10 +193,11 @@ def main(desde: str = "2023-12-31"):
         except Exception:  # noqa: BLE001
             F = json.loads(cache.read_text()) if cache.exists() else {"q": {}, "a": {}}
         lista, memoria = [], {}
+        bbd = bloomberg.leer(c["id"])
         for q in Q:
             # --- EDGAR (con caché)
             ed = {}
-            if c.get("sec_cik") and c["id"] != "PRIO":
+            if c.get("sec_cik") and c["id"] in RECETAS:
                 f_ed = HIST / f"edgar_{c['id']}_{q}.json"
                 if f_ed.exists():
                     ed = json.loads(f_ed.read_text())
@@ -202,12 +205,13 @@ def main(desde: str = "2023-12-31"):
                     ed = extraer_periodo(c["id"], c["sec_cik"], q)
                     if ed["docs"]:
                         f_ed.write_text(json.dumps(ed))
-            fechas = [d["fecha"] for d in (ed.get("docs") or {}).values()]
+            ed = bloomberg.fusionar(ed, bloomberg.periodo(c["id"], q, bbd))   # Bloomberg pisa a EDGAR
+            fechas = [d["fecha"] for d in (ed.get("docs") or {}).values() if d.get("fecha")]
             sem_q = {r["variable"]: {"valor": float(r["valor"]), "origen": "semilla", "fuente": r["fuente_url"],
                                      "nota": r["pagina_o_tabla"], "trimestre": r["trimestre"], "fecha_publicacion": r["fecha_publicacion"]}
                      for r in semillas.get(c["id"], []) if r["fecha_publicacion"] <= (max(fechas) if fechas else "9999")}
             if not fechas:
-                if c["id"] == "PRIO" and sem_q:        # PRIO: solo trimestres con release citado
+                if c["id"] == "PRIO" and sem_q and not bbd:   # PRIO sin Bloomberg: solo trimestres con release citado
                     fechas = [max(v["fecha_publicacion"] for v in sem_q.values())]
                     if q != Q[-1]:
                         continue
@@ -215,6 +219,7 @@ def main(desde: str = "2023-12-31"):
                     continue
             pub = max(fechas)
             fin = fin_trimestre(F, q, (al_dia(fx, pub) if c["moneda_estados_yf"] == "BRL" else 1.0))
+            fin = {**fin, **bloomberg.fin_bloomberg(c["id"], q, bbd)}
             d = damo_para(pub)
             macro_q = {"rf": {"valor": al_dia(rf, pub) / 100, "fecha": pub, "fuente": "FRED DGS10"}, "damodaran": d, "argentina": ar}
             cal = calibrar(c, q, ed, fin, macro_q, spot_l, al_dia(px[c["id"]], pub), al_dia(fx, pub), sem_q, memoria, acciones_ref)

@@ -1,0 +1,418 @@
+empresa,periodo,fecha_publicacion,variable,valor,unidad,moneda,hoja,campo_bloomberg,nota
+PBR,2023-09-30,,caja_mm,13402.5412,musd,USD,Balance Sheet,"Cash, Cash Equivalents & STI (C&CE_AND_STI_DETAILED)",incluye inversiones de corto plazo (ST Investments)
+PBR,2023-12-31,,caja_mm,15511.7043,musd,USD,Balance Sheet,"Cash, Cash Equivalents & STI (C&CE_AND_STI_DETAILED)",incluye inversiones de corto plazo (ST Investments)
+PBR,2024-03-31,,caja_mm,16303.1434,musd,USD,Balance Sheet,"Cash, Cash Equivalents & STI (C&CE_AND_STI_DETAILED)",incluye inversiones de corto plazo (ST Investments)
+PBR,2024-06-30,,caja_mm,12154.7892,musd,USD,Balance Sheet,"Cash, Cash Equivalents & STI (C&CE_AND_STI_DETAILED)",incluye inversiones de corto plazo (ST Investments)
+PBR,2024-09-30,,caja_mm,14306.6244,musd,USD,Balance Sheet,"Cash, Cash Equivalents & STI (C&CE_AND_STI_DETAILED)",incluye inversiones de corto plazo (ST Investments)
+PBR,2024-12-31,,caja_mm,7562.1271,musd,USD,Balance Sheet,"Cash, Cash Equivalents & STI (C&CE_AND_STI_DETAILED)",incluye inversiones de corto plazo (ST Investments)
+PBR,2025-03-31,,caja_mm,7693.4386,musd,USD,Balance Sheet,"Cash, Cash Equivalents & STI (C&CE_AND_STI_DETAILED)",incluye inversiones de corto plazo (ST Investments)
+PBR,2025-06-30,,caja_mm,9539.848,musd,USD,Balance Sheet,"Cash, Cash Equivalents & STI (C&CE_AND_STI_DETAILED)",incluye inversiones de corto plazo (ST Investments)
+PBR,2025-09-30,,caja_mm,11662.3881,musd,USD,Balance Sheet,"Cash, Cash Equivalents & STI (C&CE_AND_STI_DETAILED)",incluye inversiones de corto plazo (ST Investments)
+PBR,2025-12-31,,caja_mm,9175.2304,musd,USD,Balance Sheet,"Cash, Cash Equivalents & STI (C&CE_AND_STI_DETAILED)",incluye inversiones de corto plazo (ST Investments)
+PBR,2026-03-31,,caja_mm,9163,musd,USD,Balance Sheet,"Cash, Cash Equivalents & STI (C&CE_AND_STI_DETAILED)",incluye inversiones de corto plazo (ST Investments)
+PBR,2026-06-30,,caja_mm,10403.334,musd,USD,Balance Sheet,"Cash, Cash Equivalents & STI (C&CE_AND_STI_DETAILED)",incluye inversiones de corto plazo (ST Investments)
+PBR,2023-09-30,,caja_solo_mm,12104.1432,musd,USD,Balance Sheet,Cash & Cash Equivalents (BS_CASH_NEAR_CASH_ITEM),"solo caja y equivalentes, sin ST Investments"
+PBR,2023-12-31,,caja_solo_mm,12698.4393,musd,USD,Balance Sheet,Cash & Cash Equivalents (BS_CASH_NEAR_CASH_ITEM),"solo caja y equivalentes, sin ST Investments"
+PBR,2024-03-31,,caja_solo_mm,11503.1866,musd,USD,Balance Sheet,Cash & Cash Equivalents (BS_CASH_NEAR_CASH_ITEM),"solo caja y equivalentes, sin ST Investments"
+PBR,2024-09-30,,caja_solo_mm,8706.0546,musd,USD,Balance Sheet,Cash & Cash Equivalents (BS_CASH_NEAR_CASH_ITEM),"solo caja y equivalentes, sin ST Investments"
+PBR,2024-12-31,,caja_solo_mm,3283.1734,musd,USD,Balance Sheet,Cash & Cash Equivalents (BS_CASH_NEAR_CASH_ITEM),"solo caja y equivalentes, sin ST Investments"
+PBR,2025-03-31,,caja_solo_mm,4709.912,musd,USD,Balance Sheet,Cash & Cash Equivalents (BS_CASH_NEAR_CASH_ITEM),"solo caja y equivalentes, sin ST Investments"
+PBR,2025-06-30,,caja_solo_mm,7024.568,musd,USD,Balance Sheet,Cash & Cash Equivalents (BS_CASH_NEAR_CASH_ITEM),"solo caja y equivalentes, sin ST Investments"
+PBR,2025-09-30,,caja_solo_mm,8967.6675,musd,USD,Balance Sheet,Cash & Cash Equivalents (BS_CASH_NEAR_CASH_ITEM),"solo caja y equivalentes, sin ST Investments"
+PBR,2025-12-31,,caja_solo_mm,6455.7304,musd,USD,Balance Sheet,Cash & Cash Equivalents (BS_CASH_NEAR_CASH_ITEM),"solo caja y equivalentes, sin ST Investments"
+PBR,2026-03-31,,caja_solo_mm,6601.595,musd,USD,Balance Sheet,Cash & Cash Equivalents (BS_CASH_NEAR_CASH_ITEM),"solo caja y equivalentes, sin ST Investments"
+PBR,2026-06-30,,caja_solo_mm,6493.86,musd,USD,Balance Sheet,Cash & Cash Equivalents (BS_CASH_NEAR_CASH_ITEM),"solo caja y equivalentes, sin ST Investments"
+PBR,2023-09-30,,capex_mm,3183.978646,musd,USD,Cash Flow,Acq of Fixed & Intang (ACQUIS_FXD_&_INTANG_DETAILED),signo invertido (Excel trae egreso negativo); PP&E + intangibles
+PBR,2023-12-31,,capex_mm,3592.219356,musd,USD,Cash Flow,Acq of Fixed & Intang (ACQUIS_FXD_&_INTANG_DETAILED),signo invertido (Excel trae egreso negativo); PP&E + intangibles
+PBR,2024-03-31,,capex_mm,2837.898,musd,USD,Cash Flow,Acq of Fixed & Intang (ACQUIS_FXD_&_INTANG_DETAILED),signo invertido (Excel trae egreso negativo); PP&E + intangibles
+PBR,2024-06-30,,capex_mm,2929.6148,musd,USD,Cash Flow,Acq of Fixed & Intang (ACQUIS_FXD_&_INTANG_DETAILED),signo invertido (Excel trae egreso negativo); PP&E + intangibles
+PBR,2024-09-30,,capex_mm,4443.245621,musd,USD,Cash Flow,Acq of Fixed & Intang (ACQUIS_FXD_&_INTANG_DETAILED),signo invertido (Excel trae egreso negativo); PP&E + intangibles
+PBR,2024-12-31,,capex_mm,4439.717758,musd,USD,Cash Flow,Acq of Fixed & Intang (ACQUIS_FXD_&_INTANG_DETAILED),signo invertido (Excel trae egreso negativo); PP&E + intangibles
+PBR,2025-03-31,,capex_mm,3982.960332,musd,USD,Cash Flow,Acq of Fixed & Intang (ACQUIS_FXD_&_INTANG_DETAILED),signo invertido (Excel trae egreso negativo); PP&E + intangibles
+PBR,2025-06-30,,capex_mm,4089.897108,musd,USD,Cash Flow,Acq of Fixed & Intang (ACQUIS_FXD_&_INTANG_DETAILED),signo invertido (Excel trae egreso negativo); PP&E + intangibles
+PBR,2025-09-30,,capex_mm,4888.317808,musd,USD,Cash Flow,Acq of Fixed & Intang (ACQUIS_FXD_&_INTANG_DETAILED),signo invertido (Excel trae egreso negativo); PP&E + intangibles
+PBR,2025-12-31,,capex_mm,6599.421767,musd,USD,Cash Flow,Acq of Fixed & Intang (ACQUIS_FXD_&_INTANG_DETAILED),signo invertido (Excel trae egreso negativo); PP&E + intangibles
+PBR,2026-03-31,,capex_mm,4512.850571,musd,USD,Cash Flow,Acq of Fixed & Intang (ACQUIS_FXD_&_INTANG_DETAILED),signo invertido (Excel trae egreso negativo); PP&E + intangibles
+PBR,2026-06-30,,capex_mm,4564.436677,musd,USD,Cash Flow,Acq of Fixed & Intang (ACQUIS_FXD_&_INTANG_DETAILED),signo invertido (Excel trae egreso negativo); PP&E + intangibles
+PBR,2024-03-31,,crudo_kbd,2236,kbd,,segments geograpic measure,Oleo e LGN (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: petroleo + LGN (NGL) + condensado juntos; Bloomberg no los separa (ngl_kbd no se carga)
+PBR,2024-06-30,,crudo_kbd,2156,kbd,,segments geograpic measure,Oleo e LGN (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: petroleo + LGN (NGL) + condensado juntos; Bloomberg no los separa (ngl_kbd no se carga)
+PBR,2024-09-30,,crudo_kbd,2129,kbd,,segments geograpic measure,Oleo e LGN (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: petroleo + LGN (NGL) + condensado juntos; Bloomberg no los separa (ngl_kbd no se carga)
+PBR,2024-12-31,,crudo_kbd,2090,kbd,,segments geograpic measure,Oleo e LGN (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: petroleo + LGN (NGL) + condensado juntos; Bloomberg no los separa (ngl_kbd no se carga)
+PBR,2025-03-31,,crudo_kbd,2214,kbd,,segments geograpic measure,Oleo e LGN (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: petroleo + LGN (NGL) + condensado juntos; Bloomberg no los separa (ngl_kbd no se carga)
+PBR,2025-06-30,,crudo_kbd,2320,kbd,,segments geograpic measure,Oleo e LGN (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: petroleo + LGN (NGL) + condensado juntos; Bloomberg no los separa (ngl_kbd no se carga)
+PBR,2025-09-30,,crudo_kbd,2520,kbd,,segments geograpic measure,Oleo e LGN (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: petroleo + LGN (NGL) + condensado juntos; Bloomberg no los separa (ngl_kbd no se carga)
+PBR,2025-12-31,,crudo_kbd,2444,kbd,,segments geograpic measure,Oleo e LGN (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: petroleo + LGN (NGL) + condensado juntos; Bloomberg no los separa (ngl_kbd no se carga)
+PBR,2026-03-31,,crudo_kbd,2583,kbd,,segments geograpic measure,Oleo e LGN (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: petroleo + LGN (NGL) + condensado juntos; Bloomberg no los separa (ngl_kbd no se carga)
+PBR,2026-06-30,,crudo_kbd,2689,kbd,,segments geograpic measure,Oleo e LGN (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: petroleo + LGN (NGL) + condensado juntos; Bloomberg no los separa (ngl_kbd no se carga)
+PBR,2023-09-30,,dda_mm,3473.896908,musd,USD,Cash Flow,Depreciation & Amortization (CF_DEPR_AMORT),D&A del flujo de caja (la del IS esta vacia en varios trimestres)
+PBR,2023-12-31,,dda_mm,3629.970566,musd,USD,Cash Flow,Depreciation & Amortization (CF_DEPR_AMORT),D&A del flujo de caja (la del IS esta vacia en varios trimestres)
+PBR,2024-03-31,,dda_mm,3362.896,musd,USD,Cash Flow,Depreciation & Amortization (CF_DEPR_AMORT),D&A del flujo de caja (la del IS esta vacia en varios trimestres)
+PBR,2024-06-30,,dda_mm,3140.98478,musd,USD,Cash Flow,Depreciation & Amortization (CF_DEPR_AMORT),D&A del flujo de caja (la del IS esta vacia en varios trimestres)
+PBR,2024-09-30,,dda_mm,2983.144288,musd,USD,Cash Flow,Depreciation & Amortization (CF_DEPR_AMORT),D&A del flujo de caja (la del IS esta vacia en varios trimestres)
+PBR,2024-12-31,,dda_mm,2995.738539,musd,USD,Cash Flow,Depreciation & Amortization (CF_DEPR_AMORT),D&A del flujo de caja (la del IS esta vacia en varios trimestres)
+PBR,2025-03-31,,dda_mm,3244.222658,musd,USD,Cash Flow,Depreciation & Amortization (CF_DEPR_AMORT),D&A del flujo de caja (la del IS esta vacia en varios trimestres)
+PBR,2025-06-30,,dda_mm,3698.382572,musd,USD,Cash Flow,Depreciation & Amortization (CF_DEPR_AMORT),D&A del flujo de caja (la del IS esta vacia en varios trimestres)
+PBR,2025-09-30,,dda_mm,4109.975868,musd,USD,Cash Flow,Depreciation & Amortization (CF_DEPR_AMORT),D&A del flujo de caja (la del IS esta vacia en varios trimestres)
+PBR,2025-12-31,,dda_mm,4089.38845,musd,USD,Cash Flow,Depreciation & Amortization (CF_DEPR_AMORT),D&A del flujo de caja (la del IS esta vacia en varios trimestres)
+PBR,2026-03-31,,dda_mm,4109.747714,musd,USD,Cash Flow,Depreciation & Amortization (CF_DEPR_AMORT),D&A del flujo de caja (la del IS esta vacia en varios trimestres)
+PBR,2026-06-30,,dda_mm,4259.942789,musd,USD,Cash Flow,Depreciation & Amortization (CF_DEPR_AMORT),D&A del flujo de caja (la del IS esta vacia en varios trimestres)
+PBR,2023-09-30,,deuda_cp_mm,11005.7444,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW),incluye porcion corriente y leasing corriente
+PBR,2023-12-31,,deuda_cp_mm,11496.4641,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW),incluye porcion corriente y leasing corriente
+PBR,2024-03-31,,deuda_cp_mm,12322.5212,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW),incluye porcion corriente y leasing corriente
+PBR,2024-09-30,,deuda_cp_mm,11721.6612,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW),incluye porcion corriente y leasing corriente
+PBR,2024-12-31,,deuda_cp_mm,11149.7243,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW),incluye porcion corriente y leasing corriente
+PBR,2025-03-31,,deuda_cp_mm,11640.0863,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW),incluye porcion corriente y leasing corriente
+PBR,2025-06-30,,deuda_cp_mm,11794.032,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW),incluye porcion corriente y leasing corriente
+PBR,2025-09-30,,deuda_cp_mm,12079.0296,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW),incluye porcion corriente y leasing corriente
+PBR,2025-12-31,,deuda_cp_mm,12192.9689,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW),incluye porcion corriente y leasing corriente
+PBR,2026-03-31,,deuda_cp_mm,12791.0475,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW),incluye porcion corriente y leasing corriente
+PBR,2026-06-30,,deuda_cp_mm,11704.815,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW),incluye porcion corriente y leasing corriente
+PBR,2023-09-30,,deuda_lp_mm,49962.2752,musd,USD,Balance Sheet,LT Debt (BS_LT_BORROW),incluye leasing de largo plazo
+PBR,2023-12-31,,deuda_lp_mm,50964.6141,musd,USD,Balance Sheet,LT Debt (BS_LT_BORROW),incluye leasing de largo plazo
+PBR,2024-03-31,,deuda_lp_mm,49283.1058,musd,USD,Balance Sheet,LT Debt (BS_LT_BORROW),incluye leasing de largo plazo
+PBR,2024-09-30,,deuda_lp_mm,47490.7954,musd,USD,Balance Sheet,LT Debt (BS_LT_BORROW),incluye leasing de largo plazo
+PBR,2024-12-31,,deuda_lp_mm,49389.2764,musd,USD,Balance Sheet,LT Debt (BS_LT_BORROW),incluye leasing de largo plazo
+PBR,2025-03-31,,deuda_lp_mm,53053.7695,musd,USD,Balance Sheet,LT Debt (BS_LT_BORROW),incluye leasing de largo plazo
+PBR,2025-06-30,,deuda_lp_mm,56550.376,musd,USD,Balance Sheet,LT Debt (BS_LT_BORROW),incluye leasing de largo plazo
+PBR,2025-09-30,,deuda_lp_mm,58662.1827,musd,USD,Balance Sheet,LT Debt (BS_LT_BORROW),incluye leasing de largo plazo
+PBR,2025-12-31,,deuda_lp_mm,57430.7636,musd,USD,Balance Sheet,LT Debt (BS_LT_BORROW),incluye leasing de largo plazo
+PBR,2026-03-31,,deuda_lp_mm,58759.47,musd,USD,Balance Sheet,LT Debt (BS_LT_BORROW),incluye leasing de largo plazo
+PBR,2026-06-30,,deuda_lp_mm,59219.3205,musd,USD,Balance Sheet,LT Debt (BS_LT_BORROW),incluye leasing de largo plazo
+PBR,2023-09-30,,deuda_mm,60968.0196,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW) + LT Debt (BS_LT_BORROW),incluye arrendamientos (leasing); suma de 2 filas
+PBR,2023-12-31,,deuda_mm,62461.0782,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW) + LT Debt (BS_LT_BORROW),incluye arrendamientos (leasing); suma de 2 filas
+PBR,2024-03-31,,deuda_mm,61605.627,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW) + LT Debt (BS_LT_BORROW),incluye arrendamientos (leasing); suma de 2 filas
+PBR,2024-09-30,,deuda_mm,59212.4566,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW) + LT Debt (BS_LT_BORROW),incluye arrendamientos (leasing); suma de 2 filas
+PBR,2024-12-31,,deuda_mm,60539.0007,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW) + LT Debt (BS_LT_BORROW),incluye arrendamientos (leasing); suma de 2 filas
+PBR,2025-03-31,,deuda_mm,64693.8558,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW) + LT Debt (BS_LT_BORROW),incluye arrendamientos (leasing); suma de 2 filas
+PBR,2025-06-30,,deuda_mm,68344.408,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW) + LT Debt (BS_LT_BORROW),incluye arrendamientos (leasing); suma de 2 filas
+PBR,2025-09-30,,deuda_mm,70741.2123,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW) + LT Debt (BS_LT_BORROW),incluye arrendamientos (leasing); suma de 2 filas
+PBR,2025-12-31,,deuda_mm,69623.7325,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW) + LT Debt (BS_LT_BORROW),incluye arrendamientos (leasing); suma de 2 filas
+PBR,2026-03-31,,deuda_mm,71550.5175,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW) + LT Debt (BS_LT_BORROW),incluye arrendamientos (leasing); suma de 2 filas
+PBR,2026-06-30,,deuda_mm,70924.1355,musd,USD,Balance Sheet,ST Debt (BS_ST_BORROW) + LT Debt (BS_LT_BORROW),incluye arrendamientos (leasing); suma de 2 filas
+PBR,2023-09-30,,deuda_neta_bbg_mm,43653.3184,musd,USD,Balance Sheet,Net Debt (NET_DEBT),Net Debt de Bloomberg (ST+LT Debt menos caja y STI menos LT marketable securities)
+PBR,2023-12-31,,deuda_neta_bbg_mm,44546.0418,musd,USD,Balance Sheet,Net Debt (NET_DEBT),Net Debt de Bloomberg (ST+LT Debt menos caja y STI menos LT marketable securities)
+PBR,2024-03-31,,deuda_neta_bbg_mm,43429.32,musd,USD,Balance Sheet,Net Debt (NET_DEBT),Net Debt de Bloomberg (ST+LT Debt menos caja y STI menos LT marketable securities)
+PBR,2024-09-30,,deuda_neta_bbg_mm,44262.1646,musd,USD,Balance Sheet,Net Debt (NET_DEBT),Net Debt de Bloomberg (ST+LT Debt menos caja y STI menos LT marketable securities)
+PBR,2024-12-31,,deuda_neta_bbg_mm,52392.5031,musd,USD,Balance Sheet,Net Debt (NET_DEBT),Net Debt de Bloomberg (ST+LT Debt menos caja y STI menos LT marketable securities)
+PBR,2025-03-31,,deuda_neta_bbg_mm,56160.809,musd,USD,Balance Sheet,Net Debt (NET_DEBT),Net Debt de Bloomberg (ST+LT Debt menos caja y STI menos LT marketable securities)
+PBR,2025-06-30,,deuda_neta_bbg_mm,58753.04,musd,USD,Balance Sheet,Net Debt (NET_DEBT),Net Debt de Bloomberg (ST+LT Debt menos caja y STI menos LT marketable securities)
+PBR,2025-09-30,,deuda_neta_bbg_mm,59026.1562,musd,USD,Balance Sheet,Net Debt (NET_DEBT),Net Debt de Bloomberg (ST+LT Debt menos caja y STI menos LT marketable securities)
+PBR,2025-12-31,,deuda_neta_bbg_mm,60445.9639,musd,USD,Balance Sheet,Net Debt (NET_DEBT),Net Debt de Bloomberg (ST+LT Debt menos caja y STI menos LT marketable securities)
+PBR,2026-03-31,,deuda_neta_bbg_mm,62387.5175,musd,USD,Balance Sheet,Net Debt (NET_DEBT),Net Debt de Bloomberg (ST+LT Debt menos caja y STI menos LT marketable securities)
+PBR,2026-06-30,,deuda_neta_bbg_mm,60488.487,musd,USD,Balance Sheet,Net Debt (NET_DEBT),Net Debt de Bloomberg (ST+LT Debt menos caja y STI menos LT marketable securities)
+PBR,2023-09-30,,ebitda_gaap_mm,13463.886022,musd,USD,Cash Flow,EBITDA (EBITDA),EBIT GAAP + D&A (sin ajustar partidas anormales); distinto del EBITDA del IS
+PBR,2023-12-31,,ebitda_gaap_mm,11699.2411,musd,USD,Cash Flow,EBITDA (EBITDA),EBIT GAAP + D&A (sin ajustar partidas anormales); distinto del EBITDA del IS
+PBR,2024-03-31,,ebitda_gaap_mm,12348.664,musd,USD,Cash Flow,EBITDA (EBITDA),EBIT GAAP + D&A (sin ajustar partidas anormales); distinto del EBITDA del IS
+PBR,2024-09-30,,ebitda_gaap_mm,11385.580197,musd,USD,Cash Flow,EBITDA (EBITDA),EBIT GAAP + D&A (sin ajustar partidas anormales); distinto del EBITDA del IS
+PBR,2024-12-31,,ebitda_gaap_mm,5575.4356,musd,USD,Cash Flow,EBITDA (EBITDA),EBIT GAAP + D&A (sin ajustar partidas anormales); distinto del EBITDA del IS
+PBR,2025-03-31,,ebitda_gaap_mm,10517.907997,musd,USD,Cash Flow,EBITDA (EBITDA),EBIT GAAP + D&A (sin ajustar partidas anormales); distinto del EBITDA del IS
+PBR,2025-06-30,,ebitda_gaap_mm,9031.664886,musd,USD,Cash Flow,EBITDA (EBITDA),EBIT GAAP + D&A (sin ajustar partidas anormales); distinto del EBITDA del IS
+PBR,2025-09-30,,ebitda_gaap_mm,12086.328606,musd,USD,Cash Flow,EBITDA (EBITDA),EBIT GAAP + D&A (sin ajustar partidas anormales); distinto del EBITDA del IS
+PBR,2025-12-31,,ebitda_gaap_mm,9584.892117,musd,USD,Cash Flow,EBITDA (EBITDA),EBIT GAAP + D&A (sin ajustar partidas anormales); distinto del EBITDA del IS
+PBR,2026-03-31,,ebitda_gaap_mm,11946.865857,musd,USD,Cash Flow,EBITDA (EBITDA),EBIT GAAP + D&A (sin ajustar partidas anormales); distinto del EBITDA del IS
+PBR,2026-06-30,,ebitda_gaap_mm,18490.525054,musd,USD,Cash Flow,EBITDA (EBITDA),EBIT GAAP + D&A (sin ajustar partidas anormales); distinto del EBITDA del IS
+PBR,2023-09-30,,ebitda_gas_energia_mm,682.701,musd,USD,Segments product measure,Gas & Power: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2023-12-31,,ebitda_gas_energia_mm,637.327,musd,USD,Segments product measure,Gas & Power: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2024-03-31,,ebitda_gas_energia_mm,505.204,musd,USD,Segments product measure,Gas & Power: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2024-06-30,,ebitda_gas_energia_mm,407.577,musd,USD,Segments product measure,Gas & Power: EBITDA,EBITDA reportado del segmento (Op. Income y D&A del segmento vacios este trimestre)
+PBR,2024-09-30,,ebitda_gas_energia_mm,301.538,musd,USD,Segments product measure,Gas & Power: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2024-12-31,,ebitda_gas_energia_mm,369.427,musd,USD,Segments product measure,Gas & Power: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2025-03-31,,ebitda_gas_energia_mm,91.98,musd,USD,Segments product measure,Gas & Power: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2025-06-30,,ebitda_gas_energia_mm,251.36,musd,USD,Segments product measure,Gas & Power: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2025-09-30,,ebitda_gas_energia_mm,197.158,musd,USD,Segments product measure,Gas & Power: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2025-12-31,,ebitda_gas_energia_mm,422.985,musd,USD,Segments product measure,Gas & Power: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2026-03-31,,ebitda_gas_energia_mm,335.03,musd,USD,Segments product measure,Gas & Power: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2026-06-30,,ebitda_gas_energia_mm,424.158,musd,USD,Segments product measure,Gas & Power: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2023-09-30,,ebitda_mm,13718.153557,musd,USD,Income Statement,EBITDA (EBITDA),EBITDA Bloomberg ajustado (EBIT ajustado por partidas anormales + D&A)
+PBR,2023-12-31,,ebitda_mm,15010.446106,musd,USD,Income Statement,EBITDA (EBITDA),EBITDA Bloomberg ajustado (EBIT ajustado por partidas anormales + D&A)
+PBR,2024-03-31,,ebitda_mm,12472.086,musd,USD,Income Statement,EBITDA (EBITDA),EBITDA Bloomberg ajustado (EBIT ajustado por partidas anormales + D&A)
+PBR,2024-09-30,,ebitda_mm,11739.243576,musd,USD,Income Statement,EBITDA (EBITDA),EBITDA Bloomberg ajustado (EBIT ajustado por partidas anormales + D&A)
+PBR,2024-12-31,,ebitda_mm,10050.623121,musd,USD,Income Statement,EBITDA (EBITDA),EBITDA Bloomberg ajustado (EBIT ajustado por partidas anormales + D&A)
+PBR,2025-03-31,,ebitda_mm,10712.465616,musd,USD,Income Statement,EBITDA (EBITDA),EBITDA Bloomberg ajustado (EBIT ajustado por partidas anormales + D&A)
+PBR,2025-06-30,,ebitda_mm,9329.801969,musd,USD,Income Statement,EBITDA (EBITDA),EBITDA Bloomberg ajustado (EBIT ajustado por partidas anormales + D&A)
+PBR,2025-09-30,,ebitda_mm,12070.357911,musd,USD,Income Statement,EBITDA (EBITDA),EBITDA Bloomberg ajustado (EBIT ajustado por partidas anormales + D&A)
+PBR,2025-12-31,,ebitda_mm,11651.17185,musd,USD,Income Statement,EBITDA (EBITDA),EBITDA Bloomberg ajustado (EBIT ajustado por partidas anormales + D&A)
+PBR,2026-03-31,,ebitda_mm,11745.884857,musd,USD,Income Statement,EBITDA (EBITDA),EBITDA Bloomberg ajustado (EBIT ajustado por partidas anormales + D&A)
+PBR,2026-06-30,,ebitda_mm,19028.589725,musd,USD,Income Statement,EBITDA (EBITDA),EBITDA Bloomberg ajustado (EBIT ajustado por partidas anormales + D&A)
+PBR,2023-09-30,,ebitda_no_up_mm,2824.644,musd,USD,Segments product measure,(RTM + Gas & Power) Operating Income + Depreciation and Amortization,"Segmentos sumados: Refining, Transportation & Marketing + Gas & Power (Gas y Energia Baja Carbono); Op. Income + D&A de cada segmento; excluye E&P, Corporate y Eliminations"
+PBR,2023-12-31,,ebitda_no_up_mm,2471.585,musd,USD,Segments product measure,(RTM + Gas & Power) Operating Income + Depreciation and Amortization,"Segmentos sumados: Refining, Transportation & Marketing + Gas & Power (Gas y Energia Baja Carbono); Op. Income + D&A de cada segmento; excluye E&P, Corporate y Eliminations"
+PBR,2024-03-31,,ebitda_no_up_mm,2524.809,musd,USD,Segments product measure,(RTM + Gas & Power) Operating Income + Depreciation and Amortization,"Segmentos sumados: Refining, Transportation & Marketing + Gas & Power (Gas y Energia Baja Carbono); Op. Income + D&A de cada segmento; excluye E&P, Corporate y Eliminations"
+PBR,2024-06-30,,ebitda_no_up_mm,1590.566,musd,USD,Segments product measure,(RTM + Gas & Power) EBITDA,"Segmentos sumados: Refining, Transportation & Marketing + Gas & Power (Gas y Energia Baja Carbono); EBITDA reportado por segmento (Op. Income/D&A vacios este trimestre); excluye E&P, Corporate y Eliminations"
+PBR,2024-09-30,,ebitda_no_up_mm,1365.761,musd,USD,Segments product measure,(RTM + Gas & Power) Operating Income + Depreciation and Amortization,"Segmentos sumados: Refining, Transportation & Marketing + Gas & Power (Gas y Energia Baja Carbono); Op. Income + D&A de cada segmento; excluye E&P, Corporate y Eliminations"
+PBR,2024-12-31,,ebitda_no_up_mm,1503.753,musd,USD,Segments product measure,(RTM + Gas & Power) Operating Income + Depreciation and Amortization,"Segmentos sumados: Refining, Transportation & Marketing + Gas & Power (Gas y Energia Baja Carbono); Op. Income + D&A de cada segmento; excluye E&P, Corporate y Eliminations"
+PBR,2025-03-31,,ebitda_no_up_mm,1160.523,musd,USD,Segments product measure,(RTM + Gas & Power) Operating Income + Depreciation and Amortization,"Segmentos sumados: Refining, Transportation & Marketing + Gas & Power (Gas y Energia Baja Carbono); Op. Income + D&A de cada segmento; excluye E&P, Corporate y Eliminations"
+PBR,2025-06-30,,ebitda_no_up_mm,1277.099,musd,USD,Segments product measure,(RTM + Gas & Power) Operating Income + Depreciation and Amortization,"Segmentos sumados: Refining, Transportation & Marketing + Gas & Power (Gas y Energia Baja Carbono); Op. Income + D&A de cada segmento; excluye E&P, Corporate y Eliminations"
+PBR,2025-09-30,,ebitda_no_up_mm,1744.871,musd,USD,Segments product measure,(RTM + Gas & Power) Operating Income + Depreciation and Amortization,"Segmentos sumados: Refining, Transportation & Marketing + Gas & Power (Gas y Energia Baja Carbono); Op. Income + D&A de cada segmento; excluye E&P, Corporate y Eliminations"
+PBR,2025-12-31,,ebitda_no_up_mm,2337.073,musd,USD,Segments product measure,(RTM + Gas & Power) Operating Income + Depreciation and Amortization,"Segmentos sumados: Refining, Transportation & Marketing + Gas & Power (Gas y Energia Baja Carbono); Op. Income + D&A de cada segmento; excluye E&P, Corporate y Eliminations"
+PBR,2026-03-31,,ebitda_no_up_mm,4578.236,musd,USD,Segments product measure,(RTM + Gas & Power) Operating Income + Depreciation and Amortization,"Segmentos sumados: Refining, Transportation & Marketing + Gas & Power (Gas y Energia Baja Carbono); Op. Income + D&A de cada segmento; excluye E&P, Corporate y Eliminations"
+PBR,2026-06-30,,ebitda_no_up_mm,3991.76,musd,USD,Segments product measure,(RTM + Gas & Power) Operating Income + Depreciation and Amortization,"Segmentos sumados: Refining, Transportation & Marketing + Gas & Power (Gas y Energia Baja Carbono); Op. Income + D&A de cada segmento; excluye E&P, Corporate y Eliminations"
+PBR,2023-09-30,,ebitda_no_up_seg_bbg_mm,2644.954,musd,USD,Segments product measure,(RTM + Gas & Power) EBITDA,suma de la fila EBITDA de Bloomberg por segmento; control cruzado de ebitda_no_up_mm
+PBR,2023-12-31,,ebitda_no_up_seg_bbg_mm,2377.712,musd,USD,Segments product measure,(RTM + Gas & Power) EBITDA,suma de la fila EBITDA de Bloomberg por segmento; control cruzado de ebitda_no_up_mm
+PBR,2024-03-31,,ebitda_no_up_seg_bbg_mm,2416.132,musd,USD,Segments product measure,(RTM + Gas & Power) EBITDA,suma de la fila EBITDA de Bloomberg por segmento; control cruzado de ebitda_no_up_mm
+PBR,2024-06-30,,ebitda_no_up_seg_bbg_mm,1590.566,musd,USD,Segments product measure,(RTM + Gas & Power) EBITDA,suma de la fila EBITDA de Bloomberg por segmento; control cruzado de ebitda_no_up_mm
+PBR,2025-03-31,,ebitda_no_up_seg_bbg_mm,1232.158,musd,USD,Segments product measure,(RTM + Gas & Power) EBITDA,suma de la fila EBITDA de Bloomberg por segmento; control cruzado de ebitda_no_up_mm
+PBR,2025-06-30,,ebitda_no_up_seg_bbg_mm,1285.394,musd,USD,Segments product measure,(RTM + Gas & Power) EBITDA,suma de la fila EBITDA de Bloomberg por segmento; control cruzado de ebitda_no_up_mm
+PBR,2026-03-31,,ebitda_no_up_seg_bbg_mm,4574.243,musd,USD,Segments product measure,(RTM + Gas & Power) EBITDA,suma de la fila EBITDA de Bloomberg por segmento; control cruzado de ebitda_no_up_mm
+PBR,2026-06-30,,ebitda_no_up_seg_bbg_mm,4071.401,musd,USD,Segments product measure,(RTM + Gas & Power) EBITDA,suma de la fila EBITDA de Bloomberg por segmento; control cruzado de ebitda_no_up_mm
+PBR,2023-09-30,,ebitda_refino_mm,2141.943,musd,USD,Segments product measure,"Refining, Transportation & Marketing: Operating Income + Depreciation and Amortization",Op. Income + D&A del segmento
+PBR,2023-12-31,,ebitda_refino_mm,1834.258,musd,USD,Segments product measure,"Refining, Transportation & Marketing: Operating Income + Depreciation and Amortization",Op. Income + D&A del segmento
+PBR,2024-03-31,,ebitda_refino_mm,2019.605,musd,USD,Segments product measure,"Refining, Transportation & Marketing: Operating Income + Depreciation and Amortization",Op. Income + D&A del segmento
+PBR,2024-06-30,,ebitda_refino_mm,1182.989,musd,USD,Segments product measure,"Refining, Transportation & Marketing: EBITDA",EBITDA reportado del segmento (Op. Income y D&A del segmento vacios este trimestre)
+PBR,2024-09-30,,ebitda_refino_mm,1064.223,musd,USD,Segments product measure,"Refining, Transportation & Marketing: Operating Income + Depreciation and Amortization",Op. Income + D&A del segmento
+PBR,2024-12-31,,ebitda_refino_mm,1134.326,musd,USD,Segments product measure,"Refining, Transportation & Marketing: Operating Income + Depreciation and Amortization",Op. Income + D&A del segmento
+PBR,2025-03-31,,ebitda_refino_mm,1068.543,musd,USD,Segments product measure,"Refining, Transportation & Marketing: Operating Income + Depreciation and Amortization",Op. Income + D&A del segmento
+PBR,2025-06-30,,ebitda_refino_mm,1025.739,musd,USD,Segments product measure,"Refining, Transportation & Marketing: Operating Income + Depreciation and Amortization",Op. Income + D&A del segmento
+PBR,2025-09-30,,ebitda_refino_mm,1547.713,musd,USD,Segments product measure,"Refining, Transportation & Marketing: Operating Income + Depreciation and Amortization",Op. Income + D&A del segmento
+PBR,2025-12-31,,ebitda_refino_mm,1914.088,musd,USD,Segments product measure,"Refining, Transportation & Marketing: Operating Income + Depreciation and Amortization",Op. Income + D&A del segmento
+PBR,2026-03-31,,ebitda_refino_mm,4243.206,musd,USD,Segments product measure,"Refining, Transportation & Marketing: Operating Income + Depreciation and Amortization",Op. Income + D&A del segmento
+PBR,2026-06-30,,ebitda_refino_mm,3567.602,musd,USD,Segments product measure,"Refining, Transportation & Marketing: Operating Income + Depreciation and Amortization",Op. Income + D&A del segmento
+PBR,2023-09-30,,ebitda_up_mm,12301.524,musd,USD,Segments product measure,Exploration & Production: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2023-12-31,,ebitda_up_mm,10025.232,musd,USD,Segments product measure,Exploration & Production: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2024-03-31,,ebitda_up_mm,11371.637,musd,USD,Segments product measure,Exploration & Production: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2024-06-30,,ebitda_up_mm,10232.033,musd,USD,Segments product measure,Exploration & Production: EBITDA,EBITDA reportado del segmento (Op. Income y D&A del segmento vacios este trimestre)
+PBR,2024-09-30,,ebitda_up_mm,10394.788,musd,USD,Segments product measure,Exploration & Production: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2024-12-31,,ebitda_up_mm,5226.98,musd,USD,Segments product measure,Exploration & Production: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2025-03-31,,ebitda_up_mm,10029.597,musd,USD,Segments product measure,Exploration & Production: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2025-06-30,,ebitda_up_mm,8778.7,musd,USD,Segments product measure,Exploration & Production: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2025-09-30,,ebitda_up_mm,11032.256,musd,USD,Segments product measure,Exploration & Production: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2025-12-31,,ebitda_up_mm,7869.047,musd,USD,Segments product measure,Exploration & Production: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2026-03-31,,ebitda_up_mm,10460.846,musd,USD,Segments product measure,Exploration & Production: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2026-06-30,,ebitda_up_mm,15724.153,musd,USD,Segments product measure,Exploration & Production: Operating Income + Depreciation and Amortization,Op. Income + D&A del segmento
+PBR,2023-09-30,,flujo_operativo_mm,11588.330003,musd,USD,Cash Flow,Cash from Operating Activities (CF_CASH_FROM_OPER),
+PBR,2023-12-31,,flujo_operativo_mm,11652.809131,musd,USD,Cash Flow,Cash from Operating Activities (CF_CASH_FROM_OPER),
+PBR,2024-03-31,,flujo_operativo_mm,9413.604,musd,USD,Cash Flow,Cash from Operating Activities (CF_CASH_FROM_OPER),
+PBR,2024-06-30,,flujo_operativo_mm,9095.0525,musd,USD,Cash Flow,Cash from Operating Activities (CF_CASH_FROM_OPER),
+PBR,2024-09-30,,flujo_operativo_mm,11368.266742,musd,USD,Cash Flow,Cash from Operating Activities (CF_CASH_FROM_OPER),
+PBR,2024-12-31,,flujo_operativo_mm,8192.658642,musd,USD,Cash Flow,Cash from Operating Activities (CF_CASH_FROM_OPER),
+PBR,2025-03-31,,flujo_operativo_mm,8442.7407,musd,USD,Cash Flow,Cash from Operating Activities (CF_CASH_FROM_OPER),
+PBR,2025-06-30,,flujo_operativo_mm,7506.911705,musd,USD,Cash Flow,Cash from Operating Activities (CF_CASH_FROM_OPER),
+PBR,2025-09-30,,flujo_operativo_mm,9928.999721,musd,USD,Cash Flow,Cash from Operating Activities (CF_CASH_FROM_OPER),
+PBR,2025-12-31,,flujo_operativo_mm,10669.54075,musd,USD,Cash Flow,Cash from Operating Activities (CF_CASH_FROM_OPER),
+PBR,2026-03-31,,flujo_operativo_mm,8363.243429,musd,USD,Cash Flow,Cash from Operating Activities (CF_CASH_FROM_OPER),
+PBR,2026-06-30,,flujo_operativo_mm,12314.667894,musd,USD,Cash Flow,Cash from Operating Activities (CF_CASH_FROM_OPER),
+PBR,2024-03-31,,gas_kboed,507,kboe/d,,segments geograpic measure,Gas Natural (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: gas natural en miles boe/d (no convertido a MMcf/d)
+PBR,2024-06-30,,gas_kboed,508,kboe/d,,segments geograpic measure,Gas Natural (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: gas natural en miles boe/d (no convertido a MMcf/d)
+PBR,2024-09-30,,gas_kboed,525,kboe/d,,segments geograpic measure,Gas Natural (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: gas natural en miles boe/d (no convertido a MMcf/d)
+PBR,2024-12-31,,gas_kboed,507,kboe/d,,segments geograpic measure,Gas Natural (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: gas natural en miles boe/d (no convertido a MMcf/d)
+PBR,2025-03-31,,gas_kboed,526,kboe/d,,segments geograpic measure,Gas Natural (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: gas natural en miles boe/d (no convertido a MMcf/d)
+PBR,2025-06-30,,gas_kboed,559,kboe/d,,segments geograpic measure,Gas Natural (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: gas natural en miles boe/d (no convertido a MMcf/d)
+PBR,2025-09-30,,gas_kboed,594,kboe/d,,segments geograpic measure,Gas Natural (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: gas natural en miles boe/d (no convertido a MMcf/d)
+PBR,2025-12-31,,gas_kboed,589,kboe/d,,segments geograpic measure,Gas Natural (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: gas natural en miles boe/d (no convertido a MMcf/d)
+PBR,2026-03-31,,gas_kboed,613,kboe/d,,segments geograpic measure,Gas Natural (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: gas natural en miles boe/d (no convertido a MMcf/d)
+PBR,2026-06-30,,gas_kboed,619,kboe/d,,segments geograpic measure,Gas Natural (TOTAL_PRODUCTION_WORLD_MBOE_DY),Brasil: gas natural en miles boe/d (no convertido a MMcf/d)
+PBR,2023-09-30,,impuesto_ganancias_mm,2259.108658,musd,USD,Income Statement,"Income Tax Expense (Benefit), GAAP (IS_INC_TAX_EXP)",GAAP; corriente+diferido
+PBR,2023-12-31,,impuesto_ganancias_mm,1985.067603,musd,USD,Income Statement,"Income Tax Expense (Benefit), GAAP (IS_INC_TAX_EXP)",GAAP; corriente+diferido
+PBR,2024-03-31,,impuesto_ganancias_mm,2148.876,musd,USD,Income Statement,"Income Tax Expense (Benefit), GAAP (IS_INC_TAX_EXP)",GAAP; corriente+diferido
+PBR,2024-09-30,,impuesto_ganancias_mm,2204.760227,musd,USD,Income Statement,"Income Tax Expense (Benefit), GAAP (IS_INC_TAX_EXP)",GAAP; corriente+diferido
+PBR,2024-12-31,,impuesto_ganancias_mm,-823.172679,musd,USD,Income Statement,"Income Tax Expense (Benefit), GAAP (IS_INC_TAX_EXP)",GAAP; corriente+diferido
+PBR,2025-03-31,,impuesto_ganancias_mm,3129.334503,musd,USD,Income Statement,"Income Tax Expense (Benefit), GAAP (IS_INC_TAX_EXP)",GAAP; corriente+diferido
+PBR,2025-06-30,,impuesto_ganancias_mm,1635.605809,musd,USD,Income Statement,"Income Tax Expense (Benefit), GAAP (IS_INC_TAX_EXP)",GAAP; corriente+diferido
+PBR,2025-09-30,,impuesto_ganancias_mm,2221.945952,musd,USD,Income Statement,"Income Tax Expense (Benefit), GAAP (IS_INC_TAX_EXP)",GAAP; corriente+diferido
+PBR,2025-12-31,,impuesto_ganancias_mm,59.290667,musd,USD,Income Statement,"Income Tax Expense (Benefit), GAAP (IS_INC_TAX_EXP)",GAAP; corriente+diferido
+PBR,2026-03-31,,impuesto_ganancias_mm,3113.589286,musd,USD,Income Statement,"Income Tax Expense (Benefit), GAAP (IS_INC_TAX_EXP)",GAAP; corriente+diferido
+PBR,2026-06-30,,impuesto_ganancias_mm,3632.332746,musd,USD,Income Statement,"Income Tax Expense (Benefit), GAAP (IS_INC_TAX_EXP)",GAAP; corriente+diferido
+PBR,2023-09-30,,ingresos_mm,25575.912898,musd,USD,Income Statement,Revenue (SALES_REV_TURN),
+PBR,2023-12-31,,ingresos_mm,27103.753306,musd,USD,Income Statement,Revenue (SALES_REV_TURN),
+PBR,2024-03-31,,ingresos_mm,23779.642,musd,USD,Income Statement,Revenue (SALES_REV_TURN),
+PBR,2024-06-30,,ingresos_mm,23471.09084,musd,USD,Income Statement,Sales & Services Revenue (IS_S&SR_GAAP),campo principal vacio en el Excel este trimestre; se uso la fila 14
+PBR,2024-09-30,,ingresos_mm,23369.917364,musd,USD,Income Statement,Revenue (SALES_REV_TURN),
+PBR,2024-12-31,,ingresos_mm,20779.455539,musd,USD,Income Statement,Revenue (SALES_REV_TURN),
+PBR,2025-03-31,,ingresos_mm,21053.254374,musd,USD,Income Statement,Revenue (SALES_REV_TURN),
+PBR,2025-06-30,,ingresos_mm,21028.108012,musd,USD,Income Statement,Revenue (SALES_REV_TURN),
+PBR,2025-09-30,,ingresos_mm,23479.859458,musd,USD,Income Statement,Revenue (SALES_REV_TURN),
+PBR,2025-12-31,,ingresos_mm,23599.72345,musd,USD,Income Statement,Revenue (SALES_REV_TURN),
+PBR,2026-03-31,,ingresos_mm,23518.009429,musd,USD,Income Statement,Revenue (SALES_REV_TURN),
+PBR,2026-06-30,,ingresos_mm,33585.457892,musd,USD,Income Statement,Revenue (SALES_REV_TURN),
+PBR,2023-09-30,,intereses_mm,1158.443711,musd,USD,Income Statement,Interest Expense (IS_INT_EXPENSE),
+PBR,2023-12-31,,intereses_mm,1081.461116,musd,USD,Income Statement,Interest Expense (IS_INT_EXPENSE),
+PBR,2024-03-31,,intereses_mm,1101.304,musd,USD,Income Statement,Interest Expense (IS_INT_EXPENSE),
+PBR,2024-06-30,,intereses_mm,1077.0078,musd,USD,Income Statement,Interest Expense (IS_INT_EXPENSE),
+PBR,2024-09-30,,intereses_mm,1099.584712,musd,USD,Income Statement,Interest Expense (IS_INT_EXPENSE),
+PBR,2024-12-31,,intereses_mm,1137.088655,musd,USD,Income Statement,Interest Expense (IS_INT_EXPENSE),
+PBR,2025-03-31,,intereses_mm,1086.4795,musd,USD,Income Statement,Interest Expense (IS_INT_EXPENSE),
+PBR,2025-06-30,,intereses_mm,1169.424615,musd,USD,Income Statement,Interest Expense (IS_INT_EXPENSE),
+PBR,2025-09-30,,intereses_mm,1269.394932,musd,USD,Income Statement,Interest Expense (IS_INT_EXPENSE),
+PBR,2025-12-31,,intereses_mm,1305.1358,musd,USD,Income Statement,Interest Expense (IS_INT_EXPENSE),Interest Income=0 en el Excel este trimestre: posible valor neto
+PBR,2026-03-31,,intereses_mm,1230.034143,musd,USD,Income Statement,Interest Expense (IS_INT_EXPENSE),
+PBR,2026-06-30,,intereses_mm,1319.011258,musd,USD,Income Statement,Interest Expense (IS_INT_EXPENSE),
+PBR,2023-09-30,,minoritarios_mm,296.0068,musd,USD,Balance Sheet,Minority Interest (MINORITY_NONCONTROLLING_INTEREST),
+PBR,2023-12-31,,minoritarios_mm,391.3839,musd,USD,Balance Sheet,Minority Interest (MINORITY_NONCONTROLLING_INTEREST),
+PBR,2024-03-31,,minoritarios_mm,455.8284,musd,USD,Balance Sheet,Minority Interest (MINORITY_NONCONTROLLING_INTEREST),
+PBR,2024-09-30,,minoritarios_mm,256.9524,musd,USD,Balance Sheet,Minority Interest (MINORITY_NONCONTROLLING_INTEREST),
+PBR,2024-12-31,,minoritarios_mm,244.4468,musd,USD,Balance Sheet,Minority Interest (MINORITY_NONCONTROLLING_INTEREST),
+PBR,2025-03-31,,minoritarios_mm,307.8214,musd,USD,Balance Sheet,Minority Interest (MINORITY_NONCONTROLLING_INTEREST),
+PBR,2025-06-30,,minoritarios_mm,471.04,musd,USD,Balance Sheet,Minority Interest (MINORITY_NONCONTROLLING_INTEREST),
+PBR,2025-09-30,,minoritarios_mm,381.2787,musd,USD,Balance Sheet,Minority Interest (MINORITY_NONCONTROLLING_INTEREST),
+PBR,2025-12-31,,minoritarios_mm,326.5213,musd,USD,Balance Sheet,Minority Interest (MINORITY_NONCONTROLLING_INTEREST),
+PBR,2026-03-31,,minoritarios_mm,227.7275,musd,USD,Balance Sheet,Minority Interest (MINORITY_NONCONTROLLING_INTEREST),
+PBR,2026-06-30,,minoritarios_mm,174.924,musd,USD,Balance Sheet,Minority Interest (MINORITY_NONCONTROLLING_INTEREST),
+PBR,2023-09-30,,patrimonio_neto_mm,77046.9972,musd,USD,Balance Sheet,Equity Before Minority Interest (EQTY_BEF_MINORITY_INT_DETAILED),
+PBR,2023-12-31,,patrimonio_neto_mm,78408.8901,musd,USD,Balance Sheet,Equity Before Minority Interest (EQTY_BEF_MINORITY_INT_DETAILED),
+PBR,2024-03-31,,patrimonio_neto_mm,81282.6184,musd,USD,Balance Sheet,Equity Before Minority Interest (EQTY_BEF_MINORITY_INT_DETAILED),
+PBR,2024-06-30,,patrimonio_neto_mm,67076.8284,musd,USD,Balance Sheet,Equity Before Minority Interest (EQTY_BEF_MINORITY_INT_DETAILED),
+PBR,2024-09-30,,patrimonio_neto_mm,72353.789,musd,USD,Balance Sheet,Equity Before Minority Interest (EQTY_BEF_MINORITY_INT_DETAILED),
+PBR,2024-12-31,,patrimonio_neto_mm,59329.5726,musd,USD,Balance Sheet,Equity Before Minority Interest (EQTY_BEF_MINORITY_INT_DETAILED),
+PBR,2025-03-31,,patrimonio_neto_mm,69153.4227,musd,USD,Balance Sheet,Equity Before Minority Interest (EQTY_BEF_MINORITY_INT_DETAILED),
+PBR,2025-06-30,,patrimonio_neto_mm,73456.848,musd,USD,Balance Sheet,Equity Before Minority Interest (EQTY_BEF_MINORITY_INT_DETAILED),
+PBR,2025-09-30,,patrimonio_neto_mm,79553.8854,musd,USD,Balance Sheet,Equity Before Minority Interest (EQTY_BEF_MINORITY_INT_DETAILED),
+PBR,2025-12-31,,patrimonio_neto_mm,75382.0018,musd,USD,Balance Sheet,Equity Before Minority Interest (EQTY_BEF_MINORITY_INT_DETAILED),
+PBR,2026-03-31,,patrimonio_neto_mm,85698.8825,musd,USD,Balance Sheet,Equity Before Minority Interest (EQTY_BEF_MINORITY_INT_DETAILED),
+PBR,2026-06-30,,patrimonio_neto_mm,93063.825,musd,USD,Balance Sheet,Equity Before Minority Interest (EQTY_BEF_MINORITY_INT_DETAILED),
+PBR,2024-03-31,,precio_boe_cubierto_brasil_crude,83.24,usd/boe,USD,segments geograpic measure,Brazil - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Brazil - Crude"" de AVG_SALE_PRICE_BOE_HEDGED. Semantica incierta: coincide con Brent promedio trimestral; no confirmado como precio realizado; no usar como p_crudo sin verificar"
+PBR,2024-06-30,,precio_boe_cubierto_brasil_crude,84.94,usd/boe,USD,segments geograpic measure,Brazil - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Brazil - Crude"" de AVG_SALE_PRICE_BOE_HEDGED. Semantica incierta: coincide con Brent promedio trimestral; no confirmado como precio realizado; no usar como p_crudo sin verificar"
+PBR,2024-09-30,,precio_boe_cubierto_brasil_crude,80.18,usd/boe,USD,segments geograpic measure,Brazil - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Brazil - Crude"" de AVG_SALE_PRICE_BOE_HEDGED. Semantica incierta: coincide con Brent promedio trimestral; no confirmado como precio realizado; no usar como p_crudo sin verificar"
+PBR,2024-12-31,,precio_boe_cubierto_brasil_crude,74.69,usd/boe,USD,segments geograpic measure,Brazil - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Brazil - Crude"" de AVG_SALE_PRICE_BOE_HEDGED. Semantica incierta: coincide con Brent promedio trimestral; no confirmado como precio realizado; no usar como p_crudo sin verificar"
+PBR,2025-03-31,,precio_boe_cubierto_brasil_crude,75.66,usd/boe,USD,segments geograpic measure,Brazil - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Brazil - Crude"" de AVG_SALE_PRICE_BOE_HEDGED. Semantica incierta: coincide con Brent promedio trimestral; no confirmado como precio realizado; no usar como p_crudo sin verificar"
+PBR,2025-06-30,,precio_boe_cubierto_brasil_crude,67.82,usd/boe,USD,segments geograpic measure,Brazil - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Brazil - Crude"" de AVG_SALE_PRICE_BOE_HEDGED. Semantica incierta: coincide con Brent promedio trimestral; no confirmado como precio realizado; no usar como p_crudo sin verificar"
+PBR,2025-09-30,,precio_boe_cubierto_brasil_crude,69.07,usd/boe,USD,segments geograpic measure,Brazil - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Brazil - Crude"" de AVG_SALE_PRICE_BOE_HEDGED. Semantica incierta: coincide con Brent promedio trimestral; no confirmado como precio realizado; no usar como p_crudo sin verificar"
+PBR,2025-12-31,,precio_boe_cubierto_brasil_crude,63.69,usd/boe,USD,segments geograpic measure,Brazil - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Brazil - Crude"" de AVG_SALE_PRICE_BOE_HEDGED. Semantica incierta: coincide con Brent promedio trimestral; no confirmado como precio realizado; no usar como p_crudo sin verificar"
+PBR,2026-03-31,,precio_boe_cubierto_brasil_crude,80.61,usd/boe,USD,segments geograpic measure,Brazil - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Brazil - Crude"" de AVG_SALE_PRICE_BOE_HEDGED. Semantica incierta: coincide con Brent promedio trimestral; no confirmado como precio realizado; no usar como p_crudo sin verificar"
+PBR,2026-06-30,,precio_boe_cubierto_brasil_crude,104.52,usd/boe,USD,segments geograpic measure,Brazil - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Brazil - Crude"" de AVG_SALE_PRICE_BOE_HEDGED. Semantica incierta: coincide con Brent promedio trimestral; no confirmado como precio realizado; no usar como p_crudo sin verificar"
+PBR,2024-03-31,,precio_boe_cubierto_exterior_crude,82.506898,usd/boe,USD,segments geograpic measure,Abroad - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Abroad - Crude"" de AVG_SALE_PRICE_BOE_HEDGED; semantica incierta"
+PBR,2024-06-30,,precio_boe_cubierto_exterior_crude,81.644444,usd/boe,USD,segments geograpic measure,Abroad - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Abroad - Crude"" de AVG_SALE_PRICE_BOE_HEDGED; semantica incierta"
+PBR,2024-09-30,,precio_boe_cubierto_exterior_crude,80.127065,usd/boe,USD,segments geograpic measure,Abroad - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Abroad - Crude"" de AVG_SALE_PRICE_BOE_HEDGED; semantica incierta"
+PBR,2024-12-31,,precio_boe_cubierto_exterior_crude,73.195303,usd/boe,USD,segments geograpic measure,Abroad - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Abroad - Crude"" de AVG_SALE_PRICE_BOE_HEDGED; semantica incierta"
+PBR,2025-03-31,,precio_boe_cubierto_exterior_crude,74.639289,usd/boe,USD,segments geograpic measure,Abroad - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Abroad - Crude"" de AVG_SALE_PRICE_BOE_HEDGED; semantica incierta"
+PBR,2025-06-30,,precio_boe_cubierto_exterior_crude,65.85,usd/boe,USD,segments geograpic measure,Abroad - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Abroad - Crude"" de AVG_SALE_PRICE_BOE_HEDGED; semantica incierta"
+PBR,2025-09-30,,precio_boe_cubierto_exterior_crude,66.622061,usd/boe,USD,segments geograpic measure,Abroad - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Abroad - Crude"" de AVG_SALE_PRICE_BOE_HEDGED; semantica incierta"
+PBR,2025-12-31,,precio_boe_cubierto_exterior_crude,63.574076,usd/boe,USD,segments geograpic measure,Abroad - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Abroad - Crude"" de AVG_SALE_PRICE_BOE_HEDGED; semantica incierta"
+PBR,2026-03-31,,precio_boe_cubierto_exterior_crude,79.08504,usd/boe,USD,segments geograpic measure,Abroad - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Abroad - Crude"" de AVG_SALE_PRICE_BOE_HEDGED; semantica incierta"
+PBR,2026-06-30,,precio_boe_cubierto_exterior_crude,96.328203,usd/boe,USD,segments geograpic measure,Abroad - Crude (AVG_SALE_PRICE_BOE_HEDGED),"Fila ""Abroad - Crude"" de AVG_SALE_PRICE_BOE_HEDGED; semantica incierta"
+PBR,2023-09-30,,prestamos_cp_mm,4378.226,musd,USD,Balance Sheet,ST Borrowings (SHORT_TERM_DEBT_DETAILED),subcomponente de ST Debt; definicion exacta (leasing) no confirmada
+PBR,2023-12-31,,prestamos_cp_mm,4312.2303,musd,USD,Balance Sheet,ST Borrowings (SHORT_TERM_DEBT_DETAILED),subcomponente de ST Debt; definicion exacta (leasing) no confirmada
+PBR,2024-03-31,,prestamos_cp_mm,4895.6688,musd,USD,Balance Sheet,ST Borrowings (SHORT_TERM_DEBT_DETAILED),subcomponente de ST Debt; definicion exacta (leasing) no confirmada
+PBR,2024-09-30,,prestamos_cp_mm,3962.1766,musd,USD,Balance Sheet,ST Borrowings (SHORT_TERM_DEBT_DETAILED),subcomponente de ST Debt; definicion exacta (leasing) no confirmada
+PBR,2024-12-31,,prestamos_cp_mm,2575.2827,musd,USD,Balance Sheet,ST Borrowings (SHORT_TERM_DEBT_DETAILED),subcomponente de ST Debt; definicion exacta (leasing) no confirmada
+PBR,2025-03-31,,prestamos_cp_mm,2771.6155,musd,USD,Balance Sheet,ST Borrowings (SHORT_TERM_DEBT_DETAILED),subcomponente de ST Debt; definicion exacta (leasing) no confirmada
+PBR,2025-06-30,,prestamos_cp_mm,2485.472,musd,USD,Balance Sheet,ST Borrowings (SHORT_TERM_DEBT_DETAILED),subcomponente de ST Debt; definicion exacta (leasing) no confirmada
+PBR,2025-09-30,,prestamos_cp_mm,2482.3557,musd,USD,Balance Sheet,ST Borrowings (SHORT_TERM_DEBT_DETAILED),subcomponente de ST Debt; definicion exacta (leasing) no confirmada
+PBR,2025-12-31,,prestamos_cp_mm,2180.4951,musd,USD,Balance Sheet,ST Borrowings (SHORT_TERM_DEBT_DETAILED),subcomponente de ST Debt; definicion exacta (leasing) no confirmada
+PBR,2026-03-31,,prestamos_cp_mm,2496.725,musd,USD,Balance Sheet,ST Borrowings (SHORT_TERM_DEBT_DETAILED),subcomponente de ST Debt; definicion exacta (leasing) no confirmada
+PBR,2026-06-30,,prestamos_cp_mm,1437.8985,musd,USD,Balance Sheet,ST Borrowings (SHORT_TERM_DEBT_DETAILED),subcomponente de ST Debt; definicion exacta (leasing) no confirmada
+PBR,2023-09-30,,prestamos_lp_mm,25070.3588,musd,USD,Balance Sheet,LT Borrowings (LONG_TERM_BORROWINGS_DETAILED),subcomponente de LT Debt; definicion exacta (leasing) no confirmada
+PBR,2023-12-31,,prestamos_lp_mm,24424.4988,musd,USD,Balance Sheet,LT Borrowings (LONG_TERM_BORROWINGS_DETAILED),subcomponente de LT Debt; definicion exacta (leasing) no confirmada
+PBR,2024-03-31,,prestamos_lp_mm,22738.579,musd,USD,Balance Sheet,LT Borrowings (LONG_TERM_BORROWINGS_DETAILED),subcomponente de LT Debt; definicion exacta (leasing) no confirmada
+PBR,2024-06-30,,prestamos_lp_mm,21669.0992,musd,USD,Balance Sheet,LT Borrowings (LONG_TERM_BORROWINGS_DETAILED),subcomponente de LT Debt; definicion exacta (leasing) no confirmada
+PBR,2024-09-30,,prestamos_lp_mm,21828.4556,musd,USD,Balance Sheet,LT Borrowings (LONG_TERM_BORROWINGS_DETAILED),subcomponente de LT Debt; definicion exacta (leasing) no confirmada
+PBR,2024-12-31,,prestamos_lp_mm,20674.0719,musd,USD,Balance Sheet,LT Borrowings (LONG_TERM_BORROWINGS_DETAILED),subcomponente de LT Debt; definicion exacta (leasing) no confirmada
+PBR,2025-03-31,,prestamos_lp_mm,21136.2542,musd,USD,Balance Sheet,LT Borrowings (LONG_TERM_BORROWINGS_DETAILED),subcomponente de LT Debt; definicion exacta (leasing) no confirmada
+PBR,2025-06-30,,prestamos_lp_mm,23412.16,musd,USD,Balance Sheet,LT Borrowings (LONG_TERM_BORROWINGS_DETAILED),subcomponente de LT Debt; definicion exacta (leasing) no confirmada
+PBR,2025-09-30,,prestamos_lp_mm,25651.7613,musd,USD,Balance Sheet,LT Borrowings (LONG_TERM_BORROWINGS_DETAILED),subcomponente de LT Debt; definicion exacta (leasing) no confirmada
+PBR,2025-12-31,,prestamos_lp_mm,24196.6606,musd,USD,Balance Sheet,LT Borrowings (LONG_TERM_BORROWINGS_DETAILED),subcomponente de LT Debt; definicion exacta (leasing) no confirmada
+PBR,2026-03-31,,prestamos_lp_mm,25170.145,musd,USD,Balance Sheet,LT Borrowings (LONG_TERM_BORROWINGS_DETAILED),subcomponente de LT Debt; definicion exacta (leasing) no confirmada
+PBR,2026-06-30,,prestamos_lp_mm,24439.6305,musd,USD,Balance Sheet,LT Borrowings (LONG_TERM_BORROWINGS_DETAILED),subcomponente de LT Debt; definicion exacta (leasing) no confirmada
+PBR,2024-03-31,,prod_brasil_kboed,2742,kboe/d,,segments geograpic measure,"Brazil - Crude Oil, NGL & Natural Gas (TOTAL_PRODUCTION_WORLD_MBOE_DY)","Brasil: crudo, LGN y gas natural"
+PBR,2024-06-30,,prod_brasil_kboed,2664,kboe/d,,segments geograpic measure,"Brazil - Crude Oil, NGL & Natural Gas (TOTAL_PRODUCTION_WORLD_MBOE_DY)","Brasil: crudo, LGN y gas natural"
+PBR,2024-09-30,,prod_brasil_kboed,2654,kboe/d,,segments geograpic measure,"Brazil - Crude Oil, NGL & Natural Gas (TOTAL_PRODUCTION_WORLD_MBOE_DY)","Brasil: crudo, LGN y gas natural"
+PBR,2024-12-31,,prod_brasil_kboed,2597,kboe/d,,segments geograpic measure,"Brazil - Crude Oil, NGL & Natural Gas (TOTAL_PRODUCTION_WORLD_MBOE_DY)","Brasil: crudo, LGN y gas natural"
+PBR,2025-03-31,,prod_brasil_kboed,2740,kboe/d,,segments geograpic measure,"Brazil - Crude Oil, NGL & Natural Gas (TOTAL_PRODUCTION_WORLD_MBOE_DY)","Brasil: crudo, LGN y gas natural"
+PBR,2025-06-30,,prod_brasil_kboed,2879,kboe/d,,segments geograpic measure,"Brazil - Crude Oil, NGL & Natural Gas (TOTAL_PRODUCTION_WORLD_MBOE_DY)","Brasil: crudo, LGN y gas natural"
+PBR,2025-09-30,,prod_brasil_kboed,3114,kboe/d,,segments geograpic measure,"Brazil - Crude Oil, NGL & Natural Gas (TOTAL_PRODUCTION_WORLD_MBOE_DY)","Brasil: crudo, LGN y gas natural"
+PBR,2025-12-31,,prod_brasil_kboed,3033,kboe/d,,segments geograpic measure,"Brazil - Crude Oil, NGL & Natural Gas (TOTAL_PRODUCTION_WORLD_MBOE_DY)","Brasil: crudo, LGN y gas natural"
+PBR,2026-03-31,,prod_brasil_kboed,3197,kboe/d,,segments geograpic measure,"Brazil - Crude Oil, NGL & Natural Gas (TOTAL_PRODUCTION_WORLD_MBOE_DY)","Brasil: crudo, LGN y gas natural"
+PBR,2026-06-30,,prod_brasil_kboed,3308,kboe/d,,segments geograpic measure,"Brazil - Crude Oil, NGL & Natural Gas (TOTAL_PRODUCTION_WORLD_MBOE_DY)","Brasil: crudo, LGN y gas natural"
+PBR,2024-03-31,,prod_exterior_kboed,33,kboe/d,,segments geograpic measure,Exterior (TOTAL_PRODUCTION_WORLD_MBOE_DY),Produccion en el exterior
+PBR,2024-06-30,,prod_exterior_kboed,34,kboe/d,,segments geograpic measure,Exterior (TOTAL_PRODUCTION_WORLD_MBOE_DY),Produccion en el exterior
+PBR,2024-09-30,,prod_exterior_kboed,35,kboe/d,,segments geograpic measure,Exterior (TOTAL_PRODUCTION_WORLD_MBOE_DY),Produccion en el exterior
+PBR,2024-12-31,,prod_exterior_kboed,31,kboe/d,,segments geograpic measure,Exterior (TOTAL_PRODUCTION_WORLD_MBOE_DY),Produccion en el exterior
+PBR,2025-03-31,,prod_exterior_kboed,31,kboe/d,,segments geograpic measure,Exterior (TOTAL_PRODUCTION_WORLD_MBOE_DY),Produccion en el exterior
+PBR,2025-06-30,,prod_exterior_kboed,31,kboe/d,,segments geograpic measure,Exterior (TOTAL_PRODUCTION_WORLD_MBOE_DY),Produccion en el exterior
+PBR,2025-09-30,,prod_exterior_kboed,31,kboe/d,,segments geograpic measure,Exterior (TOTAL_PRODUCTION_WORLD_MBOE_DY),Produccion en el exterior
+PBR,2025-12-31,,prod_exterior_kboed,32,kboe/d,,segments geograpic measure,Exterior (TOTAL_PRODUCTION_WORLD_MBOE_DY),Produccion en el exterior
+PBR,2026-03-31,,prod_exterior_kboed,28,kboe/d,,segments geograpic measure,Exterior (TOTAL_PRODUCTION_WORLD_MBOE_DY),Produccion en el exterior
+PBR,2026-06-30,,prod_exterior_kboed,28,kboe/d,,segments geograpic measure,Exterior (TOTAL_PRODUCTION_WORLD_MBOE_DY),Produccion en el exterior
+PBR,2024-03-31,,prod_postsal_kbd,343,kbd,,segments geograpic measure,Pos-Sal Profundo e Ultra Profundo (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pos-sal profundo y ultra profundo, petroleo+LGN"
+PBR,2024-06-30,,prod_postsal_kbd,306,kbd,,segments geograpic measure,Pos-Sal Profundo e Ultra Profundo (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pos-sal profundo y ultra profundo, petroleo+LGN"
+PBR,2024-09-30,,prod_postsal_kbd,275,kbd,,segments geograpic measure,Pos-Sal Profundo e Ultra Profundo (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pos-sal profundo y ultra profundo, petroleo+LGN"
+PBR,2024-12-31,,prod_postsal_kbd,295,kbd,,segments geograpic measure,Pos-Sal Profundo e Ultra Profundo (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pos-sal profundo y ultra profundo, petroleo+LGN"
+PBR,2025-03-31,,prod_postsal_kbd,326,kbd,,segments geograpic measure,Pos-Sal Profundo e Ultra Profundo (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pos-sal profundo y ultra profundo, petroleo+LGN"
+PBR,2025-06-30,,prod_postsal_kbd,311,kbd,,segments geograpic measure,Pos-Sal Profundo e Ultra Profundo (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pos-sal profundo y ultra profundo, petroleo+LGN"
+PBR,2025-09-30,,prod_postsal_kbd,366,kbd,,segments geograpic measure,Pos-Sal Profundo e Ultra Profundo (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pos-sal profundo y ultra profundo, petroleo+LGN"
+PBR,2025-12-31,,prod_postsal_kbd,337,kbd,,segments geograpic measure,Pos-Sal Profundo e Ultra Profundo (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pos-sal profundo y ultra profundo, petroleo+LGN"
+PBR,2026-03-31,,prod_postsal_kbd,361,kbd,,segments geograpic measure,Pos-Sal Profundo e Ultra Profundo (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pos-sal profundo y ultra profundo, petroleo+LGN"
+PBR,2026-06-30,,prod_postsal_kbd,356,kbd,,segments geograpic measure,Pos-Sal Profundo e Ultra Profundo (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pos-sal profundo y ultra profundo, petroleo+LGN"
+PBR,2024-03-31,,prod_presal_kbd,1857,kbd,,segments geograpic measure,Pre-Sal (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pre-sal, petroleo+LGN"
+PBR,2024-06-30,,prod_presal_kbd,1815,kbd,,segments geograpic measure,Pre-Sal (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pre-sal, petroleo+LGN"
+PBR,2024-09-30,,prod_presal_kbd,1822,kbd,,segments geograpic measure,Pre-Sal (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pre-sal, petroleo+LGN"
+PBR,2024-12-31,,prod_presal_kbd,1760,kbd,,segments geograpic measure,Pre-Sal (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pre-sal, petroleo+LGN"
+PBR,2025-03-31,,prod_presal_kbd,1853,kbd,,segments geograpic measure,Pre-Sal (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pre-sal, petroleo+LGN"
+PBR,2025-06-30,,prod_presal_kbd,1974,kbd,,segments geograpic measure,Pre-Sal (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pre-sal, petroleo+LGN"
+PBR,2025-09-30,,prod_presal_kbd,2117,kbd,,segments geograpic measure,Pre-Sal (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pre-sal, petroleo+LGN"
+PBR,2025-12-31,,prod_presal_kbd,2071,kbd,,segments geograpic measure,Pre-Sal (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pre-sal, petroleo+LGN"
+PBR,2026-03-31,,prod_presal_kbd,2189,kbd,,segments geograpic measure,Pre-Sal (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pre-sal, petroleo+LGN"
+PBR,2026-06-30,,prod_presal_kbd,2299,kbd,,segments geograpic measure,Pre-Sal (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: pre-sal, petroleo+LGN"
+PBR,2024-03-31,,prod_terra_aguas_someras_kbd,35,kbd,,segments geograpic measure,Terra e aguas rasas (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: terrestre y aguas someras, petroleo+LGN"
+PBR,2024-06-30,,prod_terra_aguas_someras_kbd,35,kbd,,segments geograpic measure,Terra e aguas rasas (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: terrestre y aguas someras, petroleo+LGN"
+PBR,2024-09-30,,prod_terra_aguas_someras_kbd,32,kbd,,segments geograpic measure,Terra e aguas rasas (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: terrestre y aguas someras, petroleo+LGN"
+PBR,2024-12-31,,prod_terra_aguas_someras_kbd,35,kbd,,segments geograpic measure,Terra e aguas rasas (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: terrestre y aguas someras, petroleo+LGN"
+PBR,2025-03-31,,prod_terra_aguas_someras_kbd,36,kbd,,segments geograpic measure,Terra e aguas rasas (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: terrestre y aguas someras, petroleo+LGN"
+PBR,2025-06-30,,prod_terra_aguas_someras_kbd,35,kbd,,segments geograpic measure,Terra e aguas rasas (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: terrestre y aguas someras, petroleo+LGN"
+PBR,2025-09-30,,prod_terra_aguas_someras_kbd,36,kbd,,segments geograpic measure,Terra e aguas rasas (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: terrestre y aguas someras, petroleo+LGN"
+PBR,2025-12-31,,prod_terra_aguas_someras_kbd,36,kbd,,segments geograpic measure,Terra e aguas rasas (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: terrestre y aguas someras, petroleo+LGN"
+PBR,2026-03-31,,prod_terra_aguas_someras_kbd,34,kbd,,segments geograpic measure,Terra e aguas rasas (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: terrestre y aguas someras, petroleo+LGN"
+PBR,2026-06-30,,prod_terra_aguas_someras_kbd,34,kbd,,segments geograpic measure,Terra e aguas rasas (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Brasil: terrestre y aguas someras, petroleo+LGN"
+PBR,2024-03-31,,refino_salidas_kbd,1753,kbd,,segments geograpic measure,Salidas totales de refinación MBPD (TOTAL_REFINING_OUTPUTS_MBPD),"Salidas totales de refinacion (derivados producidos), miles bbl/d"
+PBR,2024-06-30,,refino_salidas_kbd,1878.289009,kbd,,segments geograpic measure,Salidas totales de refinación MBPD (TOTAL_REFINING_OUTPUTS_MBPD),"Salidas totales de refinacion (derivados producidos), miles bbl/d"
+PBR,2024-09-30,,refino_salidas_kbd,1818,kbd,,segments geograpic measure,Salidas totales de refinación MBPD (TOTAL_REFINING_OUTPUTS_MBPD),"Salidas totales de refinacion (derivados producidos), miles bbl/d"
+PBR,2024-12-31,,refino_salidas_kbd,1818,kbd,,segments geograpic measure,Salidas totales de refinación MBPD (TOTAL_REFINING_OUTPUTS_MBPD),"Salidas totales de refinacion (derivados producidos), miles bbl/d"
+PBR,2025-03-31,,refino_salidas_kbd,1706,kbd,,segments geograpic measure,Salidas totales de refinación MBPD (TOTAL_REFINING_OUTPUTS_MBPD),"Salidas totales de refinacion (derivados producidos), miles bbl/d"
+PBR,2025-06-30,,refino_salidas_kbd,1730,kbd,,segments geograpic measure,Salidas totales de refinación MBPD (TOTAL_REFINING_OUTPUTS_MBPD),"Salidas totales de refinacion (derivados producidos), miles bbl/d"
+PBR,2025-09-30,,refino_salidas_kbd,1790,kbd,,segments geograpic measure,Salidas totales de refinación MBPD (TOTAL_REFINING_OUTPUTS_MBPD),"Salidas totales de refinacion (derivados producidos), miles bbl/d"
+PBR,2025-12-31,,refino_salidas_kbd,1702,kbd,,segments geograpic measure,Salidas totales de refinación MBPD (TOTAL_REFINING_OUTPUTS_MBPD),"Salidas totales de refinacion (derivados producidos), miles bbl/d"
+PBR,2026-03-31,,refino_salidas_kbd,1816,kbd,,segments geograpic measure,Salidas totales de refinación MBPD (TOTAL_REFINING_OUTPUTS_MBPD),"Salidas totales de refinacion (derivados producidos), miles bbl/d"
+PBR,2026-06-30,,refino_salidas_kbd,1918,kbd,,segments geograpic measure,Salidas totales de refinación MBPD (TOTAL_REFINING_OUTPUTS_MBPD),"Salidas totales de refinacion (derivados producidos), miles bbl/d"
+PBR,2023-09-30,,resultado_antes_imp_mm,7741.944474,musd,USD,Income Statement,"Pretax Income (Loss), GAAP (PRETAX_INC)",
+PBR,2023-12-31,,resultado_antes_imp_mm,8276.195613,musd,USD,Income Statement,"Pretax Income (Loss), GAAP (PRETAX_INC)",
+PBR,2024-03-31,,resultado_antes_imp_mm,6958.496,musd,USD,Income Statement,"Pretax Income (Loss), GAAP (PRETAX_INC)",
+PBR,2024-06-30,,resultado_antes_imp_mm,-547.71894,musd,USD,Income Statement,"Pretax Income (Loss), GAAP (PRETAX_INC)",
+PBR,2024-09-30,,resultado_antes_imp_mm,8097.827318,musd,USD,Income Statement,"Pretax Income (Loss), GAAP (PRETAX_INC)",
+PBR,2024-12-31,,resultado_antes_imp_mm,-3729.637079,musd,USD,Income Statement,"Pretax Income (Loss), GAAP (PRETAX_INC)",
+PBR,2025-03-31,,resultado_antes_imp_mm,9169.681823,musd,USD,Income Statement,"Pretax Income (Loss), GAAP (PRETAX_INC)",
+PBR,2025-06-30,,resultado_antes_imp_mm,6361.669908,musd,USD,Income Statement,"Pretax Income (Loss), GAAP (PRETAX_INC)",
+PBR,2025-09-30,,resultado_antes_imp_mm,8251.709556,musd,USD,Income Statement,"Pretax Income (Loss), GAAP (PRETAX_INC)",
+PBR,2025-12-31,,resultado_antes_imp_mm,2959.530683,musd,USD,Income Statement,"Pretax Income (Loss), GAAP (PRETAX_INC)",
+PBR,2026-03-31,,resultado_antes_imp_mm,9342.859429,musd,USD,Income Statement,"Pretax Income (Loss), GAAP (PRETAX_INC)",
+PBR,2026-06-30,,resultado_antes_imp_mm,14032.076815,musd,USD,Income Statement,"Pretax Income (Loss), GAAP (PRETAX_INC)",
+PBR,2023-09-30,,resultado_neto_mm,5455.175769,musd,USD,Income Statement,"Net Income, GAAP (NET_INCOME)",GAAP
+PBR,2023-12-31,,resultado_neto_mm,6266.902634,musd,USD,Income Statement,"Net Income, GAAP (NET_INCOME)",GAAP
+PBR,2024-03-31,,resultado_neto_mm,4787.4,musd,USD,Income Statement,"Net Income, GAAP (NET_INCOME)",GAAP
+PBR,2024-09-30,,resultado_neto_mm,5871.244924,musd,USD,Income Statement,"Net Income, GAAP (NET_INCOME)",GAAP
+PBR,2024-12-31,,resultado_neto_mm,-2920.515224,musd,USD,Income Statement,"Net Income, GAAP (NET_INCOME)",GAAP
+PBR,2025-03-31,,resultado_neto_mm,6019.489648,musd,USD,Income Statement,"Net Income, GAAP (NET_INCOME)",GAAP
+PBR,2025-06-30,,resultado_neto_mm,4704.529034,musd,USD,Income Statement,"Net Income, GAAP (NET_INCOME)",GAAP
+PBR,2025-09-30,,resultado_neto_mm,6003.696492,musd,USD,Income Statement,"Net Income, GAAP (NET_INCOME)",GAAP
+PBR,2025-12-31,,resultado_neto_mm,2883.564517,musd,USD,Income Statement,"Net Income, GAAP (NET_INCOME)",GAAP
+PBR,2026-03-31,,resultado_neto_mm,6210.636143,musd,USD,Income Statement,"Net Income, GAAP (NET_INCOME)",GAAP
+PBR,2026-06-30,,resultado_neto_mm,10389.838608,musd,USD,Income Statement,"Net Income, GAAP (NET_INCOME)",GAAP
+PBR,2023-09-30,,resultado_operativo_mm,10244.256649,musd,USD,Income Statement,Operating Income (Loss) (IS_OPER_INC),"ajustado (excluye deterioros, legales, etc.)"
+PBR,2023-12-31,,resultado_operativo_mm,11380.475541,musd,USD,Income Statement,Operating Income (Loss) (IS_OPER_INC),"ajustado (excluye deterioros, legales, etc.)"
+PBR,2024-03-31,,resultado_operativo_mm,9109.19,musd,USD,Income Statement,Operating Income (Loss) (IS_OPER_INC),"ajustado (excluye deterioros, legales, etc.)"
+PBR,2024-09-30,,resultado_operativo_mm,8756.099288,musd,USD,Income Statement,Operating Income (Loss) (IS_OPER_INC),"ajustado (excluye deterioros, legales, etc.)"
+PBR,2024-12-31,,resultado_operativo_mm,7054.884582,musd,USD,Income Statement,Operating Income (Loss) (IS_OPER_INC),"ajustado (excluye deterioros, legales, etc.)"
+PBR,2025-03-31,,resultado_operativo_mm,7468.242958,musd,USD,Income Statement,Operating Income (Loss) (IS_OPER_INC),"ajustado (excluye deterioros, legales, etc.)"
+PBR,2025-06-30,,resultado_operativo_mm,5631.419397,musd,USD,Income Statement,Operating Income (Loss) (IS_OPER_INC),"ajustado (excluye deterioros, legales, etc.)"
+PBR,2025-09-30,,resultado_operativo_mm,7960.382042,musd,USD,Income Statement,Operating Income (Loss) (IS_OPER_INC),"ajustado (excluye deterioros, legales, etc.)"
+PBR,2025-12-31,,resultado_operativo_mm,7561.7834,musd,USD,Income Statement,Operating Income (Loss) (IS_OPER_INC),"ajustado (excluye deterioros, legales, etc.)"
+PBR,2026-03-31,,resultado_operativo_mm,7636.137143,musd,USD,Income Statement,Operating Income (Loss) (IS_OPER_INC),"ajustado (excluye deterioros, legales, etc.)"
+PBR,2026-06-30,,resultado_operativo_mm,14768.646935,musd,USD,Income Statement,Operating Income (Loss) (IS_OPER_INC),"ajustado (excluye deterioros, legales, etc.)"
+PBR,2023-09-30,,sga_mm,1492.618046,musd,USD,Income Statement,"Selling, General & Admin (IS_SG&A_EXPENSE)",Selling & Marketing + G&A (no incluye I+D)
+PBR,2023-12-31,,sga_mm,1603.719825,musd,USD,Income Statement,"Selling, General & Admin (IS_SG&A_EXPENSE)",Selling & Marketing + G&A (no incluye I+D)
+PBR,2024-03-31,,sga_mm,1573.984,musd,USD,Income Statement,"Selling, General & Admin (IS_SG&A_EXPENSE)",Selling & Marketing + G&A (no incluye I+D)
+PBR,2024-06-30,,sga_mm,1616.4716,musd,USD,Income Statement,"Selling, General & Admin (IS_SG&A_EXPENSE)",Selling & Marketing + G&A (no incluye I+D)
+PBR,2024-09-30,,sga_mm,1408.521667,musd,USD,Income Statement,"Selling, General & Admin (IS_SG&A_EXPENSE)",Selling & Marketing + G&A (no incluye I+D)
+PBR,2024-12-31,,sga_mm,1310.153685,musd,USD,Income Statement,"Selling, General & Admin (IS_SG&A_EXPENSE)",Selling & Marketing + G&A (no incluye I+D)
+PBR,2025-03-31,,sga_mm,1325.829823,musd,USD,Income Statement,"Selling, General & Admin (IS_SG&A_EXPENSE)",Selling & Marketing + G&A (no incluye I+D)
+PBR,2025-06-30,,sga_mm,1532.87296,musd,USD,Income Statement,"Selling, General & Admin (IS_SG&A_EXPENSE)",Selling & Marketing + G&A (no incluye I+D)
+PBR,2025-09-30,,sga_mm,1603.127395,musd,USD,Income Statement,"Selling, General & Admin (IS_SG&A_EXPENSE)",Selling & Marketing + G&A (no incluye I+D)
+PBR,2025-12-31,,sga_mm,1990.684133,musd,USD,Income Statement,"Selling, General & Admin (IS_SG&A_EXPENSE)",Selling & Marketing + G&A (no incluye I+D)
+PBR,2026-03-31,,sga_mm,1732.391571,musd,USD,Income Statement,"Selling, General & Admin (IS_SG&A_EXPENSE)",Selling & Marketing + G&A (no incluye I+D)
+PBR,2026-06-30,,sga_mm,2013.582222,musd,USD,Income Statement,"Selling, General & Admin (IS_SG&A_EXPENSE)",Selling & Marketing + G&A (no incluye I+D)
+PBR,2024-03-31,,total_kboed,2776,kboe/d,,segments geograpic measure,Producción total BOE/D (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Produccion total Petrobras (Brasil+Exterior), miles boe/d"
+PBR,2024-06-30,,total_kboed,2699,kboe/d,,segments geograpic measure,Producción total BOE/D (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Produccion total Petrobras (Brasil+Exterior), miles boe/d"
+PBR,2024-09-30,,total_kboed,2689,kboe/d,,segments geograpic measure,Producción total BOE/D (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Produccion total Petrobras (Brasil+Exterior), miles boe/d"
+PBR,2024-12-31,,total_kboed,2628,kboe/d,,segments geograpic measure,Producción total BOE/D (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Produccion total Petrobras (Brasil+Exterior), miles boe/d"
+PBR,2025-03-31,,total_kboed,2771,kboe/d,,segments geograpic measure,Producción total BOE/D (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Produccion total Petrobras (Brasil+Exterior), miles boe/d"
+PBR,2025-06-30,,total_kboed,2909,kboe/d,,segments geograpic measure,Producción total BOE/D (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Produccion total Petrobras (Brasil+Exterior), miles boe/d"
+PBR,2025-09-30,,total_kboed,3144,kboe/d,,segments geograpic measure,Producción total BOE/D (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Produccion total Petrobras (Brasil+Exterior), miles boe/d"
+PBR,2026-03-31,,total_kboed,3225,kboe/d,,segments geograpic measure,Producción total BOE/D (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Produccion total Petrobras (Brasil+Exterior), miles boe/d"
+PBR,2026-06-30,,total_kboed,3336,kboe/d,,segments geograpic measure,Producción total BOE/D (TOTAL_PRODUCTION_WORLD_MBOE_DY),"Produccion total Petrobras (Brasil+Exterior), miles boe/d"

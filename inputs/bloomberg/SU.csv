@@ -1,0 +1,644 @@
+empresa,periodo,fecha_publicacion,variable,valor,unidad,moneda,hoja,campo_bloomberg,nota
+SU,2023-09-30,,activos_totales_mm,63043,musd,USD,Balance Sheet,Total Assets,
+SU,2023-09-30,,arrendamientos_total_mm,2332,musd,USD,Balance Sheet,Capital Leases - Total,Parte de deuda_mm que es leasing (ST+LT); deuda sin leasing = deuda_mm - este valor
+SU,2023-09-30,,caja_mm,1796,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI",Caja + equivalentes; ST Investments = '-' (nada sumado)
+SU,2023-09-30,,capex_fort_hills_mm,1.49,musd,USD,Segments,Capital Expenditures [Fort Hills],Capex Fort Hills (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2023-09-30,,capex_insitu_mm,54.44,musd,USD,Segments,Capital Expenditures [In Situ],Capex In Situ (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2023-09-30,,capex_mm,1176,musd,USD,Cash Flow,+ Acq of Fixed & Intang,Compra bruta de PP&E/intangibles (positivo); neto de ventas seria 'Change in Fixed & Intang' (fila 16)
+SU,2023-09-30,,capex_oilsands_otros_mm,117.07,musd,USD,Segments,Capital Expenditures [Oil Sands],Capex Oil Sands (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2023-09-30,,capex_seg_corp_mm,2.98,musd,USD,Segments,Capital Expenditures,Capex segmento Corporate & Elimination (positivo); 2025Q4 vacio en Bloomberg
+SU,2023-09-30,,capex_seg_ep_mm,131.99,musd,USD,Segments,Capital Expenditures,Capex segmento Exploration & Production (positivo); 2025Q4 vacio en Bloomberg
+SU,2023-09-30,,capex_seg_oilsands_mm,212.52,musd,USD,Segments,Capital Expenditures,Capex segmento Oil Sands (positivo); 2025Q4 vacio en Bloomberg
+SU,2023-09-30,,capex_seg_refinacion_mm,23.86,musd,USD,Segments,Capital Expenditures,Capex segmento Refining & Marketing (positivo); 2025Q4 vacio en Bloomberg
+SU,2023-09-30,,capex_syncrude_mm,39.52,musd,USD,Segments,Capital Expenditures [Syncrude],Capex Syncrude (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2023-09-30,,cfo_mm,3120,musd,USD,Cash Flow,Cash from Operating Activities,
+SU,2023-09-30,,costo_ingresos_mm,3813,musd,USD,Income Statement,+ Cost of Goods & Services,Costo de bienes y servicios (compras de crudo/productos principalmente); no es opex upstream
+SU,2023-09-30,,dda_mm,1300,musd,USD,Income Statement,+ Depreciation & Amortization,D&A trimestral
+SU,2023-09-30,,deuda_cp_mm,2061,musd,USD,Balance Sheet,+ ST Debt,Incluye ST Capital Leases y porcion corriente de LT debt
+SU,2023-09-30,,deuda_lp_mm,9328,musd,USD,Balance Sheet,+ LT Debt,Incluye LT Capital Leases
+SU,2023-09-30,,deuda_mm,11389,musd,USD,Balance Sheet,ST Debt + LT Debt,Deuda financiera total = ST Debt + LT Debt; INCLUYE arrendamientos (capital leases); = Net Debt (fila 78) + caja
+SU,2023-09-30,,deuda_neta_bloomberg_mm,9594,musd,USD,Balance Sheet,Net Debt,Segun Bloomberg (deuda con leasing - caja)
+SU,2023-09-30,,dividendos_pagados_mm,504,musd,USD,Cash Flow,+ Dividends Paid,Positivo
+SU,2023-09-30,,dividendos_totales_mm,504,musd,USD,Income Statement,Total Cash Common Dividends,Positivo
+SU,2023-09-30,,ebitda_gaap_mm,4260,musd,USD,Cash Flow,EBITDA,EBITDA GAAP (EBIT GAAP + D&A) de la hoja Cash Flow
+SU,2023-09-30,,ebitda_mm,4412,musd,USD,Income Statement,EBITDA,EBITDA AJUSTADO de Bloomberg (EBIT ajustado + D&A; excluye items anormales)
+SU,2023-09-30,,fcf_bloomberg_mm,1944,musd,USD,Cash Flow,Free Cash Flow,Segun Bloomberg
+SU,2023-09-30,,impuesto_ganancias_mm,440,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP","GAAP, corriente+diferido"
+SU,2023-09-30,,impuestos_pagados_caja_mm,402,musd,USD,Cash Flow,Cash Paid for Taxes,
+SU,2023-09-30,,ingresos_mm,10373,musd,USD,Income Statement,Revenue,Revenue = Sales&Services + Other Revenue; 2026Q1 incluye -686 de Other Revenue (derivados). Neto de regalias (no se informan separadas)
+SU,2023-09-30,,ingresos_ventas_servicios_mm,10373,musd,USD,Income Statement,+ Sales & Services Revenue,Antes de Other Revenue (-686 en 2026Q1)
+SU,2023-09-30,,intereses_capitalizados_mm,48,musd,USD,Income Statement,Capitalized Interest Expense,
+SU,2023-09-30,,intereses_mm,192,musd,USD,Income Statement,+ Interest Expense,Gasto por intereses (positivo)
+SU,2023-09-30,,intereses_pagados_caja_mm,121,musd,USD,Cash Flow,Cash Paid for Interest,
+SU,2023-09-30,,opex_mm,1726.28,musd,USD,Segments,"SG&A (Selling, General & Administrative) [Oil Sands + Exploration & Production]",Operating+Selling&General del upstream (Oil Sands + E&P); SUBCONJUNTO de sga_mm (no sumar); incluye algo de G&A; sin regalias
+SU,2023-09-30,,osg_seg_corp_mm,148.39,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Corporate & Elimination; los 4 segmentos suman sga_mm consolidado"
+SU,2023-09-30,,osg_seg_ep_mm,76.06,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Exploration & Production; los 4 segmentos suman sga_mm consolidado"
+SU,2023-09-30,,osg_seg_oilsands_mm,1650.22,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Oil Sands; los 4 segmentos suman sga_mm consolidado"
+SU,2023-09-30,,osg_seg_refinacion_mm,454.87,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Refining & Marketing; los 4 segmentos suman sga_mm consolidado"
+SU,2023-09-30,,patrimonio_total_mm,30838,musd,USD,Balance Sheet,Total Equity,Sin minoritarios (Minority Interest = '-')
+SU,2023-09-30,,recompras_mm,150,musd,USD,Cash Flow,+ Cash (Repurchase) of Equity,Recompra neta de emisiones (positivo = salida de caja)
+SU,2023-09-30,,resultado_ajustado_seg_corp_mm,-386.27,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Corporate & Elimination; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2023-09-30,,resultado_ajustado_seg_ep_mm,169.27,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Exploration & Production; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2023-09-30,,resultado_ajustado_seg_oilsands_mm,1245.31,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Oil Sands; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2023-09-30,,resultado_ajustado_seg_refinacion_mm,952.25,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Refining & Marketing; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2023-09-30,,resultado_antes_imp_ajustado_mm,1743,musd,USD,Income Statement,"Pretax Income (Loss), Adjusted",Excluye items anormales
+SU,2023-09-30,,resultado_antes_imp_mm,1591,musd,USD,Income Statement,"Pretax Income (Loss), GAAP",GAAP
+SU,2023-09-30,,resultado_neto_ajustado_mm,1282,musd,USD,Income Statement,"Net Income Avail to Common, Adj",
+SU,2023-09-30,,resultado_neto_mm,1151,musd,USD,Income Statement,"Net Income, GAAP",Sin minoritarios ni preferentes
+SU,2023-09-30,,resultado_operativo_ajustado_mm,3112,musd,USD,Income Statement,Operating Income (Loss),EBIT ajustado de Bloomberg
+SU,2023-09-30,,sga_mm,2330,musd,USD,Income Statement,"+ Selling, General & Admin","OJO: es el Operating, Selling & General de Suncor (incluye costos operativos de todos los segmentos), NO es G&A puro. opex_mm es subconjunto de este valor: no sumar ambos"
+SU,2023-09-30,,ventas_ajustadas_seg_corp_mm,-1544.33,musd,USD,Segments,Adjusted Sales,Adjusted Sales Corporate & Elimination; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2023-09-30,,ventas_ajustadas_seg_ep_mm,354.2,musd,USD,Segments,Adjusted Sales,Adjusted Sales Exploration & Production; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2023-09-30,,ventas_ajustadas_seg_oilsands_mm,4241.5,musd,USD,Segments,Adjusted Sales,Adjusted Sales Oil Sands; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2023-09-30,,ventas_ajustadas_seg_refinacion_mm,6371.2,musd,USD,Segments,Adjusted Sales,Adjusted Sales Refining & Marketing; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2023-12-31,,activos_totales_mm,67042,musd,USD,Balance Sheet,Total Assets,
+SU,2023-12-31,,arrendamientos_total_mm,2897,musd,USD,Balance Sheet,Capital Leases - Total,Parte de deuda_mm que es leasing (ST+LT); deuda sin leasing = deuda_mm - este valor
+SU,2023-12-31,,caja_mm,1309,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI",Caja + equivalentes; ST Investments = '-' (nada sumado)
+SU,2023-12-31,,capex_fort_hills_mm,13.96,musd,USD,Segments,Capital Expenditures [Fort Hills],Capex Fort Hills (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2023-12-31,,capex_insitu_mm,76.41,musd,USD,Segments,Capital Expenditures [In Situ],Capex In Situ (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2023-12-31,,capex_mm,1140,musd,USD,Cash Flow,+ Acq of Fixed & Intang,Compra bruta de PP&E/intangibles (positivo); neto de ventas seria 'Change in Fixed & Intang' (fila 16)
+SU,2023-12-31,,capex_oilsands_otros_mm,139.59,musd,USD,Segments,Capital Expenditures [Oil Sands],Capex Oil Sands (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2023-12-31,,capex_seg_corp_mm,1.47,musd,USD,Segments,Capital Expenditures,Capex segmento Corporate & Elimination (positivo); 2025Q4 vacio en Bloomberg
+SU,2023-12-31,,capex_seg_ep_mm,111.67,musd,USD,Segments,Capital Expenditures,Capex segmento Exploration & Production (positivo); 2025Q4 vacio en Bloomberg
+SU,2023-12-31,,capex_seg_oilsands_mm,283.59,musd,USD,Segments,Capital Expenditures,Capex segmento Oil Sands (positivo); 2025Q4 vacio en Bloomberg
+SU,2023-12-31,,capex_seg_refinacion_mm,36.73,musd,USD,Segments,Capital Expenditures,Capex segmento Refining & Marketing (positivo); 2025Q4 vacio en Bloomberg
+SU,2023-12-31,,capex_syncrude_mm,53.63,musd,USD,Segments,Capital Expenditures [Syncrude],Capex Syncrude (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2023-12-31,,cfo_mm,3172,musd,USD,Cash Flow,Cash from Operating Activities,
+SU,2023-12-31,,costo_ingresos_mm,4113,musd,USD,Income Statement,+ Cost of Goods & Services,Costo de bienes y servicios (compras de crudo/productos principalmente); no es opex upstream
+SU,2023-12-31,,dda_mm,1174,musd,USD,Income Statement,+ Depreciation & Amortization,D&A trimestral
+SU,2023-12-31,,deuda_cp_mm,638,musd,USD,Balance Sheet,+ ST Debt,Incluye ST Capital Leases y porcion corriente de LT debt
+SU,2023-12-31,,deuda_lp_mm,11029,musd,USD,Balance Sheet,+ LT Debt,Incluye LT Capital Leases
+SU,2023-12-31,,deuda_mm,11667,musd,USD,Balance Sheet,ST Debt + LT Debt,Deuda financiera total = ST Debt + LT Debt; INCLUYE arrendamientos (capital leases); = Net Debt (fila 78) + caja
+SU,2023-12-31,,deuda_neta_bloomberg_mm,10357,musd,USD,Balance Sheet,Net Debt,Segun Bloomberg (deuda con leasing - caja)
+SU,2023-12-31,,dividendos_pagados_mm,517,musd,USD,Cash Flow,+ Dividends Paid,Positivo
+SU,2023-12-31,,dividendos_totales_mm,523,musd,USD,Income Statement,Total Cash Common Dividends,Positivo
+SU,2023-12-31,,ebitda_gaap_mm,3363,musd,USD,Cash Flow,EBITDA,EBITDA GAAP (EBIT GAAP + D&A) de la hoja Cash Flow
+SU,2023-12-31,,ebitda_mm,2648,musd,USD,Income Statement,EBITDA,EBITDA AJUSTADO de Bloomberg (EBIT ajustado + D&A; excluye items anormales)
+SU,2023-12-31,,fcf_bloomberg_mm,2032,musd,USD,Cash Flow,Free Cash Flow,Segun Bloomberg
+SU,2023-12-31,,impuesto_ganancias_mm,419,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP","GAAP, corriente+diferido"
+SU,2023-12-31,,impuestos_pagados_caja_mm,139,musd,USD,Cash Flow,Cash Paid for Taxes,
+SU,2023-12-31,,ingresos_mm,9983,musd,USD,Income Statement,Revenue,Revenue = Sales&Services + Other Revenue; 2026Q1 incluye -686 de Other Revenue (derivados). Neto de regalias (no se informan separadas)
+SU,2023-12-31,,ingresos_ventas_servicios_mm,9983,musd,USD,Income Statement,+ Sales & Services Revenue,Antes de Other Revenue (-686 en 2026Q1)
+SU,2023-12-31,,intereses_capitalizados_mm,51,musd,USD,Income Statement,Capitalized Interest Expense,
+SU,2023-12-31,,intereses_mm,193,musd,USD,Income Statement,+ Interest Expense,Gasto por intereses (positivo)
+SU,2023-12-31,,intereses_pagados_caja_mm,193,musd,USD,Cash Flow,Cash Paid for Interest,
+SU,2023-12-31,,opex_mm,1831.54,musd,USD,Segments,"SG&A (Selling, General & Administrative) [Oil Sands + Exploration & Production]",Operating+Selling&General del upstream (Oil Sands + E&P); SUBCONJUNTO de sga_mm (no sumar); incluye algo de G&A; sin regalias
+SU,2023-12-31,,osg_seg_corp_mm,152.81,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Corporate & Elimination; los 4 segmentos suman sga_mm consolidado"
+SU,2023-12-31,,osg_seg_ep_mm,71.26,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Exploration & Production; los 4 segmentos suman sga_mm consolidado"
+SU,2023-12-31,,osg_seg_oilsands_mm,1760.28,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Oil Sands; los 4 segmentos suman sga_mm consolidado"
+SU,2023-12-31,,osg_seg_refinacion_mm,509.87,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Refining & Marketing; los 4 segmentos suman sga_mm consolidado"
+SU,2023-12-31,,patrimonio_total_mm,32770,musd,USD,Balance Sheet,Total Equity,Sin minoritarios (Minority Interest = '-')
+SU,2023-12-31,,recompras_mm,252,musd,USD,Cash Flow,+ Cash (Repurchase) of Equity,Recompra neta de emisiones (positivo = salida de caja)
+SU,2023-12-31,,resultado_ajustado_seg_corp_mm,-30.86,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Corporate & Elimination; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2023-12-31,,resultado_ajustado_seg_ep_mm,97.71,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Exploration & Production; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2023-12-31,,resultado_ajustado_seg_oilsands_mm,1121.12,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Oil Sands; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2023-12-31,,resultado_ajustado_seg_refinacion_mm,439.34,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Refining & Marketing; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2023-12-31,,resultado_antes_imp_ajustado_mm,1776,musd,USD,Income Statement,"Pretax Income (Loss), Adjusted",Excluye items anormales
+SU,2023-12-31,,resultado_antes_imp_mm,2491,musd,USD,Income Statement,"Pretax Income (Loss), GAAP",GAAP
+SU,2023-12-31,,resultado_neto_ajustado_mm,1351,musd,USD,Income Statement,"Net Income Avail to Common, Adj",
+SU,2023-12-31,,resultado_neto_mm,2072,musd,USD,Income Statement,"Net Income, GAAP",Sin minoritarios ni preferentes
+SU,2023-12-31,,resultado_operativo_ajustado_mm,1474,musd,USD,Income Statement,Operating Income (Loss),EBIT ajustado de Bloomberg
+SU,2023-12-31,,sga_mm,2494,musd,USD,Income Statement,"+ Selling, General & Admin","OJO: es el Operating, Selling & General de Suncor (incluye costos operativos de todos los segmentos), NO es G&A puro. opex_mm es subconjunto de este valor: no sumar ambos"
+SU,2023-12-31,,ventas_ajustadas_seg_corp_mm,-1530.33,musd,USD,Segments,Adjusted Sales,Adjusted Sales Corporate & Elimination; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2023-12-31,,ventas_ajustadas_seg_ep_mm,277.71,musd,USD,Segments,Adjusted Sales,Adjusted Sales Exploration & Production; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2023-12-31,,ventas_ajustadas_seg_oilsands_mm,5663.61,musd,USD,Segments,Adjusted Sales,Adjusted Sales Oil Sands; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2023-12-31,,ventas_ajustadas_seg_refinacion_mm,5975.85,musd,USD,Segments,Adjusted Sales,Adjusted Sales Refining & Marketing; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-03-31,,activos_totales_mm,65886,musd,USD,Balance Sheet,Total Assets,
+SU,2024-03-31,,arrendamientos_total_mm,2904,musd,USD,Balance Sheet,Capital Leases - Total,Parte de deuda_mm que es leasing (ST+LT); deuda sin leasing = deuda_mm - este valor
+SU,2024-03-31,,caja_mm,1819,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI",Caja + equivalentes; ST Investments = '-' (nada sumado)
+SU,2024-03-31,,capex_fort_hills_mm,59.32,musd,USD,Segments,Capital Expenditures [Fort Hills],Capex Fort Hills (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-03-31,,capex_insitu_mm,77.11,musd,USD,Segments,Capital Expenditures [In Situ],Capex In Situ (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-03-31,,capex_mm,972,musd,USD,Cash Flow,+ Acq of Fixed & Intang,Compra bruta de PP&E/intangibles (positivo); neto de ventas seria 'Change in Fixed & Intang' (fila 16)
+SU,2024-03-31,,capex_oilsands_otros_mm,190.56,musd,USD,Segments,Capital Expenditures [Oil Sands],Capex Oil Sands (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-03-31,,capex_seg_corp_mm,2.22,musd,USD,Segments,Capital Expenditures,Capex segmento Corporate & Elimination (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-03-31,,capex_seg_ep_mm,100.1,musd,USD,Segments,Capital Expenditures,Capex segmento Exploration & Production (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-03-31,,capex_seg_oilsands_mm,374.44,musd,USD,Segments,Capital Expenditures,Capex segmento Oil Sands (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-03-31,,capex_seg_refinacion_mm,14.83,musd,USD,Segments,Capital Expenditures,Capex segmento Refining & Marketing (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-03-31,,capex_syncrude_mm,47.45,musd,USD,Segments,Capital Expenditures [Syncrude],Capex Syncrude (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-03-31,,cfo_mm,2066,musd,USD,Cash Flow,Cash from Operating Activities,
+SU,2024-03-31,,costo_ingresos_mm,3535,musd,USD,Income Statement,+ Cost of Goods & Services,Costo de bienes y servicios (compras de crudo/productos principalmente); no es opex upstream
+SU,2024-03-31,,dda_mm,1207,musd,USD,Income Statement,+ Depreciation & Amortization,D&A trimestral
+SU,2024-03-31,,deuda_cp_mm,812,musd,USD,Balance Sheet,+ ST Debt,Incluye ST Capital Leases y porcion corriente de LT debt
+SU,2024-03-31,,deuda_lp_mm,10965,musd,USD,Balance Sheet,+ LT Debt,Incluye LT Capital Leases
+SU,2024-03-31,,deuda_mm,11777,musd,USD,Balance Sheet,ST Debt + LT Debt,Deuda financiera total = ST Debt + LT Debt; INCLUYE arrendamientos (capital leases); = Net Debt (fila 78) + caja
+SU,2024-03-31,,deuda_neta_bloomberg_mm,9957,musd,USD,Balance Sheet,Net Debt,Segun Bloomberg (deuda con leasing - caja)
+SU,2024-03-31,,dividendos_pagados_mm,521,musd,USD,Cash Flow,+ Dividends Paid,Positivo
+SU,2024-03-31,,dividendos_totales_mm,525,musd,USD,Income Statement,Total Cash Common Dividends,Positivo
+SU,2024-03-31,,ebitda_gaap_mm,3738,musd,USD,Cash Flow,EBITDA,EBITDA GAAP (EBIT GAAP + D&A) de la hoja Cash Flow
+SU,2024-03-31,,ebitda_mm,3734,musd,USD,Income Statement,EBITDA,EBITDA AJUSTADO de Bloomberg (EBIT ajustado + D&A; excluye items anormales)
+SU,2024-03-31,,fcf_bloomberg_mm,1094,musd,USD,Cash Flow,Free Cash Flow,Segun Bloomberg
+SU,2024-03-31,,impuesto_ganancias_mm,452,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP","GAAP, corriente+diferido"
+SU,2024-03-31,,impuestos_pagados_caja_mm,19,musd,USD,Cash Flow,Cash Paid for Taxes,
+SU,2024-03-31,,ingresos_mm,9865,musd,USD,Income Statement,Revenue,Revenue = Sales&Services + Other Revenue; 2026Q1 incluye -686 de Other Revenue (derivados). Neto de regalias (no se informan separadas)
+SU,2024-03-31,,ingresos_ventas_servicios_mm,9865,musd,USD,Income Statement,+ Sales & Services Revenue,Antes de Other Revenue (-686 en 2026Q1)
+SU,2024-03-31,,intereses_capitalizados_mm,55,musd,USD,Income Statement,Capitalized Interest Expense,
+SU,2024-03-31,,intereses_mm,185,musd,USD,Income Statement,+ Interest Expense,Gasto por intereses (positivo)
+SU,2024-03-31,,intereses_pagados_caja_mm,101,musd,USD,Cash Flow,Cash Paid for Interest,
+SU,2024-03-31,,opex_mm,1944.88,musd,USD,Segments,"SG&A (Selling, General & Administrative) [Oil Sands + Exploration & Production]",Operating+Selling&General del upstream (Oil Sands + E&P); SUBCONJUNTO de sga_mm (no sumar); incluye algo de G&A; sin regalias
+SU,2024-03-31,,osg_seg_corp_mm,147.55,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Corporate & Elimination; los 4 segmentos suman sga_mm consolidado"
+SU,2024-03-31,,osg_seg_ep_mm,104.55,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Exploration & Production; los 4 segmentos suman sga_mm consolidado"
+SU,2024-03-31,,osg_seg_oilsands_mm,1840.33,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Oil Sands; los 4 segmentos suman sga_mm consolidado"
+SU,2024-03-31,,osg_seg_refinacion_mm,458.23,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Refining & Marketing; los 4 segmentos suman sga_mm consolidado"
+SU,2024-03-31,,patrimonio_total_mm,32719,musd,USD,Balance Sheet,Total Equity,Sin minoritarios (Minority Interest = '-')
+SU,2024-03-31,,recompras_mm,121,musd,USD,Cash Flow,+ Cash (Repurchase) of Equity,Recompra neta de emisiones (positivo = salida de caja)
+SU,2024-03-31,,resultado_ajustado_seg_corp_mm,-399.65,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Corporate & Elimination; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-03-31,,resultado_ajustado_seg_ep_mm,203.16,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Exploration & Production; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-03-31,,resultado_ajustado_seg_oilsands_mm,1016.56,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Oil Sands; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-03-31,,resultado_ajustado_seg_refinacion_mm,826,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Refining & Marketing; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-03-31,,resultado_antes_imp_ajustado_mm,1642,musd,USD,Income Statement,"Pretax Income (Loss), Adjusted",Excluye items anormales
+SU,2024-03-31,,resultado_antes_imp_mm,1646,musd,USD,Income Statement,"Pretax Income (Loss), GAAP",GAAP
+SU,2024-03-31,,resultado_neto_ajustado_mm,1191,musd,USD,Income Statement,"Net Income Avail to Common, Adj",
+SU,2024-03-31,,resultado_neto_mm,1194,musd,USD,Income Statement,"Net Income, GAAP",Sin minoritarios ni preferentes
+SU,2024-03-31,,resultado_operativo_ajustado_mm,2526,musd,USD,Income Statement,Operating Income (Loss),EBIT ajustado de Bloomberg
+SU,2024-03-31,,sga_mm,2551,musd,USD,Income Statement,"+ Selling, General & Admin","OJO: es el Operating, Selling & General de Suncor (incluye costos operativos de todos los segmentos), NO es G&A puro. opex_mm es subconjunto de este valor: no sumar ambos"
+SU,2024-03-31,,ventas_ajustadas_seg_corp_mm,-1469.59,musd,USD,Segments,Adjusted Sales,Adjusted Sales Corporate & Elimination; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-03-31,,ventas_ajustadas_seg_ep_mm,466.39,musd,USD,Segments,Adjusted Sales,Adjusted Sales Exploration & Production; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-03-31,,ventas_ajustadas_seg_oilsands_mm,4593.41,musd,USD,Segments,Adjusted Sales,Adjusted Sales Oil Sands; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-03-31,,ventas_ajustadas_seg_refinacion_mm,5699.68,musd,USD,Segments,Adjusted Sales,Adjusted Sales Refining & Marketing; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-06-30,,activos_totales_mm,66101,musd,USD,Balance Sheet,Total Assets,
+SU,2024-06-30,,arrendamientos_total_mm,3026,musd,USD,Balance Sheet,Capital Leases - Total,Parte de deuda_mm que es leasing (ST+LT); deuda sin leasing = deuda_mm - este valor
+SU,2024-06-30,,caja_mm,1736,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI",Caja + equivalentes; ST Investments = '-' (nada sumado)
+SU,2024-06-30,,capex_fort_hills_mm,50.43,musd,USD,Segments,Capital Expenditures [Fort Hills],Capex Fort Hills (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-06-30,,capex_insitu_mm,72.36,musd,USD,Segments,Capital Expenditures [In Situ],Capex In Situ (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-06-30,,capex_mm,1496,musd,USD,Cash Flow,+ Acq of Fixed & Intang,Compra bruta de PP&E/intangibles (positivo); neto de ventas seria 'Change in Fixed & Intang' (fila 16)
+SU,2024-06-30,,capex_oilsands_otros_mm,181.27,musd,USD,Segments,Capital Expenditures [Oil Sands],Capex Oil Sands (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-06-30,,capex_seg_corp_mm,1.46,musd,USD,Segments,Capital Expenditures,Capex segmento Corporate & Elimination (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-06-30,,capex_seg_ep_mm,160.8,musd,USD,Segments,Capital Expenditures,Capex segmento Exploration & Production (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-06-30,,capex_seg_oilsands_mm,342.07,musd,USD,Segments,Capital Expenditures,Capex segmento Oil Sands (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-06-30,,capex_seg_refinacion_mm,28.51,musd,USD,Segments,Capital Expenditures,Capex segmento Refining & Marketing (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-06-30,,capex_syncrude_mm,38.01,musd,USD,Segments,Capital Expenditures [Syncrude],Capex Syncrude (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-06-30,,cfo_mm,2799,musd,USD,Cash Flow,Cash from Operating Activities,
+SU,2024-06-30,,costo_ingresos_mm,4093,musd,USD,Income Statement,+ Cost of Goods & Services,Costo de bienes y servicios (compras de crudo/productos principalmente); no es opex upstream
+SU,2024-06-30,,dda_mm,1231,musd,USD,Income Statement,+ Depreciation & Amortization,D&A trimestral
+SU,2024-06-30,,deuda_cp_mm,346,musd,USD,Balance Sheet,+ ST Debt,Incluye ST Capital Leases y porcion corriente de LT debt
+SU,2024-06-30,,deuda_lp_mm,11038,musd,USD,Balance Sheet,+ LT Debt,Incluye LT Capital Leases
+SU,2024-06-30,,deuda_mm,11384,musd,USD,Balance Sheet,ST Debt + LT Debt,Deuda financiera total = ST Debt + LT Debt; INCLUYE arrendamientos (capital leases); = Net Debt (fila 78) + caja
+SU,2024-06-30,,deuda_neta_bloomberg_mm,9647,musd,USD,Balance Sheet,Net Debt,Segun Bloomberg (deuda con leasing - caja)
+SU,2024-06-30,,dividendos_pagados_mm,510,musd,USD,Cash Flow,+ Dividends Paid,Positivo
+SU,2024-06-30,,dividendos_totales_mm,517,musd,USD,Income Statement,Total Cash Common Dividends,Positivo
+SU,2024-06-30,,ebitda_gaap_mm,3834,musd,USD,Cash Flow,EBITDA,EBITDA GAAP (EBIT GAAP + D&A) de la hoja Cash Flow
+SU,2024-06-30,,ebitda_mm,3783,musd,USD,Income Statement,EBITDA,EBITDA AJUSTADO de Bloomberg (EBIT ajustado + D&A; excluye items anormales)
+SU,2024-06-30,,fcf_bloomberg_mm,1302,musd,USD,Cash Flow,Free Cash Flow,Segun Bloomberg
+SU,2024-06-30,,impuesto_ganancias_mm,450,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP","GAAP, corriente+diferido"
+SU,2024-06-30,,impuestos_pagados_caja_mm,701,musd,USD,Cash Flow,Cash Paid for Taxes,
+SU,2024-06-30,,ingresos_mm,10243,musd,USD,Income Statement,Revenue,Revenue = Sales&Services + Other Revenue; 2026Q1 incluye -686 de Other Revenue (derivados). Neto de regalias (no se informan separadas)
+SU,2024-06-30,,ingresos_ventas_servicios_mm,10243,musd,USD,Income Statement,+ Sales & Services Revenue,Antes de Other Revenue (-686 en 2026Q1)
+SU,2024-06-30,,intereses_capitalizados_mm,61,musd,USD,Income Statement,Capitalized Interest Expense,
+SU,2024-06-30,,intereses_mm,194,musd,USD,Income Statement,+ Interest Expense,Gasto por intereses (positivo)
+SU,2024-06-30,,intereses_pagados_caja_mm,231,musd,USD,Cash Flow,Cash Paid for Interest,
+SU,2024-06-30,,opex_mm,1752.75,musd,USD,Segments,"SG&A (Selling, General & Administrative) [Oil Sands + Exploration & Production]",Operating+Selling&General del upstream (Oil Sands + E&P); SUBCONJUNTO de sga_mm (no sumar); incluye algo de G&A; sin regalias
+SU,2024-06-30,,osg_seg_corp_mm,111.1,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Corporate & Elimination; los 4 segmentos suman sga_mm consolidado"
+SU,2024-06-30,,osg_seg_ep_mm,87.71,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Exploration & Production; los 4 segmentos suman sga_mm consolidado"
+SU,2024-06-30,,osg_seg_oilsands_mm,1665.04,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Oil Sands; los 4 segmentos suman sga_mm consolidado"
+SU,2024-06-30,,osg_seg_refinacion_mm,440.75,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Refining & Marketing; los 4 segmentos suman sga_mm consolidado"
+SU,2024-06-30,,patrimonio_total_mm,32542,musd,USD,Balance Sheet,Total Equity,Sin minoritarios (Minority Interest = '-')
+SU,2024-06-30,,recompras_mm,474,musd,USD,Cash Flow,+ Cash (Repurchase) of Equity,Recompra neta de emisiones (positivo = salida de caja)
+SU,2024-06-30,,resultado_ajustado_seg_corp_mm,-215.62,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Corporate & Elimination; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-06-30,,resultado_ajustado_seg_ep_mm,143.26,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Exploration & Production; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-06-30,,resultado_ajustado_seg_oilsands_mm,1275.46,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Oil Sands; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-06-30,,resultado_ajustado_seg_refinacion_mm,429.78,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Refining & Marketing; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-06-30,,resultado_antes_imp_ajustado_mm,1545,musd,USD,Income Statement,"Pretax Income (Loss), Adjusted",Excluye items anormales
+SU,2024-06-30,,resultado_antes_imp_mm,1596,musd,USD,Income Statement,"Pretax Income (Loss), GAAP",GAAP
+SU,2024-06-30,,resultado_neto_ajustado_mm,1109,musd,USD,Income Statement,"Net Income Avail to Common, Adj",
+SU,2024-06-30,,resultado_neto_mm,1146,musd,USD,Income Statement,"Net Income, GAAP",Sin minoritarios ni preferentes
+SU,2024-06-30,,resultado_operativo_ajustado_mm,2552,musd,USD,Income Statement,Operating Income (Loss),EBIT ajustado de Bloomberg
+SU,2024-06-30,,sga_mm,2305,musd,USD,Income Statement,"+ Selling, General & Admin","OJO: es el Operating, Selling & General de Suncor (incluye costos operativos de todos los segmentos), NO es G&A puro. opex_mm es subconjunto de este valor: no sumar ambos"
+SU,2024-06-30,,ventas_ajustadas_seg_corp_mm,-1540.05,musd,USD,Segments,Adjusted Sales,Adjusted Sales Corporate & Elimination; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-06-30,,ventas_ajustadas_seg_ep_mm,397.62,musd,USD,Segments,Adjusted Sales,Adjusted Sales Exploration & Production; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-06-30,,ventas_ajustadas_seg_oilsands_mm,4753.19,musd,USD,Segments,Adjusted Sales,Adjusted Sales Oil Sands; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-06-30,,ventas_ajustadas_seg_refinacion_mm,5920.47,musd,USD,Segments,Adjusted Sales,Adjusted Sales Refining & Marketing; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-09-30,,activos_totales_mm,67126,musd,USD,Balance Sheet,Total Assets,
+SU,2024-09-30,,arrendamientos_total_mm,3009,musd,USD,Balance Sheet,Capital Leases - Total,Parte de deuda_mm que es leasing (ST+LT); deuda sin leasing = deuda_mm - este valor
+SU,2024-09-30,,caja_mm,2225,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI",Caja + equivalentes; ST Investments = '-' (nada sumado)
+SU,2024-09-30,,capex_fort_hills_mm,90.18,musd,USD,Segments,Capital Expenditures [Fort Hills],Capex Fort Hills (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-09-30,,capex_insitu_mm,52.79,musd,USD,Segments,Capital Expenditures [In Situ],Capex In Situ (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-09-30,,capex_mm,1140,musd,USD,Cash Flow,+ Acq of Fixed & Intang,Compra bruta de PP&E/intangibles (positivo); neto de ventas seria 'Change in Fixed & Intang' (fila 16)
+SU,2024-09-30,,capex_oilsands_otros_mm,156.17,musd,USD,Segments,Capital Expenditures [Oil Sands],Capex Oil Sands (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-09-30,,capex_seg_corp_mm,2.2,musd,USD,Segments,Capital Expenditures,Capex segmento Corporate & Elimination (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-09-30,,capex_seg_ep_mm,196.5,musd,USD,Segments,Capital Expenditures,Capex segmento Exploration & Production (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-09-30,,capex_seg_oilsands_mm,340.2,musd,USD,Segments,Capital Expenditures,Capex segmento Oil Sands (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-09-30,,capex_seg_refinacion_mm,41.06,musd,USD,Segments,Capital Expenditures,Capex segmento Refining & Marketing (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-09-30,,capex_syncrude_mm,41.06,musd,USD,Segments,Capital Expenditures [Syncrude],Capex Syncrude (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-09-30,,cfo_mm,3124,musd,USD,Cash Flow,Cash from Operating Activities,
+SU,2024-09-30,,costo_ingresos_mm,3873,musd,USD,Income Statement,+ Cost of Goods & Services,Costo de bienes y servicios (compras de crudo/productos principalmente); no es opex upstream
+SU,2024-09-30,,dda_mm,1313,musd,USD,Income Statement,+ Depreciation & Amortization,D&A trimestral
+SU,2024-09-30,,dda_seg_corp_mm,21.26,musd,USD,Segments,Depreciation and Amortization,D&A segmento Corporate & Elimination; solo 3 trimestres
+SU,2024-09-30,,dda_seg_ep_mm,140.04,musd,USD,Segments,Depreciation and Amortization,D&A segmento Exploration & Production; solo 3 trimestres
+SU,2024-09-30,,dda_seg_oilsands_mm,970.75,musd,USD,Segments,Depreciation and Amortization,D&A segmento Oil Sands; solo 3 trimestres
+SU,2024-09-30,,dda_seg_refinacion_mm,181.1,musd,USD,Segments,Depreciation and Amortization,D&A segmento Refining & Marketing; solo 3 trimestres
+SU,2024-09-30,,deuda_cp_mm,339,musd,USD,Balance Sheet,+ ST Debt,Incluye ST Capital Leases y porcion corriente de LT debt
+SU,2024-09-30,,deuda_lp_mm,10794,musd,USD,Balance Sheet,+ LT Debt,Incluye LT Capital Leases
+SU,2024-09-30,,deuda_mm,11133,musd,USD,Balance Sheet,ST Debt + LT Debt,Deuda financiera total = ST Debt + LT Debt; INCLUYE arrendamientos (capital leases); = Net Debt (fila 78) + caja
+SU,2024-09-30,,deuda_neta_bloomberg_mm,8908,musd,USD,Balance Sheet,Net Debt,Segun Bloomberg (deuda con leasing - caja)
+SU,2024-09-30,,dividendos_pagados_mm,506,musd,USD,Cash Flow,+ Dividends Paid,Positivo
+SU,2024-09-30,,dividendos_totales_mm,512,musd,USD,Income Statement,Total Cash Common Dividends,Positivo
+SU,2024-09-30,,ebitda_gaap_mm,4084,musd,USD,Cash Flow,EBITDA,EBITDA GAAP (EBIT GAAP + D&A) de la hoja Cash Flow
+SU,2024-09-30,,ebitda_mm,4063,musd,USD,Income Statement,EBITDA,EBITDA AJUSTADO de Bloomberg (EBIT ajustado + D&A; excluye items anormales)
+SU,2024-09-30,,ebitda_no_up_mm,532.3,musd,USD,Segments,Pretax Income + Depreciation and Amortization [Refining & Marketing],"Solo Refining & Marketing (pretax + D&A; el segmento no lleva intereses ni impuestos). Corporate & Elimination excluido (lleva intereses, FX y eliminaciones). Solo 3 trimestres"
+SU,2024-09-30,,fcf_bloomberg_mm,1984,musd,USD,Cash Flow,Free Cash Flow,Segun Bloomberg
+SU,2024-09-30,,impuesto_ganancias_mm,494,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP","GAAP, corriente+diferido"
+SU,2024-09-30,,impuestos_pagados_caja_mm,394,musd,USD,Cash Flow,Cash Paid for Taxes,
+SU,2024-09-30,,ingresos_mm,10195,musd,USD,Income Statement,Revenue,Revenue = Sales&Services + Other Revenue; 2026Q1 incluye -686 de Other Revenue (derivados). Neto de regalias (no se informan separadas)
+SU,2024-09-30,,ingresos_ventas_servicios_mm,10195,musd,USD,Income Statement,+ Sales & Services Revenue,Antes de Other Revenue (-686 en 2026Q1)
+SU,2024-09-30,,intereses_capitalizados_mm,65,musd,USD,Income Statement,Capitalized Interest Expense,
+SU,2024-09-30,,intereses_mm,166,musd,USD,Income Statement,+ Interest Expense,Gasto por intereses (positivo)
+SU,2024-09-30,,intereses_pagados_caja_mm,98,musd,USD,Cash Flow,Cash Paid for Interest,
+SU,2024-09-30,,opex_mm,1731.8,musd,USD,Segments,"SG&A (Selling, General & Administrative) [Oil Sands + Exploration & Production]",Operating+Selling&General del upstream (Oil Sands + E&P); SUBCONJUNTO de sga_mm (no sumar); incluye algo de G&A; sin regalias
+SU,2024-09-30,,osg_seg_corp_mm,74.05,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Corporate & Elimination; los 4 segmentos suman sga_mm consolidado"
+SU,2024-09-30,,osg_seg_ep_mm,101.91,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Exploration & Production; los 4 segmentos suman sga_mm consolidado"
+SU,2024-09-30,,osg_seg_oilsands_mm,1629.89,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Oil Sands; los 4 segmentos suman sga_mm consolidado"
+SU,2024-09-30,,osg_seg_refinacion_mm,434.05,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Refining & Marketing; los 4 segmentos suman sga_mm consolidado"
+SU,2024-09-30,,patrimonio_total_mm,33377,musd,USD,Balance Sheet,Total Equity,Sin minoritarios (Minority Interest = '-')
+SU,2024-09-30,,recompras_mm,552,musd,USD,Cash Flow,+ Cash (Repurchase) of Equity,Recompra neta de emisiones (positivo = salida de caja)
+SU,2024-09-30,,resultado_ajustado_seg_corp_mm,0.73,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Corporate & Elimination; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-09-30,,resultado_ajustado_seg_ep_mm,199.43,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Exploration & Production; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-09-30,,resultado_ajustado_seg_oilsands_mm,1309.48,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Oil Sands; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-09-30,,resultado_ajustado_seg_refinacion_mm,354.87,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Refining & Marketing; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-09-30,,resultado_antes_imp_ajustado_mm,1955,musd,USD,Income Statement,"Pretax Income (Loss), Adjusted",Excluye items anormales
+SU,2024-09-30,,resultado_antes_imp_mm,1975,musd,USD,Income Statement,"Pretax Income (Loss), GAAP",GAAP
+SU,2024-09-30,,resultado_antes_imp_seg_corp_mm,90.92,musd,USD,Segments,Pretax Income,"Pretax Income segmento Corporate & Elimination; solo 3 trimestres (2024Q3, 2026Q1, 2026Q2); los 4 segmentos suman el pretax GAAP consolidado"
+SU,2024-09-30,,resultado_antes_imp_seg_ep_mm,199.43,musd,USD,Segments,Pretax Income,"Pretax Income segmento Exploration & Production; solo 3 trimestres (2024Q3, 2026Q1, 2026Q2); los 4 segmentos suman el pretax GAAP consolidado"
+SU,2024-09-30,,resultado_antes_imp_seg_oilsands_mm,1333.68,musd,USD,Segments,Pretax Income,"Pretax Income segmento Oil Sands; solo 3 trimestres (2024Q3, 2026Q1, 2026Q2); los 4 segmentos suman el pretax GAAP consolidado"
+SU,2024-09-30,,resultado_antes_imp_seg_refinacion_mm,351.2,musd,USD,Segments,Pretax Income,"Pretax Income segmento Refining & Marketing; solo 3 trimestres (2024Q3, 2026Q1, 2026Q2); los 4 segmentos suman el pretax GAAP consolidado"
+SU,2024-09-30,,resultado_neto_ajustado_mm,1466,musd,USD,Income Statement,"Net Income Avail to Common, Adj",
+SU,2024-09-30,,resultado_neto_mm,1481,musd,USD,Income Statement,"Net Income, GAAP",Sin minoritarios ni preferentes
+SU,2024-09-30,,resultado_operativo_ajustado_mm,2750,musd,USD,Income Statement,Operating Income (Loss),EBIT ajustado de Bloomberg
+SU,2024-09-30,,sga_mm,2240,musd,USD,Income Statement,"+ Selling, General & Admin","OJO: es el Operating, Selling & General de Suncor (incluye costos operativos de todos los segmentos), NO es G&A puro. opex_mm es subconjunto de este valor: no sumar ambos"
+SU,2024-09-30,,ventas_ajustadas_seg_corp_mm,-1552.17,musd,USD,Segments,Adjusted Sales,Adjusted Sales Corporate & Elimination; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-09-30,,ventas_ajustadas_seg_ep_mm,467.78,musd,USD,Segments,Adjusted Sales,Adjusted Sales Exploration & Production; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-09-30,,ventas_ajustadas_seg_oilsands_mm,4646.24,musd,USD,Segments,Adjusted Sales,Adjusted Sales Oil Sands; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-09-30,,ventas_ajustadas_seg_refinacion_mm,6015.11,musd,USD,Segments,Adjusted Sales,Adjusted Sales Refining & Marketing; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-12-31,,activos_totales_mm,62391,musd,USD,Balance Sheet,Total Assets,
+SU,2024-12-31,,arrendamientos_total_mm,3019,musd,USD,Balance Sheet,Capital Leases - Total,Parte de deuda_mm que es leasing (ST+LT); deuda sin leasing = deuda_mm - este valor
+SU,2024-12-31,,caja_mm,2421,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI",Caja + equivalentes; ST Investments = '-' (nada sumado)
+SU,2024-12-31,,capex_fort_hills_mm,95.8,musd,USD,Segments,Capital Expenditures [Fort Hills],Capex Fort Hills (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-12-31,,capex_insitu_mm,60.77,musd,USD,Segments,Capital Expenditures [In Situ],Capex In Situ (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-12-31,,capex_mm,1122,musd,USD,Cash Flow,+ Acq of Fixed & Intang,Compra bruta de PP&E/intangibles (positivo); neto de ventas seria 'Change in Fixed & Intang' (fila 16)
+SU,2024-12-31,,capex_oilsands_otros_mm,155.86,musd,USD,Segments,Capital Expenditures [Oil Sands],Capex Oil Sands (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-12-31,,capex_seg_corp_mm,6.43,musd,USD,Segments,Capital Expenditures,Capex segmento Corporate & Elimination (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-12-31,,capex_seg_ep_mm,170.87,musd,USD,Segments,Capital Expenditures,Capex segmento Exploration & Production (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-12-31,,capex_seg_oilsands_mm,346.74,musd,USD,Segments,Capital Expenditures,Capex segmento Oil Sands (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-12-31,,capex_seg_refinacion_mm,46.47,musd,USD,Segments,Capital Expenditures,Capex segmento Refining & Marketing (positivo); 2025Q4 vacio en Bloomberg
+SU,2024-12-31,,capex_syncrude_mm,34.32,musd,USD,Segments,Capital Expenditures [Syncrude],Capex Syncrude (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2024-12-31,,cfo_mm,3634,musd,USD,Cash Flow,Cash from Operating Activities,
+SU,2024-12-31,,costo_ingresos_mm,3793,musd,USD,Income Statement,+ Cost of Goods & Services,Costo de bienes y servicios (compras de crudo/productos principalmente); no es opex upstream
+SU,2024-12-31,,dda_mm,1323,musd,USD,Income Statement,+ Depreciation & Amortization,D&A trimestral
+SU,2024-12-31,,deuda_cp_mm,1109,musd,USD,Balance Sheet,+ ST Debt,Incluye ST Capital Leases y porcion corriente de LT debt
+SU,2024-12-31,,deuda_lp_mm,9098,musd,USD,Balance Sheet,+ LT Debt,Incluye LT Capital Leases
+SU,2024-12-31,,deuda_mm,10207,musd,USD,Balance Sheet,ST Debt + LT Debt,Deuda financiera total = ST Debt + LT Debt; INCLUYE arrendamientos (capital leases); = Net Debt (fila 78) + caja
+SU,2024-12-31,,deuda_neta_bloomberg_mm,7786,musd,USD,Balance Sheet,Net Debt,Segun Bloomberg (deuda con leasing - caja)
+SU,2024-12-31,,dividendos_pagados_mm,510,musd,USD,Cash Flow,+ Dividends Paid,Positivo
+SU,2024-12-31,,dividendos_totales_mm,511,musd,USD,Income Statement,Total Cash Common Dividends,Positivo
+SU,2024-12-31,,ebitda_gaap_mm,3533,musd,USD,Cash Flow,EBITDA,EBITDA GAAP (EBIT GAAP + D&A) de la hoja Cash Flow
+SU,2024-12-31,,ebitda_mm,3718,musd,USD,Income Statement,EBITDA,EBITDA AJUSTADO de Bloomberg (EBIT ajustado + D&A; excluye items anormales)
+SU,2024-12-31,,fcf_bloomberg_mm,2512,musd,USD,Cash Flow,Free Cash Flow,Segun Bloomberg
+SU,2024-12-31,,impuesto_ganancias_mm,194,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP","GAAP, corriente+diferido"
+SU,2024-12-31,,impuestos_pagados_caja_mm,164,musd,USD,Cash Flow,Cash Paid for Taxes,
+SU,2024-12-31,,ingresos_mm,9764,musd,USD,Income Statement,Revenue,Revenue = Sales&Services + Other Revenue; 2026Q1 incluye -686 de Other Revenue (derivados). Neto de regalias (no se informan separadas)
+SU,2024-12-31,,ingresos_ventas_servicios_mm,9764,musd,USD,Income Statement,+ Sales & Services Revenue,Antes de Other Revenue (-686 en 2026Q1)
+SU,2024-12-31,,intereses_capitalizados_mm,51,musd,USD,Income Statement,Capitalized Interest Expense,
+SU,2024-12-31,,intereses_mm,296,musd,USD,Income Statement,+ Interest Expense,Gasto por intereses (positivo)
+SU,2024-12-31,,intereses_pagados_caja_mm,235,musd,USD,Cash Flow,Cash Paid for Interest,
+SU,2024-12-31,,opex_mm,1836.67,musd,USD,Segments,"SG&A (Selling, General & Administrative) [Oil Sands + Exploration & Production]",Operating+Selling&General del upstream (Oil Sands + E&P); SUBCONJUNTO de sga_mm (no sumar); incluye algo de G&A; sin regalias
+SU,2024-12-31,,osg_seg_corp_mm,135.12,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Corporate & Elimination; los 4 segmentos suman sga_mm consolidado"
+SU,2024-12-31,,osg_seg_ep_mm,88.65,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Exploration & Production; los 4 segmentos suman sga_mm consolidado"
+SU,2024-12-31,,osg_seg_oilsands_mm,1748.02,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Oil Sands; los 4 segmentos suman sga_mm consolidado"
+SU,2024-12-31,,osg_seg_refinacion_mm,466.85,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Refining & Marketing; los 4 segmentos suman sga_mm consolidado"
+SU,2024-12-31,,patrimonio_total_mm,30934,musd,USD,Balance Sheet,Total Equity,Sin minoritarios (Minority Interest = '-')
+SU,2024-12-31,,recompras_mm,686,musd,USD,Cash Flow,+ Cash (Repurchase) of Equity,Recompra neta de emisiones (positivo = salida de caja)
+SU,2024-12-31,,resultado_ajustado_seg_corp_mm,-142.99,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Corporate & Elimination; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-12-31,,resultado_ajustado_seg_ep_mm,89.37,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Exploration & Production; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-12-31,,resultado_ajustado_seg_oilsands_mm,1150.33,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Oil Sands; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-12-31,,resultado_ajustado_seg_refinacion_mm,293.12,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Refining & Marketing; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2024-12-31,,resultado_antes_imp_ajustado_mm,964,musd,USD,Income Statement,"Pretax Income (Loss), Adjusted",Excluye items anormales
+SU,2024-12-31,,resultado_antes_imp_mm,779,musd,USD,Income Statement,"Pretax Income (Loss), GAAP",GAAP
+SU,2024-12-31,,resultado_neto_ajustado_mm,756,musd,USD,Income Statement,"Net Income Avail to Common, Adj",
+SU,2024-12-31,,resultado_neto_mm,585,musd,USD,Income Statement,"Net Income, GAAP",Sin minoritarios ni preferentes
+SU,2024-12-31,,resultado_operativo_ajustado_mm,2394,musd,USD,Income Statement,Operating Income (Loss),EBIT ajustado de Bloomberg
+SU,2024-12-31,,sga_mm,2439,musd,USD,Income Statement,"+ Selling, General & Admin","OJO: es el Operating, Selling & General de Suncor (incluye costos operativos de todos los segmentos), NO es G&A puro. opex_mm es subconjunto de este valor: no sumar ambos"
+SU,2024-12-31,,ventas_ajustadas_seg_corp_mm,-1654.36,musd,USD,Segments,Adjusted Sales,Adjusted Sales Corporate & Elimination; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-12-31,,ventas_ajustadas_seg_ep_mm,326.01,musd,USD,Segments,Adjusted Sales,Adjusted Sales Exploration & Production; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-12-31,,ventas_ajustadas_seg_oilsands_mm,4830.11,musd,USD,Segments,Adjusted Sales,Adjusted Sales Oil Sands; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2024-12-31,,ventas_ajustadas_seg_refinacion_mm,5437.09,musd,USD,Segments,Adjusted Sales,Adjusted Sales Refining & Marketing; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-03-31,,activos_totales_mm,62394,musd,USD,Balance Sheet,Total Assets,
+SU,2025-03-31,,arrendamientos_total_mm,3101,musd,USD,Balance Sheet,Capital Leases - Total,Parte de deuda_mm que es leasing (ST+LT); deuda sin leasing = deuda_mm - este valor
+SU,2025-03-31,,caja_mm,1929,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI",Caja + equivalentes; ST Investments = '-' (nada sumado)
+SU,2025-03-31,,capex_fort_hills_mm,85.73,musd,USD,Segments,Capital Expenditures [Fort Hills],Capex Fort Hills (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2025-03-31,,capex_insitu_mm,98.97,musd,USD,Segments,Capital Expenditures [In Situ],Capex In Situ (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2025-03-31,,capex_mm,798,musd,USD,Cash Flow,+ Acq of Fixed & Intang,Compra bruta de PP&E/intangibles (positivo); neto de ventas seria 'Change in Fixed & Intang' (fila 16)
+SU,2025-03-31,,capex_oilsands_otros_mm,168.66,musd,USD,Segments,Capital Expenditures [Oil Sands],Capex Oil Sands (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2025-03-31,,capex_seg_corp_mm,4.88,musd,USD,Segments,Capital Expenditures,Capex segmento Corporate & Elimination (positivo); 2025Q4 vacio en Bloomberg
+SU,2025-03-31,,capex_seg_ep_mm,133.12,musd,USD,Segments,Capital Expenditures,Capex segmento Exploration & Production (positivo); 2025Q4 vacio en Bloomberg
+SU,2025-03-31,,capex_seg_oilsands_mm,494.15,musd,USD,Segments,Capital Expenditures,Capex segmento Oil Sands (positivo); 2025Q4 vacio en Bloomberg
+SU,2025-03-31,,capex_seg_refinacion_mm,125.45,musd,USD,Segments,Capital Expenditures,Capex segmento Refining & Marketing (positivo); 2025Q4 vacio en Bloomberg
+SU,2025-03-31,,capex_syncrude_mm,140.79,musd,USD,Segments,Capital Expenditures [Syncrude],Capex Syncrude (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2025-03-31,,cfo_mm,1503,musd,USD,Cash Flow,Cash from Operating Activities,
+SU,2025-03-31,,costo_ingresos_mm,3309,musd,USD,Income Statement,+ Cost of Goods & Services,Costo de bienes y servicios (compras de crudo/productos principalmente); no es opex upstream
+SU,2025-03-31,,dda_mm,1159,musd,USD,Income Statement,+ Depreciation & Amortization,D&A trimestral
+SU,2025-03-31,,deuda_cp_mm,1123,musd,USD,Balance Sheet,+ ST Debt,Incluye ST Capital Leases y porcion corriente de LT debt
+SU,2025-03-31,,deuda_lp_mm,9165,musd,USD,Balance Sheet,+ LT Debt,Incluye LT Capital Leases
+SU,2025-03-31,,deuda_mm,10288,musd,USD,Balance Sheet,ST Debt + LT Debt,Deuda financiera total = ST Debt + LT Debt; INCLUYE arrendamientos (capital leases); = Net Debt (fila 78) + caja
+SU,2025-03-31,,deuda_neta_bloomberg_mm,8359,musd,USD,Balance Sheet,Net Debt,Segun Bloomberg (deuda con leasing - caja)
+SU,2025-03-31,,dividendos_pagados_mm,491,musd,USD,Cash Flow,+ Dividends Paid,Positivo
+SU,2025-03-31,,dividendos_totales_mm,492,musd,USD,Income Statement,Total Cash Common Dividends,Positivo
+SU,2025-03-31,,ebitda_gaap_mm,3598,musd,USD,Cash Flow,EBITDA,EBITDA GAAP (EBIT GAAP + D&A) de la hoja Cash Flow
+SU,2025-03-31,,ebitda_mm,3589,musd,USD,Income Statement,EBITDA,EBITDA AJUSTADO de Bloomberg (EBIT ajustado + D&A; excluye items anormales)
+SU,2025-03-31,,fcf_bloomberg_mm,705,musd,USD,Cash Flow,Free Cash Flow,Segun Bloomberg
+SU,2025-03-31,,impuesto_ganancias_mm,419,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP","GAAP, corriente+diferido"
+SU,2025-03-31,,impuestos_pagados_caja_mm,421,musd,USD,Cash Flow,Cash Paid for Taxes,
+SU,2025-03-31,,ingresos_mm,9290,musd,USD,Income Statement,Revenue,Revenue = Sales&Services + Other Revenue; 2026Q1 incluye -686 de Other Revenue (derivados). Neto de regalias (no se informan separadas)
+SU,2025-03-31,,ingresos_ventas_servicios_mm,9290,musd,USD,Income Statement,+ Sales & Services Revenue,Antes de Other Revenue (-686 en 2026Q1)
+SU,2025-03-31,,intereses_capitalizados_mm,40,musd,USD,Income Statement,Capitalized Interest Expense,
+SU,2025-03-31,,intereses_mm,266,musd,USD,Income Statement,+ Interest Expense,Gasto por intereses (positivo)
+SU,2025-03-31,,intereses_pagados_caja_mm,103,musd,USD,Cash Flow,Cash Paid for Interest,
+SU,2025-03-31,,opex_mm,1750.77,musd,USD,Segments,"SG&A (Selling, General & Administrative) [Oil Sands + Exploration & Production]",Operating+Selling&General del upstream (Oil Sands + E&P); SUBCONJUNTO de sga_mm (no sumar); incluye algo de G&A; sin regalias
+SU,2025-03-31,,osg_seg_corp_mm,122.67,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Corporate & Elimination; los 4 segmentos suman sga_mm consolidado"
+SU,2025-03-31,,osg_seg_ep_mm,83.64,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Exploration & Production; los 4 segmentos suman sga_mm consolidado"
+SU,2025-03-31,,osg_seg_oilsands_mm,1667.13,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Oil Sands; los 4 segmentos suman sga_mm consolidado"
+SU,2025-03-31,,osg_seg_refinacion_mm,424.45,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Refining & Marketing; los 4 segmentos suman sga_mm consolidado"
+SU,2025-03-31,,patrimonio_total_mm,31187,musd,USD,Balance Sheet,Total Equity,Sin minoritarios (Minority Interest = '-')
+SU,2025-03-31,,recompras_mm,504,musd,USD,Cash Flow,+ Cash (Repurchase) of Equity,Recompra neta de emisiones (positivo = salida de caja)
+SU,2025-03-31,,resultado_ajustado_seg_corp_mm,-159.6,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Corporate & Elimination; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-03-31,,resultado_ajustado_seg_ep_mm,110.12,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Exploration & Production; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-03-31,,resultado_ajustado_seg_oilsands_mm,1129.08,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Oil Sands; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-03-31,,resultado_ajustado_seg_refinacion_mm,464.87,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Refining & Marketing; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-03-31,,resultado_antes_imp_ajustado_mm,1586,musd,USD,Income Statement,"Pretax Income (Loss), Adjusted",Excluye items anormales
+SU,2025-03-31,,resultado_antes_imp_mm,1596,musd,USD,Income Statement,"Pretax Income (Loss), GAAP",GAAP
+SU,2025-03-31,,resultado_neto_ajustado_mm,1135,musd,USD,Income Statement,"Net Income Avail to Common, Adj",
+SU,2025-03-31,,resultado_neto_mm,1177,musd,USD,Income Statement,"Net Income, GAAP",Sin minoritarios ni preferentes
+SU,2025-03-31,,resultado_operativo_ajustado_mm,2430,musd,USD,Income Statement,Operating Income (Loss),EBIT ajustado de Bloomberg
+SU,2025-03-31,,sga_mm,2298,musd,USD,Income Statement,"+ Selling, General & Admin","OJO: es el Operating, Selling & General de Suncor (incluye costos operativos de todos los segmentos), NO es G&A puro. opex_mm es subconjunto de este valor: no sumar ambos"
+SU,2025-03-31,,ventas_ajustadas_seg_corp_mm,-1483.83,musd,USD,Segments,Adjusted Sales,Adjusted Sales Corporate & Elimination; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-03-31,,ventas_ajustadas_seg_ep_mm,377.75,musd,USD,Segments,Adjusted Sales,Adjusted Sales Exploration & Production; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-03-31,,ventas_ajustadas_seg_oilsands_mm,4477.27,musd,USD,Segments,Adjusted Sales,Adjusted Sales Oil Sands; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-03-31,,ventas_ajustadas_seg_refinacion_mm,5308.05,musd,USD,Segments,Adjusted Sales,Adjusted Sales Refining & Marketing; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-06-30,,activos_totales_mm,65043,musd,USD,Balance Sheet,Total Assets,
+SU,2025-06-30,,arrendamientos_total_mm,3184,musd,USD,Balance Sheet,Capital Leases - Total,Parte de deuda_mm que es leasing (ST+LT); deuda sin leasing = deuda_mm - este valor
+SU,2025-06-30,,caja_mm,1665,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI",Caja + equivalentes; ST Investments = '-' (nada sumado)
+SU,2025-06-30,,capex_fort_hills_mm,140.17,musd,USD,Segments,Capital Expenditures [Fort Hills],Capex Fort Hills (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2025-06-30,,capex_insitu_mm,85.26,musd,USD,Segments,Capital Expenditures [In Situ],Capex In Situ (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2025-06-30,,capex_mm,1234,musd,USD,Cash Flow,+ Acq of Fixed & Intang,Compra bruta de PP&E/intangibles (positivo); neto de ventas seria 'Change in Fixed & Intang' (fila 16)
+SU,2025-06-30,,capex_oilsands_otros_mm,403.89,musd,USD,Segments,Capital Expenditures [Oil Sands],Capex Oil Sands (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2025-06-30,,capex_seg_corp_mm,5.78,musd,USD,Segments,Capital Expenditures,Capex segmento Corporate & Elimination (positivo); 2025Q4 vacio en Bloomberg
+SU,2025-06-30,,capex_seg_ep_mm,153.9,musd,USD,Segments,Capital Expenditures,Capex segmento Exploration & Production (positivo); 2025Q4 vacio en Bloomberg
+SU,2025-06-30,,capex_seg_oilsands_mm,770.21,musd,USD,Segments,Capital Expenditures,Capex segmento Oil Sands (positivo); 2025Q4 vacio en Bloomberg
+SU,2025-06-30,,capex_seg_refinacion_mm,261.56,musd,USD,Segments,Capital Expenditures,Capex segmento Refining & Marketing (positivo); 2025Q4 vacio en Bloomberg
+SU,2025-06-30,,capex_syncrude_mm,140.89,musd,USD,Segments,Capital Expenditures [Syncrude],Capex Syncrude (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2025-06-30,,cfo_mm,2109,musd,USD,Cash Flow,Cash from Operating Activities,
+SU,2025-06-30,,costo_ingresos_mm,4039,musd,USD,Income Statement,+ Cost of Goods & Services,Costo de bienes y servicios (compras de crudo/productos principalmente); no es opex upstream
+SU,2025-06-30,,dda_mm,1235,musd,USD,Income Statement,+ Depreciation & Amortization,D&A trimestral
+SU,2025-06-30,,deuda_cp_mm,1478,musd,USD,Balance Sheet,+ ST Debt,Incluye ST Capital Leases y porcion corriente de LT debt
+SU,2025-06-30,,deuda_lp_mm,9002,musd,USD,Balance Sheet,+ LT Debt,Incluye LT Capital Leases
+SU,2025-06-30,,deuda_mm,10480,musd,USD,Balance Sheet,ST Debt + LT Debt,Deuda financiera total = ST Debt + LT Debt; INCLUYE arrendamientos (capital leases); = Net Debt (fila 78) + caja
+SU,2025-06-30,,deuda_neta_bloomberg_mm,8815,musd,USD,Balance Sheet,Net Debt,Segun Bloomberg (deuda con leasing - caja)
+SU,2025-06-30,,dividendos_pagados_mm,504,musd,USD,Cash Flow,+ Dividends Paid,Positivo
+SU,2025-06-30,,dividendos_totales_mm,505,musd,USD,Income Statement,Total Cash Common Dividends,Positivo
+SU,2025-06-30,,ebitda_gaap_mm,2884,musd,USD,Cash Flow,EBITDA,EBITDA GAAP (EBIT GAAP + D&A) de la hoja Cash Flow
+SU,2025-06-30,,ebitda_mm,2817,musd,USD,Income Statement,EBITDA,EBITDA AJUSTADO de Bloomberg (EBIT ajustado + D&A; excluye items anormales)
+SU,2025-06-30,,fcf_bloomberg_mm,875,musd,USD,Cash Flow,Free Cash Flow,Segun Bloomberg
+SU,2025-06-30,,impuesto_ganancias_mm,217,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP","GAAP, corriente+diferido"
+SU,2025-06-30,,impuestos_pagados_caja_mm,284,musd,USD,Cash Flow,Cash Paid for Taxes,
+SU,2025-06-30,,ingresos_mm,9211,musd,USD,Income Statement,Revenue,Revenue = Sales&Services + Other Revenue; 2026Q1 incluye -686 de Other Revenue (derivados). Neto de regalias (no se informan separadas)
+SU,2025-06-30,,ingresos_ventas_servicios_mm,9211,musd,USD,Income Statement,+ Sales & Services Revenue,Antes de Other Revenue (-686 en 2026Q1)
+SU,2025-06-30,,intereses_capitalizados_mm,43,musd,USD,Income Statement,Capitalized Interest Expense,
+SU,2025-06-30,,intereses_mm,164,musd,USD,Income Statement,+ Interest Expense,Gasto por intereses (positivo)
+SU,2025-06-30,,intereses_pagados_caja_mm,212,musd,USD,Cash Flow,Cash Paid for Interest,
+SU,2025-06-30,,opex_mm,1792.59,musd,USD,Segments,"SG&A (Selling, General & Administrative) [Oil Sands + Exploration & Production]",Operating+Selling&General del upstream (Oil Sands + E&P); SUBCONJUNTO de sga_mm (no sumar); incluye algo de G&A; sin regalias
+SU,2025-06-30,,osg_seg_corp_mm,75.14,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Corporate & Elimination; los 4 segmentos suman sga_mm consolidado"
+SU,2025-06-30,,osg_seg_ep_mm,90.32,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Exploration & Production; los 4 segmentos suman sga_mm consolidado"
+SU,2025-06-30,,osg_seg_oilsands_mm,1702.27,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Oil Sands; los 4 segmentos suman sga_mm consolidado"
+SU,2025-06-30,,osg_seg_refinacion_mm,417.62,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Refining & Marketing; los 4 segmentos suman sga_mm consolidado"
+SU,2025-06-30,,patrimonio_total_mm,32717,musd,USD,Balance Sheet,Total Equity,Sin minoritarios (Minority Interest = '-')
+SU,2025-06-30,,recompras_mm,533,musd,USD,Cash Flow,+ Cash (Repurchase) of Equity,Recompra neta de emisiones (positivo = salida de caja)
+SU,2025-06-30,,resultado_ajustado_seg_corp_mm,-229.76,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Corporate & Elimination; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-06-30,,resultado_ajustado_seg_ep_mm,119.22,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Exploration & Production; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-06-30,,resultado_ajustado_seg_oilsands_mm,669.06,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Oil Sands; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-06-30,,resultado_ajustado_seg_refinacion_mm,291.9,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Refining & Marketing; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-06-30,,resultado_antes_imp_ajustado_mm,969,musd,USD,Income Statement,"Pretax Income (Loss), Adjusted",Excluye items anormales
+SU,2025-06-30,,resultado_antes_imp_mm,1036,musd,USD,Income Statement,"Pretax Income (Loss), GAAP",GAAP
+SU,2025-06-30,,resultado_neto_ajustado_mm,770,musd,USD,Income Statement,"Net Income Avail to Common, Adj",
+SU,2025-06-30,,resultado_neto_mm,819,musd,USD,Income Statement,"Net Income, GAAP",Sin minoritarios ni preferentes
+SU,2025-06-30,,resultado_operativo_ajustado_mm,1583,musd,USD,Income Statement,Operating Income (Loss),EBIT ajustado de Bloomberg
+SU,2025-06-30,,sga_mm,2285,musd,USD,Income Statement,"+ Selling, General & Admin","OJO: es el Operating, Selling & General de Suncor (incluye costos operativos de todos los segmentos), NO es G&A puro. opex_mm es subconjunto de este valor: no sumar ambos"
+SU,2025-06-30,,ventas_ajustadas_seg_corp_mm,-1251.42,musd,USD,Segments,Adjusted Sales,Adjusted Sales Corporate & Elimination; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-06-30,,ventas_ajustadas_seg_ep_mm,369.93,musd,USD,Segments,Adjusted Sales,Adjusted Sales Exploration & Production; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-06-30,,ventas_ajustadas_seg_oilsands_mm,4180.54,musd,USD,Segments,Adjusted Sales,Adjusted Sales Oil Sands; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-06-30,,ventas_ajustadas_seg_refinacion_mm,5294.68,musd,USD,Segments,Adjusted Sales,Adjusted Sales Refining & Marketing; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-09-30,,activos_totales_mm,64268,musd,USD,Balance Sheet,Total Assets,
+SU,2025-09-30,,arrendamientos_total_mm,3133,musd,USD,Balance Sheet,Capital Leases - Total,Parte de deuda_mm que es leasing (ST+LT); deuda sin leasing = deuda_mm - este valor
+SU,2025-09-30,,caja_mm,2115,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI",Caja + equivalentes; ST Investments = '-' (nada sumado)
+SU,2025-09-30,,capex_fort_hills_mm,153.94,musd,USD,Segments,Capital Expenditures [Fort Hills],Capex Fort Hills (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2025-09-30,,capex_insitu_mm,114.73,musd,USD,Segments,Capital Expenditures [In Situ],Capex In Situ (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2025-09-30,,capex_mm,1078,musd,USD,Cash Flow,+ Acq of Fixed & Intang,Compra bruta de PP&E/intangibles (positivo); neto de ventas seria 'Change in Fixed & Intang' (fila 16)
+SU,2025-09-30,,capex_oilsands_otros_mm,204.05,musd,USD,Segments,Capital Expenditures [Oil Sands],Capex Oil Sands (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2025-09-30,,capex_seg_corp_mm,10.17,musd,USD,Segments,Capital Expenditures,Capex segmento Corporate & Elimination (positivo); 2025Q4 vacio en Bloomberg
+SU,2025-09-30,,capex_seg_ep_mm,118.36,musd,USD,Segments,Capital Expenditures,Capex segmento Exploration & Production (positivo); 2025Q4 vacio en Bloomberg
+SU,2025-09-30,,capex_seg_oilsands_mm,705.81,musd,USD,Segments,Capital Expenditures,Capex segmento Oil Sands (positivo); 2025Q4 vacio en Bloomberg
+SU,2025-09-30,,capex_seg_refinacion_mm,210.58,musd,USD,Segments,Capital Expenditures,Capex segmento Refining & Marketing (positivo); 2025Q4 vacio en Bloomberg
+SU,2025-09-30,,capex_syncrude_mm,233.09,musd,USD,Segments,Capital Expenditures [Syncrude],Capex Syncrude (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2025-09-30,,cfo_mm,2748,musd,USD,Cash Flow,Cash from Operating Activities,
+SU,2025-09-30,,costo_ingresos_mm,3619,musd,USD,Income Statement,+ Cost of Goods & Services,Costo de bienes y servicios (compras de crudo/productos principalmente); no es opex upstream
+SU,2025-09-30,,dda_mm,1257,musd,USD,Income Statement,+ Depreciation & Amortization,D&A trimestral
+SU,2025-09-30,,deuda_cp_mm,1462,musd,USD,Balance Sheet,+ ST Debt,Incluye ST Capital Leases y porcion corriente de LT debt
+SU,2025-09-30,,deuda_lp_mm,8918,musd,USD,Balance Sheet,+ LT Debt,Incluye LT Capital Leases
+SU,2025-09-30,,deuda_mm,10380,musd,USD,Balance Sheet,ST Debt + LT Debt,Deuda financiera total = ST Debt + LT Debt; INCLUYE arrendamientos (capital leases); = Net Debt (fila 78) + caja
+SU,2025-09-30,,deuda_neta_bloomberg_mm,8266,musd,USD,Balance Sheet,Net Debt,Segun Bloomberg (deuda con leasing - caja)
+SU,2025-09-30,,dividendos_pagados_mm,500,musd,USD,Cash Flow,+ Dividends Paid,Positivo
+SU,2025-09-30,,dividendos_totales_mm,501,musd,USD,Income Statement,Total Cash Common Dividends,Positivo
+SU,2025-09-30,,ebitda_gaap_mm,3865,musd,USD,Cash Flow,EBITDA,EBITDA GAAP (EBIT GAAP + D&A) de la hoja Cash Flow
+SU,2025-09-30,,ebitda_mm,3824,musd,USD,Income Statement,EBITDA,EBITDA AJUSTADO de Bloomberg (EBIT ajustado + D&A; excluye items anormales)
+SU,2025-09-30,,fcf_bloomberg_mm,1671,musd,USD,Cash Flow,Free Cash Flow,Segun Bloomberg
+SU,2025-09-30,,impuesto_ganancias_mm,434,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP","GAAP, corriente+diferido"
+SU,2025-09-30,,impuestos_pagados_caja_mm,319,musd,USD,Cash Flow,Cash Paid for Taxes,
+SU,2025-09-30,,ingresos_mm,9850,musd,USD,Income Statement,Revenue,Revenue = Sales&Services + Other Revenue; 2026Q1 incluye -686 de Other Revenue (derivados). Neto de regalias (no se informan separadas)
+SU,2025-09-30,,ingresos_ventas_servicios_mm,9850,musd,USD,Income Statement,+ Sales & Services Revenue,Antes de Other Revenue (-686 en 2026Q1)
+SU,2025-09-30,,intereses_capitalizados_mm,33,musd,USD,Income Statement,Capitalized Interest Expense,
+SU,2025-09-30,,intereses_mm,174,musd,USD,Income Statement,+ Interest Expense,Gasto por intereses (positivo)
+SU,2025-09-30,,intereses_pagados_caja_mm,115,musd,USD,Cash Flow,Cash Paid for Interest,
+SU,2025-09-30,,opex_mm,1799.38,musd,USD,Segments,"SG&A (Selling, General & Administrative) [Oil Sands + Exploration & Production]",Operating+Selling&General del upstream (Oil Sands + E&P); SUBCONJUNTO de sga_mm (no sumar); incluye algo de G&A; sin regalias
+SU,2025-09-30,,osg_seg_corp_mm,137.97,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Corporate & Elimination; los 4 segmentos suman sga_mm consolidado"
+SU,2025-09-30,,osg_seg_ep_mm,108.2,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Exploration & Production; los 4 segmentos suman sga_mm consolidado"
+SU,2025-09-30,,osg_seg_oilsands_mm,1691.18,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Oil Sands; los 4 segmentos suman sga_mm consolidado"
+SU,2025-09-30,,osg_seg_refinacion_mm,437.14,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Refining & Marketing; los 4 segmentos suman sga_mm consolidado"
+SU,2025-09-30,,patrimonio_total_mm,32440,musd,USD,Balance Sheet,Total Equity,Sin minoritarios (Minority Interest = '-')
+SU,2025-09-30,,recompras_mm,497,musd,USD,Cash Flow,+ Cash (Repurchase) of Equity,Recompra neta de emisiones (positivo = salida de caja)
+SU,2025-09-30,,resultado_ajustado_seg_corp_mm,-185.17,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Corporate & Elimination; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-09-30,,resultado_ajustado_seg_ep_mm,103.11,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Exploration & Production; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-09-30,,resultado_ajustado_seg_oilsands_mm,1181.43,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Oil Sands; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-09-30,,resultado_ajustado_seg_refinacion_mm,649.17,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Refining & Marketing; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-09-30,,resultado_antes_imp_ajustado_mm,1569,musd,USD,Income Statement,"Pretax Income (Loss), Adjusted",Excluye items anormales
+SU,2025-09-30,,resultado_antes_imp_mm,1610,musd,USD,Income Statement,"Pretax Income (Loss), GAAP",GAAP
+SU,2025-09-30,,resultado_neto_ajustado_mm,1146,musd,USD,Income Statement,"Net Income Avail to Common, Adj",
+SU,2025-09-30,,resultado_neto_mm,1176,musd,USD,Income Statement,"Net Income, GAAP",Sin minoritarios ni preferentes
+SU,2025-09-30,,resultado_operativo_ajustado_mm,2567,musd,USD,Income Statement,Operating Income (Loss),EBIT ajustado de Bloomberg
+SU,2025-09-30,,sga_mm,2374,musd,USD,Income Statement,"+ Selling, General & Admin","OJO: es el Operating, Selling & General de Suncor (incluye costos operativos de todos los segmentos), NO es G&A puro. opex_mm es subconjunto de este valor: no sumar ambos"
+SU,2025-09-30,,ventas_ajustadas_seg_corp_mm,-1612.03,musd,USD,Segments,Adjusted Sales,Adjusted Sales Corporate & Elimination; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-09-30,,ventas_ajustadas_seg_ep_mm,363.8,musd,USD,Segments,Adjusted Sales,Adjusted Sales Exploration & Production; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-09-30,,ventas_ajustadas_seg_oilsands_mm,4557.25,musd,USD,Segments,Adjusted Sales,Adjusted Sales Oil Sands; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-09-30,,ventas_ajustadas_seg_refinacion_mm,5888.99,musd,USD,Segments,Adjusted Sales,Adjusted Sales Refining & Marketing; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-12-31,,activos_totales_mm,65529,musd,USD,Balance Sheet,Total Assets,
+SU,2025-12-31,,arrendamientos_total_mm,3292,musd,USD,Balance Sheet,Capital Leases - Total,Parte de deuda_mm que es leasing (ST+LT); deuda sin leasing = deuda_mm - este valor
+SU,2025-12-31,,caja_mm,2660,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI",Caja + equivalentes; ST Investments = '-' (nada sumado)
+SU,2025-12-31,,capex_mm,1090,musd,USD,Cash Flow,+ Acq of Fixed & Intang,Compra bruta de PP&E/intangibles (positivo); neto de ventas seria 'Change in Fixed & Intang' (fila 16)
+SU,2025-12-31,,cfo_mm,2813,musd,USD,Cash Flow,Cash from Operating Activities,
+SU,2025-12-31,,costo_ingresos_mm,3366,musd,USD,Income Statement,+ Cost of Goods & Services,Costo de bienes y servicios (compras de crudo/productos principalmente); no es opex upstream
+SU,2025-12-31,,dda_mm,1301,musd,USD,Income Statement,+ Depreciation & Amortization,D&A trimestral
+SU,2025-12-31,,deuda_cp_mm,1174,musd,USD,Balance Sheet,+ ST Debt,Incluye ST Capital Leases y porcion corriente de LT debt
+SU,2025-12-31,,deuda_lp_mm,9396,musd,USD,Balance Sheet,+ LT Debt,Incluye LT Capital Leases
+SU,2025-12-31,,deuda_mm,10570,musd,USD,Balance Sheet,ST Debt + LT Debt,Deuda financiera total = ST Debt + LT Debt; INCLUYE arrendamientos (capital leases); = Net Debt (fila 78) + caja
+SU,2025-12-31,,deuda_neta_bloomberg_mm,7910,musd,USD,Balance Sheet,Net Debt,Segun Bloomberg (deuda con leasing - caja)
+SU,2025-12-31,,dividendos_pagados_mm,516,musd,USD,Cash Flow,+ Dividends Paid,Positivo
+SU,2025-12-31,,dividendos_totales_mm,517,musd,USD,Income Statement,Total Cash Common Dividends,Positivo
+SU,2025-12-31,,ebitda_gaap_mm,3253,musd,USD,Cash Flow,EBITDA,EBITDA GAAP (EBIT GAAP + D&A) de la hoja Cash Flow
+SU,2025-12-31,,ebitda_mm,3142,musd,USD,Income Statement,EBITDA,EBITDA AJUSTADO de Bloomberg (EBIT ajustado + D&A; excluye items anormales)
+SU,2025-12-31,,fcf_bloomberg_mm,1723,musd,USD,Cash Flow,Free Cash Flow,Segun Bloomberg
+SU,2025-12-31,,impuesto_ganancias_mm,381,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP","GAAP, corriente+diferido"
+SU,2025-12-31,,impuestos_pagados_caja_mm,209,musd,USD,Cash Flow,Cash Paid for Taxes,
+SU,2025-12-31,,ingresos_mm,9135,musd,USD,Income Statement,Revenue,Revenue = Sales&Services + Other Revenue; 2026Q1 incluye -686 de Other Revenue (derivados). Neto de regalias (no se informan separadas)
+SU,2025-12-31,,ingresos_ventas_servicios_mm,9135,musd,USD,Income Statement,+ Sales & Services Revenue,Antes de Other Revenue (-686 en 2026Q1)
+SU,2025-12-31,,intereses_capitalizados_mm,26,musd,USD,Income Statement,Capitalized Interest Expense,
+SU,2025-12-31,,intereses_mm,292,musd,USD,Income Statement,+ Interest Expense,Gasto por intereses (positivo)
+SU,2025-12-31,,intereses_pagados_caja_mm,215,musd,USD,Cash Flow,Cash Paid for Interest,
+SU,2025-12-31,,opex_mm,1919.16,musd,USD,Segments,"SG&A (Selling, General & Administrative) [Oil Sands + Exploration & Production]",Operating+Selling&General del upstream (Oil Sands + E&P); SUBCONJUNTO de sga_mm (no sumar); incluye algo de G&A; sin regalias
+SU,2025-12-31,,osg_seg_corp_mm,138.47,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Corporate & Elimination; los 4 segmentos suman sga_mm consolidado"
+SU,2025-12-31,,osg_seg_ep_mm,91.12,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Exploration & Production; los 4 segmentos suman sga_mm consolidado"
+SU,2025-12-31,,osg_seg_oilsands_mm,1828.04,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Oil Sands; los 4 segmentos suman sga_mm consolidado"
+SU,2025-12-31,,osg_seg_refinacion_mm,466.34,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Refining & Marketing; los 4 segmentos suman sga_mm consolidado"
+SU,2025-12-31,,patrimonio_total_mm,32887,musd,USD,Balance Sheet,Total Equity,Sin minoritarios (Minority Interest = '-')
+SU,2025-12-31,,recompras_mm,575,musd,USD,Cash Flow,+ Cash (Repurchase) of Equity,Recompra neta de emisiones (positivo = salida de caja)
+SU,2025-12-31,,resultado_ajustado_seg_corp_mm,-178.64,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Corporate & Elimination; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-12-31,,resultado_ajustado_seg_ep_mm,43.76,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Exploration & Production; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-12-31,,resultado_ajustado_seg_oilsands_mm,809.99,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Oil Sands; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-12-31,,resultado_ajustado_seg_refinacion_mm,640.68,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Refining & Marketing; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2025-12-31,,resultado_antes_imp_ajustado_mm,1329,musd,USD,Income Statement,"Pretax Income (Loss), Adjusted",Excluye items anormales
+SU,2025-12-31,,resultado_antes_imp_mm,1440,musd,USD,Income Statement,"Pretax Income (Loss), GAAP",GAAP
+SU,2025-12-31,,resultado_neto_ajustado_mm,972,musd,USD,Income Statement,"Net Income Avail to Common, Adj",
+SU,2025-12-31,,resultado_neto_mm,1059,musd,USD,Income Statement,"Net Income, GAAP",Sin minoritarios ni preferentes
+SU,2025-12-31,,resultado_operativo_ajustado_mm,1842,musd,USD,Income Statement,Operating Income (Loss),EBIT ajustado de Bloomberg
+SU,2025-12-31,,sga_mm,2524,musd,USD,Income Statement,"+ Selling, General & Admin","OJO: es el Operating, Selling & General de Suncor (incluye costos operativos de todos los segmentos), NO es G&A puro. opex_mm es subconjunto de este valor: no sumar ambos"
+SU,2025-12-31,,ventas_ajustadas_seg_corp_mm,-1375.34,musd,USD,Segments,Adjusted Sales,Adjusted Sales Corporate & Elimination; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-12-31,,ventas_ajustadas_seg_ep_mm,279.8,musd,USD,Segments,Adjusted Sales,Adjusted Sales Exploration & Production; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-12-31,,ventas_ajustadas_seg_oilsands_mm,4412.27,musd,USD,Segments,Adjusted Sales,Adjusted Sales Oil Sands; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2025-12-31,,ventas_ajustadas_seg_refinacion_mm,5504.93,musd,USD,Segments,Adjusted Sales,Adjusted Sales Refining & Marketing; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2026-03-31,,activos_totales_mm,66612,musd,USD,Balance Sheet,Total Assets,
+SU,2026-03-31,,arrendamientos_total_mm,3372,musd,USD,Balance Sheet,Capital Leases - Total,Parte de deuda_mm que es leasing (ST+LT); deuda sin leasing = deuda_mm - este valor
+SU,2026-03-31,,caja_mm,2347,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI",Caja + equivalentes; ST Investments = '-' (nada sumado)
+SU,2026-03-31,,capex_fort_hills_mm,129.04,musd,USD,Segments,Capital Expenditures [Fort Hills],Capex Fort Hills (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2026-03-31,,capex_insitu_mm,104.98,musd,USD,Segments,Capital Expenditures [In Situ],Capex In Situ (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2026-03-31,,capex_mm,814,musd,USD,Cash Flow,+ Acq of Fixed & Intang,Compra bruta de PP&E/intangibles (positivo); neto de ventas seria 'Change in Fixed & Intang' (fila 16)
+SU,2026-03-31,,capex_oilsands_otros_mm,161.85,musd,USD,Segments,Capital Expenditures [Oil Sands],Capex Oil Sands (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2026-03-31,,capex_seg_corp_mm,8.02,musd,USD,Segments,Capital Expenditures,Capex segmento Corporate & Elimination (positivo); 2025Q4 vacio en Bloomberg
+SU,2026-03-31,,capex_seg_ep_mm,78.01,musd,USD,Segments,Capital Expenditures,Capex segmento Exploration & Production (positivo); 2025Q4 vacio en Bloomberg
+SU,2026-03-31,,capex_seg_oilsands_mm,530.75,musd,USD,Segments,Capital Expenditures,Capex segmento Oil Sands (positivo); 2025Q4 vacio en Bloomberg
+SU,2026-03-31,,capex_seg_refinacion_mm,167.68,musd,USD,Segments,Capital Expenditures,Capex segmento Refining & Marketing (positivo); 2025Q4 vacio en Bloomberg
+SU,2026-03-31,,capex_syncrude_mm,134.87,musd,USD,Segments,Capital Expenditures [Syncrude],Capex Syncrude (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2026-03-31,,cfo_mm,1775,musd,USD,Cash Flow,Cash from Operating Activities,
+SU,2026-03-31,,costo_ingresos_mm,4215,musd,USD,Income Statement,+ Cost of Goods & Services,Costo de bienes y servicios (compras de crudo/productos principalmente); no es opex upstream
+SU,2026-03-31,,dda_mm,1262,musd,USD,Income Statement,+ Depreciation & Amortization,D&A trimestral
+SU,2026-03-31,,dda_seg_corp_mm,32.81,musd,USD,Segments,Depreciation and Amortization,D&A segmento Corporate & Elimination; solo 3 trimestres
+SU,2026-03-31,,dda_seg_ep_mm,127.58,musd,USD,Segments,Depreciation and Amortization,D&A segmento Exploration & Production; solo 3 trimestres
+SU,2026-03-31,,dda_seg_oilsands_mm,900.37,musd,USD,Segments,Depreciation and Amortization,D&A segmento Oil Sands; solo 3 trimestres
+SU,2026-03-31,,dda_seg_refinacion_mm,201.22,musd,USD,Segments,Depreciation and Amortization,D&A segmento Refining & Marketing; solo 3 trimestres
+SU,2026-03-31,,deuda_cp_mm,1170,musd,USD,Balance Sheet,+ ST Debt,Incluye ST Capital Leases y porcion corriente de LT debt
+SU,2026-03-31,,deuda_lp_mm,9459,musd,USD,Balance Sheet,+ LT Debt,Incluye LT Capital Leases
+SU,2026-03-31,,deuda_mm,10629,musd,USD,Balance Sheet,ST Debt + LT Debt,Deuda financiera total = ST Debt + LT Debt; INCLUYE arrendamientos (capital leases); = Net Debt (fila 78) + caja
+SU,2026-03-31,,deuda_neta_bloomberg_mm,8282,musd,USD,Balance Sheet,Net Debt,Segun Bloomberg (deuda con leasing - caja)
+SU,2026-03-31,,dividendos_pagados_mm,519,musd,USD,Cash Flow,+ Dividends Paid,Positivo
+SU,2026-03-31,,dividendos_totales_mm,520,musd,USD,Income Statement,Total Cash Common Dividends,Positivo
+SU,2026-03-31,,ebitda_gaap_mm,3499,musd,USD,Cash Flow,EBITDA,EBITDA GAAP (EBIT GAAP + D&A) de la hoja Cash Flow
+SU,2026-03-31,,ebitda_mm,3591,musd,USD,Income Statement,EBITDA,EBITDA AJUSTADO de Bloomberg (EBIT ajustado + D&A; excluye items anormales)
+SU,2026-03-31,,ebitda_no_up_mm,1404.15,musd,USD,Segments,Pretax Income + Depreciation and Amortization [Refining & Marketing],"Solo Refining & Marketing (pretax + D&A; el segmento no lleva intereses ni impuestos). Corporate & Elimination excluido (lleva intereses, FX y eliminaciones). Solo 3 trimestres"
+SU,2026-03-31,,fcf_bloomberg_mm,961,musd,USD,Cash Flow,Free Cash Flow,Segun Bloomberg
+SU,2026-03-31,,impuesto_ganancias_mm,529,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP","GAAP, corriente+diferido"
+SU,2026-03-31,,impuestos_pagados_caja_mm,365,musd,USD,Cash Flow,Cash Paid for Taxes,
+SU,2026-03-31,,ingresos_mm,10557,musd,USD,Income Statement,Revenue,Revenue = Sales&Services + Other Revenue; 2026Q1 incluye -686 de Other Revenue (derivados). Neto de regalias (no se informan separadas)
+SU,2026-03-31,,ingresos_ventas_servicios_mm,11243,musd,USD,Income Statement,+ Sales & Services Revenue,Antes de Other Revenue (-686 en 2026Q1)
+SU,2026-03-31,,intereses_capitalizados_mm,30,musd,USD,Income Statement,Capitalized Interest Expense,
+SU,2026-03-31,,intereses_mm,174,musd,USD,Income Statement,+ Interest Expense,Gasto por intereses (positivo)
+SU,2026-03-31,,intereses_pagados_caja_mm,116,musd,USD,Cash Flow,Cash Paid for Interest,
+SU,2026-03-31,,opex_mm,2074.14,musd,USD,Segments,"SG&A (Selling, General & Administrative) [Oil Sands + Exploration & Production]",Operating+Selling&General del upstream (Oil Sands + E&P); SUBCONJUNTO de sga_mm (no sumar); incluye algo de G&A; sin regalias
+SU,2026-03-31,,osg_seg_corp_mm,189.55,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Corporate & Elimination; los 4 segmentos suman sga_mm consolidado"
+SU,2026-03-31,,osg_seg_ep_mm,96.96,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Exploration & Production; los 4 segmentos suman sga_mm consolidado"
+SU,2026-03-31,,osg_seg_oilsands_mm,1977.18,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Oil Sands; los 4 segmentos suman sga_mm consolidado"
+SU,2026-03-31,,osg_seg_refinacion_mm,490.65,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Refining & Marketing; los 4 segmentos suman sga_mm consolidado"
+SU,2026-03-31,,patrimonio_total_mm,32850,musd,USD,Balance Sheet,Total Equity,Sin minoritarios (Minority Interest = '-')
+SU,2026-03-31,,recompras_mm,551,musd,USD,Cash Flow,+ Cash (Repurchase) of Equity,Recompra neta de emisiones (positivo = salida de caja)
+SU,2026-03-31,,resultado_ajustado_seg_corp_mm,-425.04,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Corporate & Elimination; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2026-03-31,,resultado_ajustado_seg_ep_mm,278.5,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Exploration & Production; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2026-03-31,,resultado_ajustado_seg_oilsands_mm,1147.52,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Oil Sands; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2026-03-31,,resultado_ajustado_seg_refinacion_mm,1227.72,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Refining & Marketing; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2026-03-31,,resultado_antes_imp_ajustado_mm,2152,musd,USD,Income Statement,"Pretax Income (Loss), Adjusted",Excluye items anormales
+SU,2026-03-31,,resultado_antes_imp_mm,2060,musd,USD,Income Statement,"Pretax Income (Loss), GAAP",GAAP
+SU,2026-03-31,,resultado_antes_imp_seg_corp_mm,-526.37,musd,USD,Segments,Pretax Income,"Pretax Income segmento Corporate & Elimination; solo 3 trimestres (2024Q3, 2026Q1, 2026Q2); los 4 segmentos suman el pretax GAAP consolidado"
+SU,2026-03-31,,resultado_antes_imp_seg_ep_mm,278.5,musd,USD,Segments,Pretax Income,"Pretax Income segmento Exploration & Production; solo 3 trimestres (2024Q3, 2026Q1, 2026Q2); los 4 segmentos suman el pretax GAAP consolidado"
+SU,2026-03-31,,resultado_antes_imp_seg_oilsands_mm,1105.24,musd,USD,Segments,Pretax Income,"Pretax Income segmento Oil Sands; solo 3 trimestres (2024Q3, 2026Q1, 2026Q2); los 4 segmentos suman el pretax GAAP consolidado"
+SU,2026-03-31,,resultado_antes_imp_seg_refinacion_mm,1202.93,musd,USD,Segments,Pretax Income,"Pretax Income segmento Refining & Marketing; solo 3 trimestres (2024Q3, 2026Q1, 2026Q2); los 4 segmentos suman el pretax GAAP consolidado"
+SU,2026-03-31,,resultado_neto_ajustado_mm,1591,musd,USD,Income Statement,"Net Income Avail to Common, Adj",
+SU,2026-03-31,,resultado_neto_mm,1531,musd,USD,Income Statement,"Net Income, GAAP",Sin minoritarios ni preferentes
+SU,2026-03-31,,resultado_operativo_ajustado_mm,2329,musd,USD,Income Statement,Operating Income (Loss),EBIT ajustado de Bloomberg
+SU,2026-03-31,,sga_mm,2754,musd,USD,Income Statement,"+ Selling, General & Admin","OJO: es el Operating, Selling & General de Suncor (incluye costos operativos de todos los segmentos), NO es G&A puro. opex_mm es subconjunto de este valor: no sumar ambos"
+SU,2026-03-31,,ventas_ajustadas_seg_corp_mm,-1552.14,musd,USD,Segments,Adjusted Sales,Adjusted Sales Corporate & Elimination; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2026-03-31,,ventas_ajustadas_seg_ep_mm,559.91,musd,USD,Segments,Adjusted Sales,Adjusted Sales Exploration & Production; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2026-03-31,,ventas_ajustadas_seg_oilsands_mm,5089.48,musd,USD,Segments,Adjusted Sales,Adjusted Sales Oil Sands; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2026-03-31,,ventas_ajustadas_seg_refinacion_mm,6592.77,musd,USD,Segments,Adjusted Sales,Adjusted Sales Refining & Marketing; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2026-06-30,,activos_totales_mm,66684,musd,USD,Balance Sheet,Total Assets,
+SU,2026-06-30,,arrendamientos_total_mm,3397,musd,USD,Balance Sheet,Capital Leases - Total,Parte de deuda_mm que es leasing (ST+LT); deuda sin leasing = deuda_mm - este valor
+SU,2026-06-30,,caja_mm,3781,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI",Caja + equivalentes; ST Investments = '-' (nada sumado)
+SU,2026-06-30,,capex_fort_hills_mm,97.55,musd,USD,Segments,Capital Expenditures [Fort Hills],Capex Fort Hills (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2026-06-30,,capex_insitu_mm,188.59,musd,USD,Segments,Capital Expenditures [In Situ],Capex In Situ (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2026-06-30,,capex_mm,975,musd,USD,Cash Flow,+ Acq of Fixed & Intang,Compra bruta de PP&E/intangibles (positivo); neto de ventas seria 'Change in Fixed & Intang' (fila 16)
+SU,2026-06-30,,capex_oilsands_otros_mm,221.11,musd,USD,Segments,Capital Expenditures [Oil Sands],Capex Oil Sands (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2026-06-30,,capex_seg_corp_mm,6.5,musd,USD,Segments,Capital Expenditures,Capex segmento Corporate & Elimination (positivo); 2025Q4 vacio en Bloomberg
+SU,2026-06-30,,capex_seg_ep_mm,75.87,musd,USD,Segments,Capital Expenditures,Capex segmento Exploration & Production (positivo); 2025Q4 vacio en Bloomberg
+SU,2026-06-30,,capex_seg_oilsands_mm,648.14,musd,USD,Segments,Capital Expenditures,Capex segmento Oil Sands (positivo); 2025Q4 vacio en Bloomberg
+SU,2026-06-30,,capex_seg_refinacion_mm,216.05,musd,USD,Segments,Capital Expenditures,Capex segmento Refining & Marketing (positivo); 2025Q4 vacio en Bloomberg
+SU,2026-06-30,,capex_syncrude_mm,140.9,musd,USD,Segments,Capital Expenditures [Syncrude],Capex Syncrude (positivo); Fort Hills+Syncrude+In Situ+Oil Sands otros = capex_seg_oilsands; 2025Q4 vacio
+SU,2026-06-30,,cfo_mm,4086,musd,USD,Cash Flow,Cash from Operating Activities,
+SU,2026-06-30,,costo_ingresos_mm,5019,musd,USD,Income Statement,+ Cost of Goods & Services,Costo de bienes y servicios (compras de crudo/productos principalmente); no es opex upstream
+SU,2026-06-30,,dda_mm,1238,musd,USD,Income Statement,+ Depreciation & Amortization,D&A trimestral
+SU,2026-06-30,,dda_seg_corp_mm,22.4,musd,USD,Segments,Depreciation and Amortization,D&A segmento Corporate & Elimination; solo 3 trimestres
+SU,2026-06-30,,dda_seg_ep_mm,120.67,musd,USD,Segments,Depreciation and Amortization,D&A segmento Exploration & Production; solo 3 trimestres
+SU,2026-06-30,,dda_seg_oilsands_mm,896.7,musd,USD,Segments,Depreciation and Amortization,D&A segmento Oil Sands; solo 3 trimestres
+SU,2026-06-30,,dda_seg_refinacion_mm,198.71,musd,USD,Segments,Depreciation and Amortization,D&A segmento Refining & Marketing; solo 3 trimestres
+SU,2026-06-30,,deuda_cp_mm,972,musd,USD,Balance Sheet,+ ST Debt,Incluye ST Capital Leases y porcion corriente de LT debt
+SU,2026-06-30,,deuda_lp_mm,9360,musd,USD,Balance Sheet,+ LT Debt,Incluye LT Capital Leases
+SU,2026-06-30,,deuda_mm,10332,musd,USD,Balance Sheet,ST Debt + LT Debt,Deuda financiera total = ST Debt + LT Debt; INCLUYE arrendamientos (capital leases); = Net Debt (fila 78) + caja
+SU,2026-06-30,,deuda_neta_bloomberg_mm,6551,musd,USD,Balance Sheet,Net Debt,Segun Bloomberg (deuda con leasing - caja)
+SU,2026-06-30,,dividendos_pagados_mm,510,musd,USD,Cash Flow,+ Dividends Paid,Positivo
+SU,2026-06-30,,dividendos_totales_mm,511,musd,USD,Income Statement,Total Cash Common Dividends,Positivo
+SU,2026-06-30,,ebitda_gaap_mm,6234,musd,USD,Cash Flow,EBITDA,EBITDA GAAP (EBIT GAAP + D&A) de la hoja Cash Flow
+SU,2026-06-30,,ebitda_mm,6362,musd,USD,Income Statement,EBITDA,EBITDA AJUSTADO de Bloomberg (EBIT ajustado + D&A; excluye items anormales)
+SU,2026-06-30,,ebitda_no_up_mm,1716.1,musd,USD,Segments,Pretax Income + Depreciation and Amortization [Refining & Marketing],"Solo Refining & Marketing (pretax + D&A; el segmento no lleva intereses ni impuestos). Corporate & Elimination excluido (lleva intereses, FX y eliminaciones). Solo 3 trimestres"
+SU,2026-06-30,,fcf_bloomberg_mm,3111,musd,USD,Cash Flow,Free Cash Flow,Segun Bloomberg
+SU,2026-06-30,,impuesto_ganancias_mm,901,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP","GAAP, corriente+diferido"
+SU,2026-06-30,,impuestos_pagados_caja_mm,1054,musd,USD,Cash Flow,Cash Paid for Taxes,
+SU,2026-06-30,,ingresos_mm,13735,musd,USD,Income Statement,Revenue,Revenue = Sales&Services + Other Revenue; 2026Q1 incluye -686 de Other Revenue (derivados). Neto de regalias (no se informan separadas)
+SU,2026-06-30,,ingresos_ventas_servicios_mm,13735,musd,USD,Income Statement,+ Sales & Services Revenue,Antes de Other Revenue (-686 en 2026Q1)
+SU,2026-06-30,,intereses_capitalizados_mm,28,musd,USD,Income Statement,Capitalized Interest Expense,
+SU,2026-06-30,,intereses_mm,173,musd,USD,Income Statement,+ Interest Expense,Gasto por intereses (positivo)
+SU,2026-06-30,,intereses_pagados_caja_mm,204,musd,USD,Cash Flow,Cash Paid for Interest,
+SU,2026-06-30,,opex_mm,1952.37,musd,USD,Segments,"SG&A (Selling, General & Administrative) [Oil Sands + Exploration & Production]",Operating+Selling&General del upstream (Oil Sands + E&P); SUBCONJUNTO de sga_mm (no sumar); incluye algo de G&A; sin regalias
+SU,2026-06-30,,osg_seg_corp_mm,91.04,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Corporate & Elimination; los 4 segmentos suman sga_mm consolidado"
+SU,2026-06-30,,osg_seg_ep_mm,104.05,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Exploration & Production; los 4 segmentos suman sga_mm consolidado"
+SU,2026-06-30,,osg_seg_oilsands_mm,1848.32,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Oil Sands; los 4 segmentos suman sga_mm consolidado"
+SU,2026-06-30,,osg_seg_refinacion_mm,427.04,musd,USD,Segments,"SG&A (Selling, General & Administrative)","Rotulado SG&A pero es Operating, Selling & General del segmento Refining & Marketing; los 4 segmentos suman sga_mm consolidado"
+SU,2026-06-30,,patrimonio_total_mm,33899,musd,USD,Balance Sheet,Total Equity,Sin minoritarios (Minority Interest = '-')
+SU,2026-06-30,,recompras_mm,737,musd,USD,Cash Flow,+ Cash (Repurchase) of Equity,Recompra neta de emisiones (positivo = salida de caja)
+SU,2026-06-30,,resultado_ajustado_seg_corp_mm,-59.25,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Corporate & Elimination; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2026-06-30,,resultado_ajustado_seg_ep_mm,335.99,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Exploration & Production; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2026-06-30,,resultado_ajustado_seg_oilsands_mm,1872.89,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Oil Sands; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2026-06-30,,resultado_ajustado_seg_refinacion_mm,1494.27,musd,USD,Segments,Adjusted Net Income,Adjusted Net Income Refining & Marketing; semantica ambigua (cercano a pretax ajustado; segmentos no suman el neto ajustado consolidado); solo referencia
+SU,2026-06-30,,resultado_antes_imp_ajustado_mm,3726,musd,USD,Income Statement,"Pretax Income (Loss), Adjusted",Excluye items anormales
+SU,2026-06-30,,resultado_antes_imp_mm,3598,musd,USD,Income Statement,"Pretax Income (Loss), GAAP",GAAP
+SU,2026-06-30,,resultado_antes_imp_seg_corp_mm,-200.15,musd,USD,Segments,Pretax Income,"Pretax Income segmento Corporate & Elimination; solo 3 trimestres (2024Q3, 2026Q1, 2026Q2); los 4 segmentos suman el pretax GAAP consolidado"
+SU,2026-06-30,,resultado_antes_imp_seg_ep_mm,335.99,musd,USD,Segments,Pretax Income,"Pretax Income segmento Exploration & Production; solo 3 trimestres (2024Q3, 2026Q1, 2026Q2); los 4 segmentos suman el pretax GAAP consolidado"
+SU,2026-06-30,,resultado_antes_imp_seg_oilsands_mm,1944.42,musd,USD,Segments,Pretax Income,"Pretax Income segmento Oil Sands; solo 3 trimestres (2024Q3, 2026Q1, 2026Q2); los 4 segmentos suman el pretax GAAP consolidado"
+SU,2026-06-30,,resultado_antes_imp_seg_refinacion_mm,1517.39,musd,USD,Segments,Pretax Income,"Pretax Income segmento Refining & Marketing; solo 3 trimestres (2024Q3, 2026Q1, 2026Q2); los 4 segmentos suman el pretax GAAP consolidado"
+SU,2026-06-30,,resultado_neto_ajustado_mm,2791,musd,USD,Income Statement,"Net Income Avail to Common, Adj",
+SU,2026-06-30,,resultado_neto_mm,2697,musd,USD,Income Statement,"Net Income, GAAP",Sin minoritarios ni preferentes
+SU,2026-06-30,,resultado_operativo_ajustado_mm,5124,musd,USD,Income Statement,Operating Income (Loss),EBIT ajustado de Bloomberg
+SU,2026-06-30,,sga_mm,2470,musd,USD,Income Statement,"+ Selling, General & Admin","OJO: es el Operating, Selling & General de Suncor (incluye costos operativos de todos los segmentos), NO es G&A puro. opex_mm es subconjunto de este valor: no sumar ambos"
+SU,2026-06-30,,ventas_ajustadas_seg_corp_mm,-2180.7,musd,USD,Segments,Adjusted Sales,Adjusted Sales Corporate & Elimination; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2026-06-30,,ventas_ajustadas_seg_ep_mm,609.85,musd,USD,Segments,Adjusted Sales,Adjusted Sales Exploration & Production; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2026-06-30,,ventas_ajustadas_seg_oilsands_mm,5607.11,musd,USD,Segments,Adjusted Sales,Adjusted Sales Oil Sands; NO concilia con Revenue consolidado; solo referencia relativa
+SU,2026-06-30,,ventas_ajustadas_seg_refinacion_mm,8633.21,musd,USD,Segments,Adjusted Sales,Adjusted Sales Refining & Marketing; NO concilia con Revenue consolidado; solo referencia relativa

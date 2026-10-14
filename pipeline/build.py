@@ -4,6 +4,7 @@ from collections import defaultdict
 from .common import RAIZ, cargar, ahora_iso, companias
 from engine import model
 from .derivar import derivar
+from . import bloomberg
 
 MAX_EDAD_H = {"mercado.json": 48, "brent.json": 96, "fx.json": 96, "fund_sec.json": 24 * 120, "fund_cvm.json": 24 * 120,
               "fund_yf.json": 24 * 120, "ar_se.json": 24 * 45, "edgar.json": 24 * 7, "macro.json": 24 * 7, "serie.json": 24 * 7}
@@ -72,21 +73,35 @@ def main():
         # --- inputs: automático < derivado < parámetros < semilla (dato citado) < equipo (siempre pisa)
         ins = {}
         y, sem = yfd.get(c["id"], {}), semillas.get(c["id"], {})
+        # Bloomberg (terminal UADE): último trimestre cargado; pisa a yfinance y, si no es más viejo, a EDGAR
+        ed_c = edgar.get(c["id"], {})
+        q_bb = bloomberg.ultimo_periodo(c["id"])
+        per_ed = next(iter((ed_c.get("docs") or {}).values()), {}).get("periodo")
+        bb_ok, fb = q_bb and (not per_ed or q_bb >= per_ed), {}
+        if bb_ok:
+            ed_c = bloomberg.fusionar(ed_c if per_ed == q_bb else {}, bloomberg.periodo(c["id"], q_bb))
+            fb = bloomberg.fin_bloomberg(c["id"], q_bb)
+            if fb.get("acciones_bs"):
+                fb["acciones_mm"] = fb["acciones_bs"] / 1e6
+            y = {**y, **{k: v for k, v in fb.items() if k not in ("base", "fuente")}}
+        fte = lambda k: (fb["fuente"], q_bb, "bloomberg") if k in fb else (y.get("fuente"), y.get("cierre"), "automatico")
         def auto(k, v, fuente, fecha=None, origen="automatico", nota=None):
             if v is not None:
                 ins[k] = {"valor": v, "fuente": fuente, "fecha": fecha, "origen": origen, "nota": nota}
         # balance: oficial (SEC/CVM) primero, yfinance como respaldo
         for k in ("deuda_neta_musd", "acciones_mm"):
-            if f.get(k):
+            if fb.get(k) is not None and not (k == "acciones_mm" and c["id"] in ("YPF", "PBR")):
+                auto(k, fb[k], fb["fuente"], q_bb, origen="bloomberg")
+            elif f.get(k):
                 auto(k, f[k], f.get("fuente"), f.get("fecha"))
             elif y.get(k) is not None:
                 auto(k, y[k], y["fuente"], y.get("cierre"), nota="⚠️ moneda a verificar" if y.get("moneda_verificar") else None)
-        auto("minoritarios_musd", y.get("minoritarios_musd"), y.get("fuente"), y.get("cierre"))
-        auto("capex_musd_anual", y.get("capex_musd_ttm"), y.get("fuente"), y.get("cierre"),
+        auto("minoritarios_musd", y.get("minoritarios_musd"), *fte("minoritarios_musd")[:2], origen=fte("minoritarios_musd")[2])
+        auto("capex_musd_anual", y.get("capex_musd_ttm"), *fte("capex_musd_ttm")[:2], origen=fte("capex_musd_ttm")[2],
              nota="Capex TTM del estado de flujos: puede incluir adquisiciones; revisar")
         t = y.get("tasa_impuesto_efectiva")
         if t is not None and 0.1 <= t <= 0.45:
-            auto("tasa_impuesto", t, y.get("fuente"), y.get("cierre"), nota="Tasa efectiva TTM (impuesto / resultado antes de impuestos)")
+            auto("tasa_impuesto", t, *fte("tasa_impuesto_efectiva")[:2], nota="Tasa efectiva TTM (impuesto / resultado antes de impuestos)")
         # producción y reservas oficiales (Argentina, base operado)
         for k in ("prod_crudo_kbd", "prod_otros_kboed"):
             if c["id"] in ar.get("produccion", {}):
@@ -95,6 +110,10 @@ def main():
         if c["id"] in ar.get("reservas", {}):
             auto("reservas_1p_mmboe", ar["reservas"][c["id"]]["reservas_1p_mmboe"], ar["reservas"][c["id"]]["fuente"],
                  nota="Reservas comprobadas OPERADAS (SE), no por participación: ajustar")
+        if bb_ok and "reservas_1p_mmboe" not in ins and "reservas_1p_mmboe" not in sem:   # semilla citada manda
+            r_ = bloomberg.ultima_reserva(c["id"], q_bb)
+            if r_:
+                auto("reservas_1p_mmboe", r_["valor"], r_["fuente"], r_["fecha"], origen="bloomberg", nota="Reservas probadas 1P al cierre del último ejercicio")
         for k in ("rf", "erp", "lambda_crp"):
             if params[k]["valor"] is not None:
                 auto(k, params[k]["valor"], params[k]["fuente"], origen="parametro")
@@ -121,7 +140,7 @@ def main():
         if cap and mc_y and abs(cap / mc_y - 1) > 0.25:
             nota_cap = (nota_cap or "") + f" ⚠️ difiere >25 % de la capitalización de Yahoo ({mc_y:,.0f} MUSD): revisar acciones"
         # derivación desde EDGAR + macro (pisa a lo automático de baja prioridad y a las semillas; el equipo pisa todo)
-        der = derivar(c, edgar.get(c["id"], {}), y, macro, (brent or {}).get("spot", []), cap, sem, edgar)
+        der = derivar(c, ed_c, y, macro, (brent or {}).get("spot", []), cap, sem, edgar)
         for k, v in der.items():
             if k in sem and v["origen"] == "supuesto":
                 continue

@@ -1,0 +1,504 @@
+empresa,periodo,fecha_publicacion,variable,valor,unidad,moneda,hoja,campo_bloomberg,nota
+VIST,2023-09-30,,activos_totales_mm,2504.758,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],
+VIST,2023-12-31,,activos_totales_mm,2598.003,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],
+VIST,2024-03-31,,activos_totales_mm,2795.679,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],
+VIST,2024-06-30,,activos_totales_mm,3220.047,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],
+VIST,2024-09-30,,activos_totales_mm,3481.681,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],
+VIST,2024-12-31,,activos_totales_mm,4232.372,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],
+VIST,2025-03-31,,activos_totales_mm,4483.316,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],
+VIST,2025-06-30,,activos_totales_mm,6065.06,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],
+VIST,2025-09-30,,activos_totales_mm,6739.254,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],
+VIST,2025-12-31,,activos_totales_mm,7112.853,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],
+VIST,2026-03-31,,activos_totales_mm,7720.352,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],
+VIST,2026-06-30,,activos_totales_mm,9310.225,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],
+VIST,2023-09-30,,adquisiciones_mm,0.1,musd,USD,Cash Flow,+ Net Cash From Acq & Div [CF_NT_CSH_RCVD_PD_FOR_ACQUIS_DIV],Neto pagado por adquisiciones/inversiones en asociadas; positivo=salida
+VIST,2023-12-31,,adquisiciones_mm,1.544,musd,USD,Cash Flow,+ Net Cash From Acq & Div [CF_NT_CSH_RCVD_PD_FOR_ACQUIS_DIV],Neto pagado por adquisiciones/inversiones en asociadas; positivo=salida
+VIST,2024-03-31,,adquisiciones_mm,-0.128,musd,USD,Cash Flow,+ Net Cash From Acq & Div [CF_NT_CSH_RCVD_PD_FOR_ACQUIS_DIV],Neto pagado por adquisiciones/inversiones en asociadas; positivo=salida
+VIST,2024-06-30,,adquisiciones_mm,0.594,musd,USD,Cash Flow,+ Net Cash From Acq & Div [CF_NT_CSH_RCVD_PD_FOR_ACQUIS_DIV],Neto pagado por adquisiciones/inversiones en asociadas; positivo=salida
+VIST,2024-09-30,,adquisiciones_mm,1.745,musd,USD,Cash Flow,+ Net Cash From Acq & Div [CF_NT_CSH_RCVD_PD_FOR_ACQUIS_DIV],Neto pagado por adquisiciones/inversiones en asociadas; positivo=salida
+VIST,2024-12-31,,adquisiciones_mm,1.076,musd,USD,Cash Flow,+ Net Cash From Acq & Div [CF_NT_CSH_RCVD_PD_FOR_ACQUIS_DIV],Neto pagado por adquisiciones/inversiones en asociadas; positivo=salida
+VIST,2025-03-31,,adquisiciones_mm,28.651,musd,USD,Cash Flow,+ Net Cash From Acq & Div [CF_NT_CSH_RCVD_PD_FOR_ACQUIS_DIV],Neto pagado por adquisiciones/inversiones en asociadas; positivo=salida
+VIST,2025-06-30,,adquisiciones_mm,850.535,musd,USD,Cash Flow,+ Net Cash From Acq & Div [CF_NT_CSH_RCVD_PD_FOR_ACQUIS_DIV],Neto pagado por adquisiciones/inversiones en asociadas; positivo=salida
+VIST,2025-09-30,,adquisiciones_mm,4.877,musd,USD,Cash Flow,+ Net Cash From Acq & Div [CF_NT_CSH_RCVD_PD_FOR_ACQUIS_DIV],Neto pagado por adquisiciones/inversiones en asociadas; positivo=salida
+VIST,2025-12-31,,adquisiciones_mm,855.753,musd,USD,Cash Flow,+ Net Cash From Acq & Div [CF_NT_CSH_RCVD_PD_FOR_ACQUIS_DIV],Neto pagado por adquisiciones/inversiones en asociadas; positivo=salida
+VIST,2026-03-31,,adquisiciones_mm,92.017,musd,USD,Cash Flow,+ Net Cash From Acq & Div [CF_NT_CSH_RCVD_PD_FOR_ACQUIS_DIV],Neto pagado por adquisiciones/inversiones en asociadas; positivo=salida
+VIST,2026-06-30,,adquisiciones_mm,594.412,musd,USD,Cash Flow,+ Net Cash From Acq & Div [CF_NT_CSH_RCVD_PD_FOR_ACQUIS_DIV],Neto pagado por adquisiciones/inversiones en asociadas; positivo=salida
+VIST,2023-09-30,,adquisiciones_subsidiarias_mm,-0.0,musd,USD,Cash Flow,+ Cash for Acq of Subs [CF_CASH_FOR_ACQUIS_SUBSIDIARIES],Positivo=salida
+VIST,2023-12-31,,adquisiciones_subsidiarias_mm,-0.0,musd,USD,Cash Flow,+ Cash for Acq of Subs [CF_CASH_FOR_ACQUIS_SUBSIDIARIES],Positivo=salida
+VIST,2024-03-31,,adquisiciones_subsidiarias_mm,-0.0,musd,USD,Cash Flow,+ Cash for Acq of Subs [CF_CASH_FOR_ACQUIS_SUBSIDIARIES],Positivo=salida
+VIST,2024-06-30,,adquisiciones_subsidiarias_mm,-0.0,musd,USD,Cash Flow,+ Cash for Acq of Subs [CF_CASH_FOR_ACQUIS_SUBSIDIARIES],Positivo=salida
+VIST,2024-09-30,,adquisiciones_subsidiarias_mm,-0.0,musd,USD,Cash Flow,+ Cash for Acq of Subs [CF_CASH_FOR_ACQUIS_SUBSIDIARIES],Positivo=salida
+VIST,2024-12-31,,adquisiciones_subsidiarias_mm,-0.0,musd,USD,Cash Flow,+ Cash for Acq of Subs [CF_CASH_FOR_ACQUIS_SUBSIDIARIES],Positivo=salida
+VIST,2025-03-31,,adquisiciones_subsidiarias_mm,-0.0,musd,USD,Cash Flow,+ Cash for Acq of Subs [CF_CASH_FOR_ACQUIS_SUBSIDIARIES],Positivo=salida
+VIST,2025-06-30,,adquisiciones_subsidiarias_mm,841.555,musd,USD,Cash Flow,+ Cash for Acq of Subs [CF_CASH_FOR_ACQUIS_SUBSIDIARIES],Positivo=salida
+VIST,2025-09-30,,adquisiciones_subsidiarias_mm,-0.0,musd,USD,Cash Flow,+ Cash for Acq of Subs [CF_CASH_FOR_ACQUIS_SUBSIDIARIES],Positivo=salida
+VIST,2025-12-31,,adquisiciones_subsidiarias_mm,-0.0,musd,USD,Cash Flow,+ Cash for Acq of Subs [CF_CASH_FOR_ACQUIS_SUBSIDIARIES],Positivo=salida
+VIST,2026-03-31,,adquisiciones_subsidiarias_mm,79.742,musd,USD,Cash Flow,+ Cash for Acq of Subs [CF_CASH_FOR_ACQUIS_SUBSIDIARIES],Positivo=salida
+VIST,2026-06-30,,adquisiciones_subsidiarias_mm,586.662,musd,USD,Cash Flow,+ Cash for Acq of Subs [CF_CASH_FOR_ACQUIS_SUBSIDIARIES],Positivo=salida
+VIST,2023-09-30,,caja_mm,173.789,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]",Incluye inversiones de corto plazo
+VIST,2023-12-31,,caja_mm,213.253,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]",Incluye inversiones de corto plazo
+VIST,2024-03-31,,caja_mm,151.653,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]",Incluye inversiones de corto plazo
+VIST,2024-06-30,,caja_mm,328.241,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]",Incluye inversiones de corto plazo
+VIST,2024-09-30,,caja_mm,256.027,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]",Incluye inversiones de corto plazo
+VIST,2024-12-31,,caja_mm,764.307,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]",Incluye inversiones de corto plazo
+VIST,2025-03-31,,caja_mm,739.688,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]",Incluye inversiones de corto plazo
+VIST,2025-06-30,,caja_mm,153.823,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]",Incluye inversiones de corto plazo
+VIST,2025-09-30,,caja_mm,319.657,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]",Incluye inversiones de corto plazo
+VIST,2025-12-31,,caja_mm,538.402,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]",Incluye inversiones de corto plazo
+VIST,2026-03-31,,caja_mm,615.142,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]",Incluye inversiones de corto plazo
+VIST,2026-06-30,,caja_mm,604.657,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]",Incluye inversiones de corto plazo
+VIST,2023-09-30,,capex_mm,163.938,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],"PP&E + intangibles, flujo de caja; signo invertido a positivo"
+VIST,2023-12-31,,capex_mm,232.667,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],"PP&E + intangibles, flujo de caja; signo invertido a positivo"
+VIST,2024-03-31,,capex_mm,148.403,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],"PP&E + intangibles, flujo de caja; signo invertido a positivo"
+VIST,2024-06-30,,capex_mm,273.881,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],"PP&E + intangibles, flujo de caja; signo invertido a positivo"
+VIST,2024-09-30,,capex_mm,328.898,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],"PP&E + intangibles, flujo de caja; signo invertido a positivo"
+VIST,2024-12-31,,capex_mm,312.676,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],"PP&E + intangibles, flujo de caja; signo invertido a positivo"
+VIST,2025-03-31,,capex_mm,288.03,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],"PP&E + intangibles, flujo de caja; signo invertido a positivo"
+VIST,2025-06-30,,capex_mm,496.526,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],"PP&E + intangibles, flujo de caja; signo invertido a positivo"
+VIST,2025-09-30,,capex_mm,335.455,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],"PP&E + intangibles, flujo de caja; signo invertido a positivo"
+VIST,2025-12-31,,capex_mm,347.12,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],"PP&E + intangibles, flujo de caja; signo invertido a positivo"
+VIST,2026-03-31,,capex_mm,338.241,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],"PP&E + intangibles, flujo de caja; signo invertido a positivo"
+VIST,2026-06-30,,capex_mm,502.433,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],"PP&E + intangibles, flujo de caja; signo invertido a positivo"
+VIST,2023-09-30,,capex_ppe_mm,162.762,musd,USD,Cash Flow,+ Purchase of Fixed Production Assets [CF_PURCHASE_OF_FIXED_PROD_ASSETS],Solo bienes de uso; signo invertido a positivo
+VIST,2023-12-31,,capex_ppe_mm,228.91,musd,USD,Cash Flow,+ Purchase of Fixed Production Assets [CF_PURCHASE_OF_FIXED_PROD_ASSETS],Solo bienes de uso; signo invertido a positivo
+VIST,2024-03-31,,capex_ppe_mm,147.654,musd,USD,Cash Flow,+ Purchase of Fixed Production Assets [CF_PURCHASE_OF_FIXED_PROD_ASSETS],Solo bienes de uso; signo invertido a positivo
+VIST,2024-06-30,,capex_ppe_mm,272.202,musd,USD,Cash Flow,+ Purchase of Fixed Production Assets [CF_PURCHASE_OF_FIXED_PROD_ASSETS],Solo bienes de uso; signo invertido a positivo
+VIST,2024-09-30,,capex_ppe_mm,326.188,musd,USD,Cash Flow,+ Purchase of Fixed Production Assets [CF_PURCHASE_OF_FIXED_PROD_ASSETS],Solo bienes de uso; signo invertido a positivo
+VIST,2024-12-31,,capex_ppe_mm,306.486,musd,USD,Cash Flow,+ Purchase of Fixed Production Assets [CF_PURCHASE_OF_FIXED_PROD_ASSETS],Solo bienes de uso; signo invertido a positivo
+VIST,2025-03-31,,capex_ppe_mm,286.155,musd,USD,Cash Flow,+ Purchase of Fixed Production Assets [CF_PURCHASE_OF_FIXED_PROD_ASSETS],Solo bienes de uso; signo invertido a positivo
+VIST,2025-06-30,,capex_ppe_mm,495.925,musd,USD,Cash Flow,+ Purchase of Fixed Production Assets [CF_PURCHASE_OF_FIXED_PROD_ASSETS],Solo bienes de uso; signo invertido a positivo
+VIST,2025-09-30,,capex_ppe_mm,334.169,musd,USD,Cash Flow,+ Purchase of Fixed Production Assets [CF_PURCHASE_OF_FIXED_PROD_ASSETS],Solo bienes de uso; signo invertido a positivo
+VIST,2025-12-31,,capex_ppe_mm,339.162,musd,USD,Cash Flow,+ Purchase of Fixed Production Assets [CF_PURCHASE_OF_FIXED_PROD_ASSETS],Solo bienes de uso; signo invertido a positivo
+VIST,2026-03-31,,capex_ppe_mm,338.241,musd,USD,Cash Flow,+ Purchase of Fixed Production Assets [CF_PURCHASE_OF_FIXED_PROD_ASSETS],Solo bienes de uso; signo invertido a positivo
+VIST,2026-06-30,,capex_ppe_mm,499.335,musd,USD,Cash Flow,+ Purchase of Fixed Production Assets [CF_PURCHASE_OF_FIXED_PROD_ASSETS],Solo bienes de uso; signo invertido a positivo
+VIST,2023-09-30,,cfo_mm,110.73,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],
+VIST,2023-12-31,,cfo_mm,342.899,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],
+VIST,2024-03-31,,cfo_mm,48.048,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],
+VIST,2024-06-30,,cfo_mm,278.308,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],
+VIST,2024-09-30,,cfo_mm,245.631,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],
+VIST,2024-12-31,,cfo_mm,337.677,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],
+VIST,2025-03-31,,cfo_mm,56.896,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],
+VIST,2025-06-30,,cfo_mm,-52.796,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],
+VIST,2025-09-30,,cfo_mm,292.051,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],
+VIST,2025-12-31,,cfo_mm,340.279,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],
+VIST,2026-03-31,,cfo_mm,61.985,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],
+VIST,2026-06-30,,cfo_mm,904.332,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],
+VIST,2023-09-30,,dda_mm,70.6,musd,USD,Income Statement,+ Depreciation & Amortization [IS_D&A_COR_GAAP],D&A incluida en costo de ventas; coincide con CF_DEPR_AMORT
+VIST,2023-12-31,,dda_mm,79.011,musd,USD,Income Statement,+ Depreciation & Amortization [IS_D&A_COR_GAAP],D&A incluida en costo de ventas; coincide con CF_DEPR_AMORT
+VIST,2024-03-31,,dda_mm,82.373,musd,USD,Income Statement,+ Depreciation & Amortization [IS_D&A_COR_GAAP],D&A incluida en costo de ventas; coincide con CF_DEPR_AMORT
+VIST,2024-06-30,,dda_mm,101.005,musd,USD,Income Statement,+ Depreciation & Amortization [IS_D&A_COR_GAAP],D&A incluida en costo de ventas; coincide con CF_DEPR_AMORT
+VIST,2024-09-30,,dda_mm,114.703,musd,USD,Income Statement,+ Depreciation & Amortization [IS_D&A_COR_GAAP],D&A incluida en costo de ventas; coincide con CF_DEPR_AMORT
+VIST,2024-12-31,,dda_mm,139.618,musd,USD,Income Statement,+ Depreciation & Amortization [IS_D&A_COR_GAAP],D&A incluida en costo de ventas; coincide con CF_DEPR_AMORT
+VIST,2025-03-31,,dda_mm,125.977,musd,USD,Income Statement,+ Depreciation & Amortization [IS_D&A_COR_GAAP],D&A incluida en costo de ventas; coincide con CF_DEPR_AMORT
+VIST,2025-06-30,,dda_mm,176.94,musd,USD,Income Statement,+ Depreciation & Amortization [IS_D&A_COR_GAAP],D&A incluida en costo de ventas; coincide con CF_DEPR_AMORT
+VIST,2025-09-30,,dda_mm,210.891,musd,USD,Income Statement,+ Depreciation & Amortization [IS_D&A_COR_GAAP],D&A incluida en costo de ventas; coincide con CF_DEPR_AMORT
+VIST,2025-12-31,,dda_mm,225.095,musd,USD,Income Statement,+ Depreciation & Amortization [IS_D&A_COR_GAAP],D&A incluida en costo de ventas; coincide con CF_DEPR_AMORT
+VIST,2026-03-31,,dda_mm,229.726,musd,USD,Income Statement,+ Depreciation & Amortization [IS_D&A_COR_GAAP],D&A incluida en costo de ventas; coincide con CF_DEPR_AMORT
+VIST,2026-06-30,,dda_mm,273.183,musd,USD,Income Statement,+ Depreciation & Amortization [IS_D&A_COR_GAAP],D&A incluida en costo de ventas; coincide con CF_DEPR_AMORT
+VIST,2023-09-30,,deuda_cp_ex_arrend_mm,101.095,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2023-12-31,,deuda_cp_ex_arrend_mm,61.223,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2024-03-31,,deuda_cp_ex_arrend_mm,89.774,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2024-06-30,,deuda_cp_ex_arrend_mm,205.082,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2024-09-30,,deuda_cp_ex_arrend_mm,249.991,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2024-12-31,,deuda_cp_ex_arrend_mm,46.224,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2025-03-31,,deuda_cp_ex_arrend_mm,182.191,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2025-06-30,,deuda_cp_ex_arrend_mm,698.36,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2025-09-30,,deuda_cp_ex_arrend_mm,558.289,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2025-12-31,,deuda_cp_ex_arrend_mm,350.095,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2026-03-31,,deuda_cp_ex_arrend_mm,1017.36,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2026-06-30,,deuda_cp_ex_arrend_mm,695.76,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2023-09-30,,deuda_cp_mm,136.42,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],Incluye arrendamientos (NET_DEBT BBG cierra con ST+LT-caja)
+VIST,2023-12-31,,deuda_cp_mm,96.091,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],Incluye arrendamientos (NET_DEBT BBG cierra con ST+LT-caja)
+VIST,2024-03-31,,deuda_cp_mm,119.968,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],Incluye arrendamientos (NET_DEBT BBG cierra con ST+LT-caja)
+VIST,2024-06-30,,deuda_cp_mm,228.607,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],Incluye arrendamientos (NET_DEBT BBG cierra con ST+LT-caja)
+VIST,2024-09-30,,deuda_cp_mm,266.562,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],Incluye arrendamientos (NET_DEBT BBG cierra con ST+LT-caja)
+VIST,2024-12-31,,deuda_cp_mm,104.246,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],Incluye arrendamientos (NET_DEBT BBG cierra con ST+LT-caja)
+VIST,2025-03-31,,deuda_cp_mm,224.852,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],Incluye arrendamientos (NET_DEBT BBG cierra con ST+LT-caja)
+VIST,2025-06-30,,deuda_cp_mm,725.987,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],Incluye arrendamientos (NET_DEBT BBG cierra con ST+LT-caja)
+VIST,2025-09-30,,deuda_cp_mm,576.335,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],Incluye arrendamientos (NET_DEBT BBG cierra con ST+LT-caja)
+VIST,2025-12-31,,deuda_cp_mm,405.547,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],Incluye arrendamientos (NET_DEBT BBG cierra con ST+LT-caja)
+VIST,2026-03-31,,deuda_cp_mm,1068.143,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],Incluye arrendamientos (NET_DEBT BBG cierra con ST+LT-caja)
+VIST,2026-06-30,,deuda_cp_mm,731.918,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],Incluye arrendamientos (NET_DEBT BBG cierra con ST+LT-caja)
+VIST,2023-09-30,,deuda_lp_ex_arrend_mm,587.58,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2023-12-31,,deuda_lp_ex_arrend_mm,554.832,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2024-03-31,,deuda_lp_ex_arrend_mm,576.282,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2024-06-30,,deuda_lp_ex_arrend_mm,699.909,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2024-09-30,,deuda_lp_ex_arrend_mm,725.239,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2024-12-31,,deuda_lp_ex_arrend_mm,1402.343,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2025-03-31,,deuda_lp_ex_arrend_mm,1521.007,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2025-06-30,,deuda_lp_ex_arrend_mm,1900.236,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2025-09-30,,deuda_lp_ex_arrend_mm,2369.659,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2025-12-31,,deuda_lp_ex_arrend_mm,2803.982,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2026-03-31,,deuda_lp_ex_arrend_mm,2624.921,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2026-06-30,,deuda_lp_ex_arrend_mm,2965.648,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],"Presunto ex-arrendamientos (inferido, el Excel no lo aclara)"
+VIST,2023-09-30,,deuda_lp_mm,618.108,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],Incluye arrendamientos
+VIST,2023-12-31,,deuda_lp_mm,590.432,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],Incluye arrendamientos
+VIST,2024-03-31,,deuda_lp_mm,609.937,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],Incluye arrendamientos
+VIST,2024-06-30,,deuda_lp_mm,731.029,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],Incluye arrendamientos
+VIST,2024-09-30,,deuda_lp_mm,753.916,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],Incluye arrendamientos
+VIST,2024-12-31,,deuda_lp_mm,1439.981,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],Incluye arrendamientos
+VIST,2025-03-31,,deuda_lp_mm,1554.505,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],Incluye arrendamientos
+VIST,2025-06-30,,deuda_lp_mm,1947.624,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],Incluye arrendamientos
+VIST,2025-09-30,,deuda_lp_mm,2414.448,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],Incluye arrendamientos
+VIST,2025-12-31,,deuda_lp_mm,2892.433,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],Incluye arrendamientos
+VIST,2026-03-31,,deuda_lp_mm,2702.598,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],Incluye arrendamientos
+VIST,2026-06-30,,deuda_lp_mm,3022.651,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],Incluye arrendamientos
+VIST,2023-09-30,,deuda_mm,754.528,musd,USD,Balance Sheet,ST Debt [BS_ST_BORROW] + LT Debt [BS_LT_BORROW],Deuda total corto+largo; incluye arrendamientos; concuerda con NET_DEBT BBG (deuda - caja)
+VIST,2023-12-31,,deuda_mm,686.523,musd,USD,Balance Sheet,ST Debt [BS_ST_BORROW] + LT Debt [BS_LT_BORROW],Deuda total corto+largo; incluye arrendamientos; concuerda con NET_DEBT BBG (deuda - caja)
+VIST,2024-03-31,,deuda_mm,729.905,musd,USD,Balance Sheet,ST Debt [BS_ST_BORROW] + LT Debt [BS_LT_BORROW],Deuda total corto+largo; incluye arrendamientos; concuerda con NET_DEBT BBG (deuda - caja)
+VIST,2024-06-30,,deuda_mm,959.636,musd,USD,Balance Sheet,ST Debt [BS_ST_BORROW] + LT Debt [BS_LT_BORROW],Deuda total corto+largo; incluye arrendamientos; concuerda con NET_DEBT BBG (deuda - caja)
+VIST,2024-09-30,,deuda_mm,1020.478,musd,USD,Balance Sheet,ST Debt [BS_ST_BORROW] + LT Debt [BS_LT_BORROW],Deuda total corto+largo; incluye arrendamientos; concuerda con NET_DEBT BBG (deuda - caja)
+VIST,2024-12-31,,deuda_mm,1544.227,musd,USD,Balance Sheet,ST Debt [BS_ST_BORROW] + LT Debt [BS_LT_BORROW],Deuda total corto+largo; incluye arrendamientos; concuerda con NET_DEBT BBG (deuda - caja)
+VIST,2025-03-31,,deuda_mm,1779.357,musd,USD,Balance Sheet,ST Debt [BS_ST_BORROW] + LT Debt [BS_LT_BORROW],Deuda total corto+largo; incluye arrendamientos; concuerda con NET_DEBT BBG (deuda - caja)
+VIST,2025-06-30,,deuda_mm,2673.611,musd,USD,Balance Sheet,ST Debt [BS_ST_BORROW] + LT Debt [BS_LT_BORROW],Deuda total corto+largo; incluye arrendamientos; concuerda con NET_DEBT BBG (deuda - caja)
+VIST,2025-09-30,,deuda_mm,2990.783,musd,USD,Balance Sheet,ST Debt [BS_ST_BORROW] + LT Debt [BS_LT_BORROW],Deuda total corto+largo; incluye arrendamientos; concuerda con NET_DEBT BBG (deuda - caja)
+VIST,2025-12-31,,deuda_mm,3297.98,musd,USD,Balance Sheet,ST Debt [BS_ST_BORROW] + LT Debt [BS_LT_BORROW],Deuda total corto+largo; incluye arrendamientos; concuerda con NET_DEBT BBG (deuda - caja)
+VIST,2026-03-31,,deuda_mm,3770.741,musd,USD,Balance Sheet,ST Debt [BS_ST_BORROW] + LT Debt [BS_LT_BORROW],Deuda total corto+largo; incluye arrendamientos; concuerda con NET_DEBT BBG (deuda - caja)
+VIST,2026-06-30,,deuda_mm,3754.569,musd,USD,Balance Sheet,ST Debt [BS_ST_BORROW] + LT Debt [BS_LT_BORROW],Deuda total corto+largo; incluye arrendamientos; concuerda con NET_DEBT BBG (deuda - caja)
+VIST,2023-09-30,,deuda_neta_bbg_mm,580.739,musd,USD,Balance Sheet,Net Debt [NET_DEBT],NET_DEBT Bloomberg
+VIST,2023-12-31,,deuda_neta_bbg_mm,473.27,musd,USD,Balance Sheet,Net Debt [NET_DEBT],NET_DEBT Bloomberg
+VIST,2024-03-31,,deuda_neta_bbg_mm,578.252,musd,USD,Balance Sheet,Net Debt [NET_DEBT],NET_DEBT Bloomberg
+VIST,2024-06-30,,deuda_neta_bbg_mm,631.395,musd,USD,Balance Sheet,Net Debt [NET_DEBT],NET_DEBT Bloomberg
+VIST,2024-09-30,,deuda_neta_bbg_mm,764.451,musd,USD,Balance Sheet,Net Debt [NET_DEBT],NET_DEBT Bloomberg
+VIST,2024-12-31,,deuda_neta_bbg_mm,779.92,musd,USD,Balance Sheet,Net Debt [NET_DEBT],NET_DEBT Bloomberg
+VIST,2025-03-31,,deuda_neta_bbg_mm,1039.669,musd,USD,Balance Sheet,Net Debt [NET_DEBT],NET_DEBT Bloomberg
+VIST,2025-06-30,,deuda_neta_bbg_mm,2519.788,musd,USD,Balance Sheet,Net Debt [NET_DEBT],NET_DEBT Bloomberg
+VIST,2025-09-30,,deuda_neta_bbg_mm,2671.126,musd,USD,Balance Sheet,Net Debt [NET_DEBT],NET_DEBT Bloomberg
+VIST,2025-12-31,,deuda_neta_bbg_mm,2759.578,musd,USD,Balance Sheet,Net Debt [NET_DEBT],NET_DEBT Bloomberg
+VIST,2026-03-31,,deuda_neta_bbg_mm,3155.599,musd,USD,Balance Sheet,Net Debt [NET_DEBT],NET_DEBT Bloomberg
+VIST,2026-06-30,,deuda_neta_bbg_mm,3149.912,musd,USD,Balance Sheet,Net Debt [NET_DEBT],NET_DEBT Bloomberg
+VIST,2023-09-30,,ebitda_mm,216.486,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (Oper Inc + D&A); incluye otros ingresos/gastos operativos no recurrentes; el EBITDA de la hoja Cash Flow difiere levemente
+VIST,2023-12-31,,ebitda_mm,255.598,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (Oper Inc + D&A); incluye otros ingresos/gastos operativos no recurrentes; el EBITDA de la hoja Cash Flow difiere levemente
+VIST,2024-03-31,,ebitda_mm,211.458,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (Oper Inc + D&A); incluye otros ingresos/gastos operativos no recurrentes; el EBITDA de la hoja Cash Flow difiere levemente
+VIST,2024-06-30,,ebitda_mm,280.609,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (Oper Inc + D&A); incluye otros ingresos/gastos operativos no recurrentes; el EBITDA de la hoja Cash Flow difiere levemente
+VIST,2024-09-30,,ebitda_mm,302.052,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (Oper Inc + D&A); incluye otros ingresos/gastos operativos no recurrentes; el EBITDA de la hoja Cash Flow difiere levemente
+VIST,2024-12-31,,ebitda_mm,264.922,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (Oper Inc + D&A); incluye otros ingresos/gastos operativos no recurrentes; el EBITDA de la hoja Cash Flow difiere levemente
+VIST,2025-03-31,,ebitda_mm,268.168,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (Oper Inc + D&A); incluye otros ingresos/gastos operativos no recurrentes; el EBITDA de la hoja Cash Flow difiere levemente
+VIST,2025-06-30,,ebitda_mm,599.617,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (Oper Inc + D&A); incluye otros ingresos/gastos operativos no recurrentes; el EBITDA de la hoja Cash Flow difiere levemente
+VIST,2025-09-30,,ebitda_mm,746.599,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (Oper Inc + D&A); incluye otros ingresos/gastos operativos no recurrentes; el EBITDA de la hoja Cash Flow difiere levemente
+VIST,2025-12-31,,ebitda_mm,469.2,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (Oper Inc + D&A); incluye otros ingresos/gastos operativos no recurrentes; el EBITDA de la hoja Cash Flow difiere levemente
+VIST,2026-03-31,,ebitda_mm,446.699,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (Oper Inc + D&A); incluye otros ingresos/gastos operativos no recurrentes; el EBITDA de la hoja Cash Flow difiere levemente
+VIST,2026-06-30,,ebitda_mm,820.993,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (Oper Inc + D&A); incluye otros ingresos/gastos operativos no recurrentes; el EBITDA de la hoja Cash Flow difiere levemente
+VIST,2023-09-30,,ga_mm,15.031,musd,USD,Income Statement,+ General & Administrative [IS_GENERAL_AND_ADMIN_GAAP],Solo G&A
+VIST,2023-12-31,,ga_mm,18.665,musd,USD,Income Statement,+ General & Administrative [IS_GENERAL_AND_ADMIN_GAAP],Solo G&A
+VIST,2024-03-31,,ga_mm,22.11,musd,USD,Income Statement,+ General & Administrative [IS_GENERAL_AND_ADMIN_GAAP],Solo G&A
+VIST,2024-06-30,,ga_mm,22.39,musd,USD,Income Statement,+ General & Administrative [IS_GENERAL_AND_ADMIN_GAAP],Solo G&A
+VIST,2024-09-30,,ga_mm,29.247,musd,USD,Income Statement,+ General & Administrative [IS_GENERAL_AND_ADMIN_GAAP],Solo G&A
+VIST,2024-12-31,,ga_mm,35.207,musd,USD,Income Statement,+ General & Administrative [IS_GENERAL_AND_ADMIN_GAAP],Solo G&A
+VIST,2025-03-31,,ga_mm,28.031,musd,USD,Income Statement,+ General & Administrative [IS_GENERAL_AND_ADMIN_GAAP],Solo G&A
+VIST,2025-06-30,,ga_mm,29.712,musd,USD,Income Statement,+ General & Administrative [IS_GENERAL_AND_ADMIN_GAAP],Solo G&A
+VIST,2025-09-30,,ga_mm,37.347,musd,USD,Income Statement,+ General & Administrative [IS_GENERAL_AND_ADMIN_GAAP],Solo G&A
+VIST,2025-12-31,,ga_mm,52.619,musd,USD,Income Statement,+ General & Administrative [IS_GENERAL_AND_ADMIN_GAAP],Solo G&A
+VIST,2026-03-31,,ga_mm,41.326,musd,USD,Income Statement,+ General & Administrative [IS_GENERAL_AND_ADMIN_GAAP],Solo G&A
+VIST,2026-06-30,,ga_mm,44.457,musd,USD,Income Statement,+ General & Administrative [IS_GENERAL_AND_ADMIN_GAAP],Solo G&A
+VIST,2023-09-30,,impuesto_ganancias_mm,30.629,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]",
+VIST,2023-12-31,,impuesto_ganancias_mm,34.515,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]",
+VIST,2024-03-31,,impuesto_ganancias_mm,23.388,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]",
+VIST,2024-06-30,,impuesto_ganancias_mm,29.921,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]",
+VIST,2024-09-30,,impuesto_ganancias_mm,29.081,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]",
+VIST,2024-12-31,,impuesto_ganancias_mm,30.916,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]",
+VIST,2025-03-31,,impuesto_ganancias_mm,52.165,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]",
+VIST,2025-06-30,,impuesto_ganancias_mm,58.526,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]",
+VIST,2025-09-30,,impuesto_ganancias_mm,122.218,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]",
+VIST,2025-12-31,,impuesto_ganancias_mm,52.699,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]",
+VIST,2026-03-31,,impuesto_ganancias_mm,35.816,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]",
+VIST,2026-06-30,,impuesto_ganancias_mm,119.938,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]",
+VIST,2023-09-30,,impuestos_pagados_mm,22.331,musd,USD,Cash Flow,Cash Paid for Taxes [CF_CASH_PAID_FOR_TAX],
+VIST,2023-12-31,,impuestos_pagados_mm,6.782,musd,USD,Cash Flow,Cash Paid for Taxes [CF_CASH_PAID_FOR_TAX],
+VIST,2024-03-31,,impuestos_pagados_mm,8.763,musd,USD,Cash Flow,Cash Paid for Taxes [CF_CASH_PAID_FOR_TAX],
+VIST,2024-06-30,,impuestos_pagados_mm,7.823,musd,USD,Cash Flow,Cash Paid for Taxes [CF_CASH_PAID_FOR_TAX],
+VIST,2024-09-30,,impuestos_pagados_mm,6.348,musd,USD,Cash Flow,Cash Paid for Taxes [CF_CASH_PAID_FOR_TAX],
+VIST,2024-12-31,,impuestos_pagados_mm,29.781,musd,USD,Cash Flow,Cash Paid for Taxes [CF_CASH_PAID_FOR_TAX],
+VIST,2025-03-31,,impuestos_pagados_mm,5.151,musd,USD,Cash Flow,Cash Paid for Taxes [CF_CASH_PAID_FOR_TAX],
+VIST,2025-06-30,,impuestos_pagados_mm,215.004,musd,USD,Cash Flow,Cash Paid for Taxes [CF_CASH_PAID_FOR_TAX],
+VIST,2025-09-30,,impuestos_pagados_mm,179.226,musd,USD,Cash Flow,Cash Paid for Taxes [CF_CASH_PAID_FOR_TAX],
+VIST,2025-12-31,,impuestos_pagados_mm,32.269,musd,USD,Cash Flow,Cash Paid for Taxes [CF_CASH_PAID_FOR_TAX],
+VIST,2026-03-31,,impuestos_pagados_mm,61.381,musd,USD,Cash Flow,Cash Paid for Taxes [CF_CASH_PAID_FOR_TAX],
+VIST,2026-06-30,,impuestos_pagados_mm,60.413,musd,USD,Cash Flow,Cash Paid for Taxes [CF_CASH_PAID_FOR_TAX],
+VIST,2023-09-30,,ingresos_crudo_export_mm,165.4,musd,USD,segments,Petroleo > Oil > Export Market / Revenue- Supplement Breakdown,Oil - Export Market
+VIST,2023-12-31,,ingresos_crudo_export_mm,150.8,musd,USD,segments,Petroleo > Oil > Export Market / Revenue- Supplement Breakdown,Oil - Export Market
+VIST,2024-03-31,,ingresos_crudo_export_mm,119.1,musd,USD,segments,Petroleo > Oil > Export Market / Revenue- Supplement Breakdown,Oil - Export Market
+VIST,2024-06-30,,ingresos_crudo_export_mm,148.2,musd,USD,segments,Petroleo > Oil > Export Market / Revenue- Supplement Breakdown,Oil - Export Market
+VIST,2024-09-30,,ingresos_crudo_export_mm,237.9,musd,USD,segments,Petroleo > Oil > Export Market / Revenue- Supplement Breakdown,Oil - Export Market
+VIST,2024-12-31,,ingresos_crudo_export_mm,242.8,musd,USD,segments,Petroleo > Oil > Export Market / Revenue- Supplement Breakdown,Oil - Export Market
+VIST,2025-03-31,,ingresos_crudo_export_mm,219.1,musd,USD,segments,Petroleo > Oil > Export Market / Revenue- Supplement Breakdown,Oil - Export Market
+VIST,2025-06-30,,ingresos_crudo_export_mm,342.2,musd,USD,segments,Petroleo > Oil > Export Market / Revenue- Supplement Breakdown,Oil - Export Market
+VIST,2025-09-30,,ingresos_crudo_export_mm,411.0,musd,USD,segments,Petroleo > Oil > Export Market / Revenue- Supplement Breakdown,Oil - Export Market
+VIST,2025-12-31,,ingresos_crudo_export_mm,418.7,musd,USD,segments,Petroleo > Oil > Export Market / Revenue- Supplement Breakdown,Oil - Export Market
+VIST,2026-03-31,,ingresos_crudo_export_mm,428.5,musd,USD,segments,Petroleo > Oil > Export Market / Revenue- Supplement Breakdown,Oil - Export Market
+VIST,2026-06-30,,ingresos_crudo_export_mm,860.8,musd,USD,segments,Petroleo > Oil > Export Market / Revenue- Supplement Breakdown,Oil - Export Market
+VIST,2023-09-30,,ingresos_crudo_mi_mm,107.2,musd,USD,segments,Petroleo > Oil > Domestic Market / Revenue- Supplement Breakdown,Oil - Domestic Market
+VIST,2023-12-31,,ingresos_crudo_mi_mm,133.1,musd,USD,segments,Petroleo > Oil > Domestic Market / Revenue- Supplement Breakdown,Oil - Domestic Market
+VIST,2024-03-31,,ingresos_crudo_mi_mm,174.0,musd,USD,segments,Petroleo > Oil > Domestic Market / Revenue- Supplement Breakdown,Oil - Domestic Market
+VIST,2024-06-30,,ingresos_crudo_mi_mm,214.6,musd,USD,segments,Petroleo > Oil > Domestic Market / Revenue- Supplement Breakdown,Oil - Domestic Market
+VIST,2024-09-30,,ingresos_crudo_mi_mm,184.4,musd,USD,segments,Petroleo > Oil > Domestic Market / Revenue- Supplement Breakdown,Oil - Domestic Market
+VIST,2024-12-31,,ingresos_crudo_mi_mm,192.6,musd,USD,segments,Petroleo > Oil > Domestic Market / Revenue- Supplement Breakdown,Oil - Domestic Market
+VIST,2025-03-31,,ingresos_crudo_mi_mm,186.3,musd,USD,segments,Petroleo > Oil > Domestic Market / Revenue- Supplement Breakdown,Oil - Domestic Market
+VIST,2025-06-30,,ingresos_crudo_mi_mm,224.5,musd,USD,segments,Petroleo > Oil > Domestic Market / Revenue- Supplement Breakdown,Oil - Domestic Market
+VIST,2025-09-30,,ingresos_crudo_mi_mm,246.6,musd,USD,segments,Petroleo > Oil > Domestic Market / Revenue- Supplement Breakdown,Oil - Domestic Market
+VIST,2025-12-31,,ingresos_crudo_mi_mm,233.1,musd,USD,segments,Petroleo > Oil > Domestic Market / Revenue- Supplement Breakdown,Oil - Domestic Market
+VIST,2026-03-31,,ingresos_crudo_mi_mm,222.3,musd,USD,segments,Petroleo > Oil > Domestic Market / Revenue- Supplement Breakdown,Oil - Domestic Market
+VIST,2026-06-30,,ingresos_crudo_mi_mm,338.151,musd,USD,segments,Petroleo > Oil > Domestic Market / Revenue- Supplement Breakdown,Oil - Domestic Market
+VIST,2023-09-30,,ingresos_gas_export_mm,0.5,musd,USD,segments,Gas Natural > Export Market / Revenue- Supplement Breakdown,Gas - Export Market
+VIST,2023-12-31,,ingresos_gas_export_mm,3.9,musd,USD,segments,Gas Natural > Export Market / Revenue- Supplement Breakdown,Gas - Export Market
+VIST,2024-03-31,,ingresos_gas_export_mm,7.0,musd,USD,segments,Gas Natural > Export Market / Revenue- Supplement Breakdown,Gas - Export Market
+VIST,2024-06-30,,ingresos_gas_export_mm,6.0,musd,USD,segments,Gas Natural > Export Market / Revenue- Supplement Breakdown,Gas - Export Market
+VIST,2024-09-30,,ingresos_gas_export_mm,2.9,musd,USD,segments,Gas Natural > Export Market / Revenue- Supplement Breakdown,Gas - Export Market
+VIST,2024-12-31,,ingresos_gas_export_mm,3.9,musd,USD,segments,Gas Natural > Export Market / Revenue- Supplement Breakdown,Gas - Export Market
+VIST,2025-03-31,,ingresos_gas_export_mm,3.3,musd,USD,segments,Gas Natural > Export Market / Revenue- Supplement Breakdown,Gas - Export Market
+VIST,2025-06-30,,ingresos_gas_export_mm,2.8,musd,USD,segments,Gas Natural > Export Market / Revenue- Supplement Breakdown,Gas - Export Market
+VIST,2025-09-30,,ingresos_gas_export_mm,3.4,musd,USD,segments,Gas Natural > Export Market / Revenue- Supplement Breakdown,Gas - Export Market
+VIST,2025-12-31,,ingresos_gas_export_mm,2.4,musd,USD,segments,Gas Natural > Export Market / Revenue- Supplement Breakdown,Gas - Export Market
+VIST,2026-03-31,,ingresos_gas_export_mm,2.5,musd,USD,segments,Gas Natural > Export Market / Revenue- Supplement Breakdown,Gas - Export Market
+VIST,2026-06-30,,ingresos_gas_export_mm,2.752,musd,USD,segments,Gas Natural > Export Market / Revenue- Supplement Breakdown,Gas - Export Market
+VIST,2023-09-30,,ingresos_gas_mi_mm,15.9,musd,USD,segments,Gas Natural > Domestic Market / Revenue- Supplement Breakdown,Gas - Domestic Market
+VIST,2023-12-31,,ingresos_gas_mi_mm,8.1,musd,USD,segments,Gas Natural > Domestic Market / Revenue- Supplement Breakdown,Gas - Domestic Market
+VIST,2024-03-31,,ingresos_gas_mi_mm,7.5,musd,USD,segments,Gas Natural > Domestic Market / Revenue- Supplement Breakdown,Gas - Domestic Market
+VIST,2024-06-30,,ingresos_gas_mi_mm,15.8,musd,USD,segments,Gas Natural > Domestic Market / Revenue- Supplement Breakdown,Gas - Domestic Market
+VIST,2024-09-30,,ingresos_gas_mi_mm,17.2,musd,USD,segments,Gas Natural > Domestic Market / Revenue- Supplement Breakdown,Gas - Domestic Market
+VIST,2024-12-31,,ingresos_gas_mi_mm,11.3,musd,USD,segments,Gas Natural > Domestic Market / Revenue- Supplement Breakdown,Gas - Domestic Market
+VIST,2025-03-31,,ingresos_gas_mi_mm,10.4,musd,USD,segments,Gas Natural > Domestic Market / Revenue- Supplement Breakdown,Gas - Domestic Market
+VIST,2025-06-30,,ingresos_gas_mi_mm,22.0,musd,USD,segments,Gas Natural > Domestic Market / Revenue- Supplement Breakdown,Gas - Domestic Market
+VIST,2025-09-30,,ingresos_gas_mi_mm,25.2,musd,USD,segments,Gas Natural > Domestic Market / Revenue- Supplement Breakdown,Gas - Domestic Market
+VIST,2025-12-31,,ingresos_gas_mi_mm,13.6,musd,USD,segments,Gas Natural > Domestic Market / Revenue- Supplement Breakdown,Gas - Domestic Market
+VIST,2026-03-31,,ingresos_gas_mi_mm,15.7,musd,USD,segments,Gas Natural > Domestic Market / Revenue- Supplement Breakdown,Gas - Domestic Market
+VIST,2026-06-30,,ingresos_gas_mi_mm,31.303,musd,USD,segments,Gas Natural > Domestic Market / Revenue- Supplement Breakdown,Gas - Domestic Market
+VIST,2023-09-30,,ingresos_gas_mm,16.388,musd,USD,segments,Gas Natural / Revenue,Segmento Gas Natural
+VIST,2023-12-31,,ingresos_gas_mm,12.048,musd,USD,segments,Gas Natural / Revenue,Segmento Gas Natural
+VIST,2024-03-31,,ingresos_gas_mm,14.666,musd,USD,segments,Gas Natural / Revenue,Segmento Gas Natural
+VIST,2024-06-30,,ingresos_gas_mm,21.751,musd,USD,segments,Gas Natural / Revenue,Segmento Gas Natural
+VIST,2024-09-30,,ingresos_gas_mm,20.082,musd,USD,segments,Gas Natural / Revenue,Segmento Gas Natural
+VIST,2024-12-31,,ingresos_gas_mm,15.257,musd,USD,segments,Gas Natural / Revenue,Segmento Gas Natural
+VIST,2025-03-31,,ingresos_gas_mm,13.619,musd,USD,segments,Gas Natural / Revenue,Segmento Gas Natural
+VIST,2025-06-30,,ingresos_gas_mm,24.808,musd,USD,segments,Gas Natural / Revenue,Segmento Gas Natural
+VIST,2025-09-30,,ingresos_gas_mm,28.641,musd,USD,segments,Gas Natural / Revenue,Segmento Gas Natural
+VIST,2025-12-31,,ingresos_gas_mm,16.036,musd,USD,segments,Gas Natural / Revenue,Segmento Gas Natural
+VIST,2026-03-31,,ingresos_gas_mm,18.268,musd,USD,segments,Gas Natural / Revenue,Segmento Gas Natural
+VIST,2026-06-30,,ingresos_gas_mm,34.055,musd,USD,segments,Gas Natural / Revenue,Segmento Gas Natural
+VIST,2023-09-30,,ingresos_glp_mm,0.733,musd,USD,segments,GLP / Revenue,Segmento GLP/NGL
+VIST,2023-12-31,,ingresos_glp_mm,0.968,musd,USD,segments,GLP / Revenue,Segmento GLP/NGL
+VIST,2024-03-31,,ingresos_glp_mm,0.201,musd,USD,segments,GLP / Revenue,Segmento GLP/NGL
+VIST,2024-06-30,,ingresos_glp_mm,0.276,musd,USD,segments,GLP / Revenue,Segmento GLP/NGL
+VIST,2024-09-30,,ingresos_glp_mm,1.108,musd,USD,segments,GLP / Revenue,Segmento GLP/NGL
+VIST,2024-12-31,,ingresos_glp_mm,1.358,musd,USD,segments,GLP / Revenue,Segmento GLP/NGL
+VIST,2025-03-31,,ingresos_glp_mm,1.867,musd,USD,segments,GLP / Revenue,Segmento GLP/NGL
+VIST,2025-06-30,,ingresos_glp_mm,1.473,musd,USD,segments,GLP / Revenue,Segmento GLP/NGL
+VIST,2025-09-30,,ingresos_glp_mm,1.131,musd,USD,segments,GLP / Revenue,Segmento GLP/NGL
+VIST,2025-12-31,,ingresos_glp_mm,1.71,musd,USD,segments,GLP / Revenue,Segmento GLP/NGL
+VIST,2026-03-31,,ingresos_glp_mm,1.561,musd,USD,segments,GLP / Revenue,Segmento GLP/NGL
+VIST,2026-06-30,,ingresos_glp_mm,1.896,musd,USD,segments,GLP / Revenue,Segmento GLP/NGL
+VIST,2023-09-30,,ingresos_mm,302.76,musd,USD,Income Statement,Revenue [SALES_REV_TURN],
+VIST,2023-12-31,,ingresos_mm,309.196,musd,USD,Income Statement,Revenue [SALES_REV_TURN],
+VIST,2024-03-31,,ingresos_mm,317.352,musd,USD,Income Statement,Revenue [SALES_REV_TURN],
+VIST,2024-06-30,,ingresos_mm,396.715,musd,USD,Income Statement,Revenue [SALES_REV_TURN],
+VIST,2024-09-30,,ingresos_mm,462.383,musd,USD,Income Statement,Revenue [SALES_REV_TURN],
+VIST,2024-12-31,,ingresos_mm,471.318,musd,USD,Income Statement,Revenue [SALES_REV_TURN],
+VIST,2025-03-31,,ingresos_mm,438.456,musd,USD,Income Statement,Revenue [SALES_REV_TURN],
+VIST,2025-06-30,,ingresos_mm,610.542,musd,USD,Income Statement,Revenue [SALES_REV_TURN],
+VIST,2025-09-30,,ingresos_mm,706.135,musd,USD,Income Statement,Revenue [SALES_REV_TURN],
+VIST,2025-12-31,,ingresos_mm,719.064,musd,USD,Income Statement,Revenue [SALES_REV_TURN],
+VIST,2026-03-31,,ingresos_mm,865.012,musd,USD,Income Statement,Revenue [SALES_REV_TURN],
+VIST,2026-06-30,,ingresos_mm,1234.902,musd,USD,Income Statement,Revenue [SALES_REV_TURN],
+VIST,2023-09-30,,ingresos_petroleo_segmento_mm,285.639,musd,USD,segments,Petroleo / Revenue,Segmento Petroleo; incluye retenciones y ajuste de reconciliacion en algunos trimestres
+VIST,2023-12-31,,ingresos_petroleo_segmento_mm,296.18,musd,USD,segments,Petroleo / Revenue,Segmento Petroleo; incluye retenciones y ajuste de reconciliacion en algunos trimestres
+VIST,2024-03-31,,ingresos_petroleo_segmento_mm,302.485,musd,USD,segments,Petroleo / Revenue,Segmento Petroleo; incluye retenciones y ajuste de reconciliacion en algunos trimestres
+VIST,2024-06-30,,ingresos_petroleo_segmento_mm,374.688,musd,USD,segments,Petroleo / Revenue,Segmento Petroleo; incluye retenciones y ajuste de reconciliacion en algunos trimestres
+VIST,2024-09-30,,ingresos_petroleo_segmento_mm,441.193,musd,USD,segments,Petroleo / Revenue,Segmento Petroleo; incluye retenciones y ajuste de reconciliacion en algunos trimestres
+VIST,2024-12-31,,ingresos_petroleo_segmento_mm,454.703,musd,USD,segments,Petroleo / Revenue,Segmento Petroleo; incluye retenciones y ajuste de reconciliacion en algunos trimestres
+VIST,2025-03-31,,ingresos_petroleo_segmento_mm,422.97,musd,USD,segments,Petroleo / Revenue,Segmento Petroleo; incluye retenciones y ajuste de reconciliacion en algunos trimestres
+VIST,2025-06-30,,ingresos_petroleo_segmento_mm,584.261,musd,USD,segments,Petroleo / Revenue,Segmento Petroleo; incluye retenciones y ajuste de reconciliacion en algunos trimestres
+VIST,2025-09-30,,ingresos_petroleo_segmento_mm,676.363,musd,USD,segments,Petroleo / Revenue,Segmento Petroleo; incluye retenciones y ajuste de reconciliacion en algunos trimestres
+VIST,2025-12-31,,ingresos_petroleo_segmento_mm,701.318,musd,USD,segments,Petroleo / Revenue,Segmento Petroleo; incluye retenciones y ajuste de reconciliacion en algunos trimestres
+VIST,2026-03-31,,ingresos_petroleo_segmento_mm,845.183,musd,USD,segments,Petroleo / Revenue,Segmento Petroleo; incluye retenciones y ajuste de reconciliacion en algunos trimestres
+VIST,2026-06-30,,ingresos_petroleo_segmento_mm,1198.951,musd,USD,segments,Petroleo / Revenue,Segmento Petroleo; incluye retenciones y ajuste de reconciliacion en algunos trimestres
+VIST,2023-09-30,,intereses_mm,4.842,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],
+VIST,2023-12-31,,intereses_mm,5.674,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],
+VIST,2024-03-31,,intereses_mm,4.897,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],
+VIST,2024-06-30,,intereses_mm,11.975,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],
+VIST,2024-09-30,,intereses_mm,21.022,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],
+VIST,2024-12-31,,intereses_mm,25.361,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],
+VIST,2025-03-31,,intereses_mm,24.281,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],
+VIST,2025-06-30,,intereses_mm,41.008,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],
+VIST,2025-09-30,,intereses_mm,64.17,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],
+VIST,2025-12-31,,intereses_mm,52.825,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],
+VIST,2026-03-31,,intereses_mm,54.885,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],
+VIST,2026-06-30,,intereses_mm,65.335,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],
+VIST,2023-09-30,,intereses_pagados_mm,6.855,musd,USD,Cash Flow,Cash Paid for Interest [CF_ACT_CASH_PAID_FOR_INT_DEBT],
+VIST,2023-12-31,,intereses_pagados_mm,4.239,musd,USD,Cash Flow,Cash Paid for Interest [CF_ACT_CASH_PAID_FOR_INT_DEBT],
+VIST,2024-03-31,,intereses_pagados_mm,5.678,musd,USD,Cash Flow,Cash Paid for Interest [CF_ACT_CASH_PAID_FOR_INT_DEBT],
+VIST,2024-06-30,,intereses_pagados_mm,4.424,musd,USD,Cash Flow,Cash Paid for Interest [CF_ACT_CASH_PAID_FOR_INT_DEBT],
+VIST,2024-09-30,,intereses_pagados_mm,10.612,musd,USD,Cash Flow,Cash Paid for Interest [CF_ACT_CASH_PAID_FOR_INT_DEBT],
+VIST,2024-12-31,,intereses_pagados_mm,30.09,musd,USD,Cash Flow,Cash Paid for Interest [CF_ACT_CASH_PAID_FOR_INT_DEBT],
+VIST,2025-03-31,,intereses_pagados_mm,10.566,musd,USD,Cash Flow,Cash Paid for Interest [CF_ACT_CASH_PAID_FOR_INT_DEBT],
+VIST,2025-06-30,,intereses_pagados_mm,43.668,musd,USD,Cash Flow,Cash Paid for Interest [CF_ACT_CASH_PAID_FOR_INT_DEBT],
+VIST,2025-09-30,,intereses_pagados_mm,19.443,musd,USD,Cash Flow,Cash Paid for Interest [CF_ACT_CASH_PAID_FOR_INT_DEBT],
+VIST,2025-12-31,,intereses_pagados_mm,38.257,musd,USD,Cash Flow,Cash Paid for Interest [CF_ACT_CASH_PAID_FOR_INT_DEBT],
+VIST,2026-03-31,,intereses_pagados_mm,26.868,musd,USD,Cash Flow,Cash Paid for Interest [CF_ACT_CASH_PAID_FOR_INT_DEBT],
+VIST,2026-06-30,,intereses_pagados_mm,87.87,musd,USD,Cash Flow,Cash Paid for Interest [CF_ACT_CASH_PAID_FOR_INT_DEBT],
+VIST,2023-09-30,,inversiones_cp_mm,0.0,musd,USD,Balance Sheet,+ ST Investments [BS_MKT_SEC_OTHER_ST_INVEST],Parte de caja_mm
+VIST,2023-12-31,,inversiones_cp_mm,0.0,musd,USD,Balance Sheet,+ ST Investments [BS_MKT_SEC_OTHER_ST_INVEST],Parte de caja_mm
+VIST,2024-03-31,,inversiones_cp_mm,0.0,musd,USD,Balance Sheet,+ ST Investments [BS_MKT_SEC_OTHER_ST_INVEST],Parte de caja_mm
+VIST,2024-06-30,,inversiones_cp_mm,0.0,musd,USD,Balance Sheet,+ ST Investments [BS_MKT_SEC_OTHER_ST_INVEST],Parte de caja_mm
+VIST,2024-09-30,,inversiones_cp_mm,0.0,musd,USD,Balance Sheet,+ ST Investments [BS_MKT_SEC_OTHER_ST_INVEST],Parte de caja_mm
+VIST,2024-12-31,,inversiones_cp_mm,0.0,musd,USD,Balance Sheet,+ ST Investments [BS_MKT_SEC_OTHER_ST_INVEST],Parte de caja_mm
+VIST,2025-03-31,,inversiones_cp_mm,0.0,musd,USD,Balance Sheet,+ ST Investments [BS_MKT_SEC_OTHER_ST_INVEST],Parte de caja_mm
+VIST,2025-06-30,,inversiones_cp_mm,0.0,musd,USD,Balance Sheet,+ ST Investments [BS_MKT_SEC_OTHER_ST_INVEST],Parte de caja_mm
+VIST,2025-09-30,,inversiones_cp_mm,0.0,musd,USD,Balance Sheet,+ ST Investments [BS_MKT_SEC_OTHER_ST_INVEST],Parte de caja_mm
+VIST,2025-12-31,,inversiones_cp_mm,5.553,musd,USD,Balance Sheet,+ ST Investments [BS_MKT_SEC_OTHER_ST_INVEST],Parte de caja_mm
+VIST,2026-03-31,,inversiones_cp_mm,22.805,musd,USD,Balance Sheet,+ ST Investments [BS_MKT_SEC_OTHER_ST_INVEST],Parte de caja_mm
+VIST,2026-06-30,,inversiones_cp_mm,0.0,musd,USD,Balance Sheet,+ ST Investments [BS_MKT_SEC_OTHER_ST_INVEST],Parte de caja_mm
+VIST,2023-09-30,,minoritarios_mm,0.0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],
+VIST,2023-12-31,,minoritarios_mm,0.0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],
+VIST,2024-03-31,,minoritarios_mm,0.0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],
+VIST,2024-06-30,,minoritarios_mm,0.0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],
+VIST,2024-09-30,,minoritarios_mm,0.0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],
+VIST,2024-12-31,,minoritarios_mm,0.0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],
+VIST,2025-03-31,,minoritarios_mm,0.0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],
+VIST,2025-06-30,,minoritarios_mm,0.0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],
+VIST,2025-09-30,,minoritarios_mm,0.0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],
+VIST,2025-12-31,,minoritarios_mm,0.0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],
+VIST,2026-03-31,,minoritarios_mm,0.0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],
+VIST,2026-06-30,,minoritarios_mm,189.99,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],
+VIST,2023-09-30,,opex_mm,77.957,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Costo de bienes y servicios SIN D&A: agrupa lifting, regalias, compras y otros; no separable"
+VIST,2023-12-31,,opex_mm,75.092,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Costo de bienes y servicios SIN D&A: agrupa lifting, regalias, compras y otros; no separable"
+VIST,2024-03-31,,opex_mm,74.296,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Costo de bienes y servicios SIN D&A: agrupa lifting, regalias, compras y otros; no separable"
+VIST,2024-06-30,,opex_mm,87.666,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Costo de bienes y servicios SIN D&A: agrupa lifting, regalias, compras y otros; no separable"
+VIST,2024-09-30,,opex_mm,115.304,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Costo de bienes y servicios SIN D&A: agrupa lifting, regalias, compras y otros; no separable"
+VIST,2024-12-31,,opex_mm,115.06,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Costo de bienes y servicios SIN D&A: agrupa lifting, regalias, compras y otros; no separable"
+VIST,2025-03-31,,opex_mm,100.526,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Costo de bienes y servicios SIN D&A: agrupa lifting, regalias, compras y otros; no separable"
+VIST,2025-06-30,,opex_mm,148.406,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Costo de bienes y servicios SIN D&A: agrupa lifting, regalias, compras y otros; no separable"
+VIST,2025-09-30,,opex_mm,158.053,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Costo de bienes y servicios SIN D&A: agrupa lifting, regalias, compras y otros; no separable"
+VIST,2025-12-31,,opex_mm,153.279,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Costo de bienes y servicios SIN D&A: agrupa lifting, regalias, compras y otros; no separable"
+VIST,2026-03-31,,opex_mm,162.929,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Costo de bienes y servicios SIN D&A: agrupa lifting, regalias, compras y otros; no separable"
+VIST,2026-06-30,,opex_mm,253.389,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Costo de bienes y servicios SIN D&A: agrupa lifting, regalias, compras y otros; no separable"
+VIST,2023-09-30,,otros_gastos_op_mm,-0.385,musd,USD,Income Statement,+ Other Operating Expense [IS_OTHER_OPERATING_EXPENSES_GAAP],Other Operating Expense; 150.7 en 2026Q1 y -29.3 en 2025Q4 (no recurrente)
+VIST,2023-12-31,,otros_gastos_op_mm,24.31,musd,USD,Income Statement,+ Other Operating Expense [IS_OTHER_OPERATING_EXPENSES_GAAP],Other Operating Expense; 150.7 en 2026Q1 y -29.3 en 2025Q4 (no recurrente)
+VIST,2024-03-31,,otros_gastos_op_mm,0.146,musd,USD,Income Statement,+ Other Operating Expense [IS_OTHER_OPERATING_EXPENSES_GAAP],Other Operating Expense; 150.7 en 2026Q1 y -29.3 en 2025Q4 (no recurrente)
+VIST,2024-06-30,,otros_gastos_op_mm,0.897,musd,USD,Income Statement,+ Other Operating Expense [IS_OTHER_OPERATING_EXPENSES_GAAP],Other Operating Expense; 150.7 en 2026Q1 y -29.3 en 2025Q4 (no recurrente)
+VIST,2024-09-30,,otros_gastos_op_mm,0.128,musd,USD,Income Statement,+ Other Operating Expense [IS_OTHER_OPERATING_EXPENSES_GAAP],Other Operating Expense; 150.7 en 2026Q1 y -29.3 en 2025Q4 (no recurrente)
+VIST,2024-12-31,,otros_gastos_op_mm,0.069,musd,USD,Income Statement,+ Other Operating Expense [IS_OTHER_OPERATING_EXPENSES_GAAP],Other Operating Expense; 150.7 en 2026Q1 y -29.3 en 2025Q4 (no recurrente)
+VIST,2025-03-31,,otros_gastos_op_mm,1.372,musd,USD,Income Statement,+ Other Operating Expense [IS_OTHER_OPERATING_EXPENSES_GAAP],Other Operating Expense; 150.7 en 2026Q1 y -29.3 en 2025Q4 (no recurrente)
+VIST,2025-06-30,,otros_gastos_op_mm,0.175,musd,USD,Income Statement,+ Other Operating Expense [IS_OTHER_OPERATING_EXPENSES_GAAP],Other Operating Expense; 150.7 en 2026Q1 y -29.3 en 2025Q4 (no recurrente)
+VIST,2025-09-30,,otros_gastos_op_mm,5.122,musd,USD,Income Statement,+ Other Operating Expense [IS_OTHER_OPERATING_EXPENSES_GAAP],Other Operating Expense; 150.7 en 2026Q1 y -29.3 en 2025Q4 (no recurrente)
+VIST,2025-12-31,,otros_gastos_op_mm,-29.308,musd,USD,Income Statement,+ Other Operating Expense [IS_OTHER_OPERATING_EXPENSES_GAAP],Other Operating Expense; 150.7 en 2026Q1 y -29.3 en 2025Q4 (no recurrente)
+VIST,2026-03-31,,otros_gastos_op_mm,150.712,musd,USD,Income Statement,+ Other Operating Expense [IS_OTHER_OPERATING_EXPENSES_GAAP],Other Operating Expense; 150.7 en 2026Q1 y -29.3 en 2025Q4 (no recurrente)
+VIST,2026-06-30,,otros_gastos_op_mm,0.06,musd,USD,Income Statement,+ Other Operating Expense [IS_OTHER_OPERATING_EXPENSES_GAAP],Other Operating Expense; 150.7 en 2026Q1 y -29.3 en 2025Q4 (no recurrente)
+VIST,2023-09-30,,otros_ingresos_op_mm,24.002,musd,USD,Income Statement,+ Other Operating Income [IS_OTHER_OPER_INC],Other Operating Income; muy alto en 2025Q2-Q3 (no recurrente) e infla ebitda_mm
+VIST,2023-12-31,,otros_ingresos_op_mm,83.639,musd,USD,Income Statement,+ Other Operating Income [IS_OTHER_OPER_INC],Other Operating Income; muy alto en 2025Q2-Q3 (no recurrente) e infla ebitda_mm
+VIST,2024-03-31,,otros_ingresos_op_mm,9.497,musd,USD,Income Statement,+ Other Operating Income [IS_OTHER_OPER_INC],Other Operating Income; muy alto en 2025Q2-Q3 (no recurrente) e infla ebitda_mm
+VIST,2024-06-30,,otros_ingresos_op_mm,16.987,musd,USD,Income Statement,+ Other Operating Income [IS_OTHER_OPER_INC],Other Operating Income; muy alto en 2025Q2-Q3 (no recurrente) e infla ebitda_mm
+VIST,2024-09-30,,otros_ingresos_op_mm,21.176,musd,USD,Income Statement,+ Other Operating Income [IS_OTHER_OPER_INC],Other Operating Income; muy alto en 2025Q2-Q3 (no recurrente) e infla ebitda_mm
+VIST,2024-12-31,,otros_ingresos_op_mm,6.467,musd,USD,Income Statement,+ Other Operating Income [IS_OTHER_OPER_INC],Other Operating Income; muy alto en 2025Q2-Q3 (no recurrente) e infla ebitda_mm
+VIST,2025-03-31,,otros_ingresos_op_mm,6.409,musd,USD,Income Statement,+ Other Operating Income [IS_OTHER_OPER_INC],Other Operating Income; muy alto en 2025Q2-Q3 (no recurrente) e infla ebitda_mm
+VIST,2025-06-30,,otros_ingresos_op_mm,208.073,musd,USD,Income Statement,+ Other Operating Income [IS_OTHER_OPER_INC],Other Operating Income; muy alto en 2025Q2-Q3 (no recurrente) e infla ebitda_mm
+VIST,2025-09-30,,otros_ingresos_op_mm,289.802,musd,USD,Income Statement,+ Other Operating Income [IS_OTHER_OPER_INC],Other Operating Income; muy alto en 2025Q2-Q3 (no recurrente) e infla ebitda_mm
+VIST,2025-12-31,,otros_ingresos_op_mm,8.509,musd,USD,Income Statement,+ Other Operating Income [IS_OTHER_OPER_INC],Other Operating Income; muy alto en 2025Q2-Q3 (no recurrente) e infla ebitda_mm
+VIST,2026-03-31,,otros_ingresos_op_mm,2.811,musd,USD,Income Statement,+ Other Operating Income [IS_OTHER_OPER_INC],Other Operating Income; muy alto en 2025Q2-Q3 (no recurrente) e infla ebitda_mm
+VIST,2026-06-30,,otros_ingresos_op_mm,6.11,musd,USD,Income Statement,+ Other Operating Income [IS_OTHER_OPER_INC],Other Operating Income; muy alto en 2025Q2-Q3 (no recurrente) e infla ebitda_mm
+VIST,2023-09-30,,patrimonio_total_mm,1106.43,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Incluye minoritarios
+VIST,2023-12-31,,patrimonio_total_mm,1247.015,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Incluye minoritarios
+VIST,2024-03-31,,patrimonio_total_mm,1304.796,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Incluye minoritarios
+VIST,2024-06-30,,patrimonio_total_mm,1402.463,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Incluye minoritarios
+VIST,2024-09-30,,patrimonio_total_mm,1520.309,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Incluye minoritarios
+VIST,2024-12-31,,patrimonio_total_mm,1621.213,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Incluye minoritarios
+VIST,2025-03-31,,patrimonio_total_mm,1642.098,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Incluye minoritarios
+VIST,2025-06-30,,patrimonio_total_mm,2124.559,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Incluye minoritarios
+VIST,2025-09-30,,patrimonio_total_mm,2407.619,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Incluye minoritarios
+VIST,2025-12-31,,patrimonio_total_mm,2511.594,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Incluye minoritarios
+VIST,2026-03-31,,patrimonio_total_mm,2599.489,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Incluye minoritarios
+VIST,2026-06-30,,patrimonio_total_mm,3525.342,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Incluye minoritarios
+VIST,2023-09-30,,ppe_neto_mm,1873.954,musd,USD,Balance Sheet,"+ Property, Plant & Equip, Net [BS_NET_FIX_ASSET]",
+VIST,2023-12-31,,ppe_neto_mm,1988.784,musd,USD,Balance Sheet,"+ Property, Plant & Equip, Net [BS_NET_FIX_ASSET]",
+VIST,2024-03-31,,ppe_neto_mm,2146.347,musd,USD,Balance Sheet,"+ Property, Plant & Equip, Net [BS_NET_FIX_ASSET]",
+VIST,2024-06-30,,ppe_neto_mm,2401.249,musd,USD,Balance Sheet,"+ Property, Plant & Equip, Net [BS_NET_FIX_ASSET]",
+VIST,2024-09-30,,ppe_neto_mm,2651.163,musd,USD,Balance Sheet,"+ Property, Plant & Equip, Net [BS_NET_FIX_ASSET]",
+VIST,2024-12-31,,ppe_neto_mm,2911.316,musd,USD,Balance Sheet,"+ Property, Plant & Equip, Net [BS_NET_FIX_ASSET]",
+VIST,2025-03-31,,ppe_neto_mm,3147.398,musd,USD,Balance Sheet,"+ Property, Plant & Equip, Net [BS_NET_FIX_ASSET]",
+VIST,2025-06-30,,ppe_neto_mm,4885.406,musd,USD,Balance Sheet,"+ Property, Plant & Equip, Net [BS_NET_FIX_ASSET]",
+VIST,2025-09-30,,ppe_neto_mm,5481.949,musd,USD,Balance Sheet,"+ Property, Plant & Equip, Net [BS_NET_FIX_ASSET]",
+VIST,2025-12-31,,ppe_neto_mm,5696.315,musd,USD,Balance Sheet,"+ Property, Plant & Equip, Net [BS_NET_FIX_ASSET]",
+VIST,2026-03-31,,ppe_neto_mm,5846.38,musd,USD,Balance Sheet,"+ Property, Plant & Equip, Net [BS_NET_FIX_ASSET]",
+VIST,2026-06-30,,ppe_neto_mm,7518.752,musd,USD,Balance Sheet,"+ Property, Plant & Equip, Net [BS_NET_FIX_ASSET]",
+VIST,2023-09-30,,resultado_antes_imp_mm,113.731,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax GAAP
+VIST,2023-12-31,,resultado_antes_imp_mm,167.453,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax GAAP
+VIST,2024-03-31,,resultado_antes_imp_mm,102.039,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax GAAP
+VIST,2024-06-30,,resultado_antes_imp_mm,169.561,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax GAAP
+VIST,2024-09-30,,resultado_antes_imp_mm,194.54,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax GAAP
+VIST,2024-12-31,,resultado_antes_imp_mm,124.687,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax GAAP
+VIST,2025-03-31,,resultado_antes_imp_mm,134.958,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax GAAP
+VIST,2025-06-30,,resultado_antes_imp_mm,293.815,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax GAAP
+VIST,2025-09-30,,resultado_antes_imp_mm,437.504,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax GAAP
+VIST,2025-12-31,,resultado_antes_imp_mm,138.394,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax GAAP
+VIST,2026-03-31,,resultado_antes_imp_mm,143.529,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax GAAP
+VIST,2026-06-30,,resultado_antes_imp_mm,452.924,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax GAAP
+VIST,2023-09-30,,resultado_minoritarios_mm,0.0,musd,USD,Income Statement,"- Minority Interest, GAAP [MIN_NONCONTROL_INTEREST_CREDITS]",
+VIST,2023-12-31,,resultado_minoritarios_mm,0.0,musd,USD,Income Statement,"- Minority Interest, GAAP [MIN_NONCONTROL_INTEREST_CREDITS]",
+VIST,2024-03-31,,resultado_minoritarios_mm,0.0,musd,USD,Income Statement,"- Minority Interest, GAAP [MIN_NONCONTROL_INTEREST_CREDITS]",
+VIST,2024-06-30,,resultado_minoritarios_mm,0.0,musd,USD,Income Statement,"- Minority Interest, GAAP [MIN_NONCONTROL_INTEREST_CREDITS]",
+VIST,2024-09-30,,resultado_minoritarios_mm,0.0,musd,USD,Income Statement,"- Minority Interest, GAAP [MIN_NONCONTROL_INTEREST_CREDITS]",
+VIST,2024-12-31,,resultado_minoritarios_mm,0.0,musd,USD,Income Statement,"- Minority Interest, GAAP [MIN_NONCONTROL_INTEREST_CREDITS]",
+VIST,2025-03-31,,resultado_minoritarios_mm,0.0,musd,USD,Income Statement,"- Minority Interest, GAAP [MIN_NONCONTROL_INTEREST_CREDITS]",
+VIST,2025-06-30,,resultado_minoritarios_mm,0.0,musd,USD,Income Statement,"- Minority Interest, GAAP [MIN_NONCONTROL_INTEREST_CREDITS]",
+VIST,2025-09-30,,resultado_minoritarios_mm,0.0,musd,USD,Income Statement,"- Minority Interest, GAAP [MIN_NONCONTROL_INTEREST_CREDITS]",
+VIST,2025-12-31,,resultado_minoritarios_mm,0.0,musd,USD,Income Statement,"- Minority Interest, GAAP [MIN_NONCONTROL_INTEREST_CREDITS]",
+VIST,2026-03-31,,resultado_minoritarios_mm,0.0,musd,USD,Income Statement,"- Minority Interest, GAAP [MIN_NONCONTROL_INTEREST_CREDITS]",
+VIST,2026-06-30,,resultado_minoritarios_mm,11.251,musd,USD,Income Statement,"- Minority Interest, GAAP [MIN_NONCONTROL_INTEREST_CREDITS]",
+VIST,2023-09-30,,resultado_neto_mm,83.102,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP (despues de minoritarios)
+VIST,2023-12-31,,resultado_neto_mm,132.938,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP (despues de minoritarios)
+VIST,2024-03-31,,resultado_neto_mm,78.651,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP (despues de minoritarios)
+VIST,2024-06-30,,resultado_neto_mm,139.64,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP (despues de minoritarios)
+VIST,2024-09-30,,resultado_neto_mm,165.459,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP (despues de minoritarios)
+VIST,2024-12-31,,resultado_neto_mm,93.771,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP (despues de minoritarios)
+VIST,2025-03-31,,resultado_neto_mm,82.793,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP (despues de minoritarios)
+VIST,2025-06-30,,resultado_neto_mm,235.289,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP (despues de minoritarios)
+VIST,2025-09-30,,resultado_neto_mm,315.286,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP (despues de minoritarios)
+VIST,2025-12-31,,resultado_neto_mm,85.695,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP (despues de minoritarios)
+VIST,2026-03-31,,resultado_neto_mm,107.713,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP (despues de minoritarios)
+VIST,2026-06-30,,resultado_neto_mm,321.735,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP (despues de minoritarios)
+VIST,2023-09-30,,resultado_operativo_mm,145.886,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],
+VIST,2023-12-31,,resultado_operativo_mm,176.587,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],
+VIST,2024-03-31,,resultado_operativo_mm,129.085,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],
+VIST,2024-06-30,,resultado_operativo_mm,179.604,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],
+VIST,2024-09-30,,resultado_operativo_mm,187.349,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],
+VIST,2024-12-31,,resultado_operativo_mm,125.304,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],
+VIST,2025-03-31,,resultado_operativo_mm,142.191,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],
+VIST,2025-06-30,,resultado_operativo_mm,422.677,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],
+VIST,2025-09-30,,resultado_operativo_mm,535.708,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],
+VIST,2025-12-31,,resultado_operativo_mm,244.105,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],
+VIST,2026-03-31,,resultado_operativo_mm,216.973,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],
+VIST,2026-06-30,,resultado_operativo_mm,547.81,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],
+VIST,2023-09-30,,retenciones_mm,13.1,musd,USD,segments,Reconciliation > Export Duties / Revenue- Supplement Breakdown,Export Duties del desglose de ingresos; ausente en 2026-06-30
+VIST,2023-12-31,,retenciones_mm,12.4,musd,USD,segments,Reconciliation > Export Duties / Revenue- Supplement Breakdown,Export Duties del desglose de ingresos; ausente en 2026-06-30
+VIST,2024-03-31,,retenciones_mm,9.6,musd,USD,segments,Reconciliation > Export Duties / Revenue- Supplement Breakdown,Export Duties del desglose de ingresos; ausente en 2026-06-30
+VIST,2024-06-30,,retenciones_mm,11.8,musd,USD,segments,Reconciliation > Export Duties / Revenue- Supplement Breakdown,Export Duties del desglose de ingresos; ausente en 2026-06-30
+VIST,2024-09-30,,retenciones_mm,18.8,musd,USD,segments,Reconciliation > Export Duties / Revenue- Supplement Breakdown,Export Duties del desglose de ingresos; ausente en 2026-06-30
+VIST,2024-12-31,,retenciones_mm,19.3,musd,USD,segments,Reconciliation > Export Duties / Revenue- Supplement Breakdown,Export Duties del desglose de ingresos; ausente en 2026-06-30
+VIST,2025-03-31,,retenciones_mm,17.6,musd,USD,segments,Reconciliation > Export Duties / Revenue- Supplement Breakdown,Export Duties del desglose de ingresos; ausente en 2026-06-30
+VIST,2025-06-30,,retenciones_mm,17.6,musd,USD,segments,Reconciliation > Export Duties / Revenue- Supplement Breakdown,Export Duties del desglose de ingresos; ausente en 2026-06-30
+VIST,2025-09-30,,retenciones_mm,18.8,musd,USD,segments,Reconciliation > Export Duties / Revenue- Supplement Breakdown,Export Duties del desglose de ingresos; ausente en 2026-06-30
+VIST,2025-12-31,,retenciones_mm,19.7,musd,USD,segments,Reconciliation > Export Duties / Revenue- Supplement Breakdown,Export Duties del desglose de ingresos; ausente en 2026-06-30
+VIST,2026-03-31,,retenciones_mm,23.8,musd,USD,segments,Reconciliation > Export Duties / Revenue- Supplement Breakdown,Export Duties del desglose de ingresos; ausente en 2026-06-30
+VIST,2023-09-30,,selling_mm,17.673,musd,USD,Income Statement,+ Selling & Marketing [IS_SELLING_EXPENSES],Solo Selling y Marketing
+VIST,2023-12-31,,selling_mm,19.17,musd,USD,Income Statement,+ Selling & Marketing [IS_SELLING_EXPENSES],Solo Selling y Marketing
+VIST,2024-03-31,,selling_mm,18.839,musd,USD,Income Statement,+ Selling & Marketing [IS_SELLING_EXPENSES],Solo Selling y Marketing
+VIST,2024-06-30,,selling_mm,22.14,musd,USD,Income Statement,+ Selling & Marketing [IS_SELLING_EXPENSES],Solo Selling y Marketing
+VIST,2024-09-30,,selling_mm,36.828,musd,USD,Income Statement,+ Selling & Marketing [IS_SELLING_EXPENSES],Solo Selling y Marketing
+VIST,2024-12-31,,selling_mm,62.527,musd,USD,Income Statement,+ Selling & Marketing [IS_SELLING_EXPENSES],Solo Selling y Marketing
+VIST,2025-03-31,,selling_mm,46.768,musd,USD,Income Statement,+ Selling & Marketing [IS_SELLING_EXPENSES],Solo Selling y Marketing
+VIST,2025-06-30,,selling_mm,40.705,musd,USD,Income Statement,+ Selling & Marketing [IS_SELLING_EXPENSES],Solo Selling y Marketing
+VIST,2025-09-30,,selling_mm,48.816,musd,USD,Income Statement,+ Selling & Marketing [IS_SELLING_EXPENSES],Solo Selling y Marketing
+VIST,2025-12-31,,selling_mm,81.783,musd,USD,Income Statement,+ Selling & Marketing [IS_SELLING_EXPENSES],Solo Selling y Marketing
+VIST,2026-03-31,,selling_mm,66.157,musd,USD,Income Statement,+ Selling & Marketing [IS_SELLING_EXPENSES],Solo Selling y Marketing
+VIST,2026-06-30,,selling_mm,122.113,musd,USD,Income Statement,+ Selling & Marketing [IS_SELLING_EXPENSES],Solo Selling y Marketing
+VIST,2023-09-30,,sga_mm,32.704,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]","SG&A total = Selling + G&A (Selling incluye fletes/ventas, posiblemente retenciones)"
+VIST,2023-12-31,,sga_mm,37.835,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]","SG&A total = Selling + G&A (Selling incluye fletes/ventas, posiblemente retenciones)"
+VIST,2024-03-31,,sga_mm,40.949,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]","SG&A total = Selling + G&A (Selling incluye fletes/ventas, posiblemente retenciones)"
+VIST,2024-06-30,,sga_mm,44.53,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]","SG&A total = Selling + G&A (Selling incluye fletes/ventas, posiblemente retenciones)"
+VIST,2024-09-30,,sga_mm,66.075,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]","SG&A total = Selling + G&A (Selling incluye fletes/ventas, posiblemente retenciones)"
+VIST,2024-12-31,,sga_mm,97.734,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]","SG&A total = Selling + G&A (Selling incluye fletes/ventas, posiblemente retenciones)"
+VIST,2025-03-31,,sga_mm,74.799,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]","SG&A total = Selling + G&A (Selling incluye fletes/ventas, posiblemente retenciones)"
+VIST,2025-06-30,,sga_mm,70.417,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]","SG&A total = Selling + G&A (Selling incluye fletes/ventas, posiblemente retenciones)"
+VIST,2025-09-30,,sga_mm,86.163,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]","SG&A total = Selling + G&A (Selling incluye fletes/ventas, posiblemente retenciones)"
+VIST,2025-12-31,,sga_mm,134.402,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]","SG&A total = Selling + G&A (Selling incluye fletes/ventas, posiblemente retenciones)"
+VIST,2026-03-31,,sga_mm,107.483,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]","SG&A total = Selling + G&A (Selling incluye fletes/ventas, posiblemente retenciones)"
+VIST,2026-06-30,,sga_mm,166.57,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]","SG&A total = Selling + G&A (Selling incluye fletes/ventas, posiblemente retenciones)"

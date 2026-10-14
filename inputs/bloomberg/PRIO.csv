@@ -1,0 +1,342 @@
+empresa,periodo,fecha_publicacion,variable,valor,unidad,moneda,hoja,campo_bloomberg,nota
+PRIO,2023-09-30,,ingresos_mm,828.877334,musd,USD,Income Statement,Revenue [SALES_REV_TURN],Revenue (Bloomberg Adjusted); Bloomberg convierte a USD desde BRL
+PRIO,2023-12-31,,ingresos_mm,604.664956,musd,USD,Income Statement,Revenue [SALES_REV_TURN],Revenue (Bloomberg Adjusted); Bloomberg convierte a USD desde BRL
+PRIO,2024-03-31,,ingresos_mm,646.437572,musd,USD,Income Statement,Revenue [SALES_REV_TURN],Revenue (Bloomberg Adjusted); Bloomberg convierte a USD desde BRL
+PRIO,2024-06-30,,ingresos_mm,882.155971,musd,USD,Income Statement,Revenue [SALES_REV_TURN],Revenue (Bloomberg Adjusted); Bloomberg convierte a USD desde BRL
+PRIO,2024-09-30,,ingresos_mm,645.338819,musd,USD,Income Statement,Revenue [SALES_REV_TURN],Revenue (Bloomberg Adjusted); Bloomberg convierte a USD desde BRL
+PRIO,2024-12-31,,ingresos_mm,511.850622,musd,USD,Income Statement,Revenue [SALES_REV_TURN],Revenue (Bloomberg Adjusted); Bloomberg convierte a USD desde BRL
+PRIO,2025-03-31,,ingresos_mm,759.220762,musd,USD,Income Statement,Revenue [SALES_REV_TURN],Revenue (Bloomberg Adjusted); Bloomberg convierte a USD desde BRL
+PRIO,2025-06-30,,ingresos_mm,587.411251,musd,USD,Income Statement,Revenue [SALES_REV_TURN],Revenue (Bloomberg Adjusted); Bloomberg convierte a USD desde BRL
+PRIO,2025-09-30,,ingresos_mm,654.079282,musd,USD,Income Statement,Revenue [SALES_REV_TURN],Revenue (Bloomberg Adjusted); Bloomberg convierte a USD desde BRL
+PRIO,2025-12-31,,ingresos_mm,787.876427,musd,USD,Income Statement,Revenue [SALES_REV_TURN],Revenue (Bloomberg Adjusted); Bloomberg convierte a USD desde BRL
+PRIO,2026-03-31,,ingresos_mm,1241.62278,musd,USD,Income Statement,Revenue [SALES_REV_TURN],Revenue (Bloomberg Adjusted); Bloomberg convierte a USD desde BRL
+PRIO,2026-06-30,,ingresos_mm,1389.982504,musd,USD,Income Statement,Revenue [SALES_REV_TURN],Revenue (Bloomberg Adjusted); Bloomberg convierte a USD desde BRL
+PRIO,2023-09-30,,dda_mm,173.381365,musd,USD,Cash Flow,+ Depreciation & Amortization [CF_DEPR_AMORT],D&A total del flujo de caja; coincide con D&A del segmento E&P
+PRIO,2023-12-31,,dda_mm,73.284989,musd,USD,Cash Flow,+ Depreciation & Amortization [CF_DEPR_AMORT],D&A total del flujo de caja; coincide con D&A del segmento E&P
+PRIO,2024-03-31,,dda_mm,128.702078,musd,USD,Cash Flow,+ Depreciation & Amortization [CF_DEPR_AMORT],D&A total del flujo de caja; coincide con D&A del segmento E&P
+PRIO,2024-06-30,,dda_mm,132.161912,musd,USD,Cash Flow,+ Depreciation & Amortization [CF_DEPR_AMORT],D&A total del flujo de caja; coincide con D&A del segmento E&P
+PRIO,2024-09-30,,dda_mm,100.835543,musd,USD,Cash Flow,+ Depreciation & Amortization [CF_DEPR_AMORT],D&A total del flujo de caja; coincide con D&A del segmento E&P
+PRIO,2024-12-31,,dda_mm,104.46051,musd,USD,Cash Flow,+ Depreciation & Amortization [CF_DEPR_AMORT],D&A total del flujo de caja; coincide con D&A del segmento E&P
+PRIO,2025-03-31,,dda_mm,241.544481,musd,USD,Cash Flow,+ Depreciation & Amortization [CF_DEPR_AMORT],D&A total del flujo de caja; coincide con D&A del segmento E&P
+PRIO,2025-06-30,,dda_mm,257.118434,musd,USD,Cash Flow,+ Depreciation & Amortization [CF_DEPR_AMORT],D&A total del flujo de caja; coincide con D&A del segmento E&P
+PRIO,2025-09-30,,dda_mm,178.34035,musd,USD,Cash Flow,+ Depreciation & Amortization [CF_DEPR_AMORT],D&A total del flujo de caja; coincide con D&A del segmento E&P
+PRIO,2025-12-31,,dda_mm,345.321257,musd,USD,Cash Flow,+ Depreciation & Amortization [CF_DEPR_AMORT],D&A total del flujo de caja; coincide con D&A del segmento E&P
+PRIO,2026-03-31,,dda_mm,370.193882,musd,USD,Cash Flow,+ Depreciation & Amortization [CF_DEPR_AMORT],D&A total del flujo de caja; coincide con D&A del segmento E&P
+PRIO,2026-06-30,,dda_mm,303.666584,musd,USD,Cash Flow,+ Depreciation & Amortization [CF_DEPR_AMORT],D&A total del flujo de caja; coincide con D&A del segmento E&P
+PRIO,2023-09-30,,sga_mm,4.833952,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]",SG&A = solo G&A (no hay Selling); 4T24 viene en 0 en el Excel y se omitio
+PRIO,2023-12-31,,sga_mm,1.974166,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]",SG&A = solo G&A (no hay Selling); 4T24 viene en 0 en el Excel y se omitio
+PRIO,2024-03-31,,sga_mm,3.390772,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]",SG&A = solo G&A (no hay Selling); 4T24 viene en 0 en el Excel y se omitio
+PRIO,2024-06-30,,sga_mm,7.145304,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]",SG&A = solo G&A (no hay Selling); 4T24 viene en 0 en el Excel y se omitio
+PRIO,2024-09-30,,sga_mm,4.683831,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]",SG&A = solo G&A (no hay Selling); 4T24 viene en 0 en el Excel y se omitio
+PRIO,2025-03-31,,sga_mm,5.204673,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]",SG&A = solo G&A (no hay Selling); 4T24 viene en 0 en el Excel y se omitio
+PRIO,2025-06-30,,sga_mm,2.986313,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]",SG&A = solo G&A (no hay Selling); 4T24 viene en 0 en el Excel y se omitio
+PRIO,2025-09-30,,sga_mm,3.96165,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]",SG&A = solo G&A (no hay Selling); 4T24 viene en 0 en el Excel y se omitio
+PRIO,2025-12-31,,sga_mm,6.780444,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]",SG&A = solo G&A (no hay Selling); 4T24 viene en 0 en el Excel y se omitio
+PRIO,2026-03-31,,sga_mm,5.274753,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]",SG&A = solo G&A (no hay Selling); 4T24 viene en 0 en el Excel y se omitio
+PRIO,2026-06-30,,sga_mm,4.344139,musd,USD,Income Statement,"+ Selling, General & Admin [IS_SG&A_EXPENSE]",SG&A = solo G&A (no hay Selling); 4T24 viene en 0 en el Excel y se omitio
+PRIO,2023-09-30,,opex_mm,163.391581,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Cost of Goods & Services SIN D&A (D&A va en fila aparte). Incluye costos operativos de produccion y regalias/otros costos de venta; no separable. Proxy de opex, no lifting puro"
+PRIO,2023-12-31,,opex_mm,102.88537,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Cost of Goods & Services SIN D&A (D&A va en fila aparte). Incluye costos operativos de produccion y regalias/otros costos de venta; no separable. Proxy de opex, no lifting puro"
+PRIO,2024-03-31,,opex_mm,156.751394,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Cost of Goods & Services SIN D&A (D&A va en fila aparte). Incluye costos operativos de produccion y regalias/otros costos de venta; no separable. Proxy de opex, no lifting puro"
+PRIO,2024-06-30,,opex_mm,297.855434,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Cost of Goods & Services SIN D&A (D&A va en fila aparte). Incluye costos operativos de produccion y regalias/otros costos de venta; no separable. Proxy de opex, no lifting puro"
+PRIO,2024-09-30,,opex_mm,284.150941,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Cost of Goods & Services SIN D&A (D&A va en fila aparte). Incluye costos operativos de produccion y regalias/otros costos de venta; no separable. Proxy de opex, no lifting puro"
+PRIO,2024-12-31,,opex_mm,135.958688,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Cost of Goods & Services SIN D&A (D&A va en fila aparte). Incluye costos operativos de produccion y regalias/otros costos de venta; no separable. Proxy de opex, no lifting puro"
+PRIO,2025-03-31,,opex_mm,261.833353,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Cost of Goods & Services SIN D&A (D&A va en fila aparte). Incluye costos operativos de produccion y regalias/otros costos de venta; no separable. Proxy de opex, no lifting puro"
+PRIO,2025-06-30,,opex_mm,278.743345,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Cost of Goods & Services SIN D&A (D&A va en fila aparte). Incluye costos operativos de produccion y regalias/otros costos de venta; no separable. Proxy de opex, no lifting puro"
+PRIO,2025-09-30,,opex_mm,290.698415,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Cost of Goods & Services SIN D&A (D&A va en fila aparte). Incluye costos operativos de produccion y regalias/otros costos de venta; no separable. Proxy de opex, no lifting puro"
+PRIO,2025-12-31,,opex_mm,383.724377,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Cost of Goods & Services SIN D&A (D&A va en fila aparte). Incluye costos operativos de produccion y regalias/otros costos de venta; no separable. Proxy de opex, no lifting puro"
+PRIO,2026-03-31,,opex_mm,344.405187,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Cost of Goods & Services SIN D&A (D&A va en fila aparte). Incluye costos operativos de produccion y regalias/otros costos de venta; no separable. Proxy de opex, no lifting puro"
+PRIO,2026-06-30,,opex_mm,458.759763,musd,USD,Income Statement,+ Cost of Goods & Services [IS_COG&SS_GAAP],"Cost of Goods & Services SIN D&A (D&A va en fila aparte). Incluye costos operativos de produccion y regalias/otros costos de venta; no separable. Proxy de opex, no lifting puro"
+PRIO,2023-09-30,,capex_mm,227.849323,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],Acq of Fixed & Intang con signo invertido a positivo. Incluye adquisiciones de activos (4T24 y 4T25 con picos de ~1.9-2.0bn: probables compras de campos)
+PRIO,2023-12-31,,capex_mm,143.577943,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],Acq of Fixed & Intang con signo invertido a positivo. Incluye adquisiciones de activos (4T24 y 4T25 con picos de ~1.9-2.0bn: probables compras de campos)
+PRIO,2024-03-31,,capex_mm,298.771938,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],Acq of Fixed & Intang con signo invertido a positivo. Incluye adquisiciones de activos (4T24 y 4T25 con picos de ~1.9-2.0bn: probables compras de campos)
+PRIO,2024-06-30,,capex_mm,132.840945,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],Acq of Fixed & Intang con signo invertido a positivo. Incluye adquisiciones de activos (4T24 y 4T25 con picos de ~1.9-2.0bn: probables compras de campos)
+PRIO,2024-09-30,,capex_mm,270.994158,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],Acq of Fixed & Intang con signo invertido a positivo. Incluye adquisiciones de activos (4T24 y 4T25 con picos de ~1.9-2.0bn: probables compras de campos)
+PRIO,2024-12-31,,capex_mm,1908.967257,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],Acq of Fixed & Intang con signo invertido a positivo. Incluye adquisiciones de activos (4T24 y 4T25 con picos de ~1.9-2.0bn: probables compras de campos)
+PRIO,2025-03-31,,capex_mm,272.322881,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],Acq of Fixed & Intang con signo invertido a positivo. Incluye adquisiciones de activos (4T24 y 4T25 con picos de ~1.9-2.0bn: probables compras de campos)
+PRIO,2025-06-30,,capex_mm,619.995216,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],Acq of Fixed & Intang con signo invertido a positivo. Incluye adquisiciones de activos (4T24 y 4T25 con picos de ~1.9-2.0bn: probables compras de campos)
+PRIO,2025-09-30,,capex_mm,275.852828,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],Acq of Fixed & Intang con signo invertido a positivo. Incluye adquisiciones de activos (4T24 y 4T25 con picos de ~1.9-2.0bn: probables compras de campos)
+PRIO,2025-12-31,,capex_mm,1961.609658,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],Acq of Fixed & Intang con signo invertido a positivo. Incluye adquisiciones de activos (4T24 y 4T25 con picos de ~1.9-2.0bn: probables compras de campos)
+PRIO,2026-03-31,,capex_mm,334.309742,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],Acq of Fixed & Intang con signo invertido a positivo. Incluye adquisiciones de activos (4T24 y 4T25 con picos de ~1.9-2.0bn: probables compras de campos)
+PRIO,2026-06-30,,capex_mm,197.42932,musd,USD,Cash Flow,+ Acq of Fixed & Intang [ACQUIS_FXD_&_INTANG_DETAILED],Acq of Fixed & Intang con signo invertido a positivo. Incluye adquisiciones de activos (4T24 y 4T25 con picos de ~1.9-2.0bn: probables compras de campos)
+PRIO,2023-09-30,,intereses_mm,37.072043,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],Gasto por intereses bruto (no neto de ingreso financiero)
+PRIO,2023-12-31,,intereses_mm,33.442323,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],Gasto por intereses bruto (no neto de ingreso financiero)
+PRIO,2024-03-31,,intereses_mm,36.221832,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],Gasto por intereses bruto (no neto de ingreso financiero)
+PRIO,2024-06-30,,intereses_mm,43.892195,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],Gasto por intereses bruto (no neto de ingreso financiero)
+PRIO,2024-09-30,,intereses_mm,49.748589,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],Gasto por intereses bruto (no neto de ingreso financiero)
+PRIO,2024-12-31,,intereses_mm,67.552251,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],Gasto por intereses bruto (no neto de ingreso financiero)
+PRIO,2025-03-31,,intereses_mm,65.543521,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],Gasto por intereses bruto (no neto de ingreso financiero)
+PRIO,2025-06-30,,intereses_mm,77.601605,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],Gasto por intereses bruto (no neto de ingreso financiero)
+PRIO,2025-09-30,,intereses_mm,77.025379,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],Gasto por intereses bruto (no neto de ingreso financiero)
+PRIO,2025-12-31,,intereses_mm,58.457077,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],Gasto por intereses bruto (no neto de ingreso financiero)
+PRIO,2026-03-31,,intereses_mm,89.503285,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],Gasto por intereses bruto (no neto de ingreso financiero)
+PRIO,2026-06-30,,intereses_mm,83.993757,musd,USD,Income Statement,+ Interest Expense [IS_INT_EXPENSE],Gasto por intereses bruto (no neto de ingreso financiero)
+PRIO,2023-09-30,,impuesto_ganancias_mm,100.683183,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]","Income Tax Expense (Benefit) GAAP; positivo=gasto, negativo=beneficio"
+PRIO,2023-12-31,,impuesto_ganancias_mm,68.781896,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]","Income Tax Expense (Benefit) GAAP; positivo=gasto, negativo=beneficio"
+PRIO,2024-03-31,,impuesto_ganancias_mm,96.863848,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]","Income Tax Expense (Benefit) GAAP; positivo=gasto, negativo=beneficio"
+PRIO,2024-06-30,,impuesto_ganancias_mm,200.465132,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]","Income Tax Expense (Benefit) GAAP; positivo=gasto, negativo=beneficio"
+PRIO,2024-09-30,,impuesto_ganancias_mm,28.448711,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]","Income Tax Expense (Benefit) GAAP; positivo=gasto, negativo=beneficio"
+PRIO,2024-12-31,,impuesto_ganancias_mm,-963.329993,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]","Income Tax Expense (Benefit) GAAP; positivo=gasto, negativo=beneficio"
+PRIO,2025-03-31,,impuesto_ganancias_mm,-254.383574,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]","Income Tax Expense (Benefit) GAAP; positivo=gasto, negativo=beneficio"
+PRIO,2025-06-30,,impuesto_ganancias_mm,-195.496199,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]","Income Tax Expense (Benefit) GAAP; positivo=gasto, negativo=beneficio"
+PRIO,2025-09-30,,impuesto_ganancias_mm,-92.786987,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]","Income Tax Expense (Benefit) GAAP; positivo=gasto, negativo=beneficio"
+PRIO,2025-12-31,,impuesto_ganancias_mm,114.285725,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]","Income Tax Expense (Benefit) GAAP; positivo=gasto, negativo=beneficio"
+PRIO,2026-03-31,,impuesto_ganancias_mm,-132.892174,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]","Income Tax Expense (Benefit) GAAP; positivo=gasto, negativo=beneficio"
+PRIO,2026-06-30,,impuesto_ganancias_mm,29.186442,musd,USD,Income Statement,"- Income Tax Expense (Benefit), GAAP [IS_INC_TAX_EXP]","Income Tax Expense (Benefit) GAAP; positivo=gasto, negativo=beneficio"
+PRIO,2023-09-30,,resultado_antes_imp_mm,434.411679,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax Income GAAP (no la fila Adjusted)
+PRIO,2023-12-31,,resultado_antes_imp_mm,381.298722,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax Income GAAP (no la fila Adjusted)
+PRIO,2024-03-31,,resultado_antes_imp_mm,308.065554,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax Income GAAP (no la fila Adjusted)
+PRIO,2024-06-30,,resultado_antes_imp_mm,473.07846,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax Income GAAP (no la fila Adjusted)
+PRIO,2024-09-30,,resultado_antes_imp_mm,188.444689,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax Income GAAP (no la fila Adjusted)
+PRIO,2024-12-31,,resultado_antes_imp_mm,227.373694,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax Income GAAP (no la fila Adjusted)
+PRIO,2025-03-31,,resultado_antes_imp_mm,99.967569,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax Income GAAP (no la fila Adjusted)
+PRIO,2025-06-30,,resultado_antes_imp_mm,-75.345719,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax Income GAAP (no la fila Adjusted)
+PRIO,2025-09-30,,resultado_antes_imp_mm,-28.774788,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax Income GAAP (no la fila Adjusted)
+PRIO,2025-12-31,,resultado_antes_imp_mm,-43.308682,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax Income GAAP (no la fila Adjusted)
+PRIO,2026-03-31,,resultado_antes_imp_mm,325.520008,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax Income GAAP (no la fila Adjusted)
+PRIO,2026-06-30,,resultado_antes_imp_mm,417.453592,musd,USD,Income Statement,"Pretax Income (Loss), GAAP [PRETAX_INC]",Pretax Income GAAP (no la fila Adjusted)
+PRIO,2023-09-30,,ebitda_mm,631.011092,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (EBIT ajustado + D&A del CF). La hoja Cash Flow trae otra fila EBITDA levemente distinta (EBIT GAAP)
+PRIO,2023-12-31,,ebitda_mm,521.67084,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (EBIT ajustado + D&A del CF). La hoja Cash Flow trae otra fila EBITDA levemente distinta (EBIT GAAP)
+PRIO,2024-03-31,,ebitda_mm,476.90079,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (EBIT ajustado + D&A del CF). La hoja Cash Flow trae otra fila EBITDA levemente distinta (EBIT GAAP)
+PRIO,2024-06-30,,ebitda_mm,616.327792,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (EBIT ajustado + D&A del CF). La hoja Cash Flow trae otra fila EBITDA levemente distinta (EBIT GAAP)
+PRIO,2024-09-30,,ebitda_mm,326.757008,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (EBIT ajustado + D&A del CF). La hoja Cash Flow trae otra fila EBITDA levemente distinta (EBIT GAAP)
+PRIO,2024-12-31,,ebitda_mm,356.14093,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (EBIT ajustado + D&A del CF). La hoja Cash Flow trae otra fila EBITDA levemente distinta (EBIT GAAP)
+PRIO,2025-03-31,,ebitda_mm,423.853861,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (EBIT ajustado + D&A del CF). La hoja Cash Flow trae otra fila EBITDA levemente distinta (EBIT GAAP)
+PRIO,2025-06-30,,ebitda_mm,270.833269,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (EBIT ajustado + D&A del CF). La hoja Cash Flow trae otra fila EBITDA levemente distinta (EBIT GAAP)
+PRIO,2025-09-30,,ebitda_mm,288.869679,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (EBIT ajustado + D&A del CF). La hoja Cash Flow trae otra fila EBITDA levemente distinta (EBIT GAAP)
+PRIO,2025-12-31,,ebitda_mm,356.746568,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (EBIT ajustado + D&A del CF). La hoja Cash Flow trae otra fila EBITDA levemente distinta (EBIT GAAP)
+PRIO,2026-03-31,,ebitda_mm,836.570958,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (EBIT ajustado + D&A del CF). La hoja Cash Flow trae otra fila EBITDA levemente distinta (EBIT GAAP)
+PRIO,2026-06-30,,ebitda_mm,855.395442,musd,USD,Income Statement,EBITDA [EBITDA],EBITDA Bloomberg (EBIT ajustado + D&A del CF). La hoja Cash Flow trae otra fila EBITDA levemente distinta (EBIT GAAP)
+PRIO,2023-09-30,,resultado_operativo_mm,457.629727,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],Operating Income (Loss) ajustado
+PRIO,2023-12-31,,resultado_operativo_mm,448.385851,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],Operating Income (Loss) ajustado
+PRIO,2024-03-31,,resultado_operativo_mm,348.198712,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],Operating Income (Loss) ajustado
+PRIO,2024-06-30,,resultado_operativo_mm,484.165881,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],Operating Income (Loss) ajustado
+PRIO,2024-09-30,,resultado_operativo_mm,225.921465,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],Operating Income (Loss) ajustado
+PRIO,2024-12-31,,resultado_operativo_mm,251.68042,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],Operating Income (Loss) ajustado
+PRIO,2025-03-31,,resultado_operativo_mm,182.309379,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],Operating Income (Loss) ajustado
+PRIO,2025-06-30,,resultado_operativo_mm,13.714835,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],Operating Income (Loss) ajustado
+PRIO,2025-09-30,,resultado_operativo_mm,110.529328,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],Operating Income (Loss) ajustado
+PRIO,2025-12-31,,resultado_operativo_mm,11.425311,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],Operating Income (Loss) ajustado
+PRIO,2026-03-31,,resultado_operativo_mm,466.377076,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],Operating Income (Loss) ajustado
+PRIO,2026-06-30,,resultado_operativo_mm,551.728859,musd,USD,Income Statement,Operating Income (Loss) [IS_OPER_INC],Operating Income (Loss) ajustado
+PRIO,2023-09-30,,resultado_neto_mm,333.728496,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP
+PRIO,2023-12-31,,resultado_neto_mm,312.516826,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP
+PRIO,2024-03-31,,resultado_neto_mm,211.201706,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP
+PRIO,2024-06-30,,resultado_neto_mm,272.613328,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP
+PRIO,2024-09-30,,resultado_neto_mm,159.995978,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP
+PRIO,2024-12-31,,resultado_neto_mm,1190.703687,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP
+PRIO,2025-03-31,,resultado_neto_mm,354.351143,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP
+PRIO,2025-06-30,,resultado_neto_mm,120.15048,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP
+PRIO,2025-09-30,,resultado_neto_mm,64.0122,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP
+PRIO,2025-12-31,,resultado_neto_mm,-157.594407,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP
+PRIO,2026-03-31,,resultado_neto_mm,458.412182,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP
+PRIO,2026-06-30,,resultado_neto_mm,388.267149,musd,USD,Income Statement,"Net Income, GAAP [NET_INCOME]",Net Income GAAP
+PRIO,2023-09-30,,ingresos_intereses_mm,5.16034,musd,USD,Income Statement,- Interest Income [IS_INT_INC],Interest Income; 1T25 viene en 0 en el Excel y se omitio
+PRIO,2023-12-31,,ingresos_intereses_mm,3.846788,musd,USD,Income Statement,- Interest Income [IS_INT_INC],Interest Income; 1T25 viene en 0 en el Excel y se omitio
+PRIO,2024-03-31,,ingresos_intereses_mm,10.121412,musd,USD,Income Statement,- Interest Income [IS_INT_INC],Interest Income; 1T25 viene en 0 en el Excel y se omitio
+PRIO,2024-06-30,,ingresos_intereses_mm,60.486755,musd,USD,Income Statement,- Interest Income [IS_INT_INC],Interest Income; 1T25 viene en 0 en el Excel y se omitio
+PRIO,2024-09-30,,ingresos_intereses_mm,17.056638,musd,USD,Income Statement,- Interest Income [IS_INT_INC],Interest Income; 1T25 viene en 0 en el Excel y se omitio
+PRIO,2024-12-31,,ingresos_intereses_mm,46.17118,musd,USD,Income Statement,- Interest Income [IS_INT_INC],Interest Income; 1T25 viene en 0 en el Excel y se omitio
+PRIO,2025-06-30,,ingresos_intereses_mm,2.391981,musd,USD,Income Statement,- Interest Income [IS_INT_INC],Interest Income; 1T25 viene en 0 en el Excel y se omitio
+PRIO,2025-09-30,,ingresos_intereses_mm,10.3022,musd,USD,Income Statement,- Interest Income [IS_INT_INC],Interest Income; 1T25 viene en 0 en el Excel y se omitio
+PRIO,2025-12-31,,ingresos_intereses_mm,18.994691,musd,USD,Income Statement,- Interest Income [IS_INT_INC],Interest Income; 1T25 viene en 0 en el Excel y se omitio
+PRIO,2026-03-31,,ingresos_intereses_mm,6.568865,musd,USD,Income Statement,- Interest Income [IS_INT_INC],Interest Income; 1T25 viene en 0 en el Excel y se omitio
+PRIO,2026-06-30,,ingresos_intereses_mm,4.630605,musd,USD,Income Statement,- Interest Income [IS_INT_INC],Interest Income; 1T25 viene en 0 en el Excel y se omitio
+PRIO,2023-09-30,,cfo_mm,535.072324,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],"Cash from Operating Activities; trimestre derivado por Bloomberg, ruidoso por conversion FX"
+PRIO,2023-12-31,,cfo_mm,565.42429,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],"Cash from Operating Activities; trimestre derivado por Bloomberg, ruidoso por conversion FX"
+PRIO,2024-03-31,,cfo_mm,326.136474,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],"Cash from Operating Activities; trimestre derivado por Bloomberg, ruidoso por conversion FX"
+PRIO,2024-06-30,,cfo_mm,308.859728,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],"Cash from Operating Activities; trimestre derivado por Bloomberg, ruidoso por conversion FX"
+PRIO,2024-09-30,,cfo_mm,572.950725,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],"Cash from Operating Activities; trimestre derivado por Bloomberg, ruidoso por conversion FX"
+PRIO,2024-12-31,,cfo_mm,560.187,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],"Cash from Operating Activities; trimestre derivado por Bloomberg, ruidoso por conversion FX"
+PRIO,2025-03-31,,cfo_mm,43.905568,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],"Cash from Operating Activities; trimestre derivado por Bloomberg, ruidoso por conversion FX"
+PRIO,2025-06-30,,cfo_mm,593.39394,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],"Cash from Operating Activities; trimestre derivado por Bloomberg, ruidoso por conversion FX"
+PRIO,2025-09-30,,cfo_mm,-1189.255083,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],"Cash from Operating Activities; trimestre derivado por Bloomberg, ruidoso por conversion FX"
+PRIO,2025-12-31,,cfo_mm,560.773349,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],"Cash from Operating Activities; trimestre derivado por Bloomberg, ruidoso por conversion FX"
+PRIO,2026-03-31,,cfo_mm,378.811537,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],"Cash from Operating Activities; trimestre derivado por Bloomberg, ruidoso por conversion FX"
+PRIO,2026-06-30,,cfo_mm,766.31523,musd,USD,Cash Flow,Cash from Operating Activities [CF_CASH_FROM_OPER],"Cash from Operating Activities; trimestre derivado por Bloomberg, ruidoso por conversion FX"
+PRIO,2023-09-30,,recompra_acciones_mm,0,musd,USD,Cash Flow,+ Decrease in Capital Stock [CF_DECR_CAP_STOCK],Decrease in Capital Stock (recompras de acciones) con signo invertido a positivo
+PRIO,2023-12-31,,recompra_acciones_mm,21.043978,musd,USD,Cash Flow,+ Decrease in Capital Stock [CF_DECR_CAP_STOCK],Decrease in Capital Stock (recompras de acciones) con signo invertido a positivo
+PRIO,2024-03-31,,recompra_acciones_mm,16.350486,musd,USD,Cash Flow,+ Decrease in Capital Stock [CF_DECR_CAP_STOCK],Decrease in Capital Stock (recompras de acciones) con signo invertido a positivo
+PRIO,2024-06-30,,recompra_acciones_mm,20.25197,musd,USD,Cash Flow,+ Decrease in Capital Stock [CF_DECR_CAP_STOCK],Decrease in Capital Stock (recompras de acciones) con signo invertido a positivo
+PRIO,2024-09-30,,recompra_acciones_mm,6.417881,musd,USD,Cash Flow,+ Decrease in Capital Stock [CF_DECR_CAP_STOCK],Decrease in Capital Stock (recompras de acciones) con signo invertido a positivo
+PRIO,2024-12-31,,recompra_acciones_mm,123.897084,musd,USD,Cash Flow,+ Decrease in Capital Stock [CF_DECR_CAP_STOCK],Decrease in Capital Stock (recompras de acciones) con signo invertido a positivo
+PRIO,2025-03-31,,recompra_acciones_mm,44.034305,musd,USD,Cash Flow,+ Decrease in Capital Stock [CF_DECR_CAP_STOCK],Decrease in Capital Stock (recompras de acciones) con signo invertido a positivo
+PRIO,2025-06-30,,recompra_acciones_mm,23.10783,musd,USD,Cash Flow,+ Decrease in Capital Stock [CF_DECR_CAP_STOCK],Decrease in Capital Stock (recompras de acciones) con signo invertido a positivo
+PRIO,2025-09-30,,recompra_acciones_mm,6.840781,musd,USD,Cash Flow,+ Decrease in Capital Stock [CF_DECR_CAP_STOCK],Decrease in Capital Stock (recompras de acciones) con signo invertido a positivo
+PRIO,2025-12-31,,recompra_acciones_mm,3.164639,musd,USD,Cash Flow,+ Decrease in Capital Stock [CF_DECR_CAP_STOCK],Decrease in Capital Stock (recompras de acciones) con signo invertido a positivo
+PRIO,2026-03-31,,recompra_acciones_mm,0,musd,USD,Cash Flow,+ Decrease in Capital Stock [CF_DECR_CAP_STOCK],Decrease in Capital Stock (recompras de acciones) con signo invertido a positivo
+PRIO,2026-06-30,,recompra_acciones_mm,173.587666,musd,USD,Cash Flow,+ Decrease in Capital Stock [CF_DECR_CAP_STOCK],Decrease in Capital Stock (recompras de acciones) con signo invertido a positivo
+PRIO,2023-09-30,,deuda_mm,2100.134114,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW] + + LT Debt [BS_LT_BORROW],ST Debt + LT Debt de Bloomberg (consistente con fila Net Debt). Probablemente incluye arrendamientos
+PRIO,2023-12-31,,deuda_mm,1969.162252,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW] + + LT Debt [BS_LT_BORROW],ST Debt + LT Debt de Bloomberg (consistente con fila Net Debt). Probablemente incluye arrendamientos
+PRIO,2024-03-31,,deuda_mm,2212.293948,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW] + + LT Debt [BS_LT_BORROW],ST Debt + LT Debt de Bloomberg (consistente con fila Net Debt). Probablemente incluye arrendamientos
+PRIO,2024-06-30,,deuda_mm,2381.11004,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW] + + LT Debt [BS_LT_BORROW],ST Debt + LT Debt de Bloomberg (consistente con fila Net Debt). Probablemente incluye arrendamientos
+PRIO,2024-09-30,,deuda_mm,3576.532035,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW] + + LT Debt [BS_LT_BORROW],ST Debt + LT Debt de Bloomberg (consistente con fila Net Debt). Probablemente incluye arrendamientos
+PRIO,2024-12-31,,deuda_mm,3636.499042,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW] + + LT Debt [BS_LT_BORROW],ST Debt + LT Debt de Bloomberg (consistente con fila Net Debt). Probablemente incluye arrendamientos
+PRIO,2025-03-31,,deuda_mm,3854.807211,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW] + + LT Debt [BS_LT_BORROW],ST Debt + LT Debt de Bloomberg (consistente con fila Net Debt). Probablemente incluye arrendamientos
+PRIO,2025-06-30,,deuda_mm,4238.500904,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW] + + LT Debt [BS_LT_BORROW],ST Debt + LT Debt de Bloomberg (consistente con fila Net Debt). Probablemente incluye arrendamientos
+PRIO,2025-09-30,,deuda_mm,5136.556174,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW] + + LT Debt [BS_LT_BORROW],ST Debt + LT Debt de Bloomberg (consistente con fila Net Debt). Probablemente incluye arrendamientos
+PRIO,2025-12-31,,deuda_mm,5155.861252,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW] + + LT Debt [BS_LT_BORROW],ST Debt + LT Debt de Bloomberg (consistente con fila Net Debt). Probablemente incluye arrendamientos
+PRIO,2026-03-31,,deuda_mm,5178.565123,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW] + + LT Debt [BS_LT_BORROW],ST Debt + LT Debt de Bloomberg (consistente con fila Net Debt). Probablemente incluye arrendamientos
+PRIO,2026-06-30,,deuda_mm,4927.027613,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW] + + LT Debt [BS_LT_BORROW],ST Debt + LT Debt de Bloomberg (consistente con fila Net Debt). Probablemente incluye arrendamientos
+PRIO,2023-09-30,,deuda_cp_mm,437.879885,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],ST Debt (ST Borrowings + current portion LT debt + otros)
+PRIO,2023-12-31,,deuda_cp_mm,304.31984,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],ST Debt (ST Borrowings + current portion LT debt + otros)
+PRIO,2024-03-31,,deuda_cp_mm,313.276742,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],ST Debt (ST Borrowings + current portion LT debt + otros)
+PRIO,2024-06-30,,deuda_cp_mm,286.545155,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],ST Debt (ST Borrowings + current portion LT debt + otros)
+PRIO,2024-09-30,,deuda_cp_mm,103.573689,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],ST Debt (ST Borrowings + current portion LT debt + otros)
+PRIO,2024-12-31,,deuda_cp_mm,93.838555,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],ST Debt (ST Borrowings + current portion LT debt + otros)
+PRIO,2025-03-31,,deuda_cp_mm,120.352053,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],ST Debt (ST Borrowings + current portion LT debt + otros)
+PRIO,2025-06-30,,deuda_cp_mm,690.755688,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],ST Debt (ST Borrowings + current portion LT debt + otros)
+PRIO,2025-09-30,,deuda_cp_mm,718.18461,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],ST Debt (ST Borrowings + current portion LT debt + otros)
+PRIO,2025-12-31,,deuda_cp_mm,321.503641,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],ST Debt (ST Borrowings + current portion LT debt + otros)
+PRIO,2026-03-31,,deuda_cp_mm,374.90145,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],ST Debt (ST Borrowings + current portion LT debt + otros)
+PRIO,2026-06-30,,deuda_cp_mm,921.485119,musd,USD,Balance Sheet,+ ST Debt [BS_ST_BORROW],ST Debt (ST Borrowings + current portion LT debt + otros)
+PRIO,2023-09-30,,deuda_lp_mm,1662.254229,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],"LT Debt (LT Borrowings + otros, probablemente leasing)"
+PRIO,2023-12-31,,deuda_lp_mm,1664.842412,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],"LT Debt (LT Borrowings + otros, probablemente leasing)"
+PRIO,2024-03-31,,deuda_lp_mm,1899.017206,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],"LT Debt (LT Borrowings + otros, probablemente leasing)"
+PRIO,2024-06-30,,deuda_lp_mm,2094.564885,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],"LT Debt (LT Borrowings + otros, probablemente leasing)"
+PRIO,2024-09-30,,deuda_lp_mm,3472.958346,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],"LT Debt (LT Borrowings + otros, probablemente leasing)"
+PRIO,2024-12-31,,deuda_lp_mm,3542.660486,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],"LT Debt (LT Borrowings + otros, probablemente leasing)"
+PRIO,2025-03-31,,deuda_lp_mm,3734.455158,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],"LT Debt (LT Borrowings + otros, probablemente leasing)"
+PRIO,2025-06-30,,deuda_lp_mm,3547.745216,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],"LT Debt (LT Borrowings + otros, probablemente leasing)"
+PRIO,2025-09-30,,deuda_lp_mm,4418.371564,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],"LT Debt (LT Borrowings + otros, probablemente leasing)"
+PRIO,2025-12-31,,deuda_lp_mm,4834.357611,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],"LT Debt (LT Borrowings + otros, probablemente leasing)"
+PRIO,2026-03-31,,deuda_lp_mm,4803.663672,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],"LT Debt (LT Borrowings + otros, probablemente leasing)"
+PRIO,2026-06-30,,deuda_lp_mm,4005.542493,musd,USD,Balance Sheet,+ LT Debt [BS_LT_BORROW],"LT Debt (LT Borrowings + otros, probablemente leasing)"
+PRIO,2023-09-30,,prestamos_cp_mm,394.934348,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],ST Borrowings (subitem de ST Debt)
+PRIO,2023-12-31,,prestamos_cp_mm,249.923455,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],ST Borrowings (subitem de ST Debt)
+PRIO,2024-03-31,,prestamos_cp_mm,265.342577,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],ST Borrowings (subitem de ST Debt)
+PRIO,2024-06-30,,prestamos_cp_mm,217.373113,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],ST Borrowings (subitem de ST Debt)
+PRIO,2024-09-30,,prestamos_cp_mm,39.733333,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],ST Borrowings (subitem de ST Debt)
+PRIO,2024-12-31,,prestamos_cp_mm,18.82905,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],ST Borrowings (subitem de ST Debt)
+PRIO,2025-03-31,,prestamos_cp_mm,59.998793,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],ST Borrowings (subitem de ST Debt)
+PRIO,2025-06-30,,prestamos_cp_mm,617.268664,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],ST Borrowings (subitem de ST Debt)
+PRIO,2025-09-30,,prestamos_cp_mm,648.290412,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],ST Borrowings (subitem de ST Debt)
+PRIO,2025-12-31,,prestamos_cp_mm,227.280218,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],ST Borrowings (subitem de ST Debt)
+PRIO,2026-03-31,,prestamos_cp_mm,272.546697,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],ST Borrowings (subitem de ST Debt)
+PRIO,2026-06-30,,prestamos_cp_mm,812.732508,musd,USD,Balance Sheet,+ ST Borrowings [SHORT_TERM_DEBT_DETAILED],ST Borrowings (subitem de ST Debt)
+PRIO,2023-09-30,,prestamos_lp_mm,1284.202248,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],LT Borrowings (subitem de LT Debt)
+PRIO,2023-12-31,,prestamos_lp_mm,1265.681122,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],LT Borrowings (subitem de LT Debt)
+PRIO,2024-03-31,,prestamos_lp_mm,1510.422498,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],LT Borrowings (subitem de LT Debt)
+PRIO,2024-06-30,,prestamos_lp_mm,1661.494148,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],LT Borrowings (subitem de LT Debt)
+PRIO,2024-09-30,,prestamos_lp_mm,3032.864317,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],LT Borrowings (subitem de LT Debt)
+PRIO,2024-12-31,,prestamos_lp_mm,3182.990413,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],LT Borrowings (subitem de LT Debt)
+PRIO,2025-03-31,,prestamos_lp_mm,3305.248704,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],LT Borrowings (subitem de LT Debt)
+PRIO,2025-06-30,,prestamos_lp_mm,3119.826536,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],LT Borrowings (subitem de LT Debt)
+PRIO,2025-09-30,,prestamos_lp_mm,3995.214656,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],LT Borrowings (subitem de LT Debt)
+PRIO,2025-12-31,,prestamos_lp_mm,4771.702506,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],LT Borrowings (subitem de LT Debt)
+PRIO,2026-03-31,,prestamos_lp_mm,4748.398847,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],LT Borrowings (subitem de LT Debt)
+PRIO,2026-06-30,,prestamos_lp_mm,3954.750097,musd,USD,Balance Sheet,+ LT Borrowings [LONG_TERM_BORROWINGS_DETAILED],LT Borrowings (subitem de LT Debt)
+PRIO,2023-09-30,,caja_mm,444.161696,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]","Cash, Cash Equivalents & STI; ST Investments es 0 en todos los trimestres, es solo caja y equivalentes"
+PRIO,2023-12-31,,caja_mm,481.326558,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]","Cash, Cash Equivalents & STI; ST Investments es 0 en todos los trimestres, es solo caja y equivalentes"
+PRIO,2024-03-31,,caja_mm,803.601541,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]","Cash, Cash Equivalents & STI; ST Investments es 0 en todos los trimestres, es solo caja y equivalentes"
+PRIO,2024-06-30,,caja_mm,1158.030986,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]","Cash, Cash Equivalents & STI; ST Investments es 0 en todos los trimestres, es solo caja y equivalentes"
+PRIO,2024-09-30,,caja_mm,2163.283542,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]","Cash, Cash Equivalents & STI; ST Investments es 0 en todos los trimestres, es solo caja y equivalentes"
+PRIO,2024-12-31,,caja_mm,647.323494,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]","Cash, Cash Equivalents & STI; ST Investments es 0 en todos los trimestres, es solo caja y equivalentes"
+PRIO,2025-03-31,,caja_mm,727.158352,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]","Cash, Cash Equivalents & STI; ST Investments es 0 en todos los trimestres, es solo caja y equivalentes"
+PRIO,2025-06-30,,caja_mm,875.758304,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]","Cash, Cash Equivalents & STI; ST Investments es 0 en todos los trimestres, es solo caja y equivalentes"
+PRIO,2025-09-30,,caja_mm,1770.391557,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]","Cash, Cash Equivalents & STI; ST Investments es 0 en todos los trimestres, es solo caja y equivalentes"
+PRIO,2025-12-31,,caja_mm,616.110158,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]","Cash, Cash Equivalents & STI; ST Investments es 0 en todos los trimestres, es solo caja y equivalentes"
+PRIO,2026-03-31,,caja_mm,537.776855,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]","Cash, Cash Equivalents & STI; ST Investments es 0 en todos los trimestres, es solo caja y equivalentes"
+PRIO,2026-06-30,,caja_mm,714.677931,musd,USD,Balance Sheet,"+ Cash, Cash Equivalents & STI [C&CE_AND_STI_DETAILED]","Cash, Cash Equivalents & STI; ST Investments es 0 en todos los trimestres, es solo caja y equivalentes"
+PRIO,2023-09-30,,minoritarios_mm,0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],Minority Interest; Bloomberg informa 0 en todos los trimestres
+PRIO,2023-12-31,,minoritarios_mm,0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],Minority Interest; Bloomberg informa 0 en todos los trimestres
+PRIO,2024-03-31,,minoritarios_mm,0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],Minority Interest; Bloomberg informa 0 en todos los trimestres
+PRIO,2024-06-30,,minoritarios_mm,0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],Minority Interest; Bloomberg informa 0 en todos los trimestres
+PRIO,2024-09-30,,minoritarios_mm,0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],Minority Interest; Bloomberg informa 0 en todos los trimestres
+PRIO,2024-12-31,,minoritarios_mm,0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],Minority Interest; Bloomberg informa 0 en todos los trimestres
+PRIO,2025-03-31,,minoritarios_mm,0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],Minority Interest; Bloomberg informa 0 en todos los trimestres
+PRIO,2025-06-30,,minoritarios_mm,0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],Minority Interest; Bloomberg informa 0 en todos los trimestres
+PRIO,2025-09-30,,minoritarios_mm,0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],Minority Interest; Bloomberg informa 0 en todos los trimestres
+PRIO,2025-12-31,,minoritarios_mm,0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],Minority Interest; Bloomberg informa 0 en todos los trimestres
+PRIO,2026-03-31,,minoritarios_mm,0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],Minority Interest; Bloomberg informa 0 en todos los trimestres
+PRIO,2026-06-30,,minoritarios_mm,0,musd,USD,Balance Sheet,+ Minority Interest [MINORITY_NONCONTROLLING_INTEREST],Minority Interest; Bloomberg informa 0 en todos los trimestres
+PRIO,2023-09-30,,patrimonio_mm,2575.68759,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Total Equity
+PRIO,2023-12-31,,patrimonio_mm,2860.02679,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Total Equity
+PRIO,2024-03-31,,patrimonio_mm,3069.912069,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Total Equity
+PRIO,2024-06-30,,patrimonio_mm,3190.300233,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Total Equity
+PRIO,2024-09-30,,patrimonio_mm,3342.9029,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Total Equity
+PRIO,2024-12-31,,patrimonio_mm,4201.03907,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Total Equity
+PRIO,2025-03-31,,patrimonio_mm,4648.140092,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Total Equity
+PRIO,2025-06-30,,patrimonio_mm,4816.293162,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Total Equity
+PRIO,2025-09-30,,patrimonio_mm,4879.363823,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Total Equity
+PRIO,2025-12-31,,patrimonio_mm,4673.739734,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Total Equity
+PRIO,2026-03-31,,patrimonio_mm,5125.897061,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Total Equity
+PRIO,2026-06-30,,patrimonio_mm,5459.701028,musd,USD,Balance Sheet,Total Equity [TOTAL_EQUITY],Total Equity
+PRIO,2023-09-30,,activos_totales_mm,5692.927927,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],Total Assets
+PRIO,2023-12-31,,activos_totales_mm,5834.883085,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],Total Assets
+PRIO,2024-03-31,,activos_totales_mm,6137.356129,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],Total Assets
+PRIO,2024-06-30,,activos_totales_mm,6697.989828,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],Total Assets
+PRIO,2024-09-30,,activos_totales_mm,7958.543308,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],Total Assets
+PRIO,2024-12-31,,activos_totales_mm,9036.453347,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],Total Assets
+PRIO,2025-03-31,,activos_totales_mm,9571.789415,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],Total Assets
+PRIO,2025-06-30,,activos_totales_mm,10200.539376,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],Total Assets
+PRIO,2025-09-30,,activos_totales_mm,11235.158263,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],Total Assets
+PRIO,2025-12-31,,activos_totales_mm,11635.762387,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],Total Assets
+PRIO,2026-03-31,,activos_totales_mm,12233.126482,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],Total Assets
+PRIO,2026-06-30,,activos_totales_mm,12289.305744,musd,USD,Balance Sheet,Total Assets [BS_TOT_ASSET],Total Assets
+PRIO,2023-09-30,,deuda_neta_bbg_mm,1655.972418,musd,USD,Balance Sheet,Net Debt [NET_DEBT],Net Debt calculada por Bloomberg (ST+LT debt - cash)
+PRIO,2023-12-31,,deuda_neta_bbg_mm,1487.835694,musd,USD,Balance Sheet,Net Debt [NET_DEBT],Net Debt calculada por Bloomberg (ST+LT debt - cash)
+PRIO,2024-03-31,,deuda_neta_bbg_mm,1408.692406,musd,USD,Balance Sheet,Net Debt [NET_DEBT],Net Debt calculada por Bloomberg (ST+LT debt - cash)
+PRIO,2024-06-30,,deuda_neta_bbg_mm,1223.079053,musd,USD,Balance Sheet,Net Debt [NET_DEBT],Net Debt calculada por Bloomberg (ST+LT debt - cash)
+PRIO,2024-09-30,,deuda_neta_bbg_mm,1413.248493,musd,USD,Balance Sheet,Net Debt [NET_DEBT],Net Debt calculada por Bloomberg (ST+LT debt - cash)
+PRIO,2024-12-31,,deuda_neta_bbg_mm,2989.175548,musd,USD,Balance Sheet,Net Debt [NET_DEBT],Net Debt calculada por Bloomberg (ST+LT debt - cash)
+PRIO,2025-03-31,,deuda_neta_bbg_mm,3127.648859,musd,USD,Balance Sheet,Net Debt [NET_DEBT],Net Debt calculada por Bloomberg (ST+LT debt - cash)
+PRIO,2025-06-30,,deuda_neta_bbg_mm,3362.7426,musd,USD,Balance Sheet,Net Debt [NET_DEBT],Net Debt calculada por Bloomberg (ST+LT debt - cash)
+PRIO,2025-09-30,,deuda_neta_bbg_mm,3366.164617,musd,USD,Balance Sheet,Net Debt [NET_DEBT],Net Debt calculada por Bloomberg (ST+LT debt - cash)
+PRIO,2025-12-31,,deuda_neta_bbg_mm,4539.751094,musd,USD,Balance Sheet,Net Debt [NET_DEBT],Net Debt calculada por Bloomberg (ST+LT debt - cash)
+PRIO,2026-03-31,,deuda_neta_bbg_mm,4640.788268,musd,USD,Balance Sheet,Net Debt [NET_DEBT],Net Debt calculada por Bloomberg (ST+LT debt - cash)
+PRIO,2026-06-30,,deuda_neta_bbg_mm,4212.349681,musd,USD,Balance Sheet,Net Debt [NET_DEBT],Net Debt calculada por Bloomberg (ST+LT debt - cash)
+PRIO,2025-03-31,,ingresos_campo_peregrino_mm,235.114,musd,USD,Segments,Peregrino / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-06-30,,ingresos_campo_peregrino_mm,205.942,musd,USD,Segments,Peregrino / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-09-30,,ingresos_campo_peregrino_mm,110.652,musd,USD,Segments,Peregrino / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-12-31,,ingresos_campo_peregrino_mm,278.419,musd,USD,Segments,Peregrino / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2026-03-31,,ingresos_campo_peregrino_mm,544.989,musd,USD,Segments,Peregrino / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2026-06-30,,ingresos_campo_peregrino_mm,497.565,musd,USD,Segments,Peregrino / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2023-09-30,,ingresos_campo_frade_mm,453.03,musd,USD,Segments,Frade / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2023-12-31,,ingresos_campo_frade_mm,334.86,musd,USD,Segments,Frade / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-03-31,,ingresos_campo_frade_mm,342.807,musd,USD,Segments,Frade / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-06-30,,ingresos_campo_frade_mm,338.06,musd,USD,Segments,Frade / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-09-30,,ingresos_campo_frade_mm,272.364,musd,USD,Segments,Frade / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-12-31,,ingresos_campo_frade_mm,271.807,musd,USD,Segments,Frade / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-03-31,,ingresos_campo_frade_mm,196.586,musd,USD,Segments,Frade / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-06-30,,ingresos_campo_frade_mm,149.527,musd,USD,Segments,Frade / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-09-30,,ingresos_campo_frade_mm,183.562,musd,USD,Segments,Frade / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-12-31,,ingresos_campo_frade_mm,222.014,musd,USD,Segments,Frade / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2026-03-31,,ingresos_campo_frade_mm,262.926,musd,USD,Segments,Frade / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2026-06-30,,ingresos_campo_frade_mm,470.289,musd,USD,Segments,Frade / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2023-09-30,,ingresos_campo_abl_mm,252.397,musd,USD,Segments,Albacora Leste (ABL) / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2023-12-31,,ingresos_campo_abl_mm,139.64,musd,USD,Segments,Albacora Leste (ABL) / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-03-31,,ingresos_campo_abl_mm,190.088,musd,USD,Segments,Albacora Leste (ABL) / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-06-30,,ingresos_campo_abl_mm,241.719,musd,USD,Segments,Albacora Leste (ABL) / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-09-30,,ingresos_campo_abl_mm,136.898,musd,USD,Segments,Albacora Leste (ABL) / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-12-31,,ingresos_campo_abl_mm,139.714,musd,USD,Segments,Albacora Leste (ABL) / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-03-31,,ingresos_campo_abl_mm,178.032,musd,USD,Segments,Albacora Leste (ABL) / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-06-30,,ingresos_campo_abl_mm,81.195,musd,USD,Segments,Albacora Leste (ABL) / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-09-30,,ingresos_campo_abl_mm,197.991,musd,USD,Segments,Albacora Leste (ABL) / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-12-31,,ingresos_campo_abl_mm,154.143,musd,USD,Segments,Albacora Leste (ABL) / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2026-03-31,,ingresos_campo_abl_mm,293.309,musd,USD,Segments,Albacora Leste (ABL) / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2026-06-30,,ingresos_campo_abl_mm,213.973,musd,USD,Segments,Albacora Leste (ABL) / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2023-09-30,,ingresos_campo_polvo_tbmt_mm,120.732,musd,USD,Segments,Polvo-TBMT / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2023-12-31,,ingresos_campo_polvo_tbmt_mm,127.654,musd,USD,Segments,Polvo-TBMT / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-03-31,,ingresos_campo_polvo_tbmt_mm,74.024,musd,USD,Segments,Polvo-TBMT / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-06-30,,ingresos_campo_polvo_tbmt_mm,125.227,musd,USD,Segments,Polvo-TBMT / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-09-30,,ingresos_campo_polvo_tbmt_mm,57.694,musd,USD,Segments,Polvo-TBMT / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-12-31,,ingresos_campo_polvo_tbmt_mm,56.975,musd,USD,Segments,Polvo-TBMT / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-03-31,,ingresos_campo_polvo_tbmt_mm,88.737,musd,USD,Segments,Polvo-TBMT / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-06-30,,ingresos_campo_polvo_tbmt_mm,49.346,musd,USD,Segments,Polvo-TBMT / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-09-30,,ingresos_campo_polvo_tbmt_mm,82.512,musd,USD,Segments,Polvo-TBMT / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-12-31,,ingresos_campo_polvo_tbmt_mm,93.4,musd,USD,Segments,Polvo-TBMT / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2026-03-31,,ingresos_campo_polvo_tbmt_mm,108.363,musd,USD,Segments,Polvo-TBMT / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2026-06-30,,ingresos_campo_polvo_tbmt_mm,145.623,musd,USD,Segments,Polvo-TBMT / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-03-31,,ingresos_campo_trading_mm,39.521,musd,USD,Segments,Trading / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-06-30,,ingresos_campo_trading_mm,177.156,musd,USD,Segments,Trading / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-09-30,,ingresos_campo_trading_mm,178.374,musd,USD,Segments,Trading / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-12-31,,ingresos_campo_trading_mm,0.824,musd,USD,Segments,Trading / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-03-31,,ingresos_campo_trading_mm,60.761,musd,USD,Segments,Trading / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-06-30,,ingresos_campo_trading_mm,101.401,musd,USD,Segments,Trading / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-09-30,,ingresos_campo_trading_mm,79.372,musd,USD,Segments,Trading / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2025-12-31,,ingresos_campo_trading_mm,39.87,musd,USD,Segments,Trading / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2026-03-31,,ingresos_campo_trading_mm,32.03,musd,USD,Segments,Trading / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2026-06-30,,ingresos_campo_trading_mm,62.553,musd,USD,Segments,Trading / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2024-12-31,,ingresos_campo_wahoo_mm,42.521,musd,USD,Segments,Wahoo / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2023-09-30,,ingresos_campo_manati_mm,2.731,musd,USD,Segments,Manati / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"
+PRIO,2023-12-31,,ingresos_campo_manati_mm,2.509,musd,USD,Segments,Manati / Revenue- Supplement Breakdown,"Ingreso por campo (hoja Segments, segmento E&P). Meses sin dato = campo aun no operado/adquirido o sin reporte"

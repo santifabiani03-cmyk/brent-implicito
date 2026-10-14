@@ -1,0 +1,313 @@
+empresa,periodo,fecha_publicacion,variable,valor,unidad,moneda,hoja,campo_bloomberg,nota
+YPF,2023-09-30,,acciones_excel_bruto_mm,3933,"mm (capital ARS, no acciones)",,bs,Shares Outstanding,"Valor crudo del Excel, 10x la cantidad real de acciones; no usar como acciones"
+YPF,2023-09-30,,acciones_mm,393.3,mm acciones,,bs,Shares Outstanding,"CORREGIDO: Excel trae 3933 = capital social en ARS mm (VN ARS 10/accion), NO cantidad de acciones. Acciones reales = 3933/10 = 393.3 mm (YPF: 393.312.793 acc.). Ver notas"
+YPF,2023-09-30,,caja_mm,1475,musd,USD,bs,"+ Cash, Cash Equivalents & STI",Incluye inversiones de corto plazo (ST Investments); coincide con Net Debt de Bloomberg
+YPF,2023-09-30,,caja_solo_mm,1294,musd,USD,bs,+ Cash & Cash Equivalents,"Solo caja y equivalentes, sin ST Investments"
+YPF,2023-09-30,,capex_mm,1488,musd,USD,CFlow,+ Change in Fixed & Intang,Signo invertido (egreso en Excel); incluye intangibles
+YPF,2023-09-30,,costo_bienes_servicios_mm,3216,musd,USD,IS,+ Cost of Goods & Services,Costo total de bienes y servicios (incluye compras/refinacion; NO es lifting upstream); excluye D&A
+YPF,2023-09-30,,dda_mm,888,musd,USD,CFlow,+ Depreciation & Amortization,D&A del trimestre; coincide con IS D&A costo+opex y con reconciliation
+YPF,2023-09-30,,deuda_bancaria_mm,8140,musd,USD,bs,+ ST Borrowings + + LT Borrowings,"Solo borrowings, sin leasing"
+YPF,2023-09-30,,deuda_mm,8674,musd,USD,bs,+ ST Debt + + LT Debt,ST Debt + LT Debt; incluye arrendamientos financieros (~0.7 bn)
+YPF,2023-09-30,,deuda_neta_mm,7200,musd,USD,bs,Net Debt,Calculo Bloomberg = ST Debt + LT Debt - Cash&STI
+YPF,2023-09-30,,ebitda_mm,870,musd,USD,IS,EBITDA,EBITDA ajustado = EBIT ajustado + D&A (reconciliation); CFlow trae otro EBITDA (fila 53) distinto
+YPF,2023-09-30,,flujo_operativo_mm,1300,musd,USD,CFlow,Cash from Operating Activities,
+YPF,2023-09-30,,impuesto_ganancias_mm,-25,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",Gasto GAAP (negativo = beneficio)
+YPF,2023-09-30,,ingresos_mm,4787,musd,USD,IS,Revenue,Trimestral (suma 2024 = 19299)
+YPF,2023-09-30,,intereses_mm,242,musd,USD,IS,+ Interest Expense,Gasto bruto por intereses (no neto de ingresos)
+YPF,2023-09-30,,inversiones_afiliadas_mm,1836,musd,USD,bs,+ Investments in Affiliates,Valor contable de participaciones en asociadas/JV
+YPF,2023-09-30,,minoritarios_mm,136,musd,USD,bs,+ Minority Interest,
+YPF,2023-09-30,,patrimonio_neto_mm,10965,musd,USD,bs,Equity Before Minority Interest,Equity antes de minoritarios
+YPF,2023-09-30,,resultado_antes_imp_mm,-234,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP
+YPF,2023-09-30,,resultado_neto_mm,-213,musd,USD,IS,"Net Income, GAAP",Net Income GAAP atribuible a controlante
+YPF,2023-09-30,,resultado_operativo_corp_ajustes_mm,233.88,musd,USD,SEGMENT BY PROD,Central Administration & Others: Operating Income + Reconciliation: Operating Income,Administracion central y otros + ajustes de consolidacion (no incluidos en ebitda_no_up_mm)
+YPF,2023-09-30,,resultado_operativo_mm,-18,musd,USD,IS,Operating Income (Loss),EBIT ajustado (Operating Income); EBIT GAAP en hoja reconciliation
+YPF,2023-09-30,,resultado_operativo_no_up_mm,-1135.83,musd,USD,SEGMENT BY PROD,Gas & Power: Operating Income + Commercialization: Operating Income + Industrialization: Operating Income,"Segmentos sumados: Gas & Power, Commercialization, Industrialization"
+YPF,2023-09-30,,resultado_operativo_upstream_mm,296.44,musd,USD,SEGMENT BY PROD,Upstream: Operating Income,Resultado operativo GAAP del segmento
+YPF,2023-09-30,,sga_mm,701,musd,USD,IS,"+ Selling, General & Admin",Incluye Selling & Marketing + G&A
+YPF,2023-12-31,,acciones_excel_bruto_mm,3933,"mm (capital ARS, no acciones)",,bs,Shares Outstanding,"Valor crudo del Excel, 10x la cantidad real de acciones; no usar como acciones"
+YPF,2023-12-31,,acciones_mm,393.3,mm acciones,,bs,Shares Outstanding,"CORREGIDO: Excel trae 3933 = capital social en ARS mm (VN ARS 10/accion), NO cantidad de acciones. Acciones reales = 3933/10 = 393.3 mm (YPF: 393.312.793 acc.). Ver notas"
+YPF,2023-12-31,,caja_mm,1384,musd,USD,bs,"+ Cash, Cash Equivalents & STI",Incluye inversiones de corto plazo (ST Investments); coincide con Net Debt de Bloomberg
+YPF,2023-12-31,,caja_solo_mm,1121,musd,USD,bs,+ Cash & Cash Equivalents,"Solo caja y equivalentes, sin ST Investments"
+YPF,2023-12-31,,capex_mm,1441,musd,USD,CFlow,+ Change in Fixed & Intang,Signo invertido (egreso en Excel); incluye intangibles
+YPF,2023-12-31,,costo_bienes_servicios_mm,3607,musd,USD,IS,+ Cost of Goods & Services,Costo total de bienes y servicios (incluye compras/refinacion; NO es lifting upstream); excluye D&A
+YPF,2023-12-31,,dda_mm,919,musd,USD,CFlow,+ Depreciation & Amortization,D&A del trimestre; coincide con IS D&A costo+opex y con reconciliation
+YPF,2023-12-31,,deuda_bancaria_mm,8176,musd,USD,bs,+ ST Borrowings + + LT Borrowings,"Solo borrowings, sin leasing"
+YPF,2023-12-31,,deuda_mm,8840,musd,USD,bs,+ ST Debt + + LT Debt,ST Debt + LT Debt; incluye arrendamientos financieros (~0.7 bn)
+YPF,2023-12-31,,deuda_neta_mm,7455,musd,USD,bs,Net Debt,Calculo Bloomberg = ST Debt + LT Debt - Cash&STI
+YPF,2023-12-31,,ebitda_mm,1103,musd,USD,IS,EBITDA,EBITDA ajustado = EBIT ajustado + D&A (reconciliation); CFlow trae otro EBITDA (fila 53) distinto
+YPF,2023-12-31,,flujo_operativo_mm,1589,musd,USD,CFlow,Cash from Operating Activities,
+YPF,2023-12-31,,impuesto_ganancias_mm,1569,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",Gasto GAAP (negativo = beneficio)
+YPF,2023-12-31,,ingresos_mm,5409,musd,USD,IS,Revenue,Trimestral (suma 2024 = 19299)
+YPF,2023-12-31,,intereses_mm,290,musd,USD,IS,+ Interest Expense,Gasto bruto por intereses (no neto de ingresos)
+YPF,2023-12-31,,inversiones_afiliadas_mm,1672,musd,USD,bs,+ Investments in Affiliates,Valor contable de participaciones en asociadas/JV
+YPF,2023-12-31,,minoritarios_mm,102,musd,USD,bs,+ Minority Interest,
+YPF,2023-12-31,,patrimonio_neto_mm,8933,musd,USD,bs,Equity Before Minority Interest,Equity antes de minoritarios
+YPF,2023-12-31,,resultado_antes_imp_mm,-2480,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP
+YPF,2023-12-31,,resultado_neto_mm,-4089,musd,USD,IS,"Net Income, GAAP",Net Income GAAP atribuible a controlante
+YPF,2023-12-31,,resultado_operativo_corp_ajustes_mm,-104.8,musd,USD,SEGMENT BY PROD,Central Administration & Others: Operating Income + Reconciliation: Operating Income,Administracion central y otros + ajustes de consolidacion (no incluidos en ebitda_no_up_mm)
+YPF,2023-12-31,,resultado_operativo_mm,184,musd,USD,IS,Operating Income (Loss),EBIT ajustado (Operating Income); EBIT GAAP en hoja reconciliation
+YPF,2023-12-31,,resultado_operativo_no_up_mm,2675.48,musd,USD,SEGMENT BY PROD,Downstream: Operating Income + Gas & Power: Operating Income,"Segmentos sumados: Downstream, Gas & Power"
+YPF,2023-12-31,,resultado_operativo_upstream_mm,-6014.14,musd,USD,SEGMENT BY PROD,Upstream: Operating Income,Resultado operativo GAAP del segmento
+YPF,2023-12-31,,sga_mm,847,musd,USD,IS,"+ Selling, General & Admin",Incluye Selling & Marketing + G&A
+YPF,2024-03-31,,acciones_excel_bruto_mm,3933,"mm (capital ARS, no acciones)",,bs,Shares Outstanding,"Valor crudo del Excel, 10x la cantidad real de acciones; no usar como acciones"
+YPF,2024-03-31,,acciones_mm,393.3,mm acciones,,bs,Shares Outstanding,"CORREGIDO: Excel trae 3933 = capital social en ARS mm (VN ARS 10/accion), NO cantidad de acciones. Acciones reales = 3933/10 = 393.3 mm (YPF: 393.312.793 acc.). Ver notas"
+YPF,2024-03-31,,caja_mm,1599,musd,USD,bs,"+ Cash, Cash Equivalents & STI",Incluye inversiones de corto plazo (ST Investments); coincide con Net Debt de Bloomberg
+YPF,2024-03-31,,caja_solo_mm,1309,musd,USD,bs,+ Cash & Cash Equivalents,"Solo caja y equivalentes, sin ST Investments"
+YPF,2024-03-31,,capex_mm,1181,musd,USD,CFlow,+ Change in Fixed & Intang,Signo invertido (egreso en Excel); incluye intangibles
+YPF,2024-03-31,,costo_bienes_servicios_mm,2368,musd,USD,IS,+ Cost of Goods & Services,Costo total de bienes y servicios (incluye compras/refinacion; NO es lifting upstream); excluye D&A
+YPF,2024-03-31,,dda_mm,652,musd,USD,CFlow,+ Depreciation & Amortization,D&A del trimestre; coincide con IS D&A costo+opex y con reconciliation
+YPF,2024-03-31,,dda_no_up_mm,158,musd,USD,SEGMENT BY PROD,Downstream: Depreciation and Amortization + Gas & Power: Depreciation and Amortization,"Segmentos: Downstream, Gas & Power"
+YPF,2024-03-31,,dda_upstream_mm,478,musd,USD,SEGMENT BY PROD,Upstream: Depreciation and Amortization,
+YPF,2024-03-31,,deuda_bancaria_mm,8799,musd,USD,bs,+ ST Borrowings + + LT Borrowings,"Solo borrowings, sin leasing"
+YPF,2024-03-31,,deuda_mm,9447,musd,USD,bs,+ ST Debt + + LT Debt,ST Debt + LT Debt; incluye arrendamientos financieros (~0.7 bn)
+YPF,2024-03-31,,deuda_neta_mm,7848,musd,USD,bs,Net Debt,Calculo Bloomberg = ST Debt + LT Debt - Cash&STI
+YPF,2024-03-31,,ebitda_mm,1326,musd,USD,IS,EBITDA,EBITDA ajustado = EBIT ajustado + D&A (reconciliation); CFlow trae otro EBITDA (fila 53) distinto
+YPF,2024-03-31,,ebitda_no_up_mm,672,musd,USD,SEGMENT BY PROD,Downstream: Operating Income + Depreciation and Amortization + Gas & Power: Operating Income + Depreciation and Amortization,"Suma de Operating Income + Depreciation and Amortization de: Downstream, Gas & Power. Excluye Central Administration & Others y ajustes. OI de segmento es GAAP (incluye write-downs)."
+YPF,2024-03-31,,flujo_operativo_mm,904,musd,USD,CFlow,Cash from Operating Activities,
+YPF,2024-03-31,,impuesto_ganancias_mm,-121,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",Gasto GAAP (negativo = beneficio)
+YPF,2024-03-31,,ingresos_mm,4311,musd,USD,IS,Revenue,Trimestral (suma 2024 = 19299)
+YPF,2024-03-31,,intereses_mm,199,musd,USD,IS,+ Interest Expense,Gasto bruto por intereses (no neto de ingresos)
+YPF,2024-03-31,,inversiones_afiliadas_mm,1834,musd,USD,bs,+ Investments in Affiliates,Valor contable de participaciones en asociadas/JV
+YPF,2024-03-31,,minoritarios_mm,154,musd,USD,bs,+ Minority Interest,
+YPF,2024-03-31,,patrimonio_neto_mm,9813,musd,USD,bs,Equity Before Minority Interest,Equity antes de minoritarios
+YPF,2024-03-31,,resultado_antes_imp_mm,536,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP
+YPF,2024-03-31,,resultado_neto_mm,649,musd,USD,IS,"Net Income, GAAP",Net Income GAAP atribuible a controlante
+YPF,2024-03-31,,resultado_operativo_corp_ajustes_mm,-252,musd,USD,SEGMENT BY PROD,Central Administration & Others: Operating Income + Reconciliation: Operating Income,Administracion central y otros + ajustes de consolidacion (no incluidos en ebitda_no_up_mm)
+YPF,2024-03-31,,resultado_operativo_mm,674,musd,USD,IS,Operating Income (Loss),EBIT ajustado (Operating Income); EBIT GAAP en hoja reconciliation
+YPF,2024-03-31,,resultado_operativo_no_up_mm,514,musd,USD,SEGMENT BY PROD,Downstream: Operating Income + Gas & Power: Operating Income,"Segmentos sumados: Downstream, Gas & Power"
+YPF,2024-03-31,,resultado_operativo_upstream_mm,404,musd,USD,SEGMENT BY PROD,Upstream: Operating Income,Resultado operativo GAAP del segmento
+YPF,2024-03-31,,sga_mm,571,musd,USD,IS,"+ Selling, General & Admin",Incluye Selling & Marketing + G&A
+YPF,2024-06-30,,acciones_excel_bruto_mm,3933,"mm (capital ARS, no acciones)",,bs,Shares Outstanding,"Valor crudo del Excel, 10x la cantidad real de acciones; no usar como acciones"
+YPF,2024-06-30,,acciones_mm,393.3,mm acciones,,bs,Shares Outstanding,"CORREGIDO: Excel trae 3933 = capital social en ARS mm (VN ARS 10/accion), NO cantidad de acciones. Acciones reales = 3933/10 = 393.3 mm (YPF: 393.312.793 acc.). Ver notas"
+YPF,2024-06-30,,caja_mm,1394,musd,USD,bs,"+ Cash, Cash Equivalents & STI",Incluye inversiones de corto plazo (ST Investments); coincide con Net Debt de Bloomberg
+YPF,2024-06-30,,caja_solo_mm,1041,musd,USD,bs,+ Cash & Cash Equivalents,"Solo caja y equivalentes, sin ST Investments"
+YPF,2024-06-30,,capex_mm,1354,musd,USD,CFlow,+ Change in Fixed & Intang,Signo invertido (egreso en Excel); incluye intangibles
+YPF,2024-06-30,,costo_bienes_servicios_mm,2898,musd,USD,IS,+ Cost of Goods & Services,Costo total de bienes y servicios (incluye compras/refinacion; NO es lifting upstream); excluye D&A
+YPF,2024-06-30,,dda_mm,638,musd,USD,CFlow,+ Depreciation & Amortization,D&A del trimestre; coincide con IS D&A costo+opex y con reconciliation
+YPF,2024-06-30,,dda_no_up_mm,167,musd,USD,SEGMENT BY PROD,Downstream: Depreciation and Amortization + Gas & Power: Depreciation and Amortization,"Segmentos: Downstream, Gas & Power"
+YPF,2024-06-30,,dda_upstream_mm,454,musd,USD,SEGMENT BY PROD,Upstream: Depreciation and Amortization,
+YPF,2024-06-30,,deuda_bancaria_mm,8850,musd,USD,bs,+ ST Borrowings + + LT Borrowings,"Solo borrowings, sin leasing"
+YPF,2024-06-30,,deuda_mm,9453,musd,USD,bs,+ ST Debt + + LT Debt,ST Debt + LT Debt; incluye arrendamientos financieros (~0.7 bn)
+YPF,2024-06-30,,deuda_neta_mm,8059,musd,USD,bs,Net Debt,Calculo Bloomberg = ST Debt + LT Debt - Cash&STI
+YPF,2024-06-30,,ebitda_mm,1265,musd,USD,IS,EBITDA,EBITDA ajustado = EBIT ajustado + D&A (reconciliation); CFlow trae otro EBITDA (fila 53) distinto
+YPF,2024-06-30,,ebitda_no_up_mm,495,musd,USD,SEGMENT BY PROD,Downstream: Operating Income + Depreciation and Amortization + Gas & Power: Operating Income + Depreciation and Amortization,"Suma de Operating Income + Depreciation and Amortization de: Downstream, Gas & Power. Excluye Central Administration & Others y ajustes. OI de segmento es GAAP (incluye write-downs)."
+YPF,2024-06-30,,flujo_operativo_mm,1313,musd,USD,CFlow,Cash from Operating Activities,
+YPF,2024-06-30,,impuesto_ganancias_mm,-79,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",Gasto GAAP (negativo = beneficio)
+YPF,2024-06-30,,ingresos_mm,4936,musd,USD,IS,Revenue,Trimestral (suma 2024 = 19299)
+YPF,2024-06-30,,intereses_mm,174,musd,USD,IS,+ Interest Expense,Gasto bruto por intereses (no neto de ingresos)
+YPF,2024-06-30,,inversiones_afiliadas_mm,1745,musd,USD,bs,+ Investments in Affiliates,Valor contable de participaciones en asociadas/JV
+YPF,2024-06-30,,minoritarios_mm,187,musd,USD,bs,+ Minority Interest,
+YPF,2024-06-30,,patrimonio_neto_mm,10417,musd,USD,bs,Equity Before Minority Interest,Equity antes de minoritarios
+YPF,2024-06-30,,resultado_antes_imp_mm,456,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP
+YPF,2024-06-30,,resultado_neto_mm,519,musd,USD,IS,"Net Income, GAAP",Net Income GAAP atribuible a controlante
+YPF,2024-06-30,,resultado_operativo_corp_ajustes_mm,-101,musd,USD,SEGMENT BY PROD,Central Administration & Others: Operating Income + Reconciliation: Operating Income,Administracion central y otros + ajustes de consolidacion (no incluidos en ebitda_no_up_mm)
+YPF,2024-06-30,,resultado_operativo_mm,627,musd,USD,IS,Operating Income (Loss),EBIT ajustado (Operating Income); EBIT GAAP en hoja reconciliation
+YPF,2024-06-30,,resultado_operativo_no_up_mm,328,musd,USD,SEGMENT BY PROD,Downstream: Operating Income + Gas & Power: Operating Income,"Segmentos sumados: Downstream, Gas & Power"
+YPF,2024-06-30,,resultado_operativo_upstream_mm,363,musd,USD,SEGMENT BY PROD,Upstream: Operating Income,Resultado operativo GAAP del segmento
+YPF,2024-06-30,,sga_mm,745,musd,USD,IS,"+ Selling, General & Admin",Incluye Selling & Marketing + G&A
+YPF,2024-09-30,,acciones_excel_bruto_mm,3933,"mm (capital ARS, no acciones)",,bs,Shares Outstanding,"Valor crudo del Excel, 10x la cantidad real de acciones; no usar como acciones"
+YPF,2024-09-30,,acciones_mm,393.3,mm acciones,,bs,Shares Outstanding,"CORREGIDO: Excel trae 3933 = capital social en ARS mm (VN ARS 10/accion), NO cantidad de acciones. Acciones reales = 3933/10 = 393.3 mm (YPF: 393.312.793 acc.). Ver notas"
+YPF,2024-09-30,,caja_mm,1195,musd,USD,bs,"+ Cash, Cash Equivalents & STI",Incluye inversiones de corto plazo (ST Investments); coincide con Net Debt de Bloomberg
+YPF,2024-09-30,,caja_solo_mm,877,musd,USD,bs,+ Cash & Cash Equivalents,"Solo caja y equivalentes, sin ST Investments"
+YPF,2024-09-30,,capex_mm,1485,musd,USD,CFlow,+ Change in Fixed & Intang,Signo invertido (egreso en Excel); incluye intangibles
+YPF,2024-09-30,,costo_bienes_servicios_mm,3047,musd,USD,IS,+ Cost of Goods & Services,Costo total de bienes y servicios (incluye compras/refinacion; NO es lifting upstream); excluye D&A
+YPF,2024-09-30,,dda_mm,674,musd,USD,CFlow,+ Depreciation & Amortization,D&A del trimestre; coincide con IS D&A costo+opex y con reconciliation
+YPF,2024-09-30,,dda_no_up_mm,182,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Depreciation and Amortization + LNG and Integrated Gas: Depreciation and Amortization + New Energies: Depreciation and Amortization,"Segmentos: Midstream and Downstream, LNG and Integrated Gas, New Energies"
+YPF,2024-09-30,,dda_upstream_mm,496,musd,USD,SEGMENT BY PROD,Upstream: Depreciation and Amortization,
+YPF,2024-09-30,,deuda_bancaria_mm,8700,musd,USD,bs,+ ST Borrowings + + LT Borrowings,"Solo borrowings, sin leasing"
+YPF,2024-09-30,,deuda_mm,9286,musd,USD,bs,+ ST Debt + + LT Debt,ST Debt + LT Debt; incluye arrendamientos financieros (~0.7 bn)
+YPF,2024-09-30,,deuda_neta_mm,8090,musd,USD,bs,Net Debt,Calculo Bloomberg = ST Debt + LT Debt - Cash&STI
+YPF,2024-09-30,,ebitda_mm,1464,musd,USD,IS,EBITDA,EBITDA ajustado = EBIT ajustado + D&A (reconciliation); CFlow trae otro EBITDA (fila 53) distinto
+YPF,2024-09-30,,ebitda_no_up_mm,566,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Operating Income + Depreciation and Amortization + LNG and Integrated Gas: Operating Income + Depreciation and Amortization + New Energies: Operating Income + Depreciation and Amortization,"Suma de Operating Income + Depreciation and Amortization de: Midstream and Downstream, LNG and Integrated Gas, New Energies (LNG sin D&A en Excel: se uso fila Depreciation=1). Excluye Central Administration & Others y ajustes. OI de segmento es GAAP (incluye write-downs)."
+YPF,2024-09-30,,flujo_operativo_mm,1422,musd,USD,CFlow,Cash from Operating Activities,
+YPF,2024-09-30,,impuesto_ganancias_mm,-834,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",Gasto GAAP (negativo = beneficio)
+YPF,2024-09-30,,ingresos_mm,5299,musd,USD,IS,Revenue,Trimestral (suma 2024 = 19299)
+YPF,2024-09-30,,intereses_mm,149,musd,USD,IS,+ Interest Expense,Gasto bruto por intereses (no neto de ingresos)
+YPF,2024-09-30,,inversiones_afiliadas_mm,1858,musd,USD,bs,+ Investments in Affiliates,Valor contable de participaciones en asociadas/JV
+YPF,2024-09-30,,minoritarios_mm,209,musd,USD,bs,+ Minority Interest,
+YPF,2024-09-30,,patrimonio_neto_mm,11924,musd,USD,bs,Equity Before Minority Interest,Equity antes de minoritarios
+YPF,2024-09-30,,resultado_antes_imp_mm,651,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP
+YPF,2024-09-30,,resultado_neto_mm,1471,musd,USD,IS,"Net Income, GAAP",Net Income GAAP atribuible a controlante
+YPF,2024-09-30,,resultado_operativo_corp_ajustes_mm,37,musd,USD,SEGMENT BY PROD,Central Administration & Others: Operating Income + Reconciliation: Operating Income,Administracion central y otros + ajustes de consolidacion (no incluidos en ebitda_no_up_mm)
+YPF,2024-09-30,,resultado_operativo_mm,789,musd,USD,IS,Operating Income (Loss),EBIT ajustado (Operating Income); EBIT GAAP en hoja reconciliation
+YPF,2024-09-30,,resultado_operativo_no_up_mm,384,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Operating Income + LNG and Integrated Gas: Operating Income + New Energies: Operating Income,"Segmentos sumados: Midstream and Downstream, LNG and Integrated Gas, New Energies"
+YPF,2024-09-30,,resultado_operativo_upstream_mm,333,musd,USD,SEGMENT BY PROD,Upstream: Operating Income,Resultado operativo GAAP del segmento
+YPF,2024-09-30,,sga_mm,734,musd,USD,IS,"+ Selling, General & Admin",Incluye Selling & Marketing + G&A
+YPF,2024-12-31,,acciones_excel_bruto_mm,3933,"mm (capital ARS, no acciones)",,bs,Shares Outstanding,"Valor crudo del Excel, 10x la cantidad real de acciones; no usar como acciones"
+YPF,2024-12-31,,acciones_mm,393.3,mm acciones,,bs,Shares Outstanding,"CORREGIDO: Excel trae 3933 = capital social en ARS mm (VN ARS 10/accion), NO cantidad de acciones. Acciones reales = 3933/10 = 393.3 mm (YPF: 393.312.793 acc.). Ver notas"
+YPF,2024-12-31,,caja_mm,1508,musd,USD,bs,"+ Cash, Cash Equivalents & STI",Incluye inversiones de corto plazo (ST Investments); coincide con Net Debt de Bloomberg
+YPF,2024-12-31,,caja_solo_mm,1118,musd,USD,bs,+ Cash & Cash Equivalents,"Solo caja y equivalentes, sin ST Investments"
+YPF,2024-12-31,,capex_mm,1373,musd,USD,CFlow,+ Change in Fixed & Intang,Signo invertido (egreso en Excel); incluye intangibles
+YPF,2024-12-31,,costo_bienes_servicios_mm,3012,musd,USD,IS,+ Cost of Goods & Services,Costo total de bienes y servicios (incluye compras/refinacion; NO es lifting upstream); excluye D&A
+YPF,2024-12-31,,dda_mm,795,musd,USD,CFlow,+ Depreciation & Amortization,D&A del trimestre; coincide con IS D&A costo+opex y con reconciliation
+YPF,2024-12-31,,deuda_bancaria_mm,8942,musd,USD,bs,+ ST Borrowings + + LT Borrowings,"Solo borrowings, sin leasing"
+YPF,2024-12-31,,deuda_mm,9718,musd,USD,bs,+ ST Debt + + LT Debt,ST Debt + LT Debt; incluye arrendamientos financieros (~0.7 bn)
+YPF,2024-12-31,,deuda_neta_mm,8210,musd,USD,bs,Net Debt,Calculo Bloomberg = ST Debt + LT Debt - Cash&STI
+YPF,2024-12-31,,ebitda_mm,359,musd,USD,IS,EBITDA,EBITDA ajustado = EBIT ajustado + D&A (reconciliation); CFlow trae otro EBITDA (fila 53) distinto
+YPF,2024-12-31,,flujo_operativo_mm,1558,musd,USD,CFlow,Cash from Operating Activities,
+YPF,2024-12-31,,impuesto_ganancias_mm,-225,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",Gasto GAAP (negativo = beneficio)
+YPF,2024-12-31,,ingresos_mm,4753,musd,USD,IS,Revenue,Trimestral (suma 2024 = 19299)
+YPF,2024-12-31,,intereses_mm,148,musd,USD,IS,+ Interest Expense,Gasto bruto por intereses (no neto de ingresos)
+YPF,2024-12-31,,inversiones_afiliadas_mm,1960,musd,USD,bs,+ Investments in Affiliates,Valor contable de participaciones en asociadas/JV
+YPF,2024-12-31,,minoritarios_mm,218,musd,USD,bs,+ Minority Interest,
+YPF,2024-12-31,,patrimonio_neto_mm,11653,musd,USD,bs,Equity Before Minority Interest,Equity antes de minoritarios
+YPF,2024-12-31,,resultado_antes_imp_mm,-509,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP
+YPF,2024-12-31,,resultado_neto_mm,-290,musd,USD,IS,"Net Income, GAAP",Net Income GAAP atribuible a controlante
+YPF,2024-12-31,,resultado_operativo_corp_ajustes_mm,-162,musd,USD,SEGMENT BY PROD,Central Administration & Others: Operating Income + Reconciliation: Operating Income,Administracion central y otros + ajustes de consolidacion (no incluidos en ebitda_no_up_mm)
+YPF,2024-12-31,,resultado_operativo_mm,-436,musd,USD,IS,Operating Income (Loss),EBIT ajustado (Operating Income); EBIT GAAP en hoja reconciliation
+YPF,2024-12-31,,resultado_operativo_no_up_mm,212,musd,USD,SEGMENT BY PROD,Downstream: Operating Income + Gas & Power: Operating Income,"Segmentos sumados: Downstream, Gas & Power"
+YPF,2024-12-31,,resultado_operativo_upstream_mm,-580,musd,USD,SEGMENT BY PROD,Upstream: Operating Income,Resultado operativo GAAP del segmento
+YPF,2024-12-31,,sga_mm,747,musd,USD,IS,"+ Selling, General & Admin",Incluye Selling & Marketing + G&A
+YPF,2025-03-31,,acciones_excel_bruto_mm,3933,"mm (capital ARS, no acciones)",,bs,Shares Outstanding,"Valor crudo del Excel, 10x la cantidad real de acciones; no usar como acciones"
+YPF,2025-03-31,,acciones_mm,393.3,mm acciones,,bs,Shares Outstanding,"CORREGIDO: Excel trae 3933 = capital social en ARS mm (VN ARS 10/accion), NO cantidad de acciones. Acciones reales = 3933/10 = 393.3 mm (YPF: 393.312.793 acc.). Ver notas"
+YPF,2025-03-31,,caja_mm,1230,musd,USD,bs,"+ Cash, Cash Equivalents & STI",Incluye inversiones de corto plazo (ST Investments); coincide con Net Debt de Bloomberg
+YPF,2025-03-31,,caja_solo_mm,938,musd,USD,bs,+ Cash & Cash Equivalents,"Solo caja y equivalentes, sin ST Investments"
+YPF,2025-03-31,,capex_mm,1238,musd,USD,CFlow,+ Change in Fixed & Intang,Signo invertido (egreso en Excel); incluye intangibles
+YPF,2025-03-31,,costo_bienes_servicios_mm,2567,musd,USD,IS,+ Cost of Goods & Services,Costo total de bienes y servicios (incluye compras/refinacion; NO es lifting upstream); excluye D&A
+YPF,2025-03-31,,dda_mm,806,musd,USD,CFlow,+ Depreciation & Amortization,D&A del trimestre; coincide con IS D&A costo+opex y con reconciliation
+YPF,2025-03-31,,dda_no_up_mm,180,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Depreciation and Amortization + LNG and Integrated Gas: Depreciation and Amortization + New Energies: Depreciation and Amortization,"Segmentos: Midstream and Downstream, LNG and Integrated Gas, New Energies"
+YPF,2025-03-31,,dda_upstream_mm,602,musd,USD,SEGMENT BY PROD,Upstream: Depreciation and Amortization,
+YPF,2025-03-31,,deuda_bancaria_mm,9567,musd,USD,bs,+ ST Borrowings + + LT Borrowings,"Solo borrowings, sin leasing"
+YPF,2025-03-31,,deuda_mm,10260,musd,USD,bs,+ ST Debt + + LT Debt,ST Debt + LT Debt; incluye arrendamientos financieros (~0.7 bn)
+YPF,2025-03-31,,deuda_neta_mm,9031,musd,USD,bs,Net Debt,Calculo Bloomberg = ST Debt + LT Debt - Cash&STI
+YPF,2025-03-31,,ebitda_mm,1192,musd,USD,IS,EBITDA,EBITDA ajustado = EBIT ajustado + D&A (reconciliation); CFlow trae otro EBITDA (fila 53) distinto
+YPF,2025-03-31,,ebitda_no_up_mm,581,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Operating Income + Depreciation and Amortization + LNG and Integrated Gas: Operating Income + Depreciation and Amortization + New Energies: Operating Income + Depreciation and Amortization,"Suma de Operating Income + Depreciation and Amortization de: Midstream and Downstream, LNG and Integrated Gas, New Energies. Excluye Central Administration & Others y ajustes. OI de segmento es GAAP (incluye write-downs)."
+YPF,2025-03-31,,flujo_operativo_mm,630,musd,USD,CFlow,Cash from Operating Activities,
+YPF,2025-03-31,,impuesto_ganancias_mm,27,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",Gasto GAAP (negativo = beneficio)
+YPF,2025-03-31,,ingresos_mm,4608,musd,USD,IS,Revenue,Trimestral (suma 2024 = 19299)
+YPF,2025-03-31,,intereses_mm,162,musd,USD,IS,+ Interest Expense,Gasto bruto por intereses (no neto de ingresos)
+YPF,2025-03-31,,inversiones_afiliadas_mm,2104,musd,USD,bs,+ Investments in Affiliates,Valor contable de participaciones en asociadas/JV
+YPF,2025-03-31,,minoritarios_mm,233,musd,USD,bs,+ Minority Interest,
+YPF,2025-03-31,,patrimonio_neto_mm,11677,musd,USD,bs,Equity Before Minority Interest,Equity antes de minoritarios
+YPF,2025-03-31,,resultado_antes_imp_mm,17,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP
+YPF,2025-03-31,,resultado_neto_mm,-16,musd,USD,IS,"Net Income, GAAP",Net Income GAAP atribuible a controlante
+YPF,2025-03-31,,resultado_operativo_corp_ajustes_mm,-90,musd,USD,SEGMENT BY PROD,Central Administration & Others: Operating Income + Reconciliation: Operating Income,Administracion central y otros + ajustes de consolidacion (no incluidos en ebitda_no_up_mm)
+YPF,2025-03-31,,resultado_operativo_mm,386,musd,USD,IS,Operating Income (Loss),EBIT ajustado (Operating Income); EBIT GAAP en hoja reconciliation
+YPF,2025-03-31,,resultado_operativo_no_up_mm,401,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Operating Income + LNG and Integrated Gas: Operating Income + New Energies: Operating Income,"Segmentos sumados: Midstream and Downstream, LNG and Integrated Gas, New Energies"
+YPF,2025-03-31,,resultado_operativo_upstream_mm,-119,musd,USD,SEGMENT BY PROD,Upstream: Operating Income,Resultado operativo GAAP del segmento
+YPF,2025-03-31,,sga_mm,694,musd,USD,IS,"+ Selling, General & Admin",Incluye Selling & Marketing + G&A
+YPF,2025-06-30,,acciones_excel_bruto_mm,3933,"mm (capital ARS, no acciones)",,bs,Shares Outstanding,"Valor crudo del Excel, 10x la cantidad real de acciones; no usar como acciones"
+YPF,2025-06-30,,acciones_mm,393.3,mm acciones,,bs,Shares Outstanding,"CORREGIDO: Excel trae 3933 = capital social en ARS mm (VN ARS 10/accion), NO cantidad de acciones. Acciones reales = 3933/10 = 393.3 mm (YPF: 393.312.793 acc.). Ver notas"
+YPF,2025-06-30,,caja_mm,1011,musd,USD,bs,"+ Cash, Cash Equivalents & STI",Incluye inversiones de corto plazo (ST Investments); coincide con Net Debt de Bloomberg
+YPF,2025-06-30,,caja_solo_mm,774,musd,USD,bs,+ Cash & Cash Equivalents,"Solo caja y equivalentes, sin ST Investments"
+YPF,2025-06-30,,capex_mm,1273,musd,USD,CFlow,+ Change in Fixed & Intang,Signo invertido (egreso en Excel); incluye intangibles
+YPF,2025-06-30,,costo_bienes_servicios_mm,2708,musd,USD,IS,+ Cost of Goods & Services,Costo total de bienes y servicios (incluye compras/refinacion; NO es lifting upstream); excluye D&A
+YPF,2025-06-30,,dda_mm,920,musd,USD,CFlow,+ Depreciation & Amortization,D&A del trimestre; coincide con IS D&A costo+opex y con reconciliation
+YPF,2025-06-30,,deuda_bancaria_mm,9848,musd,USD,bs,+ ST Borrowings + + LT Borrowings,"Solo borrowings, sin leasing"
+YPF,2025-06-30,,deuda_mm,10557,musd,USD,bs,+ ST Debt + + LT Debt,ST Debt + LT Debt; incluye arrendamientos financieros (~0.7 bn)
+YPF,2025-06-30,,deuda_neta_mm,9545,musd,USD,bs,Net Debt,Calculo Bloomberg = ST Debt + LT Debt - Cash&STI
+YPF,2025-06-30,,ebitda_mm,1150,musd,USD,IS,EBITDA,EBITDA ajustado = EBIT ajustado + D&A (reconciliation); CFlow trae otro EBITDA (fila 53) distinto
+YPF,2025-06-30,,flujo_operativo_mm,1049,musd,USD,CFlow,Cash from Operating Activities,
+YPF,2025-06-30,,impuesto_ganancias_mm,92,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",Gasto GAAP (negativo = beneficio)
+YPF,2025-06-30,,ingresos_mm,4647,musd,USD,IS,Revenue,Trimestral (suma 2024 = 19299)
+YPF,2025-06-30,,intereses_mm,159,musd,USD,IS,+ Interest Expense,Gasto bruto por intereses (no neto de ingresos)
+YPF,2025-06-30,,inversiones_afiliadas_mm,1914,musd,USD,bs,+ Investments in Affiliates,Valor contable de participaciones en asociadas/JV
+YPF,2025-06-30,,minoritarios_mm,230,musd,USD,bs,+ Minority Interest,
+YPF,2025-06-30,,patrimonio_neto_mm,11698,musd,USD,bs,Equity Before Minority Interest,Equity antes de minoritarios
+YPF,2025-06-30,,resultado_antes_imp_mm,150,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP
+YPF,2025-06-30,,resultado_neto_mm,50,musd,USD,IS,"Net Income, GAAP",Net Income GAAP atribuible a controlante
+YPF,2025-06-30,,resultado_operativo_mm,230,musd,USD,IS,Operating Income (Loss),EBIT ajustado (Operating Income); EBIT GAAP en hoja reconciliation
+YPF,2025-06-30,,sga_mm,695,musd,USD,IS,"+ Selling, General & Admin",Incluye Selling & Marketing + G&A
+YPF,2025-09-30,,acciones_excel_bruto_mm,3933,"mm (capital ARS, no acciones)",,bs,Shares Outstanding,"Valor crudo del Excel, 10x la cantidad real de acciones; no usar como acciones"
+YPF,2025-09-30,,acciones_mm,393.3,mm acciones,,bs,Shares Outstanding,"CORREGIDO: Excel trae 3933 = capital social en ARS mm (VN ARS 10/accion), NO cantidad de acciones. Acciones reales = 3933/10 = 393.3 mm (YPF: 393.312.793 acc.). Ver notas"
+YPF,2025-09-30,,caja_mm,1015,musd,USD,bs,"+ Cash, Cash Equivalents & STI",Incluye inversiones de corto plazo (ST Investments); coincide con Net Debt de Bloomberg
+YPF,2025-09-30,,caja_solo_mm,799,musd,USD,bs,+ Cash & Cash Equivalents,"Solo caja y equivalentes, sin ST Investments"
+YPF,2025-09-30,,capex_mm,1151,musd,USD,CFlow,+ Change in Fixed & Intang,Signo invertido (egreso en Excel); incluye intangibles
+YPF,2025-09-30,,costo_bienes_servicios_mm,2559,musd,USD,IS,+ Cost of Goods & Services,Costo total de bienes y servicios (incluye compras/refinacion; NO es lifting upstream); excluye D&A
+YPF,2025-09-30,,dda_mm,838,musd,USD,CFlow,+ Depreciation & Amortization,D&A del trimestre; coincide con IS D&A costo+opex y con reconciliation
+YPF,2025-09-30,,dda_no_up_mm,196,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Depreciation and Amortization + LNG and Integrated Gas: Depreciation and Amortization + New Energies: Depreciation and Amortization,"Segmentos: Midstream and Downstream, LNG and Integrated Gas, New Energies"
+YPF,2025-09-30,,dda_upstream_mm,615,musd,USD,SEGMENT BY PROD,Upstream: Depreciation and Amortization,
+YPF,2025-09-30,,deuda_bancaria_mm,10606,musd,USD,bs,+ ST Borrowings + + LT Borrowings,"Solo borrowings, sin leasing"
+YPF,2025-09-30,,deuda_mm,11231,musd,USD,bs,+ ST Debt + + LT Debt,ST Debt + LT Debt; incluye arrendamientos financieros (~0.7 bn)
+YPF,2025-09-30,,deuda_neta_mm,10215,musd,USD,bs,Net Debt,Calculo Bloomberg = ST Debt + LT Debt - Cash&STI
+YPF,2025-09-30,,ebitda_mm,1369,musd,USD,IS,EBITDA,EBITDA ajustado = EBIT ajustado + D&A (reconciliation); CFlow trae otro EBITDA (fila 53) distinto
+YPF,2025-09-30,,ebitda_no_up_mm,386,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Operating Income + Depreciation and Amortization + LNG and Integrated Gas: Operating Income + Depreciation and Amortization + New Energies: Operating Income + Depreciation and Amortization,"Suma de Operating Income + Depreciation and Amortization de: Midstream and Downstream, LNG and Integrated Gas, New Energies. Excluye Central Administration & Others y ajustes. OI de segmento es GAAP (incluye write-downs)."
+YPF,2025-09-30,,flujo_operativo_mm,1011,musd,USD,CFlow,Cash from Operating Activities,
+YPF,2025-09-30,,impuesto_ganancias_mm,538,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",Gasto GAAP (negativo = beneficio)
+YPF,2025-09-30,,ingresos_mm,4654,musd,USD,IS,Revenue,Trimestral (suma 2024 = 19299)
+YPF,2025-09-30,,intereses_mm,169,musd,USD,IS,+ Interest Expense,Gasto bruto por intereses (no neto de ingresos)
+YPF,2025-09-30,,inversiones_afiliadas_mm,1603,musd,USD,bs,+ Investments in Affiliates,Valor contable de participaciones en asociadas/JV
+YPF,2025-09-30,,minoritarios_mm,222,musd,USD,bs,+ Minority Interest,
+YPF,2025-09-30,,patrimonio_neto_mm,11406,musd,USD,bs,Equity Before Minority Interest,Equity antes de minoritarios
+YPF,2025-09-30,,resultado_antes_imp_mm,340,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP
+YPF,2025-09-30,,resultado_neto_mm,-206,musd,USD,IS,"Net Income, GAAP",Net Income GAAP atribuible a controlante
+YPF,2025-09-30,,resultado_operativo_corp_ajustes_mm,-53,musd,USD,SEGMENT BY PROD,Central Administration & Others: Operating Income + Reconciliation: Operating Income,Administracion central y otros + ajustes de consolidacion (no incluidos en ebitda_no_up_mm)
+YPF,2025-09-30,,resultado_operativo_mm,531,musd,USD,IS,Operating Income (Loss),EBIT ajustado (Operating Income); EBIT GAAP en hoja reconciliation
+YPF,2025-09-30,,resultado_operativo_no_up_mm,190,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Operating Income + LNG and Integrated Gas: Operating Income + New Energies: Operating Income,"Segmentos sumados: Midstream and Downstream, LNG and Integrated Gas, New Energies"
+YPF,2025-09-30,,resultado_operativo_upstream_mm,415,musd,USD,SEGMENT BY PROD,Upstream: Operating Income,Resultado operativo GAAP del segmento
+YPF,2025-09-30,,sga_mm,662,musd,USD,IS,"+ Selling, General & Admin",Incluye Selling & Marketing + G&A
+YPF,2025-12-31,,acciones_excel_bruto_mm,3933,"mm (capital ARS, no acciones)",,bs,Shares Outstanding,"Valor crudo del Excel, 10x la cantidad real de acciones; no usar como acciones"
+YPF,2025-12-31,,acciones_mm,393.3,mm acciones,,bs,Shares Outstanding,"CORREGIDO: Excel trae 3933 = capital social en ARS mm (VN ARS 10/accion), NO cantidad de acciones. Acciones reales = 3933/10 = 393.3 mm (YPF: 393.312.793 acc.). Ver notas"
+YPF,2025-12-31,,caja_mm,1195,musd,USD,bs,"+ Cash, Cash Equivalents & STI",Incluye inversiones de corto plazo (ST Investments); coincide con Net Debt de Bloomberg
+YPF,2025-12-31,,caja_solo_mm,933,musd,USD,bs,+ Cash & Cash Equivalents,"Solo caja y equivalentes, sin ST Investments"
+YPF,2025-12-31,,capex_mm,1421,musd,USD,CFlow,+ Change in Fixed & Intang,Signo invertido (egreso en Excel); incluye intangibles
+YPF,2025-12-31,,costo_bienes_servicios_mm,2482,musd,USD,IS,+ Cost of Goods & Services,Costo total de bienes y servicios (incluye compras/refinacion; NO es lifting upstream); excluye D&A
+YPF,2025-12-31,,dda_mm,774,musd,USD,CFlow,+ Depreciation & Amortization,D&A del trimestre; coincide con IS D&A costo+opex y con reconciliation
+YPF,2025-12-31,,deuda_bancaria_mm,10955,musd,USD,bs,+ ST Borrowings + + LT Borrowings,"Solo borrowings, sin leasing"
+YPF,2025-12-31,,deuda_mm,11526,musd,USD,bs,+ ST Debt + + LT Debt,ST Debt + LT Debt; incluye arrendamientos financieros (~0.7 bn)
+YPF,2025-12-31,,deuda_neta_mm,10332,musd,USD,bs,Net Debt,Calculo Bloomberg = ST Debt + LT Debt - Cash&STI
+YPF,2025-12-31,,ebitda_mm,1364,musd,USD,IS,EBITDA,EBITDA ajustado = EBIT ajustado + D&A (reconciliation); CFlow trae otro EBITDA (fila 53) distinto
+YPF,2025-12-31,,flujo_operativo_mm,1607,musd,USD,CFlow,Cash from Operating Activities,
+YPF,2025-12-31,,impuesto_ganancias_mm,1042,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",Gasto GAAP (negativo = beneficio)
+YPF,2025-12-31,,ingresos_mm,4558,musd,USD,IS,Revenue,Trimestral (suma 2024 = 19299)
+YPF,2025-12-31,,intereses_mm,187,musd,USD,IS,+ Interest Expense,Gasto bruto por intereses (no neto de ingresos)
+YPF,2025-12-31,,inversiones_afiliadas_mm,1610,musd,USD,bs,+ Investments in Affiliates,Valor contable de participaciones en asociadas/JV
+YPF,2025-12-31,,minoritarios_mm,230,musd,USD,bs,+ Minority Interest,
+YPF,2025-12-31,,patrimonio_neto_mm,10816,musd,USD,bs,Equity Before Minority Interest,Equity antes de minoritarios
+YPF,2025-12-31,,resultado_antes_imp_mm,393,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP
+YPF,2025-12-31,,resultado_neto_mm,-654,musd,USD,IS,"Net Income, GAAP",Net Income GAAP atribuible a controlante
+YPF,2025-12-31,,resultado_operativo_corp_ajustes_mm,-44,musd,USD,SEGMENT BY PROD,Central Administration & Others: Operating Income + Reconciliation: Operating Income,Administracion central y otros + ajustes de consolidacion (no incluidos en ebitda_no_up_mm)
+YPF,2025-12-31,,resultado_operativo_mm,589,musd,USD,IS,Operating Income (Loss),EBIT ajustado (Operating Income); EBIT GAAP en hoja reconciliation
+YPF,2025-12-31,,resultado_operativo_no_up_mm,690,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Operating Income + LNG and Integrated Gas: Operating Income + New Energies: Operating Income,"Segmentos sumados: Midstream and Downstream, LNG and Integrated Gas, New Energies"
+YPF,2025-12-31,,resultado_operativo_upstream_mm,-62,musd,USD,SEGMENT BY PROD,Upstream: Operating Income,Resultado operativo GAAP del segmento
+YPF,2025-12-31,,sga_mm,708,musd,USD,IS,"+ Selling, General & Admin",Incluye Selling & Marketing + G&A
+YPF,2026-03-31,,acciones_excel_bruto_mm,3933,"mm (capital ARS, no acciones)",,bs,Shares Outstanding,"Valor crudo del Excel, 10x la cantidad real de acciones; no usar como acciones"
+YPF,2026-03-31,,acciones_mm,393.3,mm acciones,,bs,Shares Outstanding,"CORREGIDO: Excel trae 3933 = capital social en ARS mm (VN ARS 10/accion), NO cantidad de acciones. Acciones reales = 3933/10 = 393.3 mm (YPF: 393.312.793 acc.). Ver notas"
+YPF,2026-03-31,,caja_mm,1693,musd,USD,bs,"+ Cash, Cash Equivalents & STI",Incluye inversiones de corto plazo (ST Investments); coincide con Net Debt de Bloomberg
+YPF,2026-03-31,,caja_solo_mm,1326,musd,USD,bs,+ Cash & Cash Equivalents,"Solo caja y equivalentes, sin ST Investments"
+YPF,2026-03-31,,capex_mm,1094,musd,USD,CFlow,+ Change in Fixed & Intang,Signo invertido (egreso en Excel); incluye intangibles
+YPF,2026-03-31,,costo_bienes_servicios_mm,2496,musd,USD,IS,+ Cost of Goods & Services,Costo total de bienes y servicios (incluye compras/refinacion; NO es lifting upstream); excluye D&A
+YPF,2026-03-31,,dda_mm,743,musd,USD,CFlow,+ Depreciation & Amortization,D&A del trimestre; coincide con IS D&A costo+opex y con reconciliation
+YPF,2026-03-31,,deuda_bancaria_mm,10121,musd,USD,bs,+ ST Borrowings + + LT Borrowings,"Solo borrowings, sin leasing"
+YPF,2026-03-31,,deuda_mm,10761,musd,USD,bs,+ ST Debt + + LT Debt,ST Debt + LT Debt; incluye arrendamientos financieros (~0.7 bn)
+YPF,2026-03-31,,deuda_neta_mm,9068,musd,USD,bs,Net Debt,Calculo Bloomberg = ST Debt + LT Debt - Cash&STI
+YPF,2026-03-31,,ebitda_mm,1617,musd,USD,IS,EBITDA,EBITDA ajustado = EBIT ajustado + D&A (reconciliation); CFlow trae otro EBITDA (fila 53) distinto
+YPF,2026-03-31,,flujo_operativo_mm,1610,musd,USD,CFlow,Cash from Operating Activities,
+YPF,2026-03-31,,impuesto_ganancias_mm,243,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",Gasto GAAP (negativo = beneficio)
+YPF,2026-03-31,,ingresos_mm,4948,musd,USD,IS,Revenue,Trimestral (suma 2024 = 19299)
+YPF,2026-03-31,,intereses_mm,194,musd,USD,IS,+ Interest Expense,Gasto bruto por intereses (no neto de ingresos)
+YPF,2026-03-31,,inversiones_afiliadas_mm,1718,musd,USD,bs,+ Investments in Affiliates,Valor contable de participaciones en asociadas/JV
+YPF,2026-03-31,,minoritarios_mm,269,musd,USD,bs,+ Minority Interest,
+YPF,2026-03-31,,patrimonio_neto_mm,11370,musd,USD,bs,Equity Before Minority Interest,Equity antes de minoritarios
+YPF,2026-03-31,,resultado_antes_imp_mm,652,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP
+YPF,2026-03-31,,resultado_neto_mm,404,musd,USD,IS,"Net Income, GAAP",Net Income GAAP atribuible a controlante
+YPF,2026-03-31,,resultado_operativo_mm,873,musd,USD,IS,Operating Income (Loss),EBIT ajustado (Operating Income); EBIT GAAP en hoja reconciliation
+YPF,2026-03-31,,sga_mm,727,musd,USD,IS,"+ Selling, General & Admin",Incluye Selling & Marketing + G&A
+YPF,2026-06-30,,acciones_excel_bruto_mm,3933,"mm (capital ARS, no acciones)",,bs,Shares Outstanding,"Valor crudo del Excel, 10x la cantidad real de acciones; no usar como acciones"
+YPF,2026-06-30,,acciones_mm,393.3,mm acciones,,bs,Shares Outstanding,"CORREGIDO: Excel trae 3933 = capital social en ARS mm (VN ARS 10/accion), NO cantidad de acciones. Acciones reales = 3933/10 = 393.3 mm (YPF: 393.312.793 acc.). Ver notas"
+YPF,2026-06-30,,caja_mm,2474,musd,USD,bs,"+ Cash, Cash Equivalents & STI",Incluye inversiones de corto plazo (ST Investments); coincide con Net Debt de Bloomberg
+YPF,2026-06-30,,caja_solo_mm,1318,musd,USD,bs,+ Cash & Cash Equivalents,"Solo caja y equivalentes, sin ST Investments"
+YPF,2026-06-30,,capex_mm,1123,musd,USD,CFlow,+ Change in Fixed & Intang,Signo invertido (egreso en Excel); incluye intangibles
+YPF,2026-06-30,,costo_bienes_servicios_mm,2780,musd,USD,IS,+ Cost of Goods & Services,Costo total de bienes y servicios (incluye compras/refinacion; NO es lifting upstream); excluye D&A
+YPF,2026-06-30,,dda_mm,878,musd,USD,CFlow,+ Depreciation & Amortization,D&A del trimestre; coincide con IS D&A costo+opex y con reconciliation
+YPF,2026-06-30,,dda_no_up_mm,222,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Depreciation and Amortization + LNG and Integrated Gas: Depreciation and Amortization + New Energies: Depreciation and Amortization,"Segmentos: Midstream and Downstream, LNG and Integrated Gas, New Energies"
+YPF,2026-06-30,,dda_upstream_mm,632,musd,USD,SEGMENT BY PROD,Upstream: Depreciation and Amortization,
+YPF,2026-06-30,,deuda_bancaria_mm,10130,musd,USD,bs,+ ST Borrowings + + LT Borrowings,"Solo borrowings, sin leasing"
+YPF,2026-06-30,,deuda_mm,10844,musd,USD,bs,+ ST Debt + + LT Debt,ST Debt + LT Debt; incluye arrendamientos financieros (~0.7 bn)
+YPF,2026-06-30,,deuda_neta_mm,8370,musd,USD,bs,Net Debt,Calculo Bloomberg = ST Debt + LT Debt - Cash&STI
+YPF,2026-06-30,,ebitda_mm,2717,musd,USD,IS,EBITDA,EBITDA ajustado = EBIT ajustado + D&A (reconciliation); CFlow trae otro EBITDA (fila 53) distinto
+YPF,2026-06-30,,ebitda_no_up_mm,921,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Operating Income + Depreciation and Amortization + LNG and Integrated Gas: Operating Income + Depreciation and Amortization + New Energies: Operating Income + Depreciation and Amortization,"Suma de Operating Income + Depreciation and Amortization de: Midstream and Downstream, LNG and Integrated Gas, New Energies. Excluye Central Administration & Others y ajustes. OI de segmento es GAAP (incluye write-downs)."
+YPF,2026-06-30,,flujo_operativo_mm,2259,musd,USD,CFlow,Cash from Operating Activities,
+YPF,2026-06-30,,impuesto_ganancias_mm,593,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",Gasto GAAP (negativo = beneficio)
+YPF,2026-06-30,,ingresos_mm,6577,musd,USD,IS,Revenue,Trimestral (suma 2024 = 19299)
+YPF,2026-06-30,,intereses_mm,183,musd,USD,IS,+ Interest Expense,Gasto bruto por intereses (no neto de ingresos)
+YPF,2026-06-30,,inversiones_afiliadas_mm,2056,musd,USD,bs,+ Investments in Affiliates,Valor contable de participaciones en asociadas/JV
+YPF,2026-06-30,,minoritarios_mm,269,musd,USD,bs,+ Minority Interest,
+YPF,2026-06-30,,patrimonio_neto_mm,12528,musd,USD,bs,Equity Before Minority Interest,Equity antes de minoritarios
+YPF,2026-06-30,,resultado_antes_imp_mm,1799,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP
+YPF,2026-06-30,,resultado_neto_mm,1202,musd,USD,IS,"Net Income, GAAP",Net Income GAAP atribuible a controlante
+YPF,2026-06-30,,resultado_operativo_corp_ajustes_mm,159,musd,USD,SEGMENT BY PROD,Central Administration & Others: Operating Income + Reconciliation: Operating Income,Administracion central y otros + ajustes de consolidacion (no incluidos en ebitda_no_up_mm)
+YPF,2026-06-30,,resultado_operativo_mm,1839,musd,USD,IS,Operating Income (Loss),EBIT ajustado (Operating Income); EBIT GAAP en hoja reconciliation
+YPF,2026-06-30,,resultado_operativo_no_up_mm,699,musd,USD,SEGMENT BY PROD,Midstream and Downstream: Operating Income + LNG and Integrated Gas: Operating Income + New Energies: Operating Income,"Segmentos sumados: Midstream and Downstream, LNG and Integrated Gas, New Energies"
+YPF,2026-06-30,,resultado_operativo_upstream_mm,955,musd,USD,SEGMENT BY PROD,Upstream: Operating Income,Resultado operativo GAAP del segmento
+YPF,2026-06-30,,sga_mm,876,musd,USD,IS,"+ Selling, General & Admin",Incluye Selling & Marketing + G&A

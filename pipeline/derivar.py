@@ -42,6 +42,8 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
     put("prod_crudo_kbd", crudo, "edgar", url("crudo_kbd"), "Producción de crudo del período" + (" (+ bitumen)" if "bitumen_kbd" in V else ""))
     total = V.get("total_kboed")
     otros = total - crudo if total is not None and crudo is not None else None
+    if otros is not None and crudo and abs(otros) < 0.005 * crudo:
+        otros = 0.0   # total ≈ crudo: diferencia de redondeo (kbpd vs boepd), sin gas separado
     put("prod_otros_kboed", otros, "derivado", url("total_kboed"), "Total boe/d − crudo (gas + NGL)")
     if otros is None and crudo is not None and c["id"] == "PRIO":
         otros = 0.0
@@ -61,6 +63,8 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
         pg = ((edgar_all.get("YPF") or {}).get("valores") or {}).get("p_gas_mmbtu")
         if pg:
             p_otros, f_otros = pg["valor"] * BOE_MMBTU, "Precio de gas en Argentina informado por YPF ($/MMBtu × 5,8): Vista no lo publica en texto"
+    if p_otros is None and otros is not None and abs(otros) < 1e-9:
+        put("precio_otros_usd_boe", 0.0, "supuesto", None, "Sin producción de gas/NGL separada del crudo: irrelevante")
     if p_otros is not None:
         put("precio_otros_usd_boe", p_otros, "derivado", url("p_gas_mcf") or url("p_gas_mmbtu") or url("p_gas_boe"), f_otros)
 
@@ -82,7 +86,11 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
             put("diferencial_pct", 0.0, "supuesto", None, "Petrobras no publica precio realizado de crudo: se supone paridad Brent (editar)")
 
     # ---------- regalías / impuestos a la producción (% del ingreso)
-    if "toti_musd" in V and crudo:
+    if "regalias_os_musd" in V and V.get("bitumen_kbd") and V.get("p_crudo"):
+        bruto = dias * V["bitumen_kbd"] * V["p_crudo"] / 1000
+        put("regalias_pct", V["regalias_os_musd"] / bruto, "derivado", url("regalias_os_musd"),
+            f"Regalías Oil Sands / (producción Oil Sands × precio realizado antes de regalías) del trimestre ({bruto:,.0f} MUSD)")
+    elif "toti_musd" in V and crudo:
         ing = dias * (V["crudo_kbd"] * V["p_crudo"] + V.get("bitumen_kbd", 0) * V["p_crudo"] + V.get("ngl_kbd", 0) * V.get("p_ngl", 0)
                       + V.get("gas_mmcfd", 0) * V.get("p_gas_mcf", 0)) / 1000
         put("regalias_pct", V["toti_musd"] / ing, "derivado", url("toti_musd"),
@@ -102,8 +110,10 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
             "Regalía estándar 10 % (Lei 9.478/1997, art. 47); no incluye participación especial")
 
     # ---------- derechos de exportación
-    if "retenciones_musd" in V and V.get("ingresos_musd"):
-        put("retencion_pct", V["retenciones_musd"] / V["ingresos_musd"], "derivado", url("retenciones_musd"),
+    if "retenciones_musd" in V and (V.get("ingresos_bb_musd") or V.get("ingresos_musd")):
+        de_bb = ed["valores"]["retenciones_musd"].get("doc") == "bloomberg" and V.get("ingresos_bb_musd")
+        ing_r = V["ingresos_bb_musd"] if de_bb else V.get("ingresos_musd")   # numerador y denominador de la misma fuente
+        put("retencion_pct", V["retenciones_musd"] / ing_r, "derivado", url("retenciones_musd"),
             "Derechos de exportación del trimestre / ingresos brutos")
     else:
         put("retencion_pct", 0.0, "supuesto", None, "Sin derechos de exportación informados (AR: Dto. 59/2026 exime no convencional hasta USD 65; editar si aplica)")
@@ -111,11 +121,17 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
     # ---------- costos por boe
     boe_anual = (crudo + otros) * 365 / 1000 if crudo and otros is not None else None   # MMboe/año
     mmboe_per = V.get("total_mmboe")
-    if "lifting_boe" in V:
+    if "opex_upstream_total_musd" in V and mmboe_per:
+        put("lifting_usd_boe", V["opex_upstream_total_musd"] / mmboe_per, "derivado", url("opex_upstream_total_musd"),
+            "Costos operativos, de venta y generales de los segmentos upstream (Bloomberg) / MMboe del período")
+        put("otros_costos_usd_boe", 0.0, "derivado", url("opex_upstream_total_musd"), "Incluidos en el costo upstream total (OS&G)")
+    elif "lifting_boe" in V:
         put("lifting_usd_boe", V["lifting_boe"], "edgar", url("lifting_boe"), "Lifting cost informado por la empresa")
     elif "opex_musd" in V and mmboe_per:
         put("lifting_usd_boe", V["opex_musd"] / mmboe_per, "derivado", url("opex_musd"), "Production & operating expenses / MMboe del período")
-    if "gpt_boe" in V:
+    if "opex_upstream_total_musd" in V and mmboe_per:
+        pass
+    elif "gpt_boe" in V:
         put("otros_costos_usd_boe", V["gpt_boe"] + V.get("ga_boe", 0), "edgar", url("gpt_boe"), "GP&T + G&A por boe")
     elif "sga_musd" in V and mmboe_per:
         put("otros_costos_usd_boe", V["sga_musd"] / mmboe_per, "derivado", url("sga_musd"), "SG&A / MMboe del período")

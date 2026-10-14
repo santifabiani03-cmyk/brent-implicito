@@ -67,7 +67,20 @@ def argentina() -> dict:
             except (TypeError, ValueError):
                 pass
         return out
-    precios = tabla("Tabla precios", ["MEDANITO", "BRENT"])
+    cab = next(r for r in wb["Tabla precios"].iter_rows(values_only=True) if r and r[0] == "AÑO")
+    nota = ""
+    if "MEDANITO" in cab:
+        precios = tabla("Tabla precios", ["MEDANITO", "BRENT"])
+    else:
+        # desde oct-2026 la SE publica la tabla por provincia: Neuquén (USD/m3) como proxy de Medanito y Brent
+        # Dated de FRED (promedio mensual, USD/bbl → USD/m3 para mantener la unidad de la tabla)
+        from .historia import serie_fred
+        br = {}
+        for d, v in serie_fred("DCOILBRENTEU").items():
+            br.setdefault(d[:7], []).append(v)
+        precios = {m: {"MEDANITO": v["NEUQUEN"], "BRENT": sum(br[m]) / len(br[m]) * M3_BBL}
+                   for m, v in tabla("Tabla precios", ["NEUQUEN"]).items() if m in br}
+        nota = "; precio Neuquén como proxy de Medanito (la SE dejó de publicar el tipo de crudo) y Brent Dated FRED"
     prod, reg = tabla("Tabla producción", ["NEUQUEN"]), tabla("Tabla regalías", ["NEUQUEN"])
     meses = sorted(m for m, v in precios.items() if v["MEDANITO"] > 0)[:-2]    # los 2 últimos son provisorios
     serie = []
@@ -76,7 +89,7 @@ def argentina() -> dict:
         valor_prod = prod.get(m, {}).get("NEUQUEN", 0) * p["MEDANITO"]
         serie.append({"mes": m, "medanito_usd_bbl": p["MEDANITO"] / M3_BBL, "brent_usd_bbl": p["BRENT"] / M3_BBL,
                       "regalias_pct_neuquen": (reg.get(m, {}).get("NEUQUEN", 0) / valor_prod) if valor_prod else None})
-    return {"serie": serie[-24:], "fuente": REG + " (Informe de Regalías, SE; últimos 2 meses provisorios excluidos)"}
+    return {"serie": serie[-24:], "fuente": REG + " (Informe de Regalías, SE; últimos 2 meses provisorios excluidos" + nota + ")"}
 
 
 def main():

@@ -1,0 +1,163 @@
+empresa,periodo,fecha_publicacion,variable,valor,unidad,moneda,hoja,campo_bloomberg,nota
+EOG,2023-09-30,,ingresos_mm,6157,musd,USD,IS,Revenue,Ventas totales (incluye Other Revenue)
+EOG,2023-12-31,,ingresos_mm,6077,musd,USD,IS,Revenue,Ventas totales (incluye Other Revenue)
+EOG,2024-03-31,,ingresos_mm,5915,musd,USD,IS,Revenue,Ventas totales (incluye Other Revenue)
+EOG,2024-06-30,,ingresos_mm,6131,musd,USD,IS,Revenue,Ventas totales (incluye Other Revenue)
+EOG,2024-09-30,,ingresos_mm,5954,musd,USD,IS,Revenue,Ventas totales (incluye Other Revenue)
+EOG,2024-12-31,,ingresos_mm,5692,musd,USD,IS,Revenue,Ventas totales (incluye Other Revenue)
+EOG,2025-03-31,,ingresos_mm,5823,musd,USD,IS,Revenue,Ventas totales (incluye Other Revenue)
+EOG,2025-06-30,,ingresos_mm,5347,musd,USD,IS,Revenue,Ventas totales (incluye Other Revenue)
+EOG,2025-09-30,,ingresos_mm,5776,musd,USD,IS,Revenue,Ventas totales (incluye Other Revenue)
+EOG,2025-12-31,,ingresos_mm,5652,musd,USD,IS,Revenue,Ventas totales (incluye Other Revenue)
+EOG,2026-03-31,,ingresos_mm,6724,musd,USD,IS,Revenue,Ventas totales (incluye Other Revenue)
+EOG,2026-06-30,,ingresos_mm,8620,musd,USD,IS,Revenue,Ventas totales (incluye Other Revenue)
+EOG,2023-09-30,,dda_mm,898,musd,USD,CFLOW,+ Depreciation & Amortization,DD&A total; coincide con la D&A de IS (Cost of Revenue)
+EOG,2023-12-31,,dda_mm,930,musd,USD,CFLOW,+ Depreciation & Amortization,DD&A total; coincide con la D&A de IS (Cost of Revenue)
+EOG,2024-03-31,,dda_mm,1074,musd,USD,CFLOW,+ Depreciation & Amortization,DD&A total; coincide con la D&A de IS (Cost of Revenue)
+EOG,2024-06-30,,dda_mm,984,musd,USD,CFLOW,+ Depreciation & Amortization,DD&A total; coincide con la D&A de IS (Cost of Revenue)
+EOG,2024-09-30,,dda_mm,1031,musd,USD,CFLOW,+ Depreciation & Amortization,DD&A total; coincide con la D&A de IS (Cost of Revenue)
+EOG,2024-12-31,,dda_mm,1019,musd,USD,CFLOW,+ Depreciation & Amortization,DD&A total; coincide con la D&A de IS (Cost of Revenue)
+EOG,2025-03-31,,dda_mm,1013,musd,USD,CFLOW,+ Depreciation & Amortization,DD&A total; coincide con la D&A de IS (Cost of Revenue)
+EOG,2025-06-30,,dda_mm,1053,musd,USD,CFLOW,+ Depreciation & Amortization,DD&A total; coincide con la D&A de IS (Cost of Revenue)
+EOG,2025-09-30,,dda_mm,1169,musd,USD,CFLOW,+ Depreciation & Amortization,DD&A total; coincide con la D&A de IS (Cost of Revenue)
+EOG,2025-12-31,,dda_mm,1226,musd,USD,CFLOW,+ Depreciation & Amortization,DD&A total; coincide con la D&A de IS (Cost of Revenue)
+EOG,2026-03-31,,dda_mm,1193,musd,USD,CFLOW,+ Depreciation & Amortization,DD&A total; coincide con la D&A de IS (Cost of Revenue)
+EOG,2026-06-30,,dda_mm,1259,musd,USD,CFLOW,+ Depreciation & Amortization,DD&A total; coincide con la D&A de IS (Cost of Revenue)
+EOG,2023-09-30,,sga_mm,161,musd,USD,IS,+ General & Administrative,"Solo G&A. El SG&A total de Bloomberg incluye Selling & Marketing (costos de GP&M), no se usa"
+EOG,2023-12-31,,sga_mm,192,musd,USD,IS,+ General & Administrative,"Solo G&A. El SG&A total de Bloomberg incluye Selling & Marketing (costos de GP&M), no se usa"
+EOG,2024-03-31,,sga_mm,162,musd,USD,IS,+ General & Administrative,"Solo G&A. El SG&A total de Bloomberg incluye Selling & Marketing (costos de GP&M), no se usa"
+EOG,2024-06-30,,sga_mm,151,musd,USD,IS,+ General & Administrative,"Solo G&A. El SG&A total de Bloomberg incluye Selling & Marketing (costos de GP&M), no se usa"
+EOG,2024-09-30,,sga_mm,167,musd,USD,IS,+ General & Administrative,"Solo G&A. El SG&A total de Bloomberg incluye Selling & Marketing (costos de GP&M), no se usa"
+EOG,2024-12-31,,sga_mm,189,musd,USD,IS,+ General & Administrative,"Solo G&A. El SG&A total de Bloomberg incluye Selling & Marketing (costos de GP&M), no se usa"
+EOG,2025-03-31,,sga_mm,171,musd,USD,IS,+ General & Administrative,"Solo G&A. El SG&A total de Bloomberg incluye Selling & Marketing (costos de GP&M), no se usa"
+EOG,2025-06-30,,sga_mm,186,musd,USD,IS,+ General & Administrative,"Solo G&A. El SG&A total de Bloomberg incluye Selling & Marketing (costos de GP&M), no se usa"
+EOG,2025-09-30,,sga_mm,239,musd,USD,IS,+ General & Administrative,"Solo G&A. El SG&A total de Bloomberg incluye Selling & Marketing (costos de GP&M), no se usa"
+EOG,2025-12-31,,sga_mm,224,musd,USD,IS,+ General & Administrative,"Solo G&A. El SG&A total de Bloomberg incluye Selling & Marketing (costos de GP&M), no se usa"
+EOG,2026-03-31,,sga_mm,185,musd,USD,IS,+ General & Administrative,"Solo G&A. El SG&A total de Bloomberg incluye Selling & Marketing (costos de GP&M), no se usa"
+EOG,2026-06-30,,sga_mm,213,musd,USD,IS,+ General & Administrative,"Solo G&A. El SG&A total de Bloomberg incluye Selling & Marketing (costos de GP&M), no se usa"
+EOG,2023-09-30,,opex_mm,1116,musd,USD,IS,+ Cost of Goods & Services,Costo de bienes y servicios sin D&A. No separa lease & well; incluye compras/comercializacion
+EOG,2023-12-31,,opex_mm,1102,musd,USD,IS,+ Cost of Goods & Services,Costo de bienes y servicios sin D&A. No separa lease & well; incluye compras/comercializacion
+EOG,2024-03-31,,opex_mm,1147,musd,USD,IS,+ Cost of Goods & Services,Costo de bienes y servicios sin D&A. No separa lease & well; incluye compras/comercializacion
+EOG,2024-06-30,,opex_mm,1150,musd,USD,IS,+ Cost of Goods & Services,Costo de bienes y servicios sin D&A. No separa lease & well; incluye compras/comercializacion
+EOG,2024-09-30,,opex_mm,1120,musd,USD,IS,+ Cost of Goods & Services,Costo de bienes y servicios sin D&A. No separa lease & well; incluye compras/comercializacion
+EOG,2024-12-31,,opex_mm,1126,musd,USD,IS,+ Cost of Goods & Services,Costo de bienes y servicios sin D&A. No separa lease & well; incluye compras/comercializacion
+EOG,2025-03-31,,opex_mm,1182,musd,USD,IS,+ Cost of Goods & Services,Costo de bienes y servicios sin D&A. No separa lease & well; incluye compras/comercializacion
+EOG,2025-06-30,,opex_mm,1152,musd,USD,IS,+ Cost of Goods & Services,Costo de bienes y servicios sin D&A. No separa lease & well; incluye compras/comercializacion
+EOG,2025-09-30,,opex_mm,1327,musd,USD,IS,+ Cost of Goods & Services,Costo de bienes y servicios sin D&A. No separa lease & well; incluye compras/comercializacion
+EOG,2025-12-31,,opex_mm,1382,musd,USD,IS,+ Cost of Goods & Services,Costo de bienes y servicios sin D&A. No separa lease & well; incluye compras/comercializacion
+EOG,2026-03-31,,opex_mm,1454,musd,USD,IS,+ Cost of Goods & Services,Costo de bienes y servicios sin D&A. No separa lease & well; incluye compras/comercializacion
+EOG,2026-06-30,,opex_mm,1574,musd,USD,IS,+ Cost of Goods & Services,Costo de bienes y servicios sin D&A. No separa lease & well; incluye compras/comercializacion
+EOG,2023-09-30,,capex_mm,1518,musd,USD,CFLOW,+ Acq of Fixed & Intang,Signo invertido (en el Excel sale negativo); capex bruto
+EOG,2023-12-31,,capex_mm,1522,musd,USD,CFLOW,+ Acq of Fixed & Intang,Signo invertido (en el Excel sale negativo); capex bruto
+EOG,2024-03-31,,capex_mm,1835,musd,USD,CFLOW,+ Acq of Fixed & Intang,Signo invertido (en el Excel sale negativo); capex bruto
+EOG,2024-06-30,,capex_mm,1670,musd,USD,CFLOW,+ Acq of Fixed & Intang,Signo invertido (en el Excel sale negativo); capex bruto
+EOG,2024-09-30,,capex_mm,1634,musd,USD,CFLOW,+ Acq of Fixed & Intang,Signo invertido (en el Excel sale negativo); capex bruto
+EOG,2024-12-31,,capex_mm,1365,musd,USD,CFLOW,+ Acq of Fixed & Intang,Signo invertido (en el Excel sale negativo); capex bruto
+EOG,2025-03-31,,capex_mm,1483,musd,USD,CFLOW,+ Acq of Fixed & Intang,Signo invertido (en el Excel sale negativo); capex bruto
+EOG,2025-06-30,,capex_mm,1793,musd,USD,CFLOW,+ Acq of Fixed & Intang,Signo invertido (en el Excel sale negativo); capex bruto
+EOG,2025-09-30,,capex_mm,1663,musd,USD,CFLOW,+ Acq of Fixed & Intang,Signo invertido (en el Excel sale negativo); capex bruto
+EOG,2025-12-31,,capex_mm,1655,musd,USD,CFLOW,+ Acq of Fixed & Intang,Signo invertido (en el Excel sale negativo); capex bruto
+EOG,2026-03-31,,capex_mm,1644,musd,USD,CFLOW,+ Acq of Fixed & Intang,Signo invertido (en el Excel sale negativo); capex bruto
+EOG,2026-06-30,,capex_mm,1782,musd,USD,CFLOW,+ Acq of Fixed & Intang,Signo invertido (en el Excel sale negativo); capex bruto
+EOG,2023-09-30,,intereses_mm,36,musd,USD,IS,+ Interest Expense,
+EOG,2023-12-31,,intereses_mm,35,musd,USD,IS,+ Interest Expense,
+EOG,2024-03-31,,intereses_mm,33,musd,USD,IS,+ Interest Expense,
+EOG,2024-06-30,,intereses_mm,36,musd,USD,IS,+ Interest Expense,
+EOG,2024-09-30,,intereses_mm,31,musd,USD,IS,+ Interest Expense,
+EOG,2024-12-31,,intereses_mm,38,musd,USD,IS,+ Interest Expense,
+EOG,2025-03-31,,intereses_mm,47,musd,USD,IS,+ Interest Expense,
+EOG,2025-06-30,,intereses_mm,51,musd,USD,IS,+ Interest Expense,
+EOG,2025-09-30,,intereses_mm,71,musd,USD,IS,+ Interest Expense,
+EOG,2025-12-31,,intereses_mm,66,musd,USD,IS,+ Interest Expense,
+EOG,2026-03-31,,intereses_mm,66,musd,USD,IS,+ Interest Expense,
+EOG,2026-06-30,,intereses_mm,67,musd,USD,IS,+ Interest Expense,
+EOG,2023-09-30,,impuesto_ganancias_mm,543,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",GAAP
+EOG,2023-12-31,,impuesto_ganancias_mm,547,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",GAAP
+EOG,2024-03-31,,impuesto_ganancias_mm,511,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",GAAP
+EOG,2024-06-30,,impuesto_ganancias_mm,470,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",GAAP
+EOG,2024-09-30,,impuesto_ganancias_mm,461,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",GAAP
+EOG,2024-12-31,,impuesto_ganancias_mm,373,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",GAAP
+EOG,2025-03-31,,impuesto_ganancias_mm,414,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",GAAP
+EOG,2025-06-30,,impuesto_ganancias_mm,406,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",GAAP
+EOG,2025-09-30,,impuesto_ganancias_mm,353,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",GAAP
+EOG,2025-12-31,,impuesto_ganancias_mm,209,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",GAAP
+EOG,2026-03-31,,impuesto_ganancias_mm,575,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",GAAP
+EOG,2026-06-30,,impuesto_ganancias_mm,775,musd,USD,IS,"- Income Tax Expense (Benefit), GAAP",GAAP
+EOG,2023-09-30,,resultado_antes_imp_mm,2573,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP (no el ajustado)
+EOG,2023-12-31,,resultado_antes_imp_mm,2535,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP (no el ajustado)
+EOG,2024-03-31,,resultado_antes_imp_mm,2300,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP (no el ajustado)
+EOG,2024-06-30,,resultado_antes_imp_mm,2160,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP (no el ajustado)
+EOG,2024-09-30,,resultado_antes_imp_mm,2134,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP (no el ajustado)
+EOG,2024-12-31,,resultado_antes_imp_mm,1624,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP (no el ajustado)
+EOG,2025-03-31,,resultado_antes_imp_mm,1877,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP (no el ajustado)
+EOG,2025-06-30,,resultado_antes_imp_mm,1751,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP (no el ajustado)
+EOG,2025-09-30,,resultado_antes_imp_mm,1824,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP (no el ajustado)
+EOG,2025-12-31,,resultado_antes_imp_mm,910,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP (no el ajustado)
+EOG,2026-03-31,,resultado_antes_imp_mm,2555,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP (no el ajustado)
+EOG,2026-06-30,,resultado_antes_imp_mm,3499,musd,USD,IS,"Pretax Income (Loss), GAAP",GAAP (no el ajustado)
+EOG,2023-09-30,,ebitda_mm,3481,musd,USD,IS,EBITDA,"EBITDA ajustado de Bloomberg (= EBITDA, Adjusted en RECONCILIATION). No es el EBITDA de CFLOW"
+EOG,2023-12-31,,ebitda_mm,3173,musd,USD,IS,EBITDA,"EBITDA ajustado de Bloomberg (= EBITDA, Adjusted en RECONCILIATION). No es el EBITDA de CFLOW"
+EOG,2024-03-31,,ebitda_mm,3139,musd,USD,IS,EBITDA,"EBITDA ajustado de Bloomberg (= EBITDA, Adjusted en RECONCILIATION). No es el EBITDA de CFLOW"
+EOG,2024-06-30,,ebitda_mm,3301,musd,USD,IS,EBITDA,"EBITDA ajustado de Bloomberg (= EBITDA, Adjusted en RECONCILIATION). No es el EBITDA de CFLOW"
+EOG,2024-09-30,,ebitda_mm,3024,musd,USD,IS,EBITDA,"EBITDA ajustado de Bloomberg (= EBITDA, Adjusted en RECONCILIATION). No es el EBITDA de CFLOW"
+EOG,2024-12-31,,ebitda_mm,2972,musd,USD,IS,EBITDA,"EBITDA ajustado de Bloomberg (= EBITDA, Adjusted en RECONCILIATION). No es el EBITDA de CFLOW"
+EOG,2025-03-31,,ebitda_mm,3026,musd,USD,IS,EBITDA,"EBITDA ajustado de Bloomberg (= EBITDA, Adjusted en RECONCILIATION). No es el EBITDA de CFLOW"
+EOG,2025-06-30,,ebitda_mm,2726,musd,USD,IS,EBITDA,"EBITDA ajustado de Bloomberg (= EBITDA, Adjusted en RECONCILIATION). No es el EBITDA de CFLOW"
+EOG,2025-09-30,,ebitda_mm,3073,musd,USD,IS,EBITDA,"EBITDA ajustado de Bloomberg (= EBITDA, Adjusted en RECONCILIATION). No es el EBITDA de CFLOW"
+EOG,2025-12-31,,ebitda_mm,3518,musd,USD,IS,EBITDA,"EBITDA ajustado de Bloomberg (= EBITDA, Adjusted en RECONCILIATION). No es el EBITDA de CFLOW"
+EOG,2026-03-31,,ebitda_mm,3594,musd,USD,IS,EBITDA,"EBITDA ajustado de Bloomberg (= EBITDA, Adjusted en RECONCILIATION). No es el EBITDA de CFLOW"
+EOG,2026-06-30,,ebitda_mm,4748,musd,USD,IS,EBITDA,"EBITDA ajustado de Bloomberg (= EBITDA, Adjusted en RECONCILIATION). No es el EBITDA de CFLOW"
+EOG,2023-09-30,,deuda_mm,4480,musd,USD,BS,+ ST Debt + + LT Debt,Suma ST Debt + LT Debt (incluye leasing segun Bloomberg). Cuadra con Net Debt de BS
+EOG,2023-12-31,,deuda_mm,4800,musd,USD,BS,+ ST Debt + + LT Debt,Suma ST Debt + LT Debt (incluye leasing segun Bloomberg). Cuadra con Net Debt de BS
+EOG,2024-03-31,,deuda_mm,4427,musd,USD,BS,+ ST Debt + + LT Debt,Suma ST Debt + LT Debt (incluye leasing segun Bloomberg). Cuadra con Net Debt de BS
+EOG,2024-06-30,,deuda_mm,4390,musd,USD,BS,+ ST Debt + + LT Debt,Suma ST Debt + LT Debt (incluye leasing segun Bloomberg). Cuadra con Net Debt de BS
+EOG,2024-09-30,,deuda_mm,4114,musd,USD,BS,+ ST Debt + + LT Debt,Suma ST Debt + LT Debt (incluye leasing segun Bloomberg). Cuadra con Net Debt de BS
+EOG,2024-12-31,,deuda_mm,5792,musd,USD,BS,+ ST Debt + + LT Debt,Suma ST Debt + LT Debt (incluye leasing segun Bloomberg). Cuadra con Net Debt de BS
+EOG,2025-03-31,,deuda_mm,5380,musd,USD,BS,+ ST Debt + + LT Debt,Suma ST Debt + LT Debt (incluye leasing segun Bloomberg). Cuadra con Net Debt de BS
+EOG,2025-06-30,,deuda_mm,4956,musd,USD,BS,+ ST Debt + + LT Debt,Suma ST Debt + LT Debt (incluye leasing segun Bloomberg). Cuadra con Net Debt de BS
+EOG,2025-09-30,,deuda_mm,8127,musd,USD,BS,+ ST Debt + + LT Debt,Suma ST Debt + LT Debt (incluye leasing segun Bloomberg). Cuadra con Net Debt de BS
+EOG,2025-12-31,,deuda_mm,9135,musd,USD,BS,+ ST Debt + + LT Debt,Suma ST Debt + LT Debt (incluye leasing segun Bloomberg). Cuadra con Net Debt de BS
+EOG,2026-03-31,,deuda_mm,8681,musd,USD,BS,+ ST Debt + + LT Debt,Suma ST Debt + LT Debt (incluye leasing segun Bloomberg). Cuadra con Net Debt de BS
+EOG,2026-06-30,,deuda_mm,8898,musd,USD,BS,+ ST Debt + + LT Debt,Suma ST Debt + LT Debt (incluye leasing segun Bloomberg). Cuadra con Net Debt de BS
+EOG,2023-09-30,,caja_mm,5326,musd,USD,BS,+ Cash & Cash Equivalents,Sin inversiones de corto plazo (ST Investments vacio)
+EOG,2023-12-31,,caja_mm,5278,musd,USD,BS,+ Cash & Cash Equivalents,Sin inversiones de corto plazo (ST Investments vacio)
+EOG,2024-03-31,,caja_mm,5292,musd,USD,BS,+ Cash & Cash Equivalents,Sin inversiones de corto plazo (ST Investments vacio)
+EOG,2024-06-30,,caja_mm,5431,musd,USD,BS,+ Cash & Cash Equivalents,Sin inversiones de corto plazo (ST Investments vacio)
+EOG,2024-09-30,,caja_mm,6122,musd,USD,BS,+ Cash & Cash Equivalents,Sin inversiones de corto plazo (ST Investments vacio)
+EOG,2024-12-31,,caja_mm,7092,musd,USD,BS,+ Cash & Cash Equivalents,Sin inversiones de corto plazo (ST Investments vacio)
+EOG,2025-03-31,,caja_mm,6599,musd,USD,BS,+ Cash & Cash Equivalents,Sin inversiones de corto plazo (ST Investments vacio)
+EOG,2025-06-30,,caja_mm,5216,musd,USD,BS,+ Cash & Cash Equivalents,Sin inversiones de corto plazo (ST Investments vacio)
+EOG,2025-09-30,,caja_mm,3530,musd,USD,BS,+ Cash & Cash Equivalents,Sin inversiones de corto plazo (ST Investments vacio)
+EOG,2025-12-31,,caja_mm,3396,musd,USD,BS,+ Cash & Cash Equivalents,Sin inversiones de corto plazo (ST Investments vacio)
+EOG,2026-03-31,,caja_mm,3849,musd,USD,BS,+ Cash & Cash Equivalents,Sin inversiones de corto plazo (ST Investments vacio)
+EOG,2026-06-30,,caja_mm,4907,musd,USD,BS,+ Cash & Cash Equivalents,Sin inversiones de corto plazo (ST Investments vacio)
+EOG,2023-09-30,,acciones_mm,583,mm acciones,,BS,Shares Outstanding,Acciones en circulacion al cierre; EOG tiene una sola clase
+EOG,2023-12-31,,acciones_mm,581,mm acciones,,BS,Shares Outstanding,Acciones en circulacion al cierre; EOG tiene una sola clase
+EOG,2024-03-31,,acciones_mm,575,mm acciones,,BS,Shares Outstanding,Acciones en circulacion al cierre; EOG tiene una sola clase
+EOG,2024-06-30,,acciones_mm,581,mm acciones,,BS,Shares Outstanding,Acciones en circulacion al cierre; EOG tiene una sola clase
+EOG,2024-09-30,,acciones_mm,565,mm acciones,,BS,Shares Outstanding,Acciones en circulacion al cierre; EOG tiene una sola clase
+EOG,2024-12-31,,acciones_mm,557,mm acciones,,BS,Shares Outstanding,Acciones en circulacion al cierre; EOG tiene una sola clase
+EOG,2025-03-31,,acciones_mm,551,mm acciones,,BS,Shares Outstanding,Acciones en circulacion al cierre; EOG tiene una sola clase
+EOG,2025-06-30,,acciones_mm,546,mm acciones,,BS,Shares Outstanding,Acciones en circulacion al cierre; EOG tiene una sola clase
+EOG,2025-09-30,,acciones_mm,544,mm acciones,,BS,Shares Outstanding,Acciones en circulacion al cierre; EOG tiene una sola clase
+EOG,2025-12-31,,acciones_mm,538,mm acciones,,BS,Shares Outstanding,Acciones en circulacion al cierre; EOG tiene una sola clase
+EOG,2026-03-31,,acciones_mm,535,mm acciones,,BS,Shares Outstanding,Acciones en circulacion al cierre; EOG tiene una sola clase
+EOG,2026-06-30,,acciones_mm,525,mm acciones,,BS,Shares Outstanding,Acciones en circulacion al cierre; EOG tiene una sola clase
+EOG,2023-09-30,,ingresos_crudo_mm,3717,musd,USD,MEASURE BY PRODUCT,Crude Oil & Condensate,Ingreso por crudo y condensado (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2023-12-31,,ingresos_crudo_mm,3597,musd,USD,MEASURE BY PRODUCT,Crude Oil & Condensate,Ingreso por crudo y condensado (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2024-03-31,,ingresos_crudo_mm,3480,musd,USD,MEASURE BY PRODUCT,Crude Oil & Condensate,Ingreso por crudo y condensado (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2025-12-31,,ingresos_crudo_mm,2991,musd,USD,MEASURE BY PRODUCT,Crude Oil & Condensate,Ingreso por crudo y condensado (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2026-03-31,,ingresos_crudo_mm,3577,musd,USD,MEASURE BY PRODUCT,Crude Oil & Condensate,Ingreso por crudo y condensado (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2026-06-30,,ingresos_crudo_mm,4901,musd,USD,MEASURE BY PRODUCT,Crude Oil & Condensate,Ingreso por crudo y condensado (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2023-09-30,,ingresos_gas_mm,417,musd,USD,MEASURE BY PRODUCT,Natural Gas,Ingreso por gas natural (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2023-12-31,,ingresos_gas_mm,476,musd,USD,MEASURE BY PRODUCT,Natural Gas,Ingreso por gas natural (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2024-03-31,,ingresos_gas_mm,382,musd,USD,MEASURE BY PRODUCT,Natural Gas,Ingreso por gas natural (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2025-12-31,,ingresos_gas_mm,847,musd,USD,MEASURE BY PRODUCT,Natural Gas,Ingreso por gas natural (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2026-03-31,,ingresos_gas_mm,1021,musd,USD,MEASURE BY PRODUCT,Natural Gas,Ingreso por gas natural (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2026-06-30,,ingresos_gas_mm,812,musd,USD,MEASURE BY PRODUCT,Natural Gas,Ingreso por gas natural (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2023-09-30,,ingresos_ngl_mm,501,musd,USD,MEASURE BY PRODUCT,Natural Gas Liquids,Ingreso por NGL (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2023-12-31,,ingresos_ngl_mm,484,musd,USD,MEASURE BY PRODUCT,Natural Gas Liquids,Ingreso por NGL (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2024-03-31,,ingresos_ngl_mm,513,musd,USD,MEASURE BY PRODUCT,Natural Gas Liquids,Ingreso por NGL (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2025-12-31,,ingresos_ngl_mm,666,musd,USD,MEASURE BY PRODUCT,Natural Gas Liquids,Ingreso por NGL (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2026-03-31,,ingresos_ngl_mm,664,musd,USD,MEASURE BY PRODUCT,Natural Gas Liquids,Ingreso por NGL (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24
+EOG,2026-06-30,,ingresos_ngl_mm,770,musd,USD,MEASURE BY PRODUCT,Natural Gas Liquids,Ingreso por NGL (no volumen). Solo 6 trimestres: faltan 3T25 a 2T24

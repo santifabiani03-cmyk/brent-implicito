@@ -1,7 +1,11 @@
 {
   "_nota": "Se edita a mano. Se muestra en la página (botón 'Estado y pendientes'). estado: pendiente | en curso | resuelto. prioridad: alta | media | baja.",
-  "actualizado": "2026-09-21",
+  "actualizado": "2026-10-14",
   "importante": [
+    {
+      "titulo": "Datos Bloomberg (14/10/2026)",
+      "texto": "Los estados contables de las 6 salen de la terminal Bloomberg (inputs/bloomberg/<ID>.csv) y pisan a EDGAR/yfinance trimestre a trimestre; EDGAR completa los operativos de VIST, YPF, EOG y PBR. Suncor reemplaza a ConocoPhillips (panel del TIF). Suncor y PRIO no traen operativos en Bloomberg: se cargaron de sus releases (SEC 6-K / RI de PRIO) con link por dato en <ID>_operativos.csv."
+    },
     {
       "titulo": "Todo el pipeline es automático",
       "texto": "EDGAR (10-Q/10-K y releases 6-K) → producción, precios realizados, costos por boe, impuestos a la producción, EBITDA de segmentos. yfinance, SEC y CVM → capex, deuda, acciones. FRED y Damodaran → rf, ERP, riesgo país, betas, múltiplos. Secretaría de Energía → Medanito y regalías. Corre sola cada día hábil; cualquier campo se puede pisar."
@@ -33,7 +37,25 @@
   ],
   "pendientes": [
     {
-      "tarea": "Serie histórica: el sesgo es grande y persistente (EOG +39, COP +30, VIST +75, YPF +99 USD/bbl vs 1ª línea) con correlación de variaciones baja (0,2–0,4): recalibrar perfil de producción y horizonte antes de interpretar",
+      "tarea": "Bloomberg: re-exportar el CDS de Argentina (CT350188 CBIN salta entre dos niveles día por día y tiene un hueco jun–nov 2025) y el histórico del CO1 (el archivo vino vacío). Hasta entonces el riesgo país sigue en Damodaran y el Brent de 1ª línea en Yahoo BZ=F",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Datos"
+    },
+    {
+      "tarea": "Suncor: la hoja Segments del Excel mezcla datos de Freeport-McMoRan (filas 76–519) y el valor de refinación (EBITDA R&M × 4 × EV/EBITDA) pesa ~60 % del EV: revisar método, igual que en PBR e YPF",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Modelo"
+    },
+    {
+      "tarea": "PRIO: el precio realizado publicado es el 'Brent de referencia' ponderado (94,60 en 2T26), no el FOB (87,69): el diferencial de realización queda subestimado. Regalías al 10 % legal (supuesto)",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Datos"
+    },
+    {
+      "tarea": "Serie histórica: el sesgo es grande y persistente (EOG +39, VIST +75, YPF +99 USD/bbl vs 1ª línea) con correlación de variaciones baja (0,2–0,4): recalibrar perfil de producción y horizonte antes de interpretar",
       "prioridad": "alta",
       "estado": "pendiente",
       "area": "Modelo"
@@ -105,7 +127,7 @@
       "area": "TIF"
     },
     {
-      "tarea": "Reescribir el criterio de universo: en EOG y COP el crudo es ~42–45 % (gas y NGL con precio fijo exógeno)",
+      "tarea": "Reescribir el criterio de universo: en EOG el crudo es ~42 % (gas y NGL con precio fijo exógeno)",
       "prioridad": "media",
       "estado": "pendiente",
       "area": "TIF"

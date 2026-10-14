@@ -94,6 +94,7 @@ td input.edited{border-color:var(--crude);background:var(--crude-soft)}
 .orig.derivado{color:var(--accent);border:1px dashed var(--accent)}
 .orig.semilla{color:var(--crude);background:var(--crude-soft)}
 .orig.edgar{color:#fff;background:var(--accent)}
+.orig.bloomberg{color:#fff;background:#1f6f5c}
 .orig.macro{color:var(--accent);background:var(--accent-soft)}
 .orig.supuesto{color:var(--warn);border:1px dashed var(--warn)}
 .orig.equipo{color:var(--ok);border:1px solid var(--ok)}
@@ -492,7 +493,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
         const url = String(x.fuente || "").match(/https?:\/\/\S+/);
         const fte = (x.fuente ? (url ? `<a href="${esc(url[0])}" target="_blank" rel="noopener">${esc(String(x.fuente).startsWith("http") ? "link" : String(x.fuente).split(/https?:/)[0] || "link")}</a>` : esc(x.fuente)) : "") + (x.nota && !sintetico ? `<div>${esc(x.nota)}</div>` : "") + (x.fecha ? `<div class="mono">${esc(x.fecha)}</div>` : "");
         return `<tr><td>${lab}</td><td class="mono">${u}</td><td><input id="in-${k}" data-k="${k}" class="${cls}" inputmode="decimal" value="${val}" placeholder="—" aria-label="${lab}"></td>
-          <td><span class="orig ${x.origen}">${{ edgar: "EDGAR", automatico: "Automático", derivado: "Calculado", macro: "Mercado", semilla: "Reporte citado", supuesto: "Supuesto", parametro: "Parámetro", equipo: "Equipo", faltante: "Falta", sintetico: "Sintético" }[x.origen]}</span></td><td class="note">${fte}</td></tr>`;
+          <td><span class="orig ${x.origen}">${{ edgar: "EDGAR", bloomberg: "Bloomberg", automatico: "Automático", derivado: "Calculado", macro: "Mercado", semilla: "Reporte citado", supuesto: "Supuesto", parametro: "Parámetro", equipo: "Equipo", faltante: "Falta", sintetico: "Sintético" }[x.origen]}</span></td><td class="note">${fte}</td></tr>`;
       }).join("") + "</tbody>";
     document.querySelectorAll("#inputs input").forEach(inp => inp.oninput = () => {
       const k = inp.dataset.k, raw = inp.value.replace(",", ".");
@@ -539,7 +540,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
 
   function fuentes() {
     $("#gen").textContent = `data.json generado ${new Date(D.generado).toLocaleString("es-AR")}`;
-    const nom = { "mercado.json": "Cotizaciones (Yahoo Finance)", "brent.json": "Brent spot FRED + curva ICE", "fx.json": "USD/BRL (BCB PTAX)", "fund_sec.json": "Balances EOG, COP (SEC XBRL)", "fund_cvm.json": "Balances PRIO, Petrobras (CVM)", "fund_yf.json": "Estados financieros de las 6 (yfinance)", "ar_se.json": "Producción y reservas operadas VIST, YPF (Secretaría de Energía)", "edgar.json": "Releases y 10-Q/10-K (SEC EDGAR)", "macro.json": "rf, ERP, riesgo país, betas (FRED, Damodaran) y Medanito (SE)" };
+    const nom = { "mercado.json": "Cotizaciones (Yahoo Finance)", "brent.json": "Brent spot FRED + curva ICE", "fx.json": "USD/BRL (BCB PTAX)", "fund_sec.json": "Balances EOG (SEC XBRL)", "fund_cvm.json": "Balances PRIO, Petrobras (CVM)", "fund_yf.json": "Estados financieros de las 6 (yfinance)", "ar_se.json": "Producción y reservas operadas VIST, YPF (Secretaría de Energía)", "edgar.json": "Releases y 10-Q/10-K (SEC EDGAR)", "macro.json": "rf, ERP, riesgo país, betas (FRED, Damodaran) y Medanito (SE)" };
     $("#t-fuentes").innerHTML = `<thead><tr><th>Fuente</th><th>Estado</th><th>Última actualización</th></tr></thead><tbody>` +
       D.fuentes_estado.map(f => `<tr><td>${nom[f.archivo] || f.archivo}</td><td><span class="st ${f.estado === "ok" ? "ok" : f.estado === "desactualizado" ? "desactualizado" : "sin"}"></span>${f.estado}</td><td class="mono">${f.actualizado ? new Date(f.actualizado).toLocaleString("es-AR") : "—"}</td></tr>`).join("") +
       `<tr><td>Inputs editados por el equipo (inputs/operativos.csv)</td><td><span class="st ${D.empresas.some(e => Object.values(e.inputs).some(v => v.origen === "equipo")) ? "ok" : "sin"}"></span>${D.empresas.some(e => Object.values(e.inputs).some(v => v.origen === "equipo")) ? "con datos" : "sin cargar"}</td><td class="mono">—</td></tr></tbody>`;
@@ -588,7 +589,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
 
 
   // ------------------------------------------------------------------ serie histórica
-  const COL = { VIST: "var(--s1)", YPF: "var(--s2)", EOG: "var(--s3)", COP: "var(--s4)", PRIO: "var(--s5)", PBR: "var(--s6)" };
+  const COL = { VIST: "var(--s1)", YPF: "var(--s2)", EOG: "var(--s3)", SU: "var(--s4)", PRIO: "var(--s5)", PBR: "var(--s6)" };
   const H = { desde: null, hasta: null, ref: "brent_1l", activos: new Set() };
   function hInit() {
     const hi = D.historia; if (!hi) { $("#h-chart").innerHTML = "<p class='note'>Todavía no se generó la serie histórica (python -m pipeline.historia).</p>"; return; }
@@ -611,7 +612,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     document.querySelectorAll("#h-emp button").forEach(b => b.onclick = () => { const e = b.dataset.e; H.activos.has(e) ? H.activos.delete(e) : H.activos.add(e); b.setAttribute("aria-pressed", H.activos.has(e)); hDraw(); });
     const inicio = Object.fromEntries(ids.map(e => [e, hi.series[e].fecha[0]]));
     $("#h-nota").textContent = "Cobertura: " + D.empresas.map(e => `${e.id} desde ${inicio[e.id] || "—"}`).join(" · ") +
-      ". PRIO no está en la SEC (solo su último release citado); Petrobras publicó los reportes de producción anteriores a 2T25 como PDF, que EDGAR no deja leer como texto.";
+      ". PRIO y Suncor: estados contables de Bloomberg y operativos de sus releases (link por dato); Petrobras publicó los reportes de producción anteriores a 2T25 como PDF, que EDGAR no deja leer como texto.";
     hDraw();
   }
   const enRango = f => f >= H.desde && f <= H.hasta;
