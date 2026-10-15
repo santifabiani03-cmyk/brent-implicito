@@ -37,10 +37,10 @@ def _historia():
         periodos = sorted(set(s["calibracion"]))
         s["cal_idx"] = [periodos.index(x) for x in s["calibracion"]]
         s["periodos"] = periodos
-        s.pop("calibracion"); s.pop("cap_musd", None)
-    for e, ls in h["calibraciones"].items():
+        s.pop("calibracion")          # cap_musd se queda: lo usa la descarga a Excel
+    for e, ls in h["calibraciones"].items():   # insumos de cada balance (valor + origen): hojas por empresa del Excel
         for k in ls:
-            k.pop("inputs", None)
+            k["inputs"] = {kk: [round(v["valor"], 6), v["origen"]] for kk, v in (k.get("inputs") or {}).items()}
     return h
 
 
@@ -110,10 +110,12 @@ def main():
         if c["id"] in ar.get("reservas", {}):
             auto("reservas_1p_mmboe", ar["reservas"][c["id"]]["reservas_1p_mmboe"], ar["reservas"][c["id"]]["fuente"],
                  nota="Reservas comprobadas OPERADAS (SE), no por participación: ajustar")
-        if bb_ok and "reservas_1p_mmboe" not in ins and "reservas_1p_mmboe" not in sem:   # semilla citada manda
+        # reservas por participación (Bloomberg/releases) pisan a las operadas de la SE; una semilla citada manda
+        if bb_ok and "reservas_1p_mmboe" not in sem:
             r_ = bloomberg.ultima_reserva(c["id"], q_bb)
             if r_:
-                auto("reservas_1p_mmboe", r_["valor"], r_["fuente"], r_["fecha"], origen="bloomberg", nota="Reservas probadas 1P al cierre del último ejercicio")
+                auto("reservas_1p_mmboe", r_["valor"], r_["fuente"], r_["fecha"], origen="semilla" if str(r_["fuente"]).startswith("http") else "bloomberg",
+                     nota="Reservas probadas 1P por participación al cierre del último ejercicio")
         for k in ("rf", "erp", "lambda_crp"):
             if params[k]["valor"] is not None:
                 auto(k, params[k]["valor"], params[k]["fuente"], origen="parametro")

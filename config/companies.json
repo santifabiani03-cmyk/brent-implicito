@@ -12,7 +12,7 @@
       "moneda_cotizacion": "USD",
       "mercado": "NYSE (ADS)",
       "ratio_adr_acciones": 1,
-      "ratio_adr_verificar": true,
+      "ratio_adr_verificar": false,
       "sec_cik": 1762506,
       "cvm_codigo": null,
       "fuente_fundamentals": "yf_se",
@@ -26,7 +26,8 @@
       "moneda_estados_verificar": false,
       "operador_se": [
         "VISTA"
-      ]
+      ],
+      "ratio_adr_nota": "1 ADS = 1 acción serie A (20-F FY2024, portada). Verificado 2026-10-14 (inputs/bloomberg/ADR_verificacion.md)."
     },
     {
       "id": "YPF",
@@ -39,7 +40,7 @@
       "moneda_cotizacion": "USD",
       "mercado": "NYSE (ADS)",
       "ratio_adr_acciones": 1,
-      "ratio_adr_verificar": true,
+      "ratio_adr_verificar": false,
       "sec_cik": 904851,
       "cvm_codigo": null,
       "fuente_fundamentals": "yf_se",
@@ -53,7 +54,8 @@
       "moneda_estados_verificar": true,
       "operador_se": [
         "YPF"
-      ]
+      ],
+      "ratio_adr_nota": "Desde el 04/08/2026 1 ADS = 10 acciones clase D (split 10:1, 6-K). El modelo usa 393,3 M de ADS-equivalentes con ratio 1: misma capitalización que 3.933 M acciones / 10. Verificado 2026-10-14."
     },
     {
       "id": "EOG",
@@ -147,7 +149,7 @@
       "moneda_cotizacion": "USD",
       "mercado": "NYSE (ADS)",
       "ratio_adr_acciones": 2,
-      "ratio_adr_verificar": true,
+      "ratio_adr_verificar": false,
       "sec_cik": 1119639,
       "cvm_codigo": 9512,
       "fuente_fundamentals": "cvm_itr",
@@ -159,7 +161,8 @@
       "ticker_precio_pref": "PBR-A",
       "ticker_yf_fund": "PBR",
       "moneda_estados_yf": "USD",
-      "moneda_estados_verificar": true
+      "moneda_estados_verificar": true,
+      "ratio_adr_nota": "1 ADS = 2 acciones (ON y PN; 20-F FY2025, Exhibit 2.4). Verificado 2026-10-14."
     }
   ]
 }

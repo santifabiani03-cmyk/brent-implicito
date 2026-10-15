@@ -1,10 +1,14 @@
 {
   "_nota": "Se edita a mano. Se muestra en la página (botón 'Estado y pendientes'). estado: pendiente | en curso | resuelto. prioridad: alta | media | baja.",
-  "actualizado": "2026-10-14",
+  "actualizado": "2026-10-15",
   "importante": [
     {
       "titulo": "Datos Bloomberg (14/10/2026)",
       "texto": "Los estados contables de las 6 salen de la terminal Bloomberg (inputs/bloomberg/<ID>.csv) y pisan a EDGAR/yfinance trimestre a trimestre; EDGAR completa los operativos de VIST, YPF, EOG y PBR. Suncor reemplaza a ConocoPhillips (panel del TIF). Suncor y PRIO no traen operativos en Bloomberg: se cargaron de sus releases (SEC 6-K / RI de PRIO) con link por dato en <ID>_operativos.csv."
+    },
+    {
+      "titulo": "Descarga a Excel (15/10/2026)",
+      "texto": "Pestaña Serie histórica → Descargar en Excel: una hoja por empresa con los insumos de cada balance y el despeje con fórmulas (forma cerrada del motor, exacta mientras el perfil sea plano), la hoja Implícitos con el Brent implícito diario y el CO1, un resumen de la prima y un control contra la web (diferencia ≤ 0,006 USD/bbl verificada en Excel)."
     },
     {
       "titulo": "Todo el pipeline es automático",
@@ -49,9 +53,9 @@
       "area": "Modelo"
     },
     {
-      "tarea": "PRIO: el precio realizado publicado es el 'Brent de referencia' ponderado (94,60 en 2T26), no el FOB (87,69): el diferencial de realización queda subestimado. Regalías al 10 % legal (supuesto)",
+      "tarea": "PRIO: precio realizado FOB cargado solo donde el release lo publica (2T24, 4T25, 1T26, 2T26); en los demás trimestres queda el 'Brent de referencia' ponderado, que subestima el diferencial. Regalías al 10 % legal (supuesto)",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "en curso",
       "area": "Datos"
     },
     {
@@ -61,15 +65,15 @@
       "area": "Modelo"
     },
     {
-      "tarea": "Petrobras antes de 2T25: los reportes de producción están en PDF (EDGAR no los lee como texto); cargar esos trimestres a mano o leer el PDF",
+      "tarea": "Petrobras antes de 2T25: los reportes de producción están en PDF (EDGAR no los lee como texto); cargar esos trimestres a mano o leer el PDF — Resuelto: la producción trimestral sale de Bloomberg desde 1T2024 (INFO PBR US.xlsx).",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Datos"
     },
     {
-      "tarea": "PRIO: cargar releases trimestrales históricos en inputs/semillas.csv (hoy la serie arranca en ago-2026)",
+      "tarea": "PRIO: cargar releases trimestrales históricos en inputs/semillas.csv (hoy la serie arranca en ago-2026) — Resuelto: 12 trimestres de releases en inputs/bloomberg/PRIO_operativos.csv (serie desde abr-2024).",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Datos"
     },
     {
@@ -79,9 +83,9 @@
       "area": "Modelo"
     },
     {
-      "tarea": "Subir el repo a GitHub y activar Pages (pasos en GUIA-GITHUB.md; hace falta 'Read and write permissions' en Actions)",
+      "tarea": "Subir el repo a GitHub y activar Pages (pasos en GUIA-GITHUB.md; hace falta 'Read and write permissions' en Actions) — Resuelto: repo publicado con Pages y actualización diaria.",
       "prioridad": "alta",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Web"
     },
     {
@@ -115,9 +119,9 @@
       "area": "Modelo"
     },
     {
-      "tarea": "Reservas y producción de VIST e YPF por participación (20-F), no por operador",
+      "tarea": "Reservas y producción de VIST e YPF por participación (20-F), no por operador — Resuelto (reservas): 1P por participación de los releases 6-K, verificadas contra el 20-F (VIST 588,1 y YPF 1.284 MMboe a 2025). VIST es bruta de regalías; YPF, neta.",
       "prioridad": "alta",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Datos"
     },
     {
@@ -145,9 +149,9 @@
       "area": "TIF"
     },
     {
-      "tarea": "Diferencial de Petrobras (hoy supuesto 0: no publica precio realizado de crudo)",
+      "tarea": "Diferencial de Petrobras (hoy supuesto 0: no publica precio realizado de crudo) — Resuelto: precio de venta anual de crudo y NGL en Brasil (20-F) vs Brent Dated anual; se usa el del ejercicio anterior (sin look-ahead): 4,1 % / 6,8 % / 4,3 %.",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Datos"
     },
     {
@@ -157,9 +161,9 @@
       "area": "Datos"
     },
     {
-      "tarea": "Revisar capex TTM de PRIO: el 4T2025 incluye una adquisición (~R$ 10.600 M)",
+      "tarea": "Revisar capex TTM de PRIO: el 4T2025 incluye una adquisición (~R$ 10.600 M) — Resuelto: se restan los pagos por adquisiciones informados en los releases (cierres de Peregrino 4T24 y 4T25, Albacora Leste, 10 % Peregrino) cuando estaban dentro del capex de Bloomberg (regla: el capex restante no queda debajo del mínimo sin adquisiciones)",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Datos"
     },
     {
@@ -169,15 +173,15 @@
       "area": "Datos"
     },
     {
-      "tarea": "Verificar ratios ADR (VIST, YPF, PBR) y moneda de los estados de yfinance para YPF y PBR",
+      "tarea": "Verificar ratios ADR (VIST, YPF, PBR) y moneda de los estados de yfinance para YPF y PBR — Resuelto: VIST 1, PBR 2 (ON y PN), YPF 10 desde el 04/08/2026 (equivalente al 393,3 M × 1 del modelo). Ver inputs/bloomberg/ADR_verificacion.md.",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Datos"
     },
     {
-      "tarea": "Analizar la información de Bloomberg y contrastarla con las APIs abiertas",
+      "tarea": "Analizar la información de Bloomberg y contrastarla con las APIs abiertas — Resuelto: Bloomberg es la fuente principal; contraste contra EDGAR (9/10 operativos dentro de ±2 %) y yfinance documentado en las notas de cada empresa.",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Datos"
     },
     {

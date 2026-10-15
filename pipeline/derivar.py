@@ -82,6 +82,10 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
             fuente = url("p_crudo") or (sem.get("p_crudo") or {}).get("fuente")
             put("diferencial_pct", 1 - pc / br, "derivado", fuente,
                 f"1 − precio realizado ({pc:.2f}) / Brent Dated promedio del trimestre ({br:.2f}, FRED, {n} ruedas)")
+        elif "diferencial_anual" in (ed.get("valores") or {}):
+            da = ed["valores"]["diferencial_anual"]
+            put("diferencial_pct", da["valor"], "derivado", da["fuente"],
+                f"1 − precio de venta anual de crudo y NGL en Brasil ({da['p']:.2f}, 20-F {da['ejercicio']}) / Brent Dated promedio {da['ejercicio']} ({da['brent']:.2f}, FRED): último ejercicio publicado")
         elif c["id"] == "PBR":
             put("diferencial_pct", 0.0, "supuesto", None, "Petrobras no publica precio realizado de crudo: se supone paridad Brent (editar)")
 

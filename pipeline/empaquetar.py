@@ -5,7 +5,8 @@ def main():
     w = RAIZ / "web"
     page = (w / "_page.html").read_text(encoding="utf-8")
     eng, app = (w / "engine.js").read_text(encoding="utf-8"), (w / "app.js").read_text(encoding="utf-8")
-    base = page.replace("/*__ENGINE__*/", eng).replace("/*__APP__*/", app)
+    xls = (w / "excel.js").read_text(encoding="utf-8")
+    base = page.replace("/*__ENGINE__*/", eng).replace("/*__EXCEL__*/", xls).replace("/*__APP__*/", app)
     (w / "index.html").write_text('<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>'
                                   + base.replace("/*__DATA__*/", "") + "</body></html>", encoding="utf-8")
     data = (w / "data.json").read_text(encoding="utf-8").replace("</", "<\\/")

@@ -348,8 +348,33 @@
         `<tr><td><b>${e}</b></td><td class="mono">${k.periodo}</td><td class="mono">${k.publicado}</td><td>${k.faltan.length ? `<span class="chip pend">faltan ${k.faltan.length}</span>` : `<span class="chip ok">completa</span>`}</td><td class="note">${esc(k.arrastrados.join(", ")) || "—"}</td><td class="note">${Object.entries(k.docs || {}).map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>`).join(" · ") || "release citado"}</td></tr>`)).join("") + "</tbody>";
   }
 
+  // ---------- descarga a Excel (web/excel.js)
+  const X = { activos: new Set() };
+  function xInit() {
+    const hi = D.historia; if (!hi || !window.BIExcel) { $("#x-panel").hidden = true; return; }
+    const ids = Object.keys(hi.series).filter(e => hi.series[e].fecha.length);
+    ids.forEach(e => X.activos.add(e));
+    const todas = ids.flatMap(e => hi.series[e].fecha).sort();
+    $("#x-desde").min = $("#x-hasta").min = todas[0]; $("#x-desde").max = $("#x-hasta").max = todas.at(-1);
+    const usar = () => { $("#x-desde").value = H.desde; $("#x-hasta").value = H.hasta; };
+    usar(); $("#x-usar").onclick = usar;
+    $("#x-emp").innerHTML = D.empresas.map(e => `<button type="button" data-e="${e.id}" aria-pressed="${X.activos.has(e.id)}" ${ids.includes(e.id) ? "" : "disabled title='Sin serie'"}><i style="background:${COL[e.id]}"></i>${e.id}</button>`).join("");
+    document.querySelectorAll("#x-emp button").forEach(b => b.onclick = () => { const e = b.dataset.e; X.activos.has(e) ? X.activos.delete(e) : X.activos.add(e); b.setAttribute("aria-pressed", X.activos.has(e)); });
+    $("#x-bajar").onclick = () => {
+      const desde = $("#x-desde").value, hasta = $("#x-hasta").value, empresas = [...X.activos];
+      const est = $("#x-estado");
+      if (!desde || !hasta || desde > hasta) { est.textContent = "Revisá el rango: 'Desde' tiene que ser anterior a 'Hasta'."; return; }
+      if (!empresas.length) { est.textContent = "Elegí al menos una empresa."; return; }
+      $("#x-bajar").disabled = true; est.textContent = "Armando el Excel…";
+      window.BIExcel.exportar(D, { desde, hasta, empresas, CAMPOS })
+        .then(r => { est.textContent = `Listo: ${r.filas} días × ${r.empresas} empresas. Control Excel vs web: máx. ${fmt(r.maxDif, 3)} USD/bbl.`; })
+        .catch(err => { est.textContent = "No se pudo armar el Excel: " + err.message; })
+        .finally(() => { $("#x-bajar").disabled = false; });
+    };
+  }
+
   cargar().then(d => {
-    D = d; tape(); rail(); cards(); fuentes(); docsEdgar(); notas(); hInit();
+    D = d; tape(); rail(); cards(); fuentes(); docsEdgar(); notas(); hInit(); xInit();
     $("#b-notas").onclick = () => { const dl = $("#notas"); if (dl.showModal) dl.showModal(); else dl.setAttribute("open", ""); };
     $("#b-cerrar").onclick = () => $("#notas").close ? $("#notas").close() : $("#notas").removeAttribute("open");
     $("#notas").addEventListener("click", ev => { if (ev.target.id === "notas") $("#notas").close(); });

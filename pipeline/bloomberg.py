@@ -41,7 +41,7 @@ def leer(emp: str) -> dict:
             for r in csv.DictReader(fh):
                 if r.get("valor") in (None, "") or not r.get("fuente_url"):
                     continue
-                var, mon = OPER.get(r["variable"], (r["variable"], ""))
+                var, mon = OPER.get(r["variable"], (r["variable"], {"mbrl": "BRL", "mcad": "CAD", "mars": "ARS"}.get(r["unidad"].lower(), "")))
                 out[r["trimestre"]][var] = {"empresa": emp, "periodo": r["trimestre"], "fecha_publicacion": r["fecha_publicacion"],
                                             "variable": var, "valor": float(r["valor"]), "unidad": r["unidad"], "moneda": mon,
                                             "fuente_url": r["fuente_url"], "campo_bloomberg": r.get("pagina_o_tabla")}
@@ -62,6 +62,18 @@ def _fx(moneda: str):
         except Exception:  # noqa: BLE001
             _fx_cache[moneda] = {}
     return _fx_cache[moneda]
+
+
+def brent_anual(anio: str):
+    """Promedio anual del Brent Dated (FRED DCOILBRENTEU); None si el año no está completo."""
+    if "_brent" not in _fx_cache:
+        from .historia import serie_fred
+        try:
+            _fx_cache["_brent"] = serie_fred("DCOILBRENTEU")
+        except Exception:  # noqa: BLE001
+            _fx_cache["_brent"] = {}
+    v = [x for d, x in _fx_cache["_brent"].items() if d[:4] == anio]
+    return sum(v) / len(v) if len(v) >= 240 else None
 
 
 def _ini_trim(q: str) -> str:
@@ -103,7 +115,8 @@ def periodo(emp: str, q: str, datos: dict | None = None) -> dict | None:
     b = datos.get(q)
     if not b:
         return None
-    pubs = [r["fecha_publicacion"] for r in b.values() if r.get("fecha_publicacion")]
+    # el dato anual del 20-F (p_crudo_anual) solo se usa en trimestres posteriores: no fija la fecha de vigencia
+    pubs = [r["fecha_publicacion"] for k, r in b.items() if r.get("fecha_publicacion") and k not in ("p_crudo_anual", "brent_ref")]
     pub = max(pubs) if pubs else None
     doc = {"url": f"Bloomberg (terminal UADE) — inputs/bloomberg/{emp}.csv", "form": "Bloomberg", "fecha": pub,
            "periodo": q, "dias": dias(q)}
@@ -117,6 +130,8 @@ def periodo(emp: str, q: str, datos: dict | None = None) -> dict | None:
     for k in PRECIOS:
         if k in b:
             put(k, a_usd(b[k], q, "flujo"), b[k])
+    if "p_crudo_fob" in b:   # PRIO: el FOB es la realización; el "Brent de referencia" ponderado no lo es
+        put("p_crudo", a_usd(b["p_crudo_fob"], q, "flujo"), b["p_crudo_fob"])
     if "p_crudo" not in val and "p_crudo_cad" in b:
         put("p_crudo", a_usd({**b["p_crudo_cad"], "moneda": "CAD"}, q, "flujo"), b["p_crudo_cad"])
     if "ebitda_no_up_mm" not in b and "rm_rai_mm" in b and "rm_dda_mm" in b:   # SU: misma definición que Bloomberg
@@ -130,6 +145,14 @@ def periodo(emp: str, q: str, datos: dict | None = None) -> dict | None:
     if "regalias_mm" in b:
         v = a_usd(b["regalias_mm"], q, "flujo")
         put("regalias_kusd", None if v is None else v * 1000, b["regalias_mm"])
+    # diferencial anual (PBR: precio de venta anual de crudo y NGL del 20-F vs Brent anual). Sin look-ahead: se usa
+    # el del ejercicio ANTERIOR al trimestre (el 20-F de un año sale en marzo/abril del siguiente)
+    anuales = sorted(p for p in datos if p < q and "p_crudo_anual" in datos[p])
+    br = brent_anual(anuales[-1][:4]) if anuales else None
+    if br:
+        fa = datos[anuales[-1]]
+        val["diferencial_anual"] = {"valor": 1 - fa["p_crudo_anual"]["valor"] / br, "doc": "bloomberg", "fuente": _fuente(fa["p_crudo_anual"]),
+                                    "ejercicio": anuales[-1][:4], "p": fa["p_crudo_anual"]["valor"], "brent": br}
     if "reservas_mmboe" in val:
         val["reservas_mmboe"]["anual"] = True
     if "total_kboed" in val:
@@ -148,6 +171,18 @@ def periodo(emp: str, q: str, datos: dict | None = None) -> dict | None:
             "pub": pub, "flujos": {k: b[k] for k in FLUJOS if k in b}}
 
 
+def capex_sin_adquisiciones(datos: dict, p: str, capex_usd: float) -> float:
+    """Capex del trimestre sin pagos por adquisiciones (PRIO: Peregrino, Albacora Leste). Se resta solo si el capex
+    restante no queda por debajo del mínimo de los trimestres sin adquisiciones: si quedara debajo, el pago no
+    estaba dentro del capex informado (los releases lo muestran aparte)."""
+    if "capex_adquisiciones_mm" not in datos[p]:
+        return capex_usd
+    piso = min((abs(a_usd(d["capex_mm"], q, "flujo") or 0) for q, d in datos.items()
+                if "capex_mm" in d and "capex_adquisiciones_mm" not in d), default=0)
+    neto = abs(capex_usd) - abs(a_usd(datos[p]["capex_adquisiciones_mm"], p, "flujo") or 0)
+    return neto if neto >= piso else capex_usd
+
+
 def ttm(emp: str, q: str, datos: dict | None = None) -> dict:
     """Flujos TTM (4 trimestres terminados en q) en MUSD, solo si están los 4."""
     datos = leer(emp) if datos is None else datos
@@ -158,6 +193,8 @@ def ttm(emp: str, q: str, datos: dict | None = None) -> dict:
     for k, ko in (("capex_mm", "capex_musd_ttm"), ("dda_mm", "dda_musd_ttm"), ("sga_mm", "sga_musd_ttm"),
                   ("intereses_mm", "intereses_musd_ttm"), ("impuesto_ganancias_mm", "_imp"), ("resultado_antes_imp_mm", "_rai")):
         vals = [a_usd(datos[p][k], p, "flujo") if k in datos[p] else None for p in qs]
+        if k == "capex_mm":
+            vals = [None if v is None else capex_sin_adquisiciones(datos, p, v) for v, p in zip(vals, qs)]
         if all(v is not None for v in vals):
             out[ko] = abs(sum(vals)) if k in ("capex_mm", "intereses_mm") else sum(vals)
     if out.get("_rai"):

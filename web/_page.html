@@ -104,6 +104,9 @@ td input.edited{border-color:var(--crude);background:var(--crude-soft)}
 .result .big{font:500 40px/1 var(--f-mono);color:var(--crude)}
 .btns{display:flex;flex-wrap:wrap;gap:8px}
 .btn{border:1px solid var(--line);background:var(--surface);padding:7px 12px;border-radius:4px;cursor:pointer;font-weight:600;font-size:13px}
+.btn.primary{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.btn.primary:disabled{opacity:.5;cursor:wait}
+.xrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
 .btn.danger{border-color:var(--bad);color:var(--bad)}
 .range{display:grid;gap:6px}
 .range input{width:100%;accent-color:var(--crude)}
@@ -205,6 +208,17 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
       <div class="chart hchart" id="h-chart"><div class="tip" id="h-tip" hidden></div></div>
       <p class="note" id="h-nota"></p>
     </div>
+    <div class="panel" id="x-panel">
+      <h2>Descargar en Excel</h2>
+      <p class="sub">Arma un .xlsx con una hoja por empresa (insumos de cada balance y el despeje con fórmulas), una hoja con el Brent implícito diario de todas las empresas calculado con esas hojas y el CO1, un resumen de la prima y un control contra la web. Elegí el rango y las empresas.</p>
+      <div class="ctrl">
+        <label class="lbl" for="x-desde">Desde <input type="date" id="x-desde"></label>
+        <label class="lbl" for="x-hasta">Hasta <input type="date" id="x-hasta"></label>
+        <div class="btns"><button class="btn" id="x-usar" type="button">Usar el rango del gráfico</button></div>
+      </div>
+      <div class="chips-sel" id="x-emp" aria-label="Empresas a incluir"></div>
+      <div class="xrow"><button class="btn primary" id="x-bajar" type="button">Descargar Excel (.xlsx)</button><span class="note" id="x-estado" role="status"></span></div>
+    </div>
     <div class="panel">
       <h2>Test 1 · ¿el implícito sigue al Brent?</h2>
       <p class="sub">Sobre el rango elegido. Sesgo = implícito − referencia (promedio); un sesgo estable es un diferencial mal calibrado, corregible. La correlación de variaciones semanales mide si el implícito se mueve con el crudo aunque el nivel esté corrido.</p>
@@ -280,4 +294,5 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
 </dialog>
 <script>/*__ENGINE__*/</script>
 <script id="datos" type="application/json">/*__DATA__*/</script>
+<script>/*__EXCEL__*/</script>
 <script>/*__APP__*/</script>
