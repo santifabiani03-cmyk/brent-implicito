@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-15T03:46:59+00:00",
+  "actualizado": "2026-10-16T00:40:26+00:00",
   "produccion": {
     "VIST": {
       "prod_crudo_kbd": 80.7059559480456,
@@ -12,14 +12,14 @@
       "fuente": "http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/85d6e021-a00d-4997-b74e-0b9b43c547fe/download/produccin-de-pozos-de-gas-y-petrleo-2026-ddjj-abiertas-y-cerradas-.csv (operado; promedio 2026-04 a 2026-06)"
     },
     "YPF": {
-      "prod_crudo_kbd": 362.819244062232,
-      "prod_otros_kboed": 182.66319662031137,
+      "prod_crudo_kbd": 349.642698230897,
+      "prod_otros_kboed": 185.924964350366,
       "meses": [
-        "2026-04",
         "2026-05",
-        "2026-06"
+        "2026-06",
+        "2026-07"
       ],
-      "fuente": "http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/85d6e021-a00d-4997-b74e-0b9b43c547fe/download/produccin-de-pozos-de-gas-y-petrleo-2026-ddjj-abiertas-y-cerradas-.csv (operado; promedio 2026-04 a 2026-06)"
+      "fuente": "http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/85d6e021-a00d-4997-b74e-0b9b43c547fe/download/produccin-de-pozos-de-gas-y-petrleo-2026-ddjj-abiertas-y-cerradas-.csv (operado; promedio 2026-05 a 2026-07)"
     }
   },
   "reservas": {
