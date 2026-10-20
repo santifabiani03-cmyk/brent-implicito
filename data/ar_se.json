@@ -1,9 +1,9 @@
 {
-  "actualizado": "2026-10-17T00:44:49+00:00",
+  "actualizado": "2026-10-20T01:12:44+00:00",
   "produccion": {},
   "reservas": {},
   "errores": {
-    "produccion": "GET falló: http://datos.energia.gob.ar/api/3/action/package_show?id=produccion-de-petroleo-y-gas-por-pozo → HTTPConnectionPool(host='datos.energia.gob.ar', port=80): Max retries exceeded with url: /api/3/action/package_show?id=produccion-de-petroleo-y-gas-por-pozo (Caused by ConnectTimeoutError(<HTTPConnection(host='datos.energia.gob.ar', port=80) at 0x7feea0927320>, 'Connection to datos.energia.gob.ar timed out. (connect timeout=30)'))",
-    "reservas": "GET falló: http://datos.energia.gob.ar/api/3/action/package_show?id=reservas-de-petroleo-y-gas → HTTPConnectionPool(host='datos.energia.gob.ar', port=80): Max retries exceeded with url: /api/3/action/package_show?id=reservas-de-petroleo-y-gas (Caused by ConnectTimeoutError(<HTTPConnection(host='datos.energia.gob.ar', port=80) at 0x7feea05d3230>, 'Connection to datos.energia.gob.ar timed out. (connect timeout=30)'))"
+    "produccion": "GET falló: http://datos.energia.gob.ar/api/3/action/package_show?id=produccion-de-petroleo-y-gas-por-pozo → HTTPConnectionPool(host='datos.energia.gob.ar', port=80): Max retries exceeded with url: /api/3/action/package_show?id=produccion-de-petroleo-y-gas-por-pozo (Caused by ConnectTimeoutError(<HTTPConnection(host='datos.energia.gob.ar', port=80) at 0x7f9071956420>, 'Connection to datos.energia.gob.ar timed out. (connect timeout=30)'))",
+    "reservas": "GET falló: http://datos.energia.gob.ar/api/3/action/package_show?id=reservas-de-petroleo-y-gas → HTTPConnectionPool(host='datos.energia.gob.ar', port=80): Max retries exceeded with url: /api/3/action/package_show?id=reservas-de-petroleo-y-gas (Caused by ConnectTimeoutError(<HTTPConnection(host='datos.energia.gob.ar', port=80) at 0x7f907163bd10>, 'Connection to datos.energia.gob.ar timed out. (connect timeout=30)'))"
   }
 }
