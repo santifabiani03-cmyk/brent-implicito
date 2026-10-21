@@ -1,9 +1,9 @@
 {
-  "actualizado": "2026-10-20T01:16:02+00:00",
+  "actualizado": "2026-10-21T00:53:51+00:00",
   "errores": {},
   "rf": {
-    "valor": 0.0509,
-    "fecha": "2026-10-16",
+    "valor": 0.051500000000000004,
+    "fecha": "2026-10-19",
     "fuente": "FRED DGS10 (UST 10 años)"
   },
   "damodaran": {

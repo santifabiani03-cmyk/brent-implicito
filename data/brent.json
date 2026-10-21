@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-20T01:11:32+00:00",
+  "actualizado": "2026-10-21T00:49:18+00:00",
   "fuentes": {
     "spot": "FRED DCOILBRENTEU (EIA, Europe Brent Spot Price FOB)",
     "futuros": "ICE Brent vía Yahoo Finance (BZ=F y contratos BZ<mes><año>.NYM)"
@@ -1608,38 +1608,38 @@
   ],
   "primera_linea": {
     "ticker": "BZ=F",
-    "precio": 109.71,
-    "ts": 1792458090
+    "precio": 109.54,
+    "ts": 1792543064
   },
   "curva": [
     {
       "ticker": "BZZ26.NYM",
-      "precio": 109.71,
-      "ts": 1792458090,
+      "precio": 109.54,
+      "ts": 1792543064,
       "vencimiento": "2026-12"
     },
     {
       "ticker": "BZF27.NYM",
-      "precio": 106.37,
-      "ts": 1792458090,
+      "precio": 105.81,
+      "ts": 1792543138,
       "vencimiento": "2027-01"
     },
     {
       "ticker": "BZG27.NYM",
-      "precio": 103.22,
-      "ts": 1792458005,
+      "precio": 101.97,
+      "ts": 1792527933,
       "vencimiento": "2027-02"
     },
     {
       "ticker": "BZH27.NYM",
-      "precio": 100.43,
-      "ts": 1792454445,
+      "precio": 99.37,
+      "ts": 1792528344,
       "vencimiento": "2027-03"
     },
     {
       "ticker": "BZJ27.NYM",
-      "precio": 98.43,
-      "ts": 1792434682,
+      "precio": 97.6,
+      "ts": 1792525028,
       "vencimiento": "2027-04"
     },
     {
@@ -1650,8 +1650,8 @@
     },
     {
       "ticker": "BZM27.NYM",
-      "precio": 95.44,
-      "ts": 1792458034,
+      "precio": 94.08,
+      "ts": 1792527932,
       "vencimiento": "2027-06"
     },
     {
@@ -1662,20 +1662,20 @@
     },
     {
       "ticker": "BZQ27.NYM",
-      "precio": 82.22,
-      "ts": 1789496955,
+      "precio": 92.15,
+      "ts": 1792500488,
       "vencimiento": "2027-08"
     },
     {
       "ticker": "BZU27.NYM",
-      "precio": 91.22,
-      "ts": 1792431782,
+      "precio": 88.81,
+      "ts": 1792508935,
       "vencimiento": "2027-09"
     },
     {
       "ticker": "BZV27.NYM",
-      "precio": 86.99,
-      "ts": 1792108801,
+      "precio": 88.42,
+      "ts": 1792543063,
       "vencimiento": "2027-10"
     },
     {
@@ -1686,14 +1686,14 @@
     },
     {
       "ticker": "BZZ27.NYM",
-      "precio": 87.04,
-      "ts": 1792420361,
+      "precio": 86.73,
+      "ts": 1792540983,
       "vencimiento": "2027-12"
     },
     {
       "ticker": "BZF28.NYM",
-      "precio": 81.0,
-      "ts": 1791289595,
+      "precio": 85.82,
+      "ts": 1792505777,
       "vencimiento": "2028-01"
     },
     {
@@ -1704,8 +1704,8 @@
     },
     {
       "ticker": "BZH28.NYM",
-      "precio": 82.0,
-      "ts": 1792127104,
+      "precio": 83.96,
+      "ts": 1792505998,
       "vencimiento": "2028-03"
     },
     {
