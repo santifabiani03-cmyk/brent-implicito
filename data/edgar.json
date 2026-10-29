@@ -1,108 +1,104 @@
 {
-  "actualizado": "2026-10-28T01:39:53+00:00",
-  "hasta": "2026-10-28",
+  "actualizado": "2026-10-29T02:00:28+00:00",
+  "hasta": "2026-10-29",
   "empresas": {
     "VIST": {
       "docs": {
         "release": {
-          "url": "https://www.sec.gov/Archives/edgar/data/1762506/000119312526306139/d151775dex1.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1762506/000119312526436174/d167189dex1.htm",
           "form": "6-K",
-          "fecha": "2026-07-16",
-          "periodo": "2026-06-30",
+          "fecha": "2026-10-28",
+          "periodo": "2026-09-30",
           "dias": 91
         }
       },
       "valores": {
         "total_kboed": {
-          "valor": 156.061,
+          "valor": 169.023,
           "doc": "release",
-          "texto": "Total (boe/d) 156,061"
+          "texto": "Total (boe/d) 169,023"
         },
         "crudo_kbd": {
-          "valor": 135.427,
+          "valor": 147.126,
           "doc": "release",
-          "texto": "Oil (bbl/d) 135,427"
+          "texto": "Oil (bbl/d) 147,126"
         },
         "p_crudo": {
-          "valor": 89.4,
+          "valor": 84.2,
           "doc": "release",
-          "texto": "Oil ($/bbl) (1) 89.4"
-        },
-        "p_gas_mmbtu": {
-          "valor": 3.0,
-          "doc": "release",
-          "texto": "Natural Gas ($/MMBTU) 3.0"
+          "texto": "Oil ($/bbl) (1) 84.2"
         },
         "lifting_boe": {
-          "valor": 4.5,
+          "valor": 4.7,
           "doc": "release",
-          "texto": "Lifting cost ($/boe) 4.5"
+          "texto": "Lifting cost ($/boe) 4.7"
         },
         "regalias_kusd": {
-          "valor": 186744.0,
+          "valor": 193529.0,
           "doc": "release",
-          "texto": "Royalties and others (186,744"
+          "texto": "Royalties and others (193,529"
         },
         "ingresos_musd": {
-          "valor": 1154.4,
+          "valor": 1234.1,
           "doc": "release",
-          "texto": "Total revenues in Q2 2026 were 1,154.4 $MM"
+          "texto": "Total revenues in Q3 2026 were 1,234.1 $MM"
         }
       },
       "fallas": [
+        "p_gas_mmbtu: no encontrado",
         "reservas_mmboe: no encontrado"
       ]
     },
     "YPF": {
       "docs": {
         "release": {
-          "url": "https://www.sec.gov/Archives/edgar/data/904851/000155485526001760/MainDocument.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/904851/000155485526002241/MainDocument.htm",
           "form": "6-K",
-          "fecha": "2026-08-11",
-          "periodo": "2026-06-30",
+          "fecha": "2026-10-28",
+          "periodo": "2026-09-30",
           "dias": 91
         }
       },
       "valores": {
         "crudo_kbd": {
-          "valor": 265.5,
+          "valor": 261.4,
           "doc": "release",
-          "texto": "Crude Oil (Kbbl/d) 265.5"
+          "texto": "Crude Oil (Kbbl/d) 261.4"
         },
         "ngl_kbd": {
-          "valor": 44.6,
+          "valor": 41.3,
           "doc": "release",
-          "texto": "NGL (Kbbl/d) 44.6"
+          "texto": "NGL (Kbbl/d) 41.3"
         },
         "total_kboed": {
-          "valor": 544.4,
+          "valor": 532.0,
           "doc": "release",
-          "texto": "Total Production (Kboed) 544.4"
+          "texto": "Total Production (Kboed) 532.0"
         },
         "p_crudo": {
-          "valor": 91.1,
+          "valor": 81.4,
           "doc": "release",
-          "texto": "Crude Oil Price (US$/bbl) 91.1"
+          "texto": "Crude Oil Price (US$/bbl) 81.4"
         },
         "p_gas_mmbtu": {
-          "valor": 4.2,
+          "valor": 4.4,
           "doc": "release",
-          "texto": "Natural Gas Price (US$/MBTU) 4.2"
+          "texto": "Natural Gas Price (US$/MBTU) 4.4"
         },
         "lifting_boe": {
-          "valor": 8.4,
+          "valor": 7.8,
           "doc": "release",
-          "texto": "Total Lifting Cost (US$/boe) (2) 8.4"
+          "texto": "Total Lifting Cost (US$/boe) (2) 7.8"
         },
         "regalias_boe": {
-          "valor": 8.5,
+          "valor": 7.4,
           "doc": "release",
-          "texto": "Royalties and other taxes 8.5"
+          "texto": "Royalties and other taxes 7.4"
         },
         "ebitda_no_up_q": {
-          "valor": 967.0,
+          "valor": 1030.0,
           "doc": "release",
-          "texto": "Adj. EBITDA Upstream 1,725 1,148 50% 786 119% 2,873 1,568 83% Midstream & Downstream 967"
+          "texto": "Adj. EBITDA Upstream 1,575 1,725 -9% 1,046 51% 4,449 2,614 70% Midstream & Downstream 1,030"
         }
       },
       "fallas": [
