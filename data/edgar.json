@@ -1,6 +1,6 @@
 {
-  "actualizado": "2026-10-29T02:00:28+00:00",
-  "hasta": "2026-10-29",
+  "actualizado": "2026-10-30T02:11:43+00:00",
+  "hasta": "2026-10-30",
   "empresas": {
     "VIST": {
       "docs": {
@@ -191,33 +191,33 @@
           "dias": 91
         },
         "produccion": {
-          "url": "https://www.sec.gov/Archives/edgar/data/1119639/000129281426003948/pbr20260728_6k.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1119639/000129281426005030/pbr20261028_6k.htm",
           "form": "6-K",
-          "fecha": "2026-07-29",
-          "periodo": "2026-06-30",
+          "fecha": "2026-10-29",
+          "periodo": "2026-12-31",
           "dias": 91
         }
       },
       "valores": {
         "crudo_kbd": {
-          "valor": 2689.0,
+          "valor": 2832.0,
           "doc": "produccion",
-          "texto": "Crude oil and NGLs (mbpd)(1) 2,689"
+          "texto": "Crude oil and NGLs (mbpd)(1) 2,832"
         },
         "brasil_kboed": {
-          "valor": 3308.0,
+          "valor": 3483.0,
           "doc": "produccion",
-          "texto": "Crude oil, NGL and natural gas production - Brazil (mboed) 3,308"
+          "texto": "Crude oil, NGL and natural gas production - Brazil (mboed) 3,483"
         },
         "gas_kboed": {
-          "valor": 619.0,
+          "valor": 651.0,
           "doc": "produccion",
-          "texto": "Natural gas (Mboed) 619"
+          "texto": "Natural gas (mboed) 651"
         },
         "total_kboed": {
-          "valor": 3336.0,
+          "valor": 3512.0,
           "doc": "produccion",
-          "texto": "Total production (mboed) 3,336"
+          "texto": "Total production (mboed) 3,512"
         },
         "lifting_boe": {
           "valor": 6.33,
