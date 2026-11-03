@@ -207,13 +207,15 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
   <section role="tabpanel" id="serie" hidden>
     <div class="panel">
       <h2>Brent implícito día por día</h2>
-      <p class="sub">Cada balance trimestral configura el modelo desde el día en que se publicó; entre balances solo se mueve la capitalización bursátil. Las marcas de abajo son los días en que entró un balance nuevo.</p>
+      <p class="sub">Cada balance trimestral configura el modelo desde el día en que se publicó; entre balances solo se mueve la capitalización bursátil. La prima es el implícito menos el CO1. Las marcas de abajo son los días en que entró un balance nuevo.</p>
       <div class="ctrl">
         <label class="lbl" for="h-desde">Desde <input type="date" id="h-desde"></label>
         <label class="lbl" for="h-hasta">Hasta <input type="date" id="h-hasta"></label>
         <div class="btns" id="h-presets"></div>
         <label class="lbl" for="h-ref">Brent de referencia
-          <select id="h-ref"><option value="brent_1l">1ª línea ICE (futuro)</option><option value="brent_spot">Spot Dated (FRED)</option></select></label>
+          <select id="h-ref"><option value="brent_1l">CO1: primer futuro (Yahoo BZ=F)</option><option value="brent_spot">Spot Dated (FRED), solo comparación</option></select></label>
+        <label class="lbl" for="h-vista">Ver
+          <select id="h-vista"><option value="implicito">Brent implícito</option><option value="prima">Prima (implícito − referencia)</option></select></label>
       </div>
       <div class="chips-sel" id="h-emp"></div>
       <div class="chart hchart" id="h-chart"><div class="tip" id="h-tip" hidden></div></div>
@@ -245,8 +247,9 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
           <li><b>Desvío amplio (caso):</b> primera rueda fuera del rango; las ruedas consecutivas fuera forman un solo caso, con su distancia inicial d0 a la media.</li>
           <li><b>Regreso:</b> en alguna de las 10 ruedas siguientes, con el balance del día del desvío, la prima vuelve al rango vigente o lo cruza y recorre hacia la media al menos ½ d0. Si no regresó y faltan ruedas para completar el plazo, el caso queda censurado y no entra en el denominador.</li>
           <li><b>Referencia:</b> <span id="x-nsim"></span> corridas de la misma regla sobre una prima sin reversión: CO1 observado menos un implícito que cambia con β·ΔCO1 más residuos remuestreados por fecha y en conjunto entre empresas (conserva volatilidad y correlación), más ruido de cierre medido con la autocovarianza de esos residuos.</li>
-          <li><b>A confirmar por el grupo:</b> el percentil del umbral (la tesis no lo fija), que la ventana excluya el día del desvío y que el rango siga moviéndose durante la evaluación.</li>
-          <li><b>Limitaciones:</b> el CO1 es el cierre de Yahoo BZ=F (el archivo de Bloomberg vino vacío), no el precio a la hora de cierre de cada acción; falta el control con CO12. El implícito de Petrobras da negativo o casi cero hasta nov-2024 por la valuación de la refinación.</li>
+          <li><b>Umbral:</b> el análisis usa P95 (decisión del grupo); el percentil se puede cambiar arriba para ver cuánto depende el resultado de esa elección.</li>
+          <li><b>A confirmar por el grupo:</b> que la ventana excluya el día del desvío y que el rango siga moviéndose durante la evaluación.</li>
+          <li><b>Limitaciones:</b> el CO1 es el cierre de Yahoo BZ=F (el archivo de Bloomberg vino vacío), no el precio a la hora de cierre de cada acción; falta el control con CO12. El riesgo país sigue siendo el de Damodaran, fijo por balance, hasta tener el CDS de Argentina (7.4 lo pide diario).</li>
         </ul>
       </details>
       <h3 class="xsub">Descargar en Excel</h3>
@@ -254,8 +257,8 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
       <div class="xrow"><button class="btn primary" id="x-bajar" type="button">Descargar Excel (.xlsx)</button><span class="note" id="x-estado" role="status"></span></div>
     </div>
     <div class="panel">
-      <h2>Test 1 · ¿el implícito sigue al Brent?</h2>
-      <p class="sub">Sobre el rango elegido. Sesgo = implícito − referencia (promedio); un sesgo estable es un diferencial mal calibrado, corregible. La correlación de variaciones semanales mide si el implícito se mueve con el crudo aunque el nivel esté corrido.</p>
+      <h2>Prima de Brent implícito: signo, magnitud y variabilidad</h2>
+      <p class="sub">Objetivo a), sobre el rango del gráfico. El nivel depende de los supuestos del modelo (7.4): solo se lee como información del mercado fuera de la banda. Como control, la correlación de variaciones semanales mide si el implícito se mueve con el crudo aunque el nivel esté corrido.</p>
       <div class="tbl"><table id="h-test"></table></div>
     </div>
     <div class="panel">
@@ -294,15 +297,16 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
         <div class="step"><b>Flujo libre</b><span>− impuestos − capex</span></div><div class="arrow">→</div>
         <div class="step"><b>Valor del patrimonio</b><span>VP al WACC − deuda neta</span></div>
       </div>
-      <p style="margin-top:14px">El despeje busca, por bisección entre USD 10 y 300, el Brent en el que <b>valor del patrimonio = capitalización bursátil</b>. Funciona porque en una productora el valor crece siempre con el precio: hay un único cruce. En una integrada (YPF, Petrobras) el downstream amortigua esa relación y el resultado se informa con banda más ancha.</p>
+      <p style="margin-top:14px">El despeje busca, por bisección entre USD 10 y 300, el Brent en el que <b>valor del patrimonio = capitalización bursátil</b>. Funciona porque en una productora el valor crece siempre con el precio: hay un único cruce. En una integrada (YPF, Suncor, Petrobras) la refinación se valúa aparte, como un término fijo, y por eso su implícito es menos informativo (7.3).</p>
+      <p><b>Prima de Brent implícito:</b> diferencia diaria, en USD/bbl, entre el implícito y el CO1. Es positiva si la cotización incorpora un barril más caro que el de futuros y negativa si lo incorpora más barato.</p>
       <p><b>Modo proyección:</b> la misma cadena hacia adelante. Fijás un Brent y ves a qué precio debería cotizar la acción.</p>
-      <p><b>Banda:</b> el implícito se recalcula con WACC ±1 pp, diferencial ±5 pp y lifting ±15 %. Es provisoria, hasta que Metodología defina el método.</p>
+      <p><b>Banda (8.3):</b> el implícito se recalcula con el costo de capital ±1 punto porcentual y los costos (lifting y otros) ±10 %, de a un supuesto por vez. Son supuestos preliminares: cubren la incertidumbre de los parámetros, no el sesgo de especificación del método.</p>
       <p class="note">Qué queda afuera: eventos posteriores al balance (litigios, cambios de management, regulación no anticipada). Si una empresa da un implícito raro, la primera hipótesis es un evento que el modelo no ve, no que el mercado se equivocó con el petróleo.</p>
     </div>
     <div class="flow">
       <div><span class="lbl">Todos los días hábiles · automático</span><h3>Mercado</h3><ul><li>Cotizaciones: Yahoo Finance</li><li>Brent spot: FRED (EIA)</li><li>Curva ICE Brent: Yahoo</li><li>USD/BRL: BCB PTAX</li></ul></div>
-      <div><span class="lbl">Cada trimestre · SEC EDGAR</span><h3>Operativos</h3><ul><li>Encuentra el último 10-Q/10-K (EOG, COP) o release 6-K (YPF, VIST, PBR)</li><li>Lee producción, precio realizado, lifting, costos por boe, impuestos a la producción, EBITDA de segmentos</li><li>Calcula diferencial vs Brent del trimestre, regalías, precio de gas/NGL</li></ul></div>
-      <div><span class="lbl">Cada trimestre · automático</span><h3>Balance y costo de capital</h3><ul><li>Capex, DD&A, SG&A, intereses, deuda, acciones: yfinance, SEC y CVM</li><li>rf (FRED), ERP, riesgo país, betas y múltiplos (Damodaran)</li><li>PRIO (sin SEC): CVM + yfinance + último release citado</li></ul></div>
+      <div><span class="lbl">Cada trimestre · SEC EDGAR</span><h3>Operativos</h3><ul><li>Encuentra el último 10-Q/10-K (EOG) o release 6-K (YPF, VIST, PBR); Suncor y PRIO salen de Bloomberg y de sus releases citados</li><li>Lee producción, precio realizado, lifting, costos por boe, impuestos a la producción, EBITDA de segmentos</li><li>Calcula diferencial vs Brent del trimestre, regalías, precio de gas/NGL</li></ul></div>
+      <div><span class="lbl">Cada trimestre · automático</span><h3>Balance y costo de capital</h3><ul><li>Capex, DD&A, SG&A, intereses, deuda, acciones: Bloomberg (terminal UADE), con yfinance, SEC y CVM de respaldo</li><li>rf (FRED), ERP, riesgo país, betas y múltiplos (Damodaran)</li></ul></div>
       <div><span class="lbl">Orquestación</span><h3>GitHub Actions</h3><ul><li>19:30 ART: baja datos, corre tests y motor</li><li>Escribe data.json y publica la web</li><li>Cada corrida queda como commit: evidencia para el Anexo III</li></ul></div>
     </div>
   </section>
@@ -311,7 +315,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     <div class="panel"><h2>Estado de las fuentes</h2><p class="sub" id="gen"></p><div class="tbl"><table id="t-fuentes"></table></div></div>
     <div class="panel"><h2>Documentos leídos en EDGAR</h2><p class="sub">Último reporte de resultados de cada empresa. Si un patrón no encuentra un dato (porque cambió el formato del reporte), queda listado acá y el campo pasa al siguiente nivel de fuente.</p><div class="tbl"><table id="t-edgar"></table></div></div>
     <div class="panel"><h2>Datos de balance tomados automáticamente</h2><p class="sub">Deuda neta = deuda financiera − caja e inversiones corrientes. Hay que verificarla contra el filing antes de usarla en el TIF.</p><div class="tbl"><table id="t-fund"></table></div></div>
-    <div class="banner warn"><strong>Bloomberg.</strong> El Reglamento exige Bloomberg/FinLab como fuente. La web usa APIs abiertas porque la licencia no permite redistribuir. El backtest del TIF se corre con la serie de Bloomberg exportada, y la diferencia queda declarada.</div>
+    <div class="banner warn"><strong>Bloomberg.</strong> Es la fuente principal del TIF (8.1). Los estados contables ya salen de la terminal; las cotizaciones y el CO1 de esta página siguen en Yahoo Finance, y los resultados de la entrega final se corren con la serie de Bloomberg exportada.</div>
   </section>
 </main>
 <dialog id="notas" aria-labelledby="notas-t">
@@ -371,9 +375,10 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     return { valor: Math.round((a + b) / 2 * 100) / 100, estado: "ok" };
   }
 
-  const BANDA = [["wacc_pp",-0.01],["wacc_pp",0.01],["diferencial_pct",-0.05],["diferencial_pct",0.05],["lifting_rel",-0.15],["lifting_rel",0.15]];
+  const BANDA = [["wacc_pp",-0.01],["wacc_pp",0.01],["costos_rel",-0.10],["costos_rel",0.10]];
   function perturbar(i, k, d) { const x = { ...i };
-    if (k === "wacc_pp") x.rf += d; else if (k === "lifting_rel") x.lifting_usd_boe *= 1 + d;
+    if (k === "wacc_pp") x.rf += d / (1 - x.peso_deuda);
+    else if (k === "costos_rel") { x.lifting_usd_boe *= 1 + d; x.otros_costos_usd_boe *= 1 + d; }
     else if (k.endsWith("_rel")) x[k.slice(0, -4)] *= 1 + d; else x[k] += d; return x; }
   function banda(i, cap) { const v = BANDA.map(([k, d]) => brentImplicito(perturbar(i, k, d), cap).valor).filter(x => x !== null);
     return v.length ? { min: Math.min(...v), max: Math.max(...v) } : { min: null, max: null }; }
@@ -688,6 +693,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
   const COLORES = { VIST: "1F77B4", YPF: "D9730D", EOG: "2E8B57", SU: "C8A415", PRIO: "C2185B", PBR: "6A3FA0" };
   const CFG = { z: "Consistencia!$C$7", plazo: "Consistencia!$C$8", rec: "Consistencia!$C$9", pct: "Consistencia!$C$10" };
   const X0 = 24;      // primera columna (1-based) de la matriz prima/media/desvío por balance en las hojas Rango
+  const BANDAS = [1.5, 1.75, 2, 2.25, 2.5];   // bandas con referencia simulada al exportar: las que ofrece la celda de desvíos
 
   let cargando = null;
   function libreria() {
@@ -819,34 +825,40 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
   }
 
   /* Referencia simulada: una fila por corrida, con la proporción de regresos de cada grupo (fuente de los percentiles de Consistencia). */
-  function hojaSimulacion(wb, emps, grupos, corridas, base, obsTotal, N, seed) {
+  function hojaSimulacion(wb, emps, grupos, bandas, base, N, seed) {
     const ws = wb.addWorksheet("Simulación", { views: [{ state: "frozen", ySplit: 24 }] }), S = window.BIStats;
     ws.getCell("A1").value = "Referencia simulada sin reversión (6.1 y 7.7)"; ws.getCell("A1").font = { bold: true, size: 13 };
     ["Cada corrida aplica la misma regla a una prima simulada: CO1 OBSERVADO menos un Brent implícito sin reversión, de modo que los regresos debidos al propio CO1 quedan en la referencia.",
      "Cambio diario del implícito = β·ΔCO1 + u. β y u salen de los cambios diarios observados con un mismo balance; u se remuestrea por fecha y en conjunto entre empresas, lo que conserva volatilidad y correlación y elimina la autocorrelación.",
      "Desfase horario remanente: sin historia intradiaria del CO1 (8.4), el ruido de cierre se mide con la autocovarianza de primer orden de u, σε² = máx(0, −cov(u_t, u_t−1)), y se suma como error i.i.d. sobre el nivel; la varianza del paseo aleatorio se reduce en 2σε².",
-     `${N} corridas; semilla ${seed}; ${base.nPool} fechas en el remuestreo conjunto. Estos valores se calculan al exportar: no cambian si se editan los parámetros de Consistencia.`]
+     `${N} corridas por banda; semilla ${seed}; ${base.nPool} fechas en el remuestreo conjunto. Estos valores se calculan al exportar: la celda de desvíos de Consistencia elige qué bloque se usa; plazo y recorrido no los cambian.`]
       .forEach((t, i) => { ws.getCell(`A${3 + i}`).value = t; Object.assign(ws.getCell(`A${3 + i}`), GRIS); });
     ws.getRow(8).values = ["Calibración", "β (ΔCO1)", "Vol. diaria u (USD/bbl)", "Autocorr. u (1)", "σε ruido (USD/bbl)"]; [1, 2, 3, 4, 5].forEach(c => Object.assign(ws.getCell(8, c), HEAD));
     ws.getRow(8).alignment = { wrapText: true, vertical: "middle" };
     emps.forEach((e, i) => { const f = ws.getRow(9 + i); f.getCell(1).value = e.id; [e.sim.beta, e.sim.volU, e.sim.ac1, e.sim.sigEps].forEach((v, k) => { f.getCell(2 + k).value = v; f.getCell(2 + k).numFmt = "0.000"; }); });
-    const f0 = 25, fN = f0 + N - 1;
-    ws.getRow(24).values = ["Corrida", ...grupos.map(g => g.nombre)]; ws.getRow(24).eachCell(c => Object.assign(c, HEAD));
-    const props = grupos.map(g => corridas.map(c => S.propSim(c, emps, g.ids)));
-    corridas.forEach((c, i) => { const f = ws.getRow(f0 + i); f.getCell(1).value = i + 1; grupos.forEach((g, j) => { const v = props[j][i]; if (v != null) { f.getCell(2 + j).value = v; f.getCell(2 + j).numFmt = "0.0%"; } }); });
-    ws.getColumn(1).width = 14; grupos.forEach((g, j) => ws.getColumn(2 + j).width = 12);
-    // histograma de la proporción total (alimenta el gráfico del Dashboard)
-    const cH = 3 + grupos.length + 1, cT = col(grupos.length), L = i => col(cH - 1 + i), rH = 8;
+    // Un bloque de columnas por banda, en la misma matriz: la celda de desvíos elige el bloque con INDEX
+    const f0 = 25, fN = f0 + N - 1, nG = grupos.length, zTxt = z => String(z).replace(".", ",");
+    ws.getRow(24).values = ["Corrida", ...bandas.flatMap(b => grupos.map(g => `${g.nombre} ±${zTxt(b.z)}`))]; ws.getRow(24).eachCell(c => Object.assign(c, HEAD));
+    const todas = bandas.map(b => grupos.map(g => b.corridas.map(c => S.propSim(c, emps, g.ids)))), iP = bandas.findIndex(b => b.z === S.PRINCIPAL.z), props = todas[iP];
+    for (let i = 0; i < N; i++) { const f = ws.getRow(f0 + i); f.getCell(1).value = i + 1; todas.forEach((pb, k) => grupos.forEach((g, j) => { const v = pb[j][i]; if (v != null) { const x = f.getCell(2 + k * nG + j); x.value = v; x.numFmt = "0.0%"; } })); }
+    ws.getColumn(1).width = 14; for (let c = 2; c <= 1 + nG * bandas.length; c++) ws.getColumn(c).width = 12;
+    const rZ = 9 + emps.length + 1, rE = rZ + 1 + bandas.length, listaZ = `$A$${rZ + 1}:$A$${rE - 1}`, matriz = `$B$${f0}:$${col(nG * bandas.length)}$${fN}`;
+    ws.getCell(rZ, 1).value = "Bandas simuladas"; Object.assign(ws.getCell(rZ, 1), HEAD);
+    bandas.forEach((b, k) => { ws.getCell(rZ + 1 + k, 1).value = b.z; });
+    ws.getCell(rE, 1).value = "Bloque elegido"; ws.getCell(rE, 2).value = fx(`IFERROR(MATCH(Consistencia!$C$7,${listaZ},0),0)`, iP + 1);
+    const columna = (g, h = "") => `INDEX(${h}${matriz},0,(${h}$B$${rE}-1)*${nG}+${g + 1})`;
+    // histograma de la proporción total (alimenta el gráfico del Dashboard); los intervalos cubren todas las bandas
+    const cH = 3 + nG + 1, L = i => col(cH - 1 + i), rH = 8;
     ["Desde", "Hasta", "Intervalo", "Simulaciones", "Observada"].forEach((t, c) => { const x = ws.getCell(rH, cH + c); x.value = t; Object.assign(x, HEAD); });
-    const tot = props[grupos.length - 1].filter(v => v != null), mn = Math.floor(Math.min(...tot, obsTotal) * 25) / 25, nb = Math.min(15, Math.ceil((Math.max(...tot, obsTotal) - mn) / .04) + 1);
+    const tot = props[nG - 1].filter(v => v != null), ext = [...todas.flatMap(pb => pb[nG - 1].filter(v => v != null)), ...bandas.map(b => b.obs).filter(Number.isFinite)], mn = Math.floor(Math.min(...ext) * 25) / 25, nb = Math.min(15, Math.ceil((Math.max(...ext) - mn) / .04) + 1);
     const borde = i => Math.round((mn + i * .04) * 100) / 100, cuentas = Array.from({ length: nb }, (_, i) => tot.filter(v => v >= borde(i) && v < borde(i + 1)).length), mx = Math.max(...cuentas);
     for (let i = 0; i < nb; i++) {
-      const r = rH + 1 + i, a = borde(i), b = borde(i + 1), rng = `$${cT}$${f0}:$${cT}$${fN}`;
+      const r = rH + 1 + i, a = borde(i), b = borde(i + 1), rng = columna(nG - 1);
       ws.getCell(r, cH).value = a; ws.getCell(r, cH + 1).value = b; ws.getCell(r, cH).numFmt = ws.getCell(r, cH + 1).numFmt = "0%";
       ws.getCell(r, cH + 2).value = fx(`TEXT(${L(0)}${r},"0%")&"–"&TEXT(${L(1)}${r},"0%")`, `${Math.round(a * 100)}%–${Math.round(b * 100)}%`);
-      ws.getCell(r, cH + 3).value = fx(`COUNTIFS(${rng},">="&${L(0)}${r},${rng},"<"&${L(1)}${r})`, cuentas[i]);
+      ws.getCell(r, cH + 3).value = fx(`IF($B$${rE}=0,0,COUNTIFS(${rng},">="&${L(0)}${r},${rng},"<"&${L(1)}${r}))`, cuentas[i]);
     }
-    return { f0, fN, colDe: g => col(1 + g), props, hist: { col: L, r0: rH + 1, r1: rH + nb, cH, cuentas, mx, mn } };
+    return { columna: g => columna(g, "'Simulación'!"), listaZ: `'Simulación'!${listaZ}`, elegido: `'Simulación'!$B$${rE}`, props, hist: { col: L, r0: rH + 1, r1: rH + nb, cH, cuentas, mx, mn } };
   }
 
   async function exportar(D, opts) {
@@ -873,7 +885,12 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     emps.forEach(e => { e.ev = S.evaluar(e, CF); });
     const grupos = S.grupos(emps, D), base = S.calibrar(emps), todos = emps.map(e => e.id);
     avance("Simulando la referencia sin reversión…");
-    const corridas = await S.simular(emps, base, CF, NSIM, SEMILLA);
+    const corridas = await S.simular(emps, base, CF, NSIM, SEMILLA), bandas = [];
+    for (const [k, z] of BANDAS.entries()) {
+      avance(`Simulando la banda de ±${String(z).replace(".", ",")} desvíos…`);
+      const cfg = { ...CF, z }, cas = emps.flatMap(e => S.evaluar(e, cfg).casos).filter(c => c.reg !== null);
+      bandas.push({ z, obs: cas.filter(c => c.reg === 1).length / cas.length, corridas: z === CF.z ? corridas : await S.simular(emps, base, cfg, NSIM, SEMILLA + 100 + k) });
+    }
     const sens = (await S.sensibilidades(emps, base, (i, n) => avance(`Sensibilidades (${i}/${n})…`))).map(x => ({ ...x, ref: S.media(x.sim), umbral: S.percentil(x.sim, Q) }));
     avance("Armando las hojas…");
 
@@ -990,8 +1007,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     const RG = {};
     emps.forEach(e => { RG[e.id] = hojaRango(wb, e, e.ev, CF); });
     const obsCas = emps.flatMap(e => e.ev.casos);
-    const obsTotal = obsCas.filter(c => c.reg === 1).length / obsCas.filter(c => c.reg !== null).length;
-    const SIM = hojaSimulacion(wb, emps, grupos, corridas, base, obsTotal, NSIM, SEMILLA), props = SIM.props;
+    const SIM = hojaSimulacion(wb, emps, grupos, bandas, base, NSIM, SEMILLA), props = SIM.props;
 
     // --- Consistencia
     const cs = wb.getWorksheet("Consistencia");
@@ -1001,11 +1017,16 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     cs.getCell("A3").value = "Hipótesis (6): la proporción de desvíos amplios que regresa a su rango habitual en el corto plazo supera el umbral de una referencia simulada sin reversión. Es una comparación descriptiva con una referencia, no una prueba de significación (7.7).";
     cs.mergeCells("A3:O3"); cs.getCell("A3").alignment = { wrapText: true, vertical: "top" }; cs.getRow(3).height = 32;
     const titPanel = (r, t) => { const c = cs.getCell(`A${r}`); c.value = t; cs.mergeCells(`A${r}:O${r}`); Object.assign(c, SUB); };
-    titPanel(5, "Especificación (6.1). Cambiar estos valores recalcula los casos y los regresos observados; la referencia simulada queda en la especificación principal");
-    [["Ventana del rango habitual (ruedas previas)", S.VENTANA, "Fija: 20 ruedas ≈ un mes bursátil"], ["Banda: desvíos estándar", CF.z, "Principal: 2. Sensibilidad: 1,5 y 2,5"], ["Plazo de regreso (ruedas, máx. 15)", CF.plazo, "Principal: 10. Sensibilidad: 5 y 15"],
+    titPanel(5, "Especificación (6.1). Banda y percentil recalculan el panel A completo, umbral incluido. Plazo y recorrido no tienen referencia simulada: el panel A deja de dar veredicto y hay que leer el panel E");
+    [["Ventana del rango habitual (ruedas previas)", S.VENTANA, "Fija: 20 ruedas ≈ un mes bursátil"], ["Banda: desvíos estándar", CF.z, "Principal: 2. Elegir de la lista: cada valor tiene su referencia simulada"], ["Plazo de regreso (ruedas, máx. 15)", CF.plazo, "Principal: 10. Sensibilidad: 5 y 15"],
      ["Recorrido mínimo hacia la media (× d0)", CF.rec, "Principal: ½. Sensibilidad: ⅓ y ⅔"], ["Percentil de la referencia usado como umbral", percentil, "Elegido en la página; la tesis no fija el percentil"]]
       .forEach(([l, v, n], i) => { const r = 6 + i; cs.getCell(`A${r}`).value = l; const c = cs.getCell(`C${r}`); c.value = v; c.font = { bold: true, color: { argb: "FF0000C0" } }; if (i) c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFF8DC" } }; cs.getCell(`D${r}`).value = n; Object.assign(cs.getCell(`D${r}`), GRIS); });
     cs.getCell("C8").dataValidation = { type: "whole", operator: "between", formulae: [1, 15], showErrorMessage: true, error: "Entre 1 y 15 ruedas" };
+    cs.getCell("C7").dataValidation = { type: "list", allowBlank: false, formulae: [SIM.listaZ], showErrorMessage: true, error: "Elegí una banda de la lista: son las que tienen referencia simulada" };
+    // La referencia se simula al exportar: sin corridas para esa especificación, comparar con otra daría un veredicto falso
+    const AVISO = "$A$11", nc = fm => `IF(${AVISO}<>"","n/c",${fm})`;
+    cs.mergeCells("A11:O11"); cs.getCell("A11").font = { bold: true, color: { argb: "FFC00000" } };
+    cs.getCell("A11").value = fx(`IF(AND(${SIM.elegido}>0,$C$8=${CF.plazo},ABS($C$9-${CF.rec})<0.000001),"","Atención: la referencia simulada existe para las bandas de la lista, con ${CF.plazo} ruedas y ½ d0. Con otra especificación el panel A no da veredicto (n/c): usar el panel E, que la recalcula.")`, "");
 
     // Panel A: objetivo c) y prueba de la hipótesis
     const rA = 12; titPanel(rA, "A. Regreso de los desvíos amplios frente a la referencia simulada (objetivo c y hipótesis)");
@@ -1015,7 +1036,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     const obsDe = ids => S.observado(emps, ids);
     const R = (id, c_) => `'Rango ${id}'!$${c_}$${RG[id].f0}:$${c_}$${RG[id].f0 + RG[id].n - 1}`;
     grupos.forEach((g, i) => {
-      const r = filaG[g.nombre], f = cs.getRow(r), o = obsDe(g.ids), simC = `'Simulación'!$${SIM.colDe(i)}$${SIM.f0}:$${SIM.colDe(i)}$${SIM.fN}`, a = props[i].filter(v => v != null);
+      const r = filaG[g.nombre], f = cs.getRow(r), o = obsDe(g.ids), simC = SIM.columna(i), a = props[i].filter(v => v != null);
       const um = S.percentil(a, Q), suma = c => g.ids.map(id => `${c}${filaG[id]}`).join("+");
       f.getCell(1).value = g.nombre;
       if (!g.tipo) {
@@ -1031,17 +1052,17 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
         f.getCell("O").value = fx(`IFERROR((${g.ids.map(id => `COUNTIFS(${R(id, "Q")},1,${R(id, "S")},0)`).join("+")})/(${g.ids.map(id => `COUNTIFS(${R(id, "Q")},1,${R(id, "S")},0)+COUNTIFS(${R(id, "Q")},0,${R(id, "S")},0)`).join("+")}),"")`, o.propSc ?? "");
       }
       f.getCell(6).value = fx(`IF(C${r}+D${r}>0,C${r}/(C${r}+D${r}),"")`, o.prop ?? "");
-      f.getCell(7).value = fx(`AVERAGE(${simC})`, S.media(a)); f.getCell(8).value = fx(`PERCENTILE(${simC},$C$10/100)`, um);
-      f.getCell(9).value = fx(`IF(F${r}="","",F${r}-H${r})`, o.prop == null ? "" : o.prop - um);
-      f.getCell(10).value = fx(`IF(F${r}="","",IF(F${r}>H${r},"Sí","No"))`, o.prop == null ? "" : (o.prop > um ? "Sí" : "No")); f.getCell(10).alignment = { horizontal: "center" };
-      f.getCell(11).value = fx(`IF(F${r}="","",COUNTIF(${simC},"<="&F${r})/COUNT(${simC}))`, o.prop == null ? "" : a.filter(v => v <= o.prop).length / a.length);
+      f.getCell(7).value = fx(nc(`AVERAGE(${simC})`), S.media(a)); f.getCell(8).value = fx(nc(`PERCENTILE(${simC},$C$10/100)`), um);
+      f.getCell(9).value = fx(nc(`IF(F${r}="","",F${r}-H${r})`), o.prop == null ? "" : o.prop - um);
+      f.getCell(10).value = fx(nc(`IF(F${r}="","",IF(F${r}>H${r},"Sí","No"))`), o.prop == null ? "" : (o.prop > um ? "Sí" : "No")); f.getCell(10).alignment = { horizontal: "center" };
+      f.getCell(11).value = fx(nc(`IF(F${r}="","",COUNTIF(${simC},"<="&F${r})/COUNT(${simC}))`), o.prop == null ? "" : a.filter(v => v <= o.prop).length / a.length);
       [6, 7, 8, 11, 15].forEach(c => f.getCell(c).numFmt = "0.0%"); f.getCell(9).numFmt = "+0.0%;-0.0%"; f.getCell(12).numFmt = "0.0"; f.getCell(13).numFmt = "0.00";
       if (g.tipo === "total") f.eachCell(c => { c.font = { bold: true }; c.fill = SUB.fill; });
     });
     const rTot = filaG["Total"], oT = obsDe(todos), aT = props[grupos.length - 1].filter(v => v != null), umT = S.percentil(aT, Q);
     let r = rTot + 1;
     const dec = v => String(Math.round(v * 1000) / 10).replace(".", ","), lectura = (p, u) => `Lectura: la proporción de regreso (${dec(p)}%) ${p > u ? "supera" : "no supera"} el umbral (${dec(u)}%): la hipótesis ${p > u ? "se sostiene" : "no se sostiene"} con esta especificación.`;
-    cs.getCell(`A${r}`).value = fx(`"Lectura: la proporción de regreso ("&ROUND(F${rTot}*100,1)&"%) "&IF(F${rTot}>H${rTot},"supera","no supera")&" el umbral ("&ROUND(H${rTot}*100,1)&"%): la hipótesis "&IF(F${rTot}>H${rTot},"se sostiene","no se sostiene")&" con esta especificación."`, lectura(oT.prop, umT));
+    cs.getCell(`A${r}`).value = fx(`IF(${AVISO}<>"","Lectura: proporción de regreso de "&ROUND(F${rTot}*100,1)&"% con esta especificación; sin veredicto, ver panel E.","Lectura: la proporción de regreso ("&ROUND(F${rTot}*100,1)&"%) "&IF(F${rTot}>H${rTot},"supera","no supera")&" el umbral ("&ROUND(H${rTot}*100,1)&"%): la hipótesis "&IF(F${rTot}>H${rTot},"se sostiene","no se sostiene")&" con esta especificación.")`, lectura(oT.prop, umT));
     cs.getCell(`A${r}`).font = { bold: true }; r += 1;
     cs.getCell(`A${r}`).value = "Por empresa hay pocos casos y el umbral es más alto: el contraste de la hipótesis es el total. Censurado: sin regreso y con menos ruedas posteriores que el plazo; no entra en el denominador."; Object.assign(cs.getCell(`A${r}`), GRIS); r += 2;
 
@@ -1109,7 +1130,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     // --- observada en el histograma
     const sh = wb.getWorksheet("Simulación"), H_ = SIM.hist;
     for (let q = H_.r0; q <= H_.r1; q++) { const a = sh.getCell(q, H_.cH).value, b = sh.getCell(q, H_.cH + 1).value;
-      sh.getCell(q, H_.cH + 4).value = fx(`IF(AND(Consistencia!$F$${rTot}>=${H_.col(0)}${q},Consistencia!$F$${rTot}<${H_.col(1)}${q}),MAX(${H_.col(3)}$${H_.r0}:${H_.col(3)}$${H_.r1}),0)`, oT.prop >= a && oT.prop < b ? H_.mx : 0); }
+      sh.getCell(q, H_.cH + 4).value = fx(`IF(AND(Consistencia!${AVISO}="",Consistencia!$F$${rTot}>=${H_.col(0)}${q},Consistencia!$F$${rTot}<${H_.col(1)}${q}),MAX(${H_.col(3)}$${H_.r0}:${H_.col(3)}$${H_.r1}),0)`, oT.prop >= a && oT.prop < b ? H_.mx : 0); }
 
     // --- Dashboard
     const ds = wb.getWorksheet("Dashboard");
@@ -1117,7 +1138,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     ds.getCell("A1").value = "Brent implícito y prima: dashboard"; ds.getCell("A1").font = { bold: true, size: 16 };
     ds.getCell("A2").value = `Rango ${desde} a ${hasta} · ${emps.map(e => e.id).join(", ")} · Los gráficos e indicadores leen las celdas de las demás hojas`; Object.assign(ds.getCell("A2"), GRIS);
     const KPI = [["Desvíos amplios (casos)", `Consistencia!B${rTot}`, oT.n, "0"], ["Regresan en el plazo", `Consistencia!C${rTot}`, oT.reg, "0"], ["Proporción de regreso", `Consistencia!F${rTot}`, oT.prop, "0.0%"],
-      ["Referencia simulada (media)", `Consistencia!G${rTot}`, S.media(aT), "0.0%"], ["Umbral (percentil de la referencia)", `Consistencia!H${rTot}`, umT, "0.0%"], ["¿Supera el umbral?", `IF(Consistencia!F${rTot}>Consistencia!H${rTot},"Sí","No")`, oT.prop > umT ? "Sí" : "No", "General"]];
+      ["Referencia simulada (media)", `Consistencia!G${rTot}`, S.media(aT), "0.0%"], ["Umbral (percentil de la referencia)", `Consistencia!H${rTot}`, umT, "0.0%"], ["¿Supera el umbral?", `Consistencia!J${rTot}`, oT.prop > umT ? "Sí" : "No", "General"]];
     KPI.forEach(([lab, fm, js, nf], i) => { const a = col(4 * i), b = col(4 * i + 3);
       ds.mergeCells(`${a}4:${b}4`); ds.mergeCells(`${a}5:${b}6`);
       const t = ds.getCell(`${a}4`), v = ds.getCell(`${a}5`); t.value = lab; t.font = { size: 9, color: { argb: "FF555555" } }; t.alignment = { horizontal: "center", wrapText: true };
@@ -1201,8 +1222,8 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     const c12 = c.slice(0, 12), prom = c12.reduce((s, x) => s + x.precio, 0) / (c12.length || 1);
     const ok = D.empresas.filter(e => e.resultado.estado === "ok").length;
     $("#tape").innerHTML = [
-      ["Brent spot (Dated)", fmt(sp?.[1]), `FRED · ${sp?.[0] ?? "—"}`],
-      ["Brent 1ª línea", fmt(b.primera_linea?.precio), `ICE · ${fecha(b.primera_linea?.ts)}`],
+      ["CO1 · primer futuro de Brent", fmt(b.primera_linea?.precio), `Referencia de la prima · Yahoo BZ=F · ${fecha(b.primera_linea?.ts)}`],
+      ["Brent spot (Dated)", fmt(sp?.[1]), `Solo comparación · FRED · ${sp?.[0] ?? "—"}`],
       ["Curva: promedio 12 m", fmt(prom), `${c12.length} contratos · ${c12[0]?.vencimiento ?? ""} a ${c12.at(-1)?.vencimiento ?? ""}`],
       ["USD / BRL", fmt(D.fx?.usd_brl, 4), "BCB PTAX venta"],
       ["Empresas calibradas", `${ok} / ${D.empresas.length}`, "con inputs completos y citados"]
@@ -1210,7 +1231,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     const gap = sp && b.primera_linea ? sp[1] - b.primera_linea.precio : null;
     $("#estado-banner").innerHTML = ok === 0
       ? `<strong>Todavía no hay implícitos.</strong> Los datos de mercado y de balance se actualizan solos. Lo que falta son los inputs operativos (producción, costos, capex, reservas, diferencial) y los parámetros de WACC, que el equipo carga con su fuente en <span class="mono">inputs/operativos.csv</span>. ${gap != null && Math.abs(gap) > 5 ? `Ojo: hoy el spot y la 1ª línea difieren en USD ${fmt(gap, 1)}, así que la elección de qué Brent se usa como referencia cambia la lectura.` : ""}`
-      : `<strong>${ok} de ${D.empresas.length} empresas calibradas automáticamente.</strong> Referencia: Brent ${D.brent_referencia.replace(/_/g, " ")}. Leer con cuidado: en el caso base la producción es plana y el horizonte termina con las reservas probadas, así que el valor de los recursos no probados no entra y el implícito tiende a salir alto. Las integradas cargan además una estimación gruesa de su downstream.`;
+      : `<strong>${ok} de ${D.empresas.length} empresas calibradas automáticamente.</strong> La prima compara cada implícito con el CO1 (primer futuro de Brent). Leer el nivel con cuidado: la producción es plana y el horizonte termina con las reservas probadas (7.4), así que los recursos no probados no entran y el implícito tiende a salir alto; la banda no cubre ese sesgo de especificación (8.3). Las integradas cargan además una estimación gruesa de la refinación.`;
   }
 
   function rail() {
@@ -1241,7 +1262,8 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     const pts = v.map((p, k) => `${(k / (v.length - 1) * w).toFixed(1)},${(h - 2 - (p - mn) / (mx - mn || 1) * (h - 4)).toFixed(1)}`);
     return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><polygon points="0,${h} ${pts.join(" ")} ${w},${h}" fill="var(--accent-soft)"/><polyline points="${pts.join(" ")}" fill="none" stroke="var(--accent)" stroke-width="1.5"/></svg>`;
   }
-  const chipPerfil = e => `<span class="chip ${e.perfil === "pure-play" ? "pure" : "int"}">${e.perfil === "pure-play" ? "Pure-play" : "Integrada"}</span>`;
+  const chipPerfil = e => `<span class="chip ${e.perfil === "pure-play" ? "pure" : "int"}">${e.perfil === "pure-play" ? "Perfil puro" : "Integrada"}</span>`;
+  const sg = (v, d = 1) => v == null || isNaN(v) ? "—" : (v >= 0 ? "+" : "") + fmt(v, d);
   const chipEstado = e => e.resultado.estado === "ok" ? `<span class="chip ok">Calibrada</span>` : `<span class="chip pend">Faltan ${e.resultado.faltan?.length ?? "?"} inputs</span>`;
 
   function cards() {
@@ -1254,6 +1276,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
           <div><span class="lbl">Capitalización</span><span class="v">USD ${musd(e.mercado.cap_musd)}</span></div>
         </div>
         <div class="implied"><span class="lbl">Brent implícito</span><span class="v">${e.resultado.brent_implicito != null ? fmt(e.resultado.brent_implicito, 1) : "—"}</span>${chipEstado(e)}</div>
+        ${e.resultado.brent_implicito != null ? `<div class="note">Prima <b class="num">${sg(e.resultado.brent_implicito - refBrent())}</b> USD/bbl frente al CO1 (${fmt(refBrent(), 1)})</div>` : ""}
       </button>`).join("");
     document.querySelectorAll(".card").forEach(b => b.onclick = () => { abrir(b.dataset.id); tab("empresa"); });
   }
@@ -1292,7 +1315,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
         <div><span class="lbl">Cotización</span><span class="v">${esc(e.mercado.moneda || "")} ${fmt(e.mercado.precio)}</span></div>
         <div><span class="lbl">Capitalización</span><span class="v">USD ${musd(e.mercado.cap_musd)}</span></div>
         <div><span class="lbl">Referencia natural</span><span>${esc(e.referencia_natural)}</span></div>
-        <div><span class="lbl">Fundamentals</span><span>${{ sec_xbrl: "SEC XBRL + yfinance (auto)", cvm_itr: "CVM ITR + yfinance (auto)", yf_se: "yfinance + Secretaría de Energía (auto)" }[e.fuente_fundamentals]}</span></div>
+        <div><span class="lbl">Fundamentals</span><span>${{ sec_xbrl: "SEC XBRL + yfinance (auto)", cvm_itr: "CVM ITR + yfinance (auto)", yf_se: "yfinance + Secretaría de Energía (auto)", bloomberg: "Bloomberg + releases citados" }[e.fuente_fundamentals] ?? "—"}</span></div>
       </div>
       <p class="note" style="margin-top:10px">${e.mercado.nota_cap ? "Capitalización: " + esc(e.mercado.nota_cap) + "." : "Capitalización pendiente: falta cargar las acciones en circulación (6-K)."} <a href="${esc(e.ir_url)}" target="_blank" rel="noopener">Relación con inversores</a></p>`;
     tablaInputs(); calcular();
@@ -1331,12 +1354,14 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     }
     if (sintetico) cap = M.valorPatrimonio(i, 75);
     const bi = M.brentImplicito(i, cap), bd = M.banda(i, cap), sens = M.sensibilidad(i, cap).slice(0, 5), ref = refBrent();
-    const lectura = bi.valor == null ? "" : bi.valor > ref ? `El mercado paga un Brent <b>por encima</b> de la referencia (${fmt(ref, 1)}): escenario optimista incorporado.` : `El mercado paga un Brent <b>por debajo</b> de la referencia (${fmt(ref, 1)}): hay margen si el crudo no cae.`;
+    const prima = bi.valor == null ? null : bi.valor - ref, enBanda = bd.min != null && ref >= bd.min && ref <= bd.max;   // 7.1: solo fuera de la banda se lee como información del mercado
+    const lectura = bi.valor == null ? "" : enBanda ? `El CO1 (${fmt(ref, 1)}) cae dentro de la banda: esta prima no se lee como información del mercado.` : `La cotización incorpora un barril <b>${prima > 0 ? "más caro" : "más barato"}</b> que el CO1 (${fmt(ref, 1)}). Es una lectura condicionada al modelo.`;
     const est = { debajo: "El valor del modelo supera la capitalización aun con Brent USD 10: revisar inputs.", encima: "Ni con Brent USD 300 el modelo alcanza la capitalización: revisar inputs.", no_monotono: "El valor no crece con el Brent: no hay despeje informativo." }[bi.estado] || "";
     box.innerHTML = `<h2>Brent implícito</h2>
       ${sintetico ? `<div class="banner warn" style="margin:8px 0"><strong>Caso sintético.</strong> Inputs de prueba y capitalización fabricada para que el despeje dé 75. No representa a ${esc(e.nombre)}.</div>` : ""}
       <div class="result"><span class="big">${bi.valor != null ? fmt(bi.valor, 1) : "—"}</span>
-        <span>USD/bbl · banda ${fmt(bd.min, 1)} – ${fmt(bd.max, 1)} · WACC ${fmt(M.wacc(i) * 100, 1)} %</span><span>${lectura}${est}</span></div>
+        <span>USD/bbl · banda ${fmt(bd.min, 1)} – ${fmt(bd.max, 1)} · WACC ${fmt(M.wacc(i) * 100, 1)} %</span>
+        ${prima != null ? `<span><b>Prima ${sg(prima)}</b> USD/bbl · banda de la prima ${bd.min != null ? `${sg(bd.min - ref)} a ${sg(bd.max - ref)}` : "—"}</span>` : ""}<span>${lectura}${est}</span></div>
       <h3 style="font-size:15px;margin-top:14px">Qué mueve el resultado (input ±10 %)</h3>
       <div class="tbl"><table><thead><tr><th>Input</th><th>−10 %</th><th>+10 %</th></tr></thead><tbody>
       ${sens.map(s => `<tr><td>${CAMPOS[s.input][0]}</td><td class="num">${fmt(s.menos10, 1)}</td><td class="num">${fmt(s.mas10, 1)}</td></tr>`).join("")}</tbody></table></div>
@@ -1404,7 +1429,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
 
   // ------------------------------------------------------------------ serie histórica
   const COL = { VIST: "var(--s1)", YPF: "var(--s2)", EOG: "var(--s3)", SU: "var(--s4)", PRIO: "var(--s5)", PBR: "var(--s6)" };
-  const H = { desde: null, hasta: null, ref: "brent_1l", activos: new Set() };
+  const H = { desde: null, hasta: null, ref: "brent_1l", vista: "implicito", activos: new Set() };
   function hInit() {
     const hi = D.historia; if (!hi) { $("#h-chart").innerHTML = "<p class='note'>Todavía no se generó la serie histórica (python -m pipeline.historia).</p>"; return; }
     const ids = Object.keys(hi.series).filter(e => hi.series[e].fecha.length);
@@ -1412,9 +1437,9 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     const todas = ids.flatMap(e => hi.series[e].fecha).sort();
     const f0 = todas[0], f1 = todas.at(-1);
     const menos1a = (() => { const d = new Date(f1); d.setFullYear(d.getFullYear() - 1); return d.toISOString().slice(0, 10); })();
-    const presets = [["Ventana TIF 3T24–1T26", "2024-07-01", "2026-03-31"], ["Último año", menos1a, f1], ["Todo", f0, f1]];
+    const presets = [["Ventana de la tesis 3T24–2T26", TIF[0], TIF[1]], ["Último año", menos1a, f1], ["Todo", f0, f1]];
     try { const g = JSON.parse(localStorage.getItem("bi_rango") || "null"); if (g) { H.desde = g[0]; H.hasta = g[1]; } } catch (e) {}
-    H.desde = H.desde || "2024-07-01"; H.hasta = H.hasta || f1;
+    H.desde = H.desde || TIF[0]; H.hasta = H.hasta || TIF[1];
     $("#h-desde").min = $("#h-hasta").min = f0; $("#h-desde").max = $("#h-hasta").max = f1;
     $("#h-desde").value = H.desde; $("#h-hasta").value = H.hasta;
     $("#h-presets").innerHTML = presets.map(([n, a, b]) => `<button class="btn" data-a="${a}" data-b="${b}">${n}</button>`).join("");
@@ -1422,11 +1447,12 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     $("#h-desde").onchange = () => { H.desde = $("#h-desde").value; hDraw(); };
     $("#h-hasta").onchange = () => { H.hasta = $("#h-hasta").value; hDraw(); };
     $("#h-ref").onchange = () => { H.ref = $("#h-ref").value; hDraw(); };
+    $("#h-vista").onchange = () => { H.vista = $("#h-vista").value; hDraw(); };
     $("#h-emp").innerHTML = D.empresas.map(e => `<button data-e="${e.id}" aria-pressed="${H.activos.has(e.id)}" ${ids.includes(e.id) ? "" : "disabled title='Sin serie'"}><i style="background:${COL[e.id]}"></i>${e.id}</button>`).join("");
     document.querySelectorAll("#h-emp button").forEach(b => b.onclick = () => { const e = b.dataset.e; H.activos.has(e) ? H.activos.delete(e) : H.activos.add(e); b.setAttribute("aria-pressed", H.activos.has(e)); hDraw(); });
     const inicio = Object.fromEntries(ids.map(e => [e, hi.series[e].fecha[0]]));
     $("#h-nota").textContent = "Cobertura: " + D.empresas.map(e => `${e.id} desde ${inicio[e.id] || "—"}`).join(" · ") +
-      ". PRIO y Suncor: estados contables de Bloomberg y operativos de sus releases (link por dato); Petrobras publicó los reportes de producción anteriores a 2T25 como PDF, que EDGAR no deja leer como texto.";
+      ". PRIO y Suncor: estados contables de Bloomberg y operativos de sus releases (link por dato). Con una sola empresa elegida se dibuja su banda de sensibilidad.";
     hDraw();
   }
   const enRango = f => f >= H.desde && f <= H.hasta;
@@ -1441,9 +1467,10 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     const W = 1000, Hh = 400, L = 46, R = 118, T = 14, B = 52;
     const t = f => Date.parse(f), t0 = t(fechas[0]), t1 = t(fechas.at(-1));
     const x = f => L + (t(f) - t0) / (t1 - t0 || 1) * (W - L - R);
-    const vis = [...fechas.map(f => ref[f]).filter(v => v != null)];
-    act.forEach(e => { const s = hi.series[e]; s.fecha.forEach((f, i) => { if (enRango(f) && s.implicito[i] != null) { vis.push(s.implicito[i]); if (act.length === 1) { vis.push(s.banda_min[i], s.banda_max[i]); } } }); });
-    const lo = Math.floor(Math.min(...vis) / 20) * 20, hiV = Math.ceil(Math.max(...vis) / 20) * 20;
+    const esPrima = H.vista === "prima", val = (v, f) => v == null ? null : esPrima ? (ref[f] == null ? null : v - ref[f]) : v;   // prima: solo ruedas con acción y referencia (6.1)
+    const vis = esPrima ? [0] : fechas.map(f => ref[f]);
+    act.forEach(e => { const s = hi.series[e]; s.fecha.forEach((f, i) => { if (enRango(f) && s.implicito[i] != null) { vis.push(val(s.implicito[i], f)); if (act.length === 1) { vis.push(val(s.banda_min[i], f), val(s.banda_max[i], f)); } } }); });
+    const visOk = vis.filter(v => v != null), lo = Math.floor(Math.min(...visOk) / 20) * 20, hiV = Math.ceil(Math.max(...visOk) / 20) * 20;
     const y = v => T + (hiV - v) / (hiV - lo || 1) * (Hh - T - B);
     let g = "";
     for (let v = lo; v <= hiV; v += 20) g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${L - 8}" y="${y(v) + 4}" text-anchor="end">${v}</text>`;
@@ -1453,12 +1480,14 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     const path = pts => { let d = "", pen = false; pts.forEach(([f, v]) => { if (v == null) { pen = false; return; } d += `${pen ? "L" : "M"}${x(f).toFixed(1)},${y(v).toFixed(1)}`; pen = true; }); return d; };
     // banda (una sola empresa)
     if (act.length === 1) {
-      const s = hi.series[act[0]], idx = s.fecha.map((f, i) => i).filter(i => enRango(s.fecha[i]) && s.banda_min[i] != null);
-      if (idx.length) g += `<path d="M${idx.map(i => `${x(s.fecha[i]).toFixed(1)},${y(s.banda_max[i]).toFixed(1)}`).join("L")}L${idx.slice().reverse().map(i => `${x(s.fecha[i]).toFixed(1)},${y(s.banda_min[i]).toFixed(1)}`).join("L")}Z" fill="${COL[act[0]]}" opacity=".15"/>`;
+      const s = hi.series[act[0]], idx = s.fecha.map((f, i) => i).filter(i => enRango(s.fecha[i]) && val(s.banda_min[i], s.fecha[i]) != null && val(s.banda_max[i], s.fecha[i]) != null);
+      if (idx.length) g += `<path d="M${idx.map(i => `${x(s.fecha[i]).toFixed(1)},${y(val(s.banda_max[i], s.fecha[i])).toFixed(1)}`).join("L")}L${idx.slice().reverse().map(i => `${x(s.fecha[i]).toFixed(1)},${y(val(s.banda_min[i], s.fecha[i])).toFixed(1)}`).join("L")}Z" fill="${COL[act[0]]}" opacity=".15"/>`;
     }
-    g += `<path d="${path(refF.filter(enRango).map(f => [f, ref[f]]))}" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="${H.ref === "brent_1l" ? "0" : "5 3"}"/>`;
-    const finales = [["Brent", "var(--ink)", (() => { const f = refF.filter(enRango).at(-1); return f ? ref[f] : null; })()]];
-    act.forEach(e => { const s = hi.series[e]; const pts = s.fecha.map((f, i) => [f, s.implicito[i]]).filter(([f]) => enRango(f));
+    const nomRef = H.ref === "brent_1l" ? "CO1" : "Spot";
+    g += esPrima ? `<line x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}" stroke="var(--ink)" stroke-width="2"/>`
+      : `<path d="${path(refF.filter(enRango).map(f => [f, ref[f]]))}" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="${H.ref === "brent_1l" ? "0" : "5 3"}"/>`;
+    const finales = esPrima ? [] : [[nomRef, "var(--ink)", (() => { const f = refF.filter(enRango).at(-1); return f ? ref[f] : null; })()]];
+    act.forEach(e => { const s = hi.series[e]; const pts = s.fecha.map((f, i) => [f, val(s.implicito[i], f)]).filter(([f]) => enRango(f));
       g += `<path d="${path(pts)}" fill="none" stroke="${COL[e]}" stroke-width="2" stroke-linejoin="round"/>`;
       const ult = pts.filter(p => p[1] != null).at(-1); if (ult) finales.push([e, COL[e], ult[1]]);
       // recalibraciones
@@ -1469,7 +1498,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
       .reduce((prev, it) => { it.yy = Math.max(it.yy, prev + 13); g += `<text x="${W - R + 6}" y="${it.yy + 4}" style="fill:var(--ink);font-weight:600"><tspan style="fill:${it.c}">■</tspan> ${esc(it.n)} ${fmt(it.v, 0)}</text>`; return it.yy; }, -99);
     g += `<text x="${L}" y="${T - 2}">USD/bbl</text><line id="h-cross" x1="0" x2="0" y1="${T}" y2="${Hh - B}" stroke="var(--muted)" stroke-dasharray="3 3" visibility="hidden"/>`;
     g += `<rect id="h-hit" x="${L}" y="${T}" width="${W - L - R}" height="${Hh - T - B}" fill="transparent"/>`;
-    $("#h-chart").innerHTML = `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Brent implícito diario por empresa y Brent de referencia">${g}</svg><div class="tip" id="h-tip" hidden></div>`;
+    $("#h-chart").innerHTML = `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="${esPrima ? "Prima de Brent implícito diaria por empresa" : "Brent implícito diario por empresa y Brent de referencia"}">${g}</svg><div class="tip" id="h-tip" hidden></div>`;
     const svg = $("#h-chart svg"), tip = $("#h-tip"), cross = $("#h-cross");
     const idxs = Object.fromEntries(act.map(e => [e, Object.fromEntries(hi.series[e].fecha.map((f, i) => [f, i]))]));
     $("#h-hit").onmousemove = ev => {
@@ -1477,7 +1506,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
       const tt = t0 + (px - L) / (W - L - R) * (t1 - t0); let f = fechas[0];
       for (const ff of fechas) { if (t(ff) <= tt) f = ff; else break; }
       cross.setAttribute("x1", x(f)); cross.setAttribute("x2", x(f)); cross.setAttribute("visibility", "visible");
-      const filas = [[`Brent ${H.ref === "brent_1l" ? "1ª línea" : "spot"}`, refAl(ref, refF, f), "var(--ink)"], ...act.map(e => { const i = idxs[e][f]; const s = hi.series[e]; return [e + (i != null ? ` <span class="note">(${s.periodos[s.cal_idx[i]]})</span>` : ""), i != null ? s.implicito[i] : null, COL[e]]; })];
+      const filas = [[nomRef, refAl(ref, refF, f), "var(--ink)"], ...act.map(e => { const i = idxs[e][f]; const s = hi.series[e]; return [e + (i != null ? ` <span class="note">(${s.periodos[s.cal_idx[i]]})</span>` : ""), i != null ? val(s.implicito[i], f) : null, COL[e]]; })];
       tip.innerHTML = `<b>${f}</b>` + filas.map(([n, v, c]) => `<div><span><span style="color:${c}">■</span> ${n}</span><span>${fmt(v, 1)}</span></div>`).join("");
       tip.hidden = false; const cw = $("#h-chart").clientWidth; const lx = (x(f) / W) * r.width;
       tip.style.left = Math.min(lx + 12, cw - 200) + "px"; tip.style.top = "12px";
@@ -1489,14 +1518,14 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     const hi = D.historia;
     const corr = (a, b) => { const n = a.length; if (n < 3) return null; const ma = a.reduce((s, v) => s + v, 0) / n, mb = b.reduce((s, v) => s + v, 0) / n;
       let sab = 0, sa = 0, sb = 0; for (let i = 0; i < n; i++) { sab += (a[i] - ma) * (b[i] - mb); sa += (a[i] - ma) ** 2; sb += (b[i] - mb) ** 2; } return sab / Math.sqrt(sa * sb); };
-    const filas = act.map(e => { const s = hi.series[e]; const pares = s.fecha.map((f, i) => [f, s.implicito[i], refAl(ref, refF, f)]).filter(([f, v, r]) => enRango(f) && v != null && r != null);
-      if (!pares.length) return `<tr><td><b>${e}</b></td><td colspan="6" class="note">Sin datos en el rango</td></tr>`;
-      const err = pares.map(p => p[1] - p[2]), n = pares.length, sesgo = err.reduce((a, b) => a + b, 0) / n;
-      const sd = Math.sqrt(err.reduce((a, b) => a + (b - sesgo) ** 2, 0) / Math.max(1, n - 1));
+    const filas = act.map(e => { const s = hi.series[e]; const pares = s.fecha.map((f, i) => [f, s.implicito[i], ref[f]]).filter(([f, v, r]) => enRango(f) && v != null && r != null);
+      if (!pares.length) return `<tr><td><b>${e}</b></td><td colspan="8" class="note">Sin datos en el rango</td></tr>`;
+      const pr = pares.map(p => p[1] - p[2]), n = pares.length, media = pr.reduce((a, b) => a + b, 0) / n;
+      const sd = Math.sqrt(pr.reduce((a, b) => a + (b - media) ** 2, 0) / Math.max(1, n - 1)), mag = pr.reduce((a, b) => a + Math.abs(b), 0) / n, pos = pr.filter(v => v > 0).length / n;
       const sem = pares.filter((_, i) => i % 5 === 0); const dI = [], dR = []; for (let i = 1; i < sem.length; i++) { dI.push(sem[i][1] - sem[i - 1][1]); dR.push(sem[i][2] - sem[i - 1][2]); }
       const c = corr(dI, dR), mi = pares.reduce((a, p) => a + p[1], 0) / n, mr = pares.reduce((a, p) => a + p[2], 0) / n;
-      return `<tr><td><b>${e}</b></td><td class="num">${n}</td><td class="num">${fmt(mi, 1)}</td><td class="num">${fmt(mr, 1)}</td><td class="num">${sesgo >= 0 ? "+" : ""}${fmt(sesgo, 1)}</td><td class="num">${fmt(sd, 1)}</td><td class="num">${c == null ? "—" : fmt(c, 2)}</td></tr>`; });
-    $("#h-test").innerHTML = `<thead><tr><th>Empresa</th><th>Días</th><th>Implícito medio</th><th>Referencia media</th><th>Sesgo</th><th>Desvío del error</th><th>Correl. variaciones semanales</th></tr></thead><tbody>${filas.join("")}</tbody>`;
+      return `<tr><td><b>${e}</b></td><td class="num">${n}</td><td class="num">${fmt(mi, 1)}</td><td class="num">${fmt(mr, 1)}</td><td class="num">${sg(media)}</td><td class="num">${fmt(mag, 1)}</td><td class="num">${fmt(sd, 1)}</td><td class="num">${fmt(pos * 100, 0)} %</td><td class="num">${c == null ? "—" : fmt(c, 2)}</td></tr>`; });
+    $("#h-test").innerHTML = `<thead><tr><th>Empresa</th><th>Ruedas</th><th>Implícito medio</th><th>Referencia media</th><th>Prima media (signo)</th><th>|Prima| media (magnitud)</th><th>Desvío estándar (variabilidad)</th><th>Ruedas con prima positiva</th><th>Correl. variaciones semanales</th></tr></thead><tbody>${filas.join("")}</tbody>`;
   }
   function hCal() {
     const hi = D.historia;

@@ -20,34 +20,52 @@
     },
     {
       "titulo": "Serie histórica día por día",
-      "texto": "Cada balance trimestral configura el modelo desde su fecha de publicación (sin look-ahead) y cada día se despeja con la capitalización de ese día. Pestaña 'Serie histórica': rango editable, Brent spot o 1ª línea como referencia, marcas de recalibración y Test 1 (sesgo, desvío y correlación de variaciones) para el rango elegido."
+      "texto": "Cada balance trimestral configura el modelo desde su fecha de publicación (sin look-ahead) y cada día se despeja con la capitalización de ese día. Pestaña 'Serie histórica': rango editable, vista de implícito o de prima, marcas de recalibración, prueba de la hipótesis y descripción de la prima (signo, magnitud y variabilidad)."
     },
     {
-      "titulo": "Los implícitos todavía no son interpretables",
-      "texto": "En el caso base la producción es plana y el horizonte termina con las reservas probadas (EOG ~11 años, Vista ~7). El valor de los recursos no probados no entra, así que el modelo necesita un Brent más alto para llegar a la cotización: sesgo al alza en todos los pure-plays. Es el error de calibración que debe detectar el Test 1."
+      "titulo": "El nivel de la prima tiene sesgo de especificación",
+      "texto": "La producción es plana y el horizonte termina con las reservas probadas (EOG ~11 años, Vista ~7). Los recursos no probados no entran, así que el modelo necesita un Brent más alto para llegar a la cotización. El grupo mantiene este caso base y lo declara como limitación: la hipótesis trabaja sobre los desvíos respecto de una banda móvil, no sobre el nivel."
     },
     {
       "titulo": "Vista: riesgo argentino dentro del implícito",
-      "texto": "WACC 13,7 % con prima país 9,7 % (Damodaran) y reservas de la Secretaría de Energía en base operada, no por participación. El implícito de VIST (158,5) mezcla expectativa de crudo con riesgo país: es el contraargumento central de la defensa."
+      "texto": "WACC 13,7 % con prima país 9,7 % (Damodaran). El implícito de Vista mezcla expectativa de crudo con riesgo país: es el contraargumento central de la defensa. El riesgo país pasa a ser diario cuando esté la serie de Argentina."
     },
     {
-      "titulo": "Petrobras sale bajo por el downstream",
-      "texto": "El valor de refinación se estima con el EBITDA del 2T26 × 4 × EV/EBITDA sectorial, y ese trimestre está inflado por ganancias de inventario. El downstream queda sobrevaluado y el implícito de PBR (52,0) sale bajo."
+      "titulo": "Petrobras: la refinación pesa mucho en 2026",
+      "texto": "El valor de refinación se estima con el EBITDA del trimestre × 4 × EV/EBITDA sectorial. Los trimestres de 2026 suben por ganancias de inventario, y la refinación llega al 76 % del EV. Hay alternativas analizadas: la decisión está pendiente."
     },
     {
-      "titulo": "¿Contra qué Brent se compara?",
-      "texto": "El 15/09/2026 el Brent spot Dated (FRED) cerró en 130,80 y la 1ª línea ICE en ~97,5. Elegir spot, 1ª línea o promedio de la curva cambia la lectura: es una decisión metodológica, no un detalle."
+      "titulo": "Referencia: CO1",
+      "texto": "La prima se calcula contra el primer futuro de Brent, con el CO12 como control (6.1 y 7.1). La web usa Yahoo BZ=F como aproximación hasta tener la serie de Bloomberg. El spot Dated y la curva quedan solo como comparación."
     },
     {
       "titulo": "Fuentes y límites",
-      "texto": "PRIO no es registrante SEC (usa CVM + yfinance + release citado). Yahoo no es fuente institucional: sirve para la web en vivo; el TIF cita Bloomberg/FinLab, que se analiza más adelante. El choque con el tutor por el alcance quedó resuelto."
+      "texto": "Bloomberg es la fuente principal del TIF (8.1). Los estados contables ya salen de la terminal; las cotizaciones y el CO1 de la web siguen en Yahoo. PRIO no es registrante SEC: usa Bloomberg, CVM y releases citados."
     }
   ],
   "pendientes": [
     {
-      "tarea": "Definir el percentil del umbral de la referencia simulada: la tesis no lo fija. Es editable en Serie histórica → Prueba de la hipótesis (95 por defecto) y el Excel baja con el elegido",
+      "tarea": "Riesgo país diario, como pide 7.4 y 8.2 (decisión del grupo, 03/11/2026): reemplazar la prima anual de Damodaran por el diferencial soberano de cada fecha dentro del WACC. Toca la serie histórica y las fórmulas del Excel. Bloqueado hasta tener la serie de Argentina",
       "prioridad": "alta",
       "estado": "pendiente",
+      "area": "Modelo"
+    },
+    {
+      "tarea": "Confirmar dos lecturas de 6.1 aplicadas en el cálculo: la ventana de 20 ruedas excluye el día del desvío y el rango sigue moviéndose durante la evaluación",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Metodología"
+    },
+    {
+      "tarea": "Integradas: el capex y el SG&A consolidados se cargan todos al upstream, mientras la refinación se valúa aparte (Suncor: el capex de refinación llega al 15 % del total). YPF y Petrobras no traen capex por segmento en Bloomberg",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Modelo"
+    },
+    {
+      "tarea": "Definir el percentil del umbral de la referencia simulada — Resuelto: el análisis usa P95 (decisión del grupo, 03/11/2026) y el percentil es editable en la página. Con la ventana 3T2024–2T2026: 135 de 223 casos regresan (60,5 %) frente a un umbral de 58,6 %.",
+      "prioridad": "alta",
+      "estado": "resuelto",
       "area": "Metodología"
     },
     {
@@ -57,25 +75,25 @@
       "area": "Metodología"
     },
     {
-      "tarea": "PBR: el implícito da negativo o casi cero hasta nov-2024 (prima de −100 a −70) por el valor de refinación con múltiplo: revisar esos balances antes de leer la prima de Petrobras",
+      "tarea": "PBR: el implícito da negativo o casi cero hasta nov-2024 (prima de −100 a −70) por el valor de refinación con múltiplo: revisar esos balances antes de leer la prima de Petrobras — Resuelto: no era el modelo. Los releases de 1T24 y 2T24 están en reales y el EBITDA de segmentos se leía como dólares (refinación de USD 306.000 M). Convertido al promedio del trimestre: la serie ya no tiene ruedas vacías en la ventana.",
       "prioridad": "alta",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Modelo"
     },
     {
-      "tarea": "Referencia simulada con CO1 de cierre (Yahoo BZ=F): el desfase horario se aproxima con ruido de cierre. Reemplazar por CO1 a la hora de cierre de cada acción y agregar el control con CO12 cuando estén los datos de Bloomberg",
+      "tarea": "Referencia simulada con CO1 de cierre (Yahoo BZ=F): el desfase horario se mide como ruido de cierre, como prevé 8.4 si falta historia intradiaria. Falta el CO1 de Bloomberg y el control con CO12",
       "prioridad": "media",
       "estado": "pendiente",
       "area": "Datos"
     },
     {
-      "tarea": "Bloomberg: re-exportar el CDS de Argentina (CT350188 CBIN salta entre dos niveles día por día y tiene un hueco jun–nov 2025) y el histórico del CO1 (el archivo vino vacío). Hasta entonces el riesgo país sigue en Damodaran y el Brent de 1ª línea en Yahoo BZ=F",
+      "tarea": "Bloomberg: volver a bajar el riesgo país de Argentina (el CDS salta entre dos niveles, trae valores de 9 y 21 pb y un hueco de jun–nov 2025), el CO1 (el archivo vino vacío), el CO12 y las cotizaciones. Lista exacta en inputs/bloomberg/PEDIDO_TERMINAL.md",
       "prioridad": "alta",
       "estado": "pendiente",
       "area": "Datos"
     },
     {
-      "tarea": "Suncor: la hoja Segments del Excel mezcla datos de Freeport-McMoRan (filas 76–519) y el valor de refinación (EBITDA R&M × 4 × EV/EBITDA) pesa ~60 % del EV: revisar método, igual que en PBR e YPF",
+      "tarea": "Suncor: la hoja Segments del Excel mezcla datos de Freeport-McMoRan (filas 76–519): revisar qué filas se usaron",
       "prioridad": "alta",
       "estado": "pendiente",
       "area": "Modelo"
@@ -87,10 +105,10 @@
       "area": "Datos"
     },
     {
-      "tarea": "Serie histórica: el sesgo es grande y persistente (EOG +39, VIST +75, YPF +99 USD/bbl vs 1ª línea) con correlación de variaciones baja (0,2–0,4): recalibrar perfil de producción y horizonte antes de interpretar",
+      "tarea": "Declarar en la entrega final el sesgo de nivel de la prima en la ventana (VIST +93,5; YPF +118,1; EOG +40,7; PRIO +29,2; SU +7,3; PBR −15,7 USD/bbl): el CO1 casi nunca cae dentro de la banda, que no cubre el sesgo de especificación (8.3)",
       "prioridad": "alta",
       "estado": "pendiente",
-      "area": "Modelo"
+      "area": "TIF"
     },
     {
       "tarea": "Petrobras antes de 2T25: los reportes de producción están en PDF (EDGAR no los lee como texto); cargar esos trimestres a mano o leer el PDF — Resuelto: la producción trimestral sale de Bloomberg desde 1T2024 (INFO PBR US.xlsx).",
@@ -105,7 +123,7 @@
       "area": "Datos"
     },
     {
-      "tarea": "YPF: saltos grandes en la serie al entrar cada balance (downstream × múltiplo y riesgo país Damodaran: 16 % en 2025 vs 9,7 % en 2026)",
+      "tarea": "YPF: saltos grandes en la serie al entrar cada balance. Se resuelven con el valor de refinación y el riesgo país diario (ver esos pendientes)",
       "prioridad": "media",
       "estado": "pendiente",
       "area": "Modelo"
@@ -117,33 +135,33 @@
       "area": "Web"
     },
     {
-      "tarea": "Reemplazar 'producción plana hasta agotar reservas' por un perfil calibrado con la guía de producción de cada empresa",
+      "tarea": "Reemplazar 'producción plana hasta agotar reservas' por un perfil calibrado con la guía de producción de cada empresa — Resuelto: decisión del grupo (03/11/2026). Se mantiene el perfil plano como caso base y se declara el sesgo de nivel como limitación (7.4 y 8.4).",
       "prioridad": "alta",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Modelo"
     },
     {
-      "tarea": "Agregar una segunda banda con reservas probadas + probables (2P)",
+      "tarea": "Agregar una segunda banda con reservas probadas + probables (2P) — Resuelto: descartado. 7.4 deja afuera las reservas probables y las posibles.",
       "prioridad": "alta",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Modelo"
     },
     {
-      "tarea": "Definir el Brent de referencia: spot Dated, 1ª línea o promedio de la curva",
+      "tarea": "Definir el Brent de referencia: spot Dated, 1ª línea o promedio de la curva — Resuelto: CO1, con CO12 como control (Entregable 6.1 y 7.1). El spot y la curva quedan solo como comparación.",
       "prioridad": "alta",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Metodología"
     },
     {
-      "tarea": "Backtest 3T2024–1T2026 (Test 1): la serie diaria y la tabla ya corren solas; falta la muestra de control 2022–2023 (python -m pipeline.historia --desde 2021-12-31) y leer resultados",
+      "tarea": "Backtest 3T2024–1T2026 (Test 1): la serie diaria y la tabla ya corren solas; falta la muestra de control 2022–2023 (python -m pipeline.historia --desde 2021-12-31) y leer resultados — Resuelto: el Entregable reemplaza el Test 1 por la descripción de la prima (objetivo a) y la prueba de 6.1. No usa muestra de control 2022–2023.",
       "prioridad": "alta",
-      "estado": "en curso",
+      "estado": "resuelto",
       "area": "Modelo"
     },
     {
-      "tarea": "Downstream de YPF y Petrobras: EBITDA normalizado sin efecto inventario y múltiplo específico de refinación",
+      "tarea": "Valor de refinación de YPF, Suncor y Petrobras: decidir el método. El análisis de alternativas ya está hecho: no cambia la hipótesis, pero sí el nivel de la prima y el par Vista–YPF. En YPF la refinación llega a superar el EV de la empresa",
       "prioridad": "alta",
-      "estado": "pendiente",
+      "estado": "en curso",
       "area": "Modelo"
     },
     {
@@ -153,27 +171,27 @@
       "area": "Datos"
     },
     {
-      "tarea": "Rehacer ~70 % del marco teórico para el enfoque de Brent implícito (DCF inverso, sensibilidad al crudo, diferenciales, valor relativo)",
+      "tarea": "Rehacer ~70 % del marco teórico para el enfoque de Brent implícito (DCF inverso, sensibilidad al crudo, diferenciales, valor relativo) — Resuelto: capítulo 7 del Entregable.",
       "prioridad": "alta",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "TIF"
     },
     {
-      "tarea": "Reescribir el criterio de universo: en EOG el crudo es ~42 % (gas y NGL con precio fijo exógeno)",
+      "tarea": "Reescribir el criterio de universo: en EOG el crudo es ~42 % (gas y NGL con precio fijo exógeno) — Resuelto: despejabilidad (7.3 y 8.1).",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "TIF"
     },
     {
-      "tarea": "Unificar documentos: ventana 3T2024–1T2026 y dato de brecha (47,9 vs 51 USD/bbl)",
+      "tarea": "Unificar documentos: ventana 3T2024–1T2026 y dato de brecha (47,9 vs 51 USD/bbl) — Resuelto: el Entregable fija 3T2024–2T2026 y 47,9 USD/bbl.",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "TIF"
     },
     {
-      "tarea": "Planteamiento v2: sacar la cita a Fattouh (2011), sacar metodología de la pregunta principal y alinear las secundarias",
+      "tarea": "Planteamiento v2: sacar la cita a Fattouh (2011), sacar metodología de la pregunta principal y alinear las secundarias — Resuelto: reemplazado por el capítulo 2 del Entregable. Los lineamientos no prohíben citas en el planteamiento.",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "TIF"
     },
     {

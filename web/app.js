@@ -44,8 +44,8 @@
     const c12 = c.slice(0, 12), prom = c12.reduce((s, x) => s + x.precio, 0) / (c12.length || 1);
     const ok = D.empresas.filter(e => e.resultado.estado === "ok").length;
     $("#tape").innerHTML = [
-      ["Brent spot (Dated)", fmt(sp?.[1]), `FRED · ${sp?.[0] ?? "—"}`],
-      ["Brent 1ª línea", fmt(b.primera_linea?.precio), `ICE · ${fecha(b.primera_linea?.ts)}`],
+      ["CO1 · primer futuro de Brent", fmt(b.primera_linea?.precio), `Referencia de la prima · Yahoo BZ=F · ${fecha(b.primera_linea?.ts)}`],
+      ["Brent spot (Dated)", fmt(sp?.[1]), `Solo comparación · FRED · ${sp?.[0] ?? "—"}`],
       ["Curva: promedio 12 m", fmt(prom), `${c12.length} contratos · ${c12[0]?.vencimiento ?? ""} a ${c12.at(-1)?.vencimiento ?? ""}`],
       ["USD / BRL", fmt(D.fx?.usd_brl, 4), "BCB PTAX venta"],
       ["Empresas calibradas", `${ok} / ${D.empresas.length}`, "con inputs completos y citados"]
@@ -53,7 +53,7 @@
     const gap = sp && b.primera_linea ? sp[1] - b.primera_linea.precio : null;
     $("#estado-banner").innerHTML = ok === 0
       ? `<strong>Todavía no hay implícitos.</strong> Los datos de mercado y de balance se actualizan solos. Lo que falta son los inputs operativos (producción, costos, capex, reservas, diferencial) y los parámetros de WACC, que el equipo carga con su fuente en <span class="mono">inputs/operativos.csv</span>. ${gap != null && Math.abs(gap) > 5 ? `Ojo: hoy el spot y la 1ª línea difieren en USD ${fmt(gap, 1)}, así que la elección de qué Brent se usa como referencia cambia la lectura.` : ""}`
-      : `<strong>${ok} de ${D.empresas.length} empresas calibradas automáticamente.</strong> Referencia: Brent ${D.brent_referencia.replace(/_/g, " ")}. Leer con cuidado: en el caso base la producción es plana y el horizonte termina con las reservas probadas, así que el valor de los recursos no probados no entra y el implícito tiende a salir alto. Las integradas cargan además una estimación gruesa de su downstream.`;
+      : `<strong>${ok} de ${D.empresas.length} empresas calibradas automáticamente.</strong> La prima compara cada implícito con el CO1 (primer futuro de Brent). Leer el nivel con cuidado: la producción es plana y el horizonte termina con las reservas probadas (7.4), así que los recursos no probados no entran y el implícito tiende a salir alto; la banda no cubre ese sesgo de especificación (8.3). Las integradas cargan además una estimación gruesa de la refinación.`;
   }
 
   function rail() {
@@ -84,7 +84,8 @@
     const pts = v.map((p, k) => `${(k / (v.length - 1) * w).toFixed(1)},${(h - 2 - (p - mn) / (mx - mn || 1) * (h - 4)).toFixed(1)}`);
     return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><polygon points="0,${h} ${pts.join(" ")} ${w},${h}" fill="var(--accent-soft)"/><polyline points="${pts.join(" ")}" fill="none" stroke="var(--accent)" stroke-width="1.5"/></svg>`;
   }
-  const chipPerfil = e => `<span class="chip ${e.perfil === "pure-play" ? "pure" : "int"}">${e.perfil === "pure-play" ? "Pure-play" : "Integrada"}</span>`;
+  const chipPerfil = e => `<span class="chip ${e.perfil === "pure-play" ? "pure" : "int"}">${e.perfil === "pure-play" ? "Perfil puro" : "Integrada"}</span>`;
+  const sg = (v, d = 1) => v == null || isNaN(v) ? "—" : (v >= 0 ? "+" : "") + fmt(v, d);
   const chipEstado = e => e.resultado.estado === "ok" ? `<span class="chip ok">Calibrada</span>` : `<span class="chip pend">Faltan ${e.resultado.faltan?.length ?? "?"} inputs</span>`;
 
   function cards() {
@@ -97,6 +98,7 @@
           <div><span class="lbl">Capitalización</span><span class="v">USD ${musd(e.mercado.cap_musd)}</span></div>
         </div>
         <div class="implied"><span class="lbl">Brent implícito</span><span class="v">${e.resultado.brent_implicito != null ? fmt(e.resultado.brent_implicito, 1) : "—"}</span>${chipEstado(e)}</div>
+        ${e.resultado.brent_implicito != null ? `<div class="note">Prima <b class="num">${sg(e.resultado.brent_implicito - refBrent())}</b> USD/bbl frente al CO1 (${fmt(refBrent(), 1)})</div>` : ""}
       </button>`).join("");
     document.querySelectorAll(".card").forEach(b => b.onclick = () => { abrir(b.dataset.id); tab("empresa"); });
   }
@@ -135,7 +137,7 @@
         <div><span class="lbl">Cotización</span><span class="v">${esc(e.mercado.moneda || "")} ${fmt(e.mercado.precio)}</span></div>
         <div><span class="lbl">Capitalización</span><span class="v">USD ${musd(e.mercado.cap_musd)}</span></div>
         <div><span class="lbl">Referencia natural</span><span>${esc(e.referencia_natural)}</span></div>
-        <div><span class="lbl">Fundamentals</span><span>${{ sec_xbrl: "SEC XBRL + yfinance (auto)", cvm_itr: "CVM ITR + yfinance (auto)", yf_se: "yfinance + Secretaría de Energía (auto)" }[e.fuente_fundamentals]}</span></div>
+        <div><span class="lbl">Fundamentals</span><span>${{ sec_xbrl: "SEC XBRL + yfinance (auto)", cvm_itr: "CVM ITR + yfinance (auto)", yf_se: "yfinance + Secretaría de Energía (auto)", bloomberg: "Bloomberg + releases citados" }[e.fuente_fundamentals] ?? "—"}</span></div>
       </div>
       <p class="note" style="margin-top:10px">${e.mercado.nota_cap ? "Capitalización: " + esc(e.mercado.nota_cap) + "." : "Capitalización pendiente: falta cargar las acciones en circulación (6-K)."} <a href="${esc(e.ir_url)}" target="_blank" rel="noopener">Relación con inversores</a></p>`;
     tablaInputs(); calcular();
@@ -174,12 +176,14 @@
     }
     if (sintetico) cap = M.valorPatrimonio(i, 75);
     const bi = M.brentImplicito(i, cap), bd = M.banda(i, cap), sens = M.sensibilidad(i, cap).slice(0, 5), ref = refBrent();
-    const lectura = bi.valor == null ? "" : bi.valor > ref ? `El mercado paga un Brent <b>por encima</b> de la referencia (${fmt(ref, 1)}): escenario optimista incorporado.` : `El mercado paga un Brent <b>por debajo</b> de la referencia (${fmt(ref, 1)}): hay margen si el crudo no cae.`;
+    const prima = bi.valor == null ? null : bi.valor - ref, enBanda = bd.min != null && ref >= bd.min && ref <= bd.max;   // 7.1: solo fuera de la banda se lee como información del mercado
+    const lectura = bi.valor == null ? "" : enBanda ? `El CO1 (${fmt(ref, 1)}) cae dentro de la banda: esta prima no se lee como información del mercado.` : `La cotización incorpora un barril <b>${prima > 0 ? "más caro" : "más barato"}</b> que el CO1 (${fmt(ref, 1)}). Es una lectura condicionada al modelo.`;
     const est = { debajo: "El valor del modelo supera la capitalización aun con Brent USD 10: revisar inputs.", encima: "Ni con Brent USD 300 el modelo alcanza la capitalización: revisar inputs.", no_monotono: "El valor no crece con el Brent: no hay despeje informativo." }[bi.estado] || "";
     box.innerHTML = `<h2>Brent implícito</h2>
       ${sintetico ? `<div class="banner warn" style="margin:8px 0"><strong>Caso sintético.</strong> Inputs de prueba y capitalización fabricada para que el despeje dé 75. No representa a ${esc(e.nombre)}.</div>` : ""}
       <div class="result"><span class="big">${bi.valor != null ? fmt(bi.valor, 1) : "—"}</span>
-        <span>USD/bbl · banda ${fmt(bd.min, 1)} – ${fmt(bd.max, 1)} · WACC ${fmt(M.wacc(i) * 100, 1)} %</span><span>${lectura}${est}</span></div>
+        <span>USD/bbl · banda ${fmt(bd.min, 1)} – ${fmt(bd.max, 1)} · WACC ${fmt(M.wacc(i) * 100, 1)} %</span>
+        ${prima != null ? `<span><b>Prima ${sg(prima)}</b> USD/bbl · banda de la prima ${bd.min != null ? `${sg(bd.min - ref)} a ${sg(bd.max - ref)}` : "—"}</span>` : ""}<span>${lectura}${est}</span></div>
       <h3 style="font-size:15px;margin-top:14px">Qué mueve el resultado (input ±10 %)</h3>
       <div class="tbl"><table><thead><tr><th>Input</th><th>−10 %</th><th>+10 %</th></tr></thead><tbody>
       ${sens.map(s => `<tr><td>${CAMPOS[s.input][0]}</td><td class="num">${fmt(s.menos10, 1)}</td><td class="num">${fmt(s.mas10, 1)}</td></tr>`).join("")}</tbody></table></div>
@@ -247,7 +251,7 @@
 
   // ------------------------------------------------------------------ serie histórica
   const COL = { VIST: "var(--s1)", YPF: "var(--s2)", EOG: "var(--s3)", SU: "var(--s4)", PRIO: "var(--s5)", PBR: "var(--s6)" };
-  const H = { desde: null, hasta: null, ref: "brent_1l", activos: new Set() };
+  const H = { desde: null, hasta: null, ref: "brent_1l", vista: "implicito", activos: new Set() };
   function hInit() {
     const hi = D.historia; if (!hi) { $("#h-chart").innerHTML = "<p class='note'>Todavía no se generó la serie histórica (python -m pipeline.historia).</p>"; return; }
     const ids = Object.keys(hi.series).filter(e => hi.series[e].fecha.length);
@@ -255,9 +259,9 @@
     const todas = ids.flatMap(e => hi.series[e].fecha).sort();
     const f0 = todas[0], f1 = todas.at(-1);
     const menos1a = (() => { const d = new Date(f1); d.setFullYear(d.getFullYear() - 1); return d.toISOString().slice(0, 10); })();
-    const presets = [["Ventana TIF 3T24–1T26", "2024-07-01", "2026-03-31"], ["Último año", menos1a, f1], ["Todo", f0, f1]];
+    const presets = [["Ventana de la tesis 3T24–2T26", TIF[0], TIF[1]], ["Último año", menos1a, f1], ["Todo", f0, f1]];
     try { const g = JSON.parse(localStorage.getItem("bi_rango") || "null"); if (g) { H.desde = g[0]; H.hasta = g[1]; } } catch (e) {}
-    H.desde = H.desde || "2024-07-01"; H.hasta = H.hasta || f1;
+    H.desde = H.desde || TIF[0]; H.hasta = H.hasta || TIF[1];
     $("#h-desde").min = $("#h-hasta").min = f0; $("#h-desde").max = $("#h-hasta").max = f1;
     $("#h-desde").value = H.desde; $("#h-hasta").value = H.hasta;
     $("#h-presets").innerHTML = presets.map(([n, a, b]) => `<button class="btn" data-a="${a}" data-b="${b}">${n}</button>`).join("");
@@ -265,11 +269,12 @@
     $("#h-desde").onchange = () => { H.desde = $("#h-desde").value; hDraw(); };
     $("#h-hasta").onchange = () => { H.hasta = $("#h-hasta").value; hDraw(); };
     $("#h-ref").onchange = () => { H.ref = $("#h-ref").value; hDraw(); };
+    $("#h-vista").onchange = () => { H.vista = $("#h-vista").value; hDraw(); };
     $("#h-emp").innerHTML = D.empresas.map(e => `<button data-e="${e.id}" aria-pressed="${H.activos.has(e.id)}" ${ids.includes(e.id) ? "" : "disabled title='Sin serie'"}><i style="background:${COL[e.id]}"></i>${e.id}</button>`).join("");
     document.querySelectorAll("#h-emp button").forEach(b => b.onclick = () => { const e = b.dataset.e; H.activos.has(e) ? H.activos.delete(e) : H.activos.add(e); b.setAttribute("aria-pressed", H.activos.has(e)); hDraw(); });
     const inicio = Object.fromEntries(ids.map(e => [e, hi.series[e].fecha[0]]));
     $("#h-nota").textContent = "Cobertura: " + D.empresas.map(e => `${e.id} desde ${inicio[e.id] || "—"}`).join(" · ") +
-      ". PRIO y Suncor: estados contables de Bloomberg y operativos de sus releases (link por dato); Petrobras publicó los reportes de producción anteriores a 2T25 como PDF, que EDGAR no deja leer como texto.";
+      ". PRIO y Suncor: estados contables de Bloomberg y operativos de sus releases (link por dato). Con una sola empresa elegida se dibuja su banda de sensibilidad.";
     hDraw();
   }
   const enRango = f => f >= H.desde && f <= H.hasta;
@@ -284,9 +289,10 @@
     const W = 1000, Hh = 400, L = 46, R = 118, T = 14, B = 52;
     const t = f => Date.parse(f), t0 = t(fechas[0]), t1 = t(fechas.at(-1));
     const x = f => L + (t(f) - t0) / (t1 - t0 || 1) * (W - L - R);
-    const vis = [...fechas.map(f => ref[f]).filter(v => v != null)];
-    act.forEach(e => { const s = hi.series[e]; s.fecha.forEach((f, i) => { if (enRango(f) && s.implicito[i] != null) { vis.push(s.implicito[i]); if (act.length === 1) { vis.push(s.banda_min[i], s.banda_max[i]); } } }); });
-    const lo = Math.floor(Math.min(...vis) / 20) * 20, hiV = Math.ceil(Math.max(...vis) / 20) * 20;
+    const esPrima = H.vista === "prima", val = (v, f) => v == null ? null : esPrima ? (ref[f] == null ? null : v - ref[f]) : v;   // prima: solo ruedas con acción y referencia (6.1)
+    const vis = esPrima ? [0] : fechas.map(f => ref[f]);
+    act.forEach(e => { const s = hi.series[e]; s.fecha.forEach((f, i) => { if (enRango(f) && s.implicito[i] != null) { vis.push(val(s.implicito[i], f)); if (act.length === 1) { vis.push(val(s.banda_min[i], f), val(s.banda_max[i], f)); } } }); });
+    const visOk = vis.filter(v => v != null), lo = Math.floor(Math.min(...visOk) / 20) * 20, hiV = Math.ceil(Math.max(...visOk) / 20) * 20;
     const y = v => T + (hiV - v) / (hiV - lo || 1) * (Hh - T - B);
     let g = "";
     for (let v = lo; v <= hiV; v += 20) g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${L - 8}" y="${y(v) + 4}" text-anchor="end">${v}</text>`;
@@ -296,12 +302,14 @@
     const path = pts => { let d = "", pen = false; pts.forEach(([f, v]) => { if (v == null) { pen = false; return; } d += `${pen ? "L" : "M"}${x(f).toFixed(1)},${y(v).toFixed(1)}`; pen = true; }); return d; };
     // banda (una sola empresa)
     if (act.length === 1) {
-      const s = hi.series[act[0]], idx = s.fecha.map((f, i) => i).filter(i => enRango(s.fecha[i]) && s.banda_min[i] != null);
-      if (idx.length) g += `<path d="M${idx.map(i => `${x(s.fecha[i]).toFixed(1)},${y(s.banda_max[i]).toFixed(1)}`).join("L")}L${idx.slice().reverse().map(i => `${x(s.fecha[i]).toFixed(1)},${y(s.banda_min[i]).toFixed(1)}`).join("L")}Z" fill="${COL[act[0]]}" opacity=".15"/>`;
+      const s = hi.series[act[0]], idx = s.fecha.map((f, i) => i).filter(i => enRango(s.fecha[i]) && val(s.banda_min[i], s.fecha[i]) != null && val(s.banda_max[i], s.fecha[i]) != null);
+      if (idx.length) g += `<path d="M${idx.map(i => `${x(s.fecha[i]).toFixed(1)},${y(val(s.banda_max[i], s.fecha[i])).toFixed(1)}`).join("L")}L${idx.slice().reverse().map(i => `${x(s.fecha[i]).toFixed(1)},${y(val(s.banda_min[i], s.fecha[i])).toFixed(1)}`).join("L")}Z" fill="${COL[act[0]]}" opacity=".15"/>`;
     }
-    g += `<path d="${path(refF.filter(enRango).map(f => [f, ref[f]]))}" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="${H.ref === "brent_1l" ? "0" : "5 3"}"/>`;
-    const finales = [["Brent", "var(--ink)", (() => { const f = refF.filter(enRango).at(-1); return f ? ref[f] : null; })()]];
-    act.forEach(e => { const s = hi.series[e]; const pts = s.fecha.map((f, i) => [f, s.implicito[i]]).filter(([f]) => enRango(f));
+    const nomRef = H.ref === "brent_1l" ? "CO1" : "Spot";
+    g += esPrima ? `<line x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}" stroke="var(--ink)" stroke-width="2"/>`
+      : `<path d="${path(refF.filter(enRango).map(f => [f, ref[f]]))}" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="${H.ref === "brent_1l" ? "0" : "5 3"}"/>`;
+    const finales = esPrima ? [] : [[nomRef, "var(--ink)", (() => { const f = refF.filter(enRango).at(-1); return f ? ref[f] : null; })()]];
+    act.forEach(e => { const s = hi.series[e]; const pts = s.fecha.map((f, i) => [f, val(s.implicito[i], f)]).filter(([f]) => enRango(f));
       g += `<path d="${path(pts)}" fill="none" stroke="${COL[e]}" stroke-width="2" stroke-linejoin="round"/>`;
       const ult = pts.filter(p => p[1] != null).at(-1); if (ult) finales.push([e, COL[e], ult[1]]);
       // recalibraciones
@@ -312,7 +320,7 @@
       .reduce((prev, it) => { it.yy = Math.max(it.yy, prev + 13); g += `<text x="${W - R + 6}" y="${it.yy + 4}" style="fill:var(--ink);font-weight:600"><tspan style="fill:${it.c}">■</tspan> ${esc(it.n)} ${fmt(it.v, 0)}</text>`; return it.yy; }, -99);
     g += `<text x="${L}" y="${T - 2}">USD/bbl</text><line id="h-cross" x1="0" x2="0" y1="${T}" y2="${Hh - B}" stroke="var(--muted)" stroke-dasharray="3 3" visibility="hidden"/>`;
     g += `<rect id="h-hit" x="${L}" y="${T}" width="${W - L - R}" height="${Hh - T - B}" fill="transparent"/>`;
-    $("#h-chart").innerHTML = `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Brent implícito diario por empresa y Brent de referencia">${g}</svg><div class="tip" id="h-tip" hidden></div>`;
+    $("#h-chart").innerHTML = `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="${esPrima ? "Prima de Brent implícito diaria por empresa" : "Brent implícito diario por empresa y Brent de referencia"}">${g}</svg><div class="tip" id="h-tip" hidden></div>`;
     const svg = $("#h-chart svg"), tip = $("#h-tip"), cross = $("#h-cross");
     const idxs = Object.fromEntries(act.map(e => [e, Object.fromEntries(hi.series[e].fecha.map((f, i) => [f, i]))]));
     $("#h-hit").onmousemove = ev => {
@@ -320,7 +328,7 @@
       const tt = t0 + (px - L) / (W - L - R) * (t1 - t0); let f = fechas[0];
       for (const ff of fechas) { if (t(ff) <= tt) f = ff; else break; }
       cross.setAttribute("x1", x(f)); cross.setAttribute("x2", x(f)); cross.setAttribute("visibility", "visible");
-      const filas = [[`Brent ${H.ref === "brent_1l" ? "1ª línea" : "spot"}`, refAl(ref, refF, f), "var(--ink)"], ...act.map(e => { const i = idxs[e][f]; const s = hi.series[e]; return [e + (i != null ? ` <span class="note">(${s.periodos[s.cal_idx[i]]})</span>` : ""), i != null ? s.implicito[i] : null, COL[e]]; })];
+      const filas = [[nomRef, refAl(ref, refF, f), "var(--ink)"], ...act.map(e => { const i = idxs[e][f]; const s = hi.series[e]; return [e + (i != null ? ` <span class="note">(${s.periodos[s.cal_idx[i]]})</span>` : ""), i != null ? val(s.implicito[i], f) : null, COL[e]]; })];
       tip.innerHTML = `<b>${f}</b>` + filas.map(([n, v, c]) => `<div><span><span style="color:${c}">■</span> ${n}</span><span>${fmt(v, 1)}</span></div>`).join("");
       tip.hidden = false; const cw = $("#h-chart").clientWidth; const lx = (x(f) / W) * r.width;
       tip.style.left = Math.min(lx + 12, cw - 200) + "px"; tip.style.top = "12px";
@@ -332,14 +340,14 @@
     const hi = D.historia;
     const corr = (a, b) => { const n = a.length; if (n < 3) return null; const ma = a.reduce((s, v) => s + v, 0) / n, mb = b.reduce((s, v) => s + v, 0) / n;
       let sab = 0, sa = 0, sb = 0; for (let i = 0; i < n; i++) { sab += (a[i] - ma) * (b[i] - mb); sa += (a[i] - ma) ** 2; sb += (b[i] - mb) ** 2; } return sab / Math.sqrt(sa * sb); };
-    const filas = act.map(e => { const s = hi.series[e]; const pares = s.fecha.map((f, i) => [f, s.implicito[i], refAl(ref, refF, f)]).filter(([f, v, r]) => enRango(f) && v != null && r != null);
-      if (!pares.length) return `<tr><td><b>${e}</b></td><td colspan="6" class="note">Sin datos en el rango</td></tr>`;
-      const err = pares.map(p => p[1] - p[2]), n = pares.length, sesgo = err.reduce((a, b) => a + b, 0) / n;
-      const sd = Math.sqrt(err.reduce((a, b) => a + (b - sesgo) ** 2, 0) / Math.max(1, n - 1));
+    const filas = act.map(e => { const s = hi.series[e]; const pares = s.fecha.map((f, i) => [f, s.implicito[i], ref[f]]).filter(([f, v, r]) => enRango(f) && v != null && r != null);
+      if (!pares.length) return `<tr><td><b>${e}</b></td><td colspan="8" class="note">Sin datos en el rango</td></tr>`;
+      const pr = pares.map(p => p[1] - p[2]), n = pares.length, media = pr.reduce((a, b) => a + b, 0) / n;
+      const sd = Math.sqrt(pr.reduce((a, b) => a + (b - media) ** 2, 0) / Math.max(1, n - 1)), mag = pr.reduce((a, b) => a + Math.abs(b), 0) / n, pos = pr.filter(v => v > 0).length / n;
       const sem = pares.filter((_, i) => i % 5 === 0); const dI = [], dR = []; for (let i = 1; i < sem.length; i++) { dI.push(sem[i][1] - sem[i - 1][1]); dR.push(sem[i][2] - sem[i - 1][2]); }
       const c = corr(dI, dR), mi = pares.reduce((a, p) => a + p[1], 0) / n, mr = pares.reduce((a, p) => a + p[2], 0) / n;
-      return `<tr><td><b>${e}</b></td><td class="num">${n}</td><td class="num">${fmt(mi, 1)}</td><td class="num">${fmt(mr, 1)}</td><td class="num">${sesgo >= 0 ? "+" : ""}${fmt(sesgo, 1)}</td><td class="num">${fmt(sd, 1)}</td><td class="num">${c == null ? "—" : fmt(c, 2)}</td></tr>`; });
-    $("#h-test").innerHTML = `<thead><tr><th>Empresa</th><th>Días</th><th>Implícito medio</th><th>Referencia media</th><th>Sesgo</th><th>Desvío del error</th><th>Correl. variaciones semanales</th></tr></thead><tbody>${filas.join("")}</tbody>`;
+      return `<tr><td><b>${e}</b></td><td class="num">${n}</td><td class="num">${fmt(mi, 1)}</td><td class="num">${fmt(mr, 1)}</td><td class="num">${sg(media)}</td><td class="num">${fmt(mag, 1)}</td><td class="num">${fmt(sd, 1)}</td><td class="num">${fmt(pos * 100, 0)} %</td><td class="num">${c == null ? "—" : fmt(c, 2)}</td></tr>`; });
+    $("#h-test").innerHTML = `<thead><tr><th>Empresa</th><th>Ruedas</th><th>Implícito medio</th><th>Referencia media</th><th>Prima media (signo)</th><th>|Prima| media (magnitud)</th><th>Desvío estándar (variabilidad)</th><th>Ruedas con prima positiva</th><th>Correl. variaciones semanales</th></tr></thead><tbody>${filas.join("")}</tbody>`;
   }
   function hCal() {
     const hi = D.historia;

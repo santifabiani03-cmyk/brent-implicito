@@ -36,6 +36,28 @@ def test_faltantes():
         assert "beta" in str(e)
 
 
+def test_banda_de_8_3():
+    """Costo de capital ±1 punto porcentual exacto y costos (lifting + otros) ±10 %."""
+    i = model.Inputs.desde_dict(SINTETICO)
+    assert abs(model.wacc(model._perturbar(i, "wacc_pp", 0.01)) - model.wacc(i) - 0.01) < 1e-12
+    c = model._perturbar(i, "costos_rel", 0.10)
+    assert abs(c.lifting_usd_boe - 11) < 1e-9 and abs(c.otros_costos_usd_boe - 5.5) < 1e-9 and c.diferencial_pct == i.diferencial_pct
+    assert {k for k, _ in model.BANDA} == {"wacc_pp", "costos_rel"}
+
+
+def test_petrobras_en_reales(monkeypatch):
+    """Release en R$ (…rs_6k.htm): el EBITDA de segmentos pasa a USD. Release en USD: no se toca."""
+    from pipeline import historia, bloomberg
+    monkeypatch.setattr(bloomberg, "tc", lambda m, q, t: 5.0)
+    ed = {"docs": {"resultados": {"url": "https://x/pbrrmf1q24rs_6k.htm"}},
+          "valores": {"ebitda_rtm_q": {"valor": 9875.0}, "ebitda_glce_q": {"valor": 2405.0}, "lifting_boe": {"valor": 6.04}}}
+    v = historia.reales_a_usd(ed, "2024-03-31")["valores"]
+    assert v["ebitda_rtm_q"]["valor"] == 1975 and v["ebitda_glce_q"]["valor"] == 481 and v["lifting_boe"]["valor"] == 6.04
+    assert ed["valores"]["ebitda_rtm_q"]["valor"] == 9875     # no modifica la caché leída
+    usd = {"docs": {"resultados": {"url": "https://x/pbrrmf3q24usd_6k.htm"}}, "valores": {"ebitda_rtm_q": {"valor": 1078.0}}}
+    assert historia.reales_a_usd(usd, "2024-09-30")["valores"]["ebitda_rtm_q"]["valor"] == 1078
+
+
 def test_paridad_js():
     i = model.Inputs.desde_dict(SINTETICO)
     caps = [model.valor_patrimonio(i, b) for b in (45, 80, 130)]

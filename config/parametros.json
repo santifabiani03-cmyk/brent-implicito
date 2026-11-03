@@ -8,5 +8,5 @@
     "Norteamérica": {"valor": 0, "descripcion": "Mercado desarrollado: sin prima", "fuente": "Supuesto del diseño (ALCANCE §5c)"}
   },
   "lambda_crp": {"valor": 1, "descripcion": "Exposición unitaria como caso base (MT 7.2.2, Pereiro 2006)", "fuente": "Decisión metodológica del equipo"},
-  "brent_referencia": {"valor": "primera_linea", "opciones": ["spot", "primera_linea", "promedio_curva_12m"], "descripcion": "⚠️ Decisión abierta: contra qué Brent se contrasta el implícito"}
+  "brent_referencia": {"valor": "primera_linea", "opciones": ["spot", "primera_linea", "promedio_curva_12m"], "descripcion": "CO1, primer futuro de Brent (TIF 6.1 y 7.1); el spot y la curva quedan solo como comparación. Control con CO12 (7.1, 8.4) pendiente de los datos de Bloomberg"}
 }

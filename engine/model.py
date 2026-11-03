@@ -124,17 +124,17 @@ def brent_implicito(i: Inputs, cap_mercado_musd: float, lo: float = 10.0, hi: fl
     return {"valor": round((a + b) / 2, 2), "estado": "ok"}
 
 
-# Escenarios para la banda (provisorio: a reemplazar por el método que defina Metodología)
-BANDA = [("wacc_pp", -0.01), ("wacc_pp", 0.01), ("diferencial_pct", -0.05), ("diferencial_pct", 0.05),
-         ("lifting_rel", -0.15), ("lifting_rel", 0.15)]
+# Escenarios de la banda (TIF 8.3): costo de capital ±1 punto porcentual y costos ±10 % (supuestos preliminares)
+BANDA = [("wacc_pp", -0.01), ("wacc_pp", 0.01), ("costos_rel", -0.10), ("costos_rel", 0.10)]
 
 
 def _perturbar(i: Inputs, clave: str, delta: float) -> Inputs:
     d = asdict(i)
     if clave == "wacc_pp":
-        d["rf"] += delta          # desplaza el WACC ~1 a 1 vía costo del capital propio
-    elif clave == "lifting_rel":
+        d["rf"] += delta / (1 - d["peso_deuda"])   # el WACC se mueve exactamente delta vía costo del capital propio
+    elif clave == "costos_rel":
         d["lifting_usd_boe"] *= 1 + delta
+        d["otros_costos_usd_boe"] *= 1 + delta
     elif clave.endswith("_rel"):
         d[clave[:-4]] *= 1 + delta
     else:

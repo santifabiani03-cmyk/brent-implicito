@@ -21,6 +21,7 @@
   const COLORES = { VIST: "1F77B4", YPF: "D9730D", EOG: "2E8B57", SU: "C8A415", PRIO: "C2185B", PBR: "6A3FA0" };
   const CFG = { z: "Consistencia!$C$7", plazo: "Consistencia!$C$8", rec: "Consistencia!$C$9", pct: "Consistencia!$C$10" };
   const X0 = 24;      // primera columna (1-based) de la matriz prima/media/desvío por balance en las hojas Rango
+  const BANDAS = [1.5, 1.75, 2, 2.25, 2.5];   // bandas con referencia simulada al exportar: las que ofrece la celda de desvíos
 
   let cargando = null;
   function libreria() {
@@ -152,34 +153,40 @@
   }
 
   /* Referencia simulada: una fila por corrida, con la proporción de regresos de cada grupo (fuente de los percentiles de Consistencia). */
-  function hojaSimulacion(wb, emps, grupos, corridas, base, obsTotal, N, seed) {
+  function hojaSimulacion(wb, emps, grupos, bandas, base, N, seed) {
     const ws = wb.addWorksheet("Simulación", { views: [{ state: "frozen", ySplit: 24 }] }), S = window.BIStats;
     ws.getCell("A1").value = "Referencia simulada sin reversión (6.1 y 7.7)"; ws.getCell("A1").font = { bold: true, size: 13 };
     ["Cada corrida aplica la misma regla a una prima simulada: CO1 OBSERVADO menos un Brent implícito sin reversión, de modo que los regresos debidos al propio CO1 quedan en la referencia.",
      "Cambio diario del implícito = β·ΔCO1 + u. β y u salen de los cambios diarios observados con un mismo balance; u se remuestrea por fecha y en conjunto entre empresas, lo que conserva volatilidad y correlación y elimina la autocorrelación.",
      "Desfase horario remanente: sin historia intradiaria del CO1 (8.4), el ruido de cierre se mide con la autocovarianza de primer orden de u, σε² = máx(0, −cov(u_t, u_t−1)), y se suma como error i.i.d. sobre el nivel; la varianza del paseo aleatorio se reduce en 2σε².",
-     `${N} corridas; semilla ${seed}; ${base.nPool} fechas en el remuestreo conjunto. Estos valores se calculan al exportar: no cambian si se editan los parámetros de Consistencia.`]
+     `${N} corridas por banda; semilla ${seed}; ${base.nPool} fechas en el remuestreo conjunto. Estos valores se calculan al exportar: la celda de desvíos de Consistencia elige qué bloque se usa; plazo y recorrido no los cambian.`]
       .forEach((t, i) => { ws.getCell(`A${3 + i}`).value = t; Object.assign(ws.getCell(`A${3 + i}`), GRIS); });
     ws.getRow(8).values = ["Calibración", "β (ΔCO1)", "Vol. diaria u (USD/bbl)", "Autocorr. u (1)", "σε ruido (USD/bbl)"]; [1, 2, 3, 4, 5].forEach(c => Object.assign(ws.getCell(8, c), HEAD));
     ws.getRow(8).alignment = { wrapText: true, vertical: "middle" };
     emps.forEach((e, i) => { const f = ws.getRow(9 + i); f.getCell(1).value = e.id; [e.sim.beta, e.sim.volU, e.sim.ac1, e.sim.sigEps].forEach((v, k) => { f.getCell(2 + k).value = v; f.getCell(2 + k).numFmt = "0.000"; }); });
-    const f0 = 25, fN = f0 + N - 1;
-    ws.getRow(24).values = ["Corrida", ...grupos.map(g => g.nombre)]; ws.getRow(24).eachCell(c => Object.assign(c, HEAD));
-    const props = grupos.map(g => corridas.map(c => S.propSim(c, emps, g.ids)));
-    corridas.forEach((c, i) => { const f = ws.getRow(f0 + i); f.getCell(1).value = i + 1; grupos.forEach((g, j) => { const v = props[j][i]; if (v != null) { f.getCell(2 + j).value = v; f.getCell(2 + j).numFmt = "0.0%"; } }); });
-    ws.getColumn(1).width = 14; grupos.forEach((g, j) => ws.getColumn(2 + j).width = 12);
-    // histograma de la proporción total (alimenta el gráfico del Dashboard)
-    const cH = 3 + grupos.length + 1, cT = col(grupos.length), L = i => col(cH - 1 + i), rH = 8;
+    // Un bloque de columnas por banda, en la misma matriz: la celda de desvíos elige el bloque con INDEX
+    const f0 = 25, fN = f0 + N - 1, nG = grupos.length, zTxt = z => String(z).replace(".", ",");
+    ws.getRow(24).values = ["Corrida", ...bandas.flatMap(b => grupos.map(g => `${g.nombre} ±${zTxt(b.z)}`))]; ws.getRow(24).eachCell(c => Object.assign(c, HEAD));
+    const todas = bandas.map(b => grupos.map(g => b.corridas.map(c => S.propSim(c, emps, g.ids)))), iP = bandas.findIndex(b => b.z === S.PRINCIPAL.z), props = todas[iP];
+    for (let i = 0; i < N; i++) { const f = ws.getRow(f0 + i); f.getCell(1).value = i + 1; todas.forEach((pb, k) => grupos.forEach((g, j) => { const v = pb[j][i]; if (v != null) { const x = f.getCell(2 + k * nG + j); x.value = v; x.numFmt = "0.0%"; } })); }
+    ws.getColumn(1).width = 14; for (let c = 2; c <= 1 + nG * bandas.length; c++) ws.getColumn(c).width = 12;
+    const rZ = 9 + emps.length + 1, rE = rZ + 1 + bandas.length, listaZ = `$A$${rZ + 1}:$A$${rE - 1}`, matriz = `$B$${f0}:$${col(nG * bandas.length)}$${fN}`;
+    ws.getCell(rZ, 1).value = "Bandas simuladas"; Object.assign(ws.getCell(rZ, 1), HEAD);
+    bandas.forEach((b, k) => { ws.getCell(rZ + 1 + k, 1).value = b.z; });
+    ws.getCell(rE, 1).value = "Bloque elegido"; ws.getCell(rE, 2).value = fx(`IFERROR(MATCH(Consistencia!$C$7,${listaZ},0),0)`, iP + 1);
+    const columna = (g, h = "") => `INDEX(${h}${matriz},0,(${h}$B$${rE}-1)*${nG}+${g + 1})`;
+    // histograma de la proporción total (alimenta el gráfico del Dashboard); los intervalos cubren todas las bandas
+    const cH = 3 + nG + 1, L = i => col(cH - 1 + i), rH = 8;
     ["Desde", "Hasta", "Intervalo", "Simulaciones", "Observada"].forEach((t, c) => { const x = ws.getCell(rH, cH + c); x.value = t; Object.assign(x, HEAD); });
-    const tot = props[grupos.length - 1].filter(v => v != null), mn = Math.floor(Math.min(...tot, obsTotal) * 25) / 25, nb = Math.min(15, Math.ceil((Math.max(...tot, obsTotal) - mn) / .04) + 1);
+    const tot = props[nG - 1].filter(v => v != null), ext = [...todas.flatMap(pb => pb[nG - 1].filter(v => v != null)), ...bandas.map(b => b.obs).filter(Number.isFinite)], mn = Math.floor(Math.min(...ext) * 25) / 25, nb = Math.min(15, Math.ceil((Math.max(...ext) - mn) / .04) + 1);
     const borde = i => Math.round((mn + i * .04) * 100) / 100, cuentas = Array.from({ length: nb }, (_, i) => tot.filter(v => v >= borde(i) && v < borde(i + 1)).length), mx = Math.max(...cuentas);
     for (let i = 0; i < nb; i++) {
-      const r = rH + 1 + i, a = borde(i), b = borde(i + 1), rng = `$${cT}$${f0}:$${cT}$${fN}`;
+      const r = rH + 1 + i, a = borde(i), b = borde(i + 1), rng = columna(nG - 1);
       ws.getCell(r, cH).value = a; ws.getCell(r, cH + 1).value = b; ws.getCell(r, cH).numFmt = ws.getCell(r, cH + 1).numFmt = "0%";
       ws.getCell(r, cH + 2).value = fx(`TEXT(${L(0)}${r},"0%")&"–"&TEXT(${L(1)}${r},"0%")`, `${Math.round(a * 100)}%–${Math.round(b * 100)}%`);
-      ws.getCell(r, cH + 3).value = fx(`COUNTIFS(${rng},">="&${L(0)}${r},${rng},"<"&${L(1)}${r})`, cuentas[i]);
+      ws.getCell(r, cH + 3).value = fx(`IF($B$${rE}=0,0,COUNTIFS(${rng},">="&${L(0)}${r},${rng},"<"&${L(1)}${r}))`, cuentas[i]);
     }
-    return { f0, fN, colDe: g => col(1 + g), props, hist: { col: L, r0: rH + 1, r1: rH + nb, cH, cuentas, mx, mn } };
+    return { columna: g => columna(g, "'Simulación'!"), listaZ: `'Simulación'!${listaZ}`, elegido: `'Simulación'!$B$${rE}`, props, hist: { col: L, r0: rH + 1, r1: rH + nb, cH, cuentas, mx, mn } };
   }
 
   async function exportar(D, opts) {
@@ -206,7 +213,12 @@
     emps.forEach(e => { e.ev = S.evaluar(e, CF); });
     const grupos = S.grupos(emps, D), base = S.calibrar(emps), todos = emps.map(e => e.id);
     avance("Simulando la referencia sin reversión…");
-    const corridas = await S.simular(emps, base, CF, NSIM, SEMILLA);
+    const corridas = await S.simular(emps, base, CF, NSIM, SEMILLA), bandas = [];
+    for (const [k, z] of BANDAS.entries()) {
+      avance(`Simulando la banda de ±${String(z).replace(".", ",")} desvíos…`);
+      const cfg = { ...CF, z }, cas = emps.flatMap(e => S.evaluar(e, cfg).casos).filter(c => c.reg !== null);
+      bandas.push({ z, obs: cas.filter(c => c.reg === 1).length / cas.length, corridas: z === CF.z ? corridas : await S.simular(emps, base, cfg, NSIM, SEMILLA + 100 + k) });
+    }
     const sens = (await S.sensibilidades(emps, base, (i, n) => avance(`Sensibilidades (${i}/${n})…`))).map(x => ({ ...x, ref: S.media(x.sim), umbral: S.percentil(x.sim, Q) }));
     avance("Armando las hojas…");
 
@@ -323,8 +335,7 @@
     const RG = {};
     emps.forEach(e => { RG[e.id] = hojaRango(wb, e, e.ev, CF); });
     const obsCas = emps.flatMap(e => e.ev.casos);
-    const obsTotal = obsCas.filter(c => c.reg === 1).length / obsCas.filter(c => c.reg !== null).length;
-    const SIM = hojaSimulacion(wb, emps, grupos, corridas, base, obsTotal, NSIM, SEMILLA), props = SIM.props;
+    const SIM = hojaSimulacion(wb, emps, grupos, bandas, base, NSIM, SEMILLA), props = SIM.props;
 
     // --- Consistencia
     const cs = wb.getWorksheet("Consistencia");
@@ -334,11 +345,16 @@
     cs.getCell("A3").value = "Hipótesis (6): la proporción de desvíos amplios que regresa a su rango habitual en el corto plazo supera el umbral de una referencia simulada sin reversión. Es una comparación descriptiva con una referencia, no una prueba de significación (7.7).";
     cs.mergeCells("A3:O3"); cs.getCell("A3").alignment = { wrapText: true, vertical: "top" }; cs.getRow(3).height = 32;
     const titPanel = (r, t) => { const c = cs.getCell(`A${r}`); c.value = t; cs.mergeCells(`A${r}:O${r}`); Object.assign(c, SUB); };
-    titPanel(5, "Especificación (6.1). Cambiar estos valores recalcula los casos y los regresos observados; la referencia simulada queda en la especificación principal");
-    [["Ventana del rango habitual (ruedas previas)", S.VENTANA, "Fija: 20 ruedas ≈ un mes bursátil"], ["Banda: desvíos estándar", CF.z, "Principal: 2. Sensibilidad: 1,5 y 2,5"], ["Plazo de regreso (ruedas, máx. 15)", CF.plazo, "Principal: 10. Sensibilidad: 5 y 15"],
+    titPanel(5, "Especificación (6.1). Banda y percentil recalculan el panel A completo, umbral incluido. Plazo y recorrido no tienen referencia simulada: el panel A deja de dar veredicto y hay que leer el panel E");
+    [["Ventana del rango habitual (ruedas previas)", S.VENTANA, "Fija: 20 ruedas ≈ un mes bursátil"], ["Banda: desvíos estándar", CF.z, "Principal: 2. Elegir de la lista: cada valor tiene su referencia simulada"], ["Plazo de regreso (ruedas, máx. 15)", CF.plazo, "Principal: 10. Sensibilidad: 5 y 15"],
      ["Recorrido mínimo hacia la media (× d0)", CF.rec, "Principal: ½. Sensibilidad: ⅓ y ⅔"], ["Percentil de la referencia usado como umbral", percentil, "Elegido en la página; la tesis no fija el percentil"]]
       .forEach(([l, v, n], i) => { const r = 6 + i; cs.getCell(`A${r}`).value = l; const c = cs.getCell(`C${r}`); c.value = v; c.font = { bold: true, color: { argb: "FF0000C0" } }; if (i) c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFF8DC" } }; cs.getCell(`D${r}`).value = n; Object.assign(cs.getCell(`D${r}`), GRIS); });
     cs.getCell("C8").dataValidation = { type: "whole", operator: "between", formulae: [1, 15], showErrorMessage: true, error: "Entre 1 y 15 ruedas" };
+    cs.getCell("C7").dataValidation = { type: "list", allowBlank: false, formulae: [SIM.listaZ], showErrorMessage: true, error: "Elegí una banda de la lista: son las que tienen referencia simulada" };
+    // La referencia se simula al exportar: sin corridas para esa especificación, comparar con otra daría un veredicto falso
+    const AVISO = "$A$11", nc = fm => `IF(${AVISO}<>"","n/c",${fm})`;
+    cs.mergeCells("A11:O11"); cs.getCell("A11").font = { bold: true, color: { argb: "FFC00000" } };
+    cs.getCell("A11").value = fx(`IF(AND(${SIM.elegido}>0,$C$8=${CF.plazo},ABS($C$9-${CF.rec})<0.000001),"","Atención: la referencia simulada existe para las bandas de la lista, con ${CF.plazo} ruedas y ½ d0. Con otra especificación el panel A no da veredicto (n/c): usar el panel E, que la recalcula.")`, "");
 
     // Panel A: objetivo c) y prueba de la hipótesis
     const rA = 12; titPanel(rA, "A. Regreso de los desvíos amplios frente a la referencia simulada (objetivo c y hipótesis)");
@@ -348,7 +364,7 @@
     const obsDe = ids => S.observado(emps, ids);
     const R = (id, c_) => `'Rango ${id}'!$${c_}$${RG[id].f0}:$${c_}$${RG[id].f0 + RG[id].n - 1}`;
     grupos.forEach((g, i) => {
-      const r = filaG[g.nombre], f = cs.getRow(r), o = obsDe(g.ids), simC = `'Simulación'!$${SIM.colDe(i)}$${SIM.f0}:$${SIM.colDe(i)}$${SIM.fN}`, a = props[i].filter(v => v != null);
+      const r = filaG[g.nombre], f = cs.getRow(r), o = obsDe(g.ids), simC = SIM.columna(i), a = props[i].filter(v => v != null);
       const um = S.percentil(a, Q), suma = c => g.ids.map(id => `${c}${filaG[id]}`).join("+");
       f.getCell(1).value = g.nombre;
       if (!g.tipo) {
@@ -364,17 +380,17 @@
         f.getCell("O").value = fx(`IFERROR((${g.ids.map(id => `COUNTIFS(${R(id, "Q")},1,${R(id, "S")},0)`).join("+")})/(${g.ids.map(id => `COUNTIFS(${R(id, "Q")},1,${R(id, "S")},0)+COUNTIFS(${R(id, "Q")},0,${R(id, "S")},0)`).join("+")}),"")`, o.propSc ?? "");
       }
       f.getCell(6).value = fx(`IF(C${r}+D${r}>0,C${r}/(C${r}+D${r}),"")`, o.prop ?? "");
-      f.getCell(7).value = fx(`AVERAGE(${simC})`, S.media(a)); f.getCell(8).value = fx(`PERCENTILE(${simC},$C$10/100)`, um);
-      f.getCell(9).value = fx(`IF(F${r}="","",F${r}-H${r})`, o.prop == null ? "" : o.prop - um);
-      f.getCell(10).value = fx(`IF(F${r}="","",IF(F${r}>H${r},"Sí","No"))`, o.prop == null ? "" : (o.prop > um ? "Sí" : "No")); f.getCell(10).alignment = { horizontal: "center" };
-      f.getCell(11).value = fx(`IF(F${r}="","",COUNTIF(${simC},"<="&F${r})/COUNT(${simC}))`, o.prop == null ? "" : a.filter(v => v <= o.prop).length / a.length);
+      f.getCell(7).value = fx(nc(`AVERAGE(${simC})`), S.media(a)); f.getCell(8).value = fx(nc(`PERCENTILE(${simC},$C$10/100)`), um);
+      f.getCell(9).value = fx(nc(`IF(F${r}="","",F${r}-H${r})`), o.prop == null ? "" : o.prop - um);
+      f.getCell(10).value = fx(nc(`IF(F${r}="","",IF(F${r}>H${r},"Sí","No"))`), o.prop == null ? "" : (o.prop > um ? "Sí" : "No")); f.getCell(10).alignment = { horizontal: "center" };
+      f.getCell(11).value = fx(nc(`IF(F${r}="","",COUNTIF(${simC},"<="&F${r})/COUNT(${simC}))`), o.prop == null ? "" : a.filter(v => v <= o.prop).length / a.length);
       [6, 7, 8, 11, 15].forEach(c => f.getCell(c).numFmt = "0.0%"); f.getCell(9).numFmt = "+0.0%;-0.0%"; f.getCell(12).numFmt = "0.0"; f.getCell(13).numFmt = "0.00";
       if (g.tipo === "total") f.eachCell(c => { c.font = { bold: true }; c.fill = SUB.fill; });
     });
     const rTot = filaG["Total"], oT = obsDe(todos), aT = props[grupos.length - 1].filter(v => v != null), umT = S.percentil(aT, Q);
     let r = rTot + 1;
     const dec = v => String(Math.round(v * 1000) / 10).replace(".", ","), lectura = (p, u) => `Lectura: la proporción de regreso (${dec(p)}%) ${p > u ? "supera" : "no supera"} el umbral (${dec(u)}%): la hipótesis ${p > u ? "se sostiene" : "no se sostiene"} con esta especificación.`;
-    cs.getCell(`A${r}`).value = fx(`"Lectura: la proporción de regreso ("&ROUND(F${rTot}*100,1)&"%) "&IF(F${rTot}>H${rTot},"supera","no supera")&" el umbral ("&ROUND(H${rTot}*100,1)&"%): la hipótesis "&IF(F${rTot}>H${rTot},"se sostiene","no se sostiene")&" con esta especificación."`, lectura(oT.prop, umT));
+    cs.getCell(`A${r}`).value = fx(`IF(${AVISO}<>"","Lectura: proporción de regreso de "&ROUND(F${rTot}*100,1)&"% con esta especificación; sin veredicto, ver panel E.","Lectura: la proporción de regreso ("&ROUND(F${rTot}*100,1)&"%) "&IF(F${rTot}>H${rTot},"supera","no supera")&" el umbral ("&ROUND(H${rTot}*100,1)&"%): la hipótesis "&IF(F${rTot}>H${rTot},"se sostiene","no se sostiene")&" con esta especificación.")`, lectura(oT.prop, umT));
     cs.getCell(`A${r}`).font = { bold: true }; r += 1;
     cs.getCell(`A${r}`).value = "Por empresa hay pocos casos y el umbral es más alto: el contraste de la hipótesis es el total. Censurado: sin regreso y con menos ruedas posteriores que el plazo; no entra en el denominador."; Object.assign(cs.getCell(`A${r}`), GRIS); r += 2;
 
@@ -442,7 +458,7 @@
     // --- observada en el histograma
     const sh = wb.getWorksheet("Simulación"), H_ = SIM.hist;
     for (let q = H_.r0; q <= H_.r1; q++) { const a = sh.getCell(q, H_.cH).value, b = sh.getCell(q, H_.cH + 1).value;
-      sh.getCell(q, H_.cH + 4).value = fx(`IF(AND(Consistencia!$F$${rTot}>=${H_.col(0)}${q},Consistencia!$F$${rTot}<${H_.col(1)}${q}),MAX(${H_.col(3)}$${H_.r0}:${H_.col(3)}$${H_.r1}),0)`, oT.prop >= a && oT.prop < b ? H_.mx : 0); }
+      sh.getCell(q, H_.cH + 4).value = fx(`IF(AND(Consistencia!${AVISO}="",Consistencia!$F$${rTot}>=${H_.col(0)}${q},Consistencia!$F$${rTot}<${H_.col(1)}${q}),MAX(${H_.col(3)}$${H_.r0}:${H_.col(3)}$${H_.r1}),0)`, oT.prop >= a && oT.prop < b ? H_.mx : 0); }
 
     // --- Dashboard
     const ds = wb.getWorksheet("Dashboard");
@@ -450,7 +466,7 @@
     ds.getCell("A1").value = "Brent implícito y prima: dashboard"; ds.getCell("A1").font = { bold: true, size: 16 };
     ds.getCell("A2").value = `Rango ${desde} a ${hasta} · ${emps.map(e => e.id).join(", ")} · Los gráficos e indicadores leen las celdas de las demás hojas`; Object.assign(ds.getCell("A2"), GRIS);
     const KPI = [["Desvíos amplios (casos)", `Consistencia!B${rTot}`, oT.n, "0"], ["Regresan en el plazo", `Consistencia!C${rTot}`, oT.reg, "0"], ["Proporción de regreso", `Consistencia!F${rTot}`, oT.prop, "0.0%"],
-      ["Referencia simulada (media)", `Consistencia!G${rTot}`, S.media(aT), "0.0%"], ["Umbral (percentil de la referencia)", `Consistencia!H${rTot}`, umT, "0.0%"], ["¿Supera el umbral?", `IF(Consistencia!F${rTot}>Consistencia!H${rTot},"Sí","No")`, oT.prop > umT ? "Sí" : "No", "General"]];
+      ["Referencia simulada (media)", `Consistencia!G${rTot}`, S.media(aT), "0.0%"], ["Umbral (percentil de la referencia)", `Consistencia!H${rTot}`, umT, "0.0%"], ["¿Supera el umbral?", `Consistencia!J${rTot}`, oT.prop > umT ? "Sí" : "No", "General"]];
     KPI.forEach(([lab, fm, js, nf], i) => { const a = col(4 * i), b = col(4 * i + 3);
       ds.mergeCells(`${a}4:${b}4`); ds.mergeCells(`${a}5:${b}6`);
       const t = ds.getCell(`${a}4`), v = ds.getCell(`${a}5`); t.value = lab; t.font = { size: 9, color: { argb: "FF555555" } }; t.alignment = { horizontal: "center", wrapText: true };

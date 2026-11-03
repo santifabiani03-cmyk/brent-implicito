@@ -111,8 +111,9 @@ def main():
             auto("reservas_1p_mmboe", ar["reservas"][c["id"]]["reservas_1p_mmboe"], ar["reservas"][c["id"]]["fuente"],
                  nota="Reservas comprobadas OPERADAS (SE), no por participación: ajustar")
         # reservas por participación (Bloomberg/releases) pisan a las operadas de la SE; una semilla citada manda
-        if bb_ok and "reservas_1p_mmboe" not in sem:
-            r_ = bloomberg.ultima_reserva(c["id"], q_bb)
+        # (no depende de bb_ok: si EDGAR ya publicó un trimestre más nuevo, la última reserva anual sigue vigente)
+        if q_bb and "reservas_1p_mmboe" not in sem:
+            r_ = bloomberg.ultima_reserva(c["id"], max(q_bb, per_ed or q_bb))
             if r_:
                 auto("reservas_1p_mmboe", r_["valor"], r_["fuente"], r_["fecha"], origen="semilla" if str(r_["fuente"]).startswith("http") else "bloomberg",
                      nota="Reservas probadas 1P por participación al cierre del último ejercicio")

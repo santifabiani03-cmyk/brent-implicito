@@ -43,9 +43,10 @@
     return { valor: Math.round((a + b) / 2 * 100) / 100, estado: "ok" };
   }
 
-  const BANDA = [["wacc_pp",-0.01],["wacc_pp",0.01],["diferencial_pct",-0.05],["diferencial_pct",0.05],["lifting_rel",-0.15],["lifting_rel",0.15]];
+  const BANDA = [["wacc_pp",-0.01],["wacc_pp",0.01],["costos_rel",-0.10],["costos_rel",0.10]];
   function perturbar(i, k, d) { const x = { ...i };
-    if (k === "wacc_pp") x.rf += d; else if (k === "lifting_rel") x.lifting_usd_boe *= 1 + d;
+    if (k === "wacc_pp") x.rf += d / (1 - x.peso_deuda);
+    else if (k === "costos_rel") { x.lifting_usd_boe *= 1 + d; x.otros_costos_usd_boe *= 1 + d; }
     else if (k.endsWith("_rel")) x[k.slice(0, -4)] *= 1 + d; else x[k] += d; return x; }
   function banda(i, cap) { const v = BANDA.map(([k, d]) => brentImplicito(perturbar(i, k, d), cap).valor).filter(x => x !== null);
     return v.length ? { min: Math.min(...v), max: Math.max(...v) } : { min: null, max: null }; }

@@ -158,7 +158,7 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
             put("valor_no_upstream_musd", eb * 4 * mult, "derivado", url("ebitda_no_up_q") or url("ebitda_rtm_q"),
                 f"EBITDA ajustado de segmentos no-upstream del trimestre ({eb:,.0f}) × 4 × EV/EBITDA Oil/Gas Integrated de Damodaran ({mult:.2f}). Aproximación gruesa: banda ancha")
     else:
-        put("valor_no_upstream_musd", 0.0, "supuesto", None, "Pure-play: sin segmentos no-upstream")
+        put("valor_no_upstream_musd", 0.0, "supuesto", None, "Perfil puro: sin segmentos no-upstream")
 
     # ---------- impuestos y costo de capital
     d = macro.get("damodaran") or {}

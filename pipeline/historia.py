@@ -7,7 +7,7 @@ es la capitalización bursátil. Para cada día d:
     Brent implícito(d)  = despeje del motor con esa calibración y esa capitalización
 
 Uso:
-    python -m pipeline.historia                    # desde 1T2024 (cubre la ventana 3T2024–1T2026)
+    python -m pipeline.historia                    # desde 1T2024 (cubre la ventana 3T2024–2T2026)
     python -m pipeline.historia --desde 2021-12-31 # agrega la muestra de control 2022–2023
 Los documentos de EDGAR ya leídos quedan en data/historia/ y no se vuelven a bajar."""
 import csv, io, json, sys, math, datetime as dt
@@ -114,6 +114,22 @@ def fin_trimestre(F: dict, q: str, moneda_div: float) -> dict:
             "fuente": f"Yahoo Finance vía yfinance ({'TTM al ' + q if usa_q else 'anual ≤ ' + q})"}
 
 
+def reales_a_usd(ed: dict, q: str) -> dict:
+    """Petrobras publicó los resultados de 1T24 y 2T24 en R$ (archivo …rs_6k.htm; desde 3T24, …usd_6k.htm). El EBITDA de
+    segmentos se pasa a USD con el promedio del trimestre; sin tipo de cambio se descarta y lo completa Bloomberg."""
+    url = (ed.get("docs") or {}).get("resultados", {}).get("url", "")
+    if "rs_6k" not in url:
+        return ed
+    t, val = bloomberg.tc("BRL", q, "flujo"), dict(ed.get("valores") or {})
+    for k in ("ebitda_rtm_q", "ebitda_glce_q"):
+        if k in val:
+            if t:
+                val[k] = {**val[k], "valor": val[k]["valor"] / t}
+            else:
+                val.pop(k)
+    return {**ed, "valores": val}
+
+
 # ------------------------------------------------------------------ calibraciones
 def trimestres_idx(q: str) -> int:
     return int(q[:4]) * 4 + FINES.index(q[5:]) 
@@ -205,7 +221,7 @@ def main(desde: str = "2023-12-31"):
                     ed = extraer_periodo(c["id"], c["sec_cik"], q)
                     if ed["docs"]:
                         f_ed.write_text(json.dumps(ed))
-            ed = bloomberg.fusionar(ed, bloomberg.periodo(c["id"], q, bbd))   # Bloomberg pisa a EDGAR
+            ed = bloomberg.fusionar(reales_a_usd(ed, q), bloomberg.periodo(c["id"], q, bbd))   # Bloomberg pisa a EDGAR
             fechas = [d["fecha"] for d in (ed.get("docs") or {}).values() if d.get("fecha")]
             sem_q = {r["variable"]: {"valor": float(r["valor"]), "origen": "semilla", "fuente": r["fuente_url"],
                                      "nota": r["pagina_o_tabla"], "trimestre": r["trimestre"], "fecha_publicacion": r["fecha_publicacion"]}
