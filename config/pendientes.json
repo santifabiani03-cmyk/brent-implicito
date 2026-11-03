@@ -1,10 +1,14 @@
 {
   "_nota": "Se edita a mano. Se muestra en la página (botón 'Estado y pendientes'). estado: pendiente | en curso | resuelto. prioridad: alta | media | baja.",
-  "actualizado": "2026-10-15",
+  "actualizado": "2026-11-03",
   "importante": [
     {
       "titulo": "Datos Bloomberg (14/10/2026)",
       "texto": "Los estados contables de las 6 salen de la terminal Bloomberg (inputs/bloomberg/<ID>.csv) y pisan a EDGAR/yfinance trimestre a trimestre; EDGAR completa los operativos de VIST, YPF, EOG y PBR. Suncor reemplaza a ConocoPhillips (panel del TIF). Suncor y PRIO no traen operativos en Bloomberg: se cargaron de sus releases (SEC 6-K / RI de PRIO) con link por dato en <ID>_operativos.csv."
+    },
+    {
+      "titulo": "Excel: dashboard y prueba de la hipótesis (03/11/2026)",
+      "texto": "La descarga suma una pestaña Dashboard (13 gráficos nativos conectados a celdas) y una pestaña Consistencia con la regla de 6.1 en fórmulas, la referencia simulada sin reversión, descripción de la prima, comparación entre pares, dinámica y sensibilidades."
     },
     {
       "titulo": "Descarga a Excel (15/10/2026)",
@@ -40,6 +44,30 @@
     }
   ],
   "pendientes": [
+    {
+      "tarea": "Definir el percentil del umbral de la referencia simulada: la tesis no lo fija y el Excel usa 95 (editable en la hoja Consistencia). Con P95 y la ventana 3T2024–2T2026 el total supera el umbral (61,3 % vs 58,5 %), pero no con ±2,5 desvíos ni con plazo de 5 ruedas",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Metodología"
+    },
+    {
+      "tarea": "La prima es muy persistente en nivel con un mismo balance (ρ ≈ 0,99, vida media de 50 a 240 ruedas) aunque los desvíos amplios regresen: discutirlo al interpretar la hipótesis, que trabaja sobre la banda móvil",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Metodología"
+    },
+    {
+      "tarea": "PBR: el implícito da negativo o casi cero hasta nov-2024 (prima de −100 a −70) por el valor de refinación con múltiplo: revisar esos balances antes de leer la prima de Petrobras",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Modelo"
+    },
+    {
+      "tarea": "Referencia simulada con CO1 de cierre (Yahoo BZ=F): el desfase horario se aproxima con ruido de cierre. Reemplazar por CO1 a la hora de cierre de cada acción y agregar el control con CO12 cuando estén los datos de Bloomberg",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Datos"
+    },
     {
       "tarea": "Bloomberg: re-exportar el CDS de Argentina (CT350188 CBIN salta entre dos niveles día por día y tiene un hueco jun–nov 2025) y el histórico del CO1 (el archivo vino vacío). Hasta entonces el riesgo país sigue en Damodaran y el Brent de 1ª línea en Yahoo BZ=F",
       "prioridad": "alta",

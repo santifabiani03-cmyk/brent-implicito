@@ -366,8 +366,8 @@
       if (!desde || !hasta || desde > hasta) { est.textContent = "Revisá el rango: 'Desde' tiene que ser anterior a 'Hasta'."; return; }
       if (!empresas.length) { est.textContent = "Elegí al menos una empresa."; return; }
       $("#x-bajar").disabled = true; est.textContent = "Armando el Excel…";
-      window.BIExcel.exportar(D, { desde, hasta, empresas, CAMPOS })
-        .then(r => { est.textContent = `Listo: ${r.filas} días × ${r.empresas} empresas. Control Excel vs web: máx. ${fmt(r.maxDif, 3)} USD/bbl.`; })
+      window.BIExcel.exportar(D, { desde, hasta, empresas, CAMPOS, avance: t => { est.textContent = t; } })
+        .then(r => { est.textContent = `Listo: ${r.filas} días × ${r.empresas} empresas. ${r.regresos} de ${r.casos} desvíos regresan (${fmt(r.prop * 100, 1)} %; umbral ${fmt(r.umbral * 100, 1)} %). Control Excel vs web: máx. ${fmt(r.maxDif, 3)} USD/bbl.`; })
         .catch(err => { est.textContent = "No se pudo armar el Excel: " + err.message; })
         .finally(() => { $("#x-bajar").disabled = false; });
     };
