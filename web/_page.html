@@ -37,8 +37,8 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 nav.tabs{display:flex;gap:4px;margin-top:12px;overflow-x:auto}
 nav.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:8px 12px;cursor:pointer;color:var(--muted);font-weight:600;white-space:nowrap}
 nav.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--accent)}
-main{padding-top:24px;display:grid;gap:28px}
-section[role=tabpanel]{display:grid;gap:24px}
+main{padding-top:24px;display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}
+section[role=tabpanel]{display:grid;gap:24px;grid-template-columns:minmax(0,1fr)}
 /* tape */
 .tape{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
 .tape>div{background:var(--surface);padding:14px 16px;display:grid;gap:4px}
@@ -107,6 +107,17 @@ td input.edited{border-color:var(--crude);background:var(--crude-soft)}
 .btn.primary{background:var(--ink);color:var(--surface);border-color:var(--ink)}
 .btn.primary:disabled{opacity:.5;cursor:wait}
 .xrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin:12px 0}
+.kpis>div{background:var(--surface);padding:10px 12px;display:grid;gap:2px}
+.kpis span{font-size:12px;color:var(--muted)}
+.kpis b{font-size:22px;font-variant-numeric:tabular-nums}
+.xlect{font-weight:600;margin:8px 0 12px}
+.xsub{margin:20px 0 4px}
+.xdet{margin:16px 0}.xdet summary{cursor:pointer;font-weight:600}.xdet ul{margin:8px 0 0;padding-left:20px;display:grid;gap:6px}
+#x-pct{width:80px}
+#x-panel td.num{white-space:nowrap}
+tr.xtotal td{font-weight:700;border-top:2px solid var(--line)}
+.si{color:var(--ok,#1a7f4b);font-weight:700}.no{color:var(--bad);font-weight:700}
 .btn.danger{border-color:var(--bad);color:var(--bad)}
 .range{display:grid;gap:6px}
 .range input{width:100%;accent-color:var(--crude)}
@@ -209,14 +220,37 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
       <p class="note" id="h-nota"></p>
     </div>
     <div class="panel" id="x-panel">
-      <h2>Descargar en Excel</h2>
-      <p class="sub">Arma un .xlsx con un dashboard de gráficos conectados a las celdas, la prueba estadística de la hipótesis (casos, regresos y referencia simulada), una hoja por empresa con el despeje en fórmulas y el Brent implícito diario con el CO1. Elegí el rango y las empresas.</p>
+      <h2>Prueba de la hipótesis: ¿los desvíos amplios de la prima son transitorios?</h2>
+      <p class="sub">La proporción de desvíos amplios que regresa a su rango habitual en el corto plazo debería superar el umbral de una referencia simulada sin reversión. Es una comparación descriptiva con una referencia, no una prueba de significación. Elegí rango, empresas y percentil del umbral: el Excel baja con la misma selección.</p>
       <div class="ctrl">
         <label class="lbl" for="x-desde">Desde <input type="date" id="x-desde"></label>
         <label class="lbl" for="x-hasta">Hasta <input type="date" id="x-hasta"></label>
-        <div class="btns"><button class="btn" id="x-usar" type="button">Usar el rango del gráfico</button></div>
+        <div class="btns"><button class="btn" id="x-tif" type="button">Ventana de la tesis</button><button class="btn" id="x-usar" type="button">Usar el rango del gráfico</button></div>
+        <label class="lbl" for="x-pct">Percentil del umbral <input type="number" id="x-pct" min="50" max="99.9" step="0.5" value="95"></label>
       </div>
       <div class="chips-sel" id="x-emp" aria-label="Empresas a incluir"></div>
+      <div class="kpis" id="x-kpis" aria-live="polite"></div>
+      <p class="xlect" id="x-lect"></p>
+      <div class="tbl"><table id="x-tabla"></table></div>
+      <h3 class="xsub">Sensibilidades</h3>
+      <p class="sub">Cada fila recalcula los casos y la referencia con un parámetro distinto.</p>
+      <div class="tbl"><table id="x-sens"></table></div>
+      <h3 class="xsub">Dinámica de la prima con un mismo balance</h3>
+      <p class="sub">Evidencia complementaria. Un ρ cercano a 1 y una vida media larga indican una prima persistente en nivel, aunque los desvíos respecto de la banda móvil regresen.</p>
+      <div class="tbl"><table id="x-din"></table></div>
+      <details class="xdet"><summary>Cómo se calcula y qué falta definir</summary>
+        <ul>
+          <li><b>Prima:</b> Brent implícito con el último balance publicado menos el primer futuro de Brent, en USD/bbl.</li>
+          <li><b>Rango habitual:</b> media de las 20 ruedas previas ± 2 desvíos estándar, recalculada con los parámetros del balance vigente.</li>
+          <li><b>Desvío amplio (caso):</b> primera rueda fuera del rango; las ruedas consecutivas fuera forman un solo caso, con su distancia inicial d0 a la media.</li>
+          <li><b>Regreso:</b> en alguna de las 10 ruedas siguientes, con el balance del día del desvío, la prima vuelve al rango vigente o lo cruza y recorre hacia la media al menos ½ d0. Si no regresó y faltan ruedas para completar el plazo, el caso queda censurado y no entra en el denominador.</li>
+          <li><b>Referencia:</b> <span id="x-nsim"></span> corridas de la misma regla sobre una prima sin reversión: CO1 observado menos un implícito que cambia con β·ΔCO1 más residuos remuestreados por fecha y en conjunto entre empresas (conserva volatilidad y correlación), más ruido de cierre medido con la autocovarianza de esos residuos.</li>
+          <li><b>A confirmar por el grupo:</b> el percentil del umbral (la tesis no lo fija), que la ventana excluya el día del desvío y que el rango siga moviéndose durante la evaluación.</li>
+          <li><b>Limitaciones:</b> el CO1 es el cierre de Yahoo BZ=F (el archivo de Bloomberg vino vacío), no el precio a la hora de cierre de cada acción; falta el control con CO12. El implícito de Petrobras da negativo o casi cero hasta nov-2024 por la valuación de la refinación.</li>
+        </ul>
+      </details>
+      <h3 class="xsub">Descargar en Excel</h3>
+      <p class="sub">Dashboard con gráficos conectados a las celdas, esta prueba con sus fórmulas, una hoja por empresa con el despeje y el Brent implícito diario con el CO1.</p>
       <div class="xrow"><button class="btn primary" id="x-bajar" type="button">Descargar Excel (.xlsx)</button><span class="note" id="x-estado" role="status"></span></div>
     </div>
     <div class="panel">

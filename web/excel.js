@@ -184,13 +184,13 @@
 
   async function exportar(D, opts) {
     const ExcelJS = await libreria(), S = window.BIStats;
-    const { desde, hasta, empresas, CAMPOS, avance = () => {} } = opts;
+    const { desde, hasta, empresas, CAMPOS, avance = () => {}, percentil = 95 } = opts, Q = percentil / 100;
     const hi = D.historia, wb = new ExcelJS.Workbook(), { despeje } = S;
     wb.creator = "Barril Implícito — TIF Finanzas UADE"; wb.created = new Date();
     wb.calcProperties.fullCalcOnLoad = true;
     const emps = D.empresas.filter(e => empresas.includes(e.id) && hi.series[e.id] && hi.series[e.id].fecha.length)
       .map(e => { const p = S.preparar(D, e.id, desde, hasta); return p ? { ...p, info: e } : null; }).filter(Boolean);
-    if (!emps.length) throw new Error("no hay datos para ese rango y esas empresas");
+    if (!emps.length || emps.some(e => e.n < S.MIN_RUEDAS)) throw new Error("no hay suficientes ruedas para ese rango y esas empresas");
     const co1 = Object.fromEntries(hi.brent_1l.fecha.map((f, i) => [f, hi.brent_1l.valor[i]]));
     const Di = {}, CALS = {};
     emps.forEach(e => {
@@ -202,21 +202,12 @@
     const fechas = [...new Set([...emps.flatMap(e => Object.keys(Di[e.id])), ...Object.keys(co1).filter(f => f >= desde && f <= hasta)])].sort();
 
     // --- test: especificación principal, referencia y sensibilidades (8.3)
-    const CF = { z: 2, plazo: 10, rec: .5 }, NSIM = 2000, NSENS = 1000, SEMILLA = 20261103;
+    const CF = S.PRINCIPAL, { NSIM, NSENS, SEMILLA } = S;
     emps.forEach(e => { e.ev = S.evaluar(e, CF); });
-    const grupos = S.grupos(emps, D), base = S.calibrar(emps);
+    const grupos = S.grupos(emps, D), base = S.calibrar(emps), todos = emps.map(e => e.id);
     avance("Simulando la referencia sin reversión…");
     const corridas = await S.simular(emps, base, CF, NSIM, SEMILLA);
-    const todos = emps.map(e => e.id);
-    const resumenCfg = async (cfg, N, sem) => {
-      let cas = 0, reg = 0, cen = 0;
-      emps.forEach(e => { const c = S.evaluar(e, cfg).casos; cas += c.length; reg += c.filter(x => x.reg === 1).length; cen += c.filter(x => x.reg === null).length; });
-      const r = await S.simular(emps, base, cfg, N, sem), a = r.map(c => S.propSim(c, emps, todos)).filter(v => v != null);
-      return { cas, reg, cen, prop: reg / (cas - cen), ref: S.media(a), umbral: S.percentil(a, .95) };
-    };
-    const ESC = [["Especificación principal (±2 desvíos, 10 ruedas, ½ d0)", CF], ["Banda de ±1,5 desvíos", { ...CF, z: 1.5 }], ["Banda de ±2,5 desvíos", { ...CF, z: 2.5 }], ["Plazo de 5 ruedas", { ...CF, plazo: 5 }], ["Plazo de 15 ruedas", { ...CF, plazo: 15 }], ["Recorrido mínimo de ⅓ d0", { ...CF, rec: 1 / 3 }], ["Recorrido mínimo de ⅔ d0", { ...CF, rec: 2 / 3 }], ["Ventana que reinicia con cada balance", { ...CF, reset: true }]];
-    const sens = [];
-    for (let i = 0; i < ESC.length; i++) { avance(`Sensibilidades (${i + 1}/${ESC.length})…`); sens.push({ nombre: ESC[i][0], ...(await resumenCfg(ESC[i][1], NSENS, SEMILLA + i + 1)) }); }
+    const sens = (await S.sensibilidades(emps, base, (i, n) => avance(`Sensibilidades (${i}/${n})…`))).map(x => ({ ...x, ref: S.media(x.sim), umbral: S.percentil(x.sim, Q) }));
     avance("Armando las hojas…");
 
     // --- Leeme
@@ -308,7 +299,7 @@
     rs.getCell("A1").value = `Prima = implícito − CO1 (USD/bbl), del ${desde} al ${hasta}`; rs.getCell("A1").font = { bold: true, size: 13 };
     const primas = Object.fromEntries(emps.map(e => [e.id, fechas.filter(f => Di[e.id][f] && co1[f] != null).map(f => Di[e.id][f].xl - co1[f])]));
     const impls = Object.fromEntries(emps.map(e => [e.id, Object.values(Di[e.id]).map(d => d.xl)]));
-    const abs = a => S.media(a.map(Math.abs)), sd = a => Math.sqrt(S.devsq(a) / (a.length - 1));
+    const abs = a => S.media(a.map(Math.abs)), { sd } = S;
     const met = [["Días con implícito", c => `COUNT(${c})`, "0", "i", a => a.length], ["Implícito medio", c => `AVERAGE(${c})`, "0.00", "i", S.media],
       ["Días con prima", c => `COUNT(${c})`, "0", "p", a => a.length], ["Prima media (signo)", c => `AVERAGE(${c})`, "0.00", "p", S.media],
       ["Prima media en valor absoluto (magnitud)", c => `(SUMIF(${c},">0")-SUMIF(${c},"<0"))/COUNT(${c})`, "0.00", "p", abs],
@@ -345,7 +336,7 @@
     const titPanel = (r, t) => { const c = cs.getCell(`A${r}`); c.value = t; cs.mergeCells(`A${r}:O${r}`); Object.assign(c, SUB); };
     titPanel(5, "Especificación (6.1). Cambiar estos valores recalcula los casos y los regresos observados; la referencia simulada queda en la especificación principal");
     [["Ventana del rango habitual (ruedas previas)", S.VENTANA, "Fija: 20 ruedas ≈ un mes bursátil"], ["Banda: desvíos estándar", CF.z, "Principal: 2. Sensibilidad: 1,5 y 2,5"], ["Plazo de regreso (ruedas, máx. 15)", CF.plazo, "Principal: 10. Sensibilidad: 5 y 15"],
-     ["Recorrido mínimo hacia la media (× d0)", CF.rec, "Principal: ½. Sensibilidad: ⅓ y ⅔"], ["Percentil de la referencia usado como umbral", 95, "El grupo debe confirmarlo: la tesis no fija el percentil"]]
+     ["Recorrido mínimo hacia la media (× d0)", CF.rec, "Principal: ½. Sensibilidad: ⅓ y ⅔"], ["Percentil de la referencia usado como umbral", percentil, "Elegido en la página; la tesis no fija el percentil"]]
       .forEach(([l, v, n], i) => { const r = 6 + i; cs.getCell(`A${r}`).value = l; const c = cs.getCell(`C${r}`); c.value = v; c.font = { bold: true, color: { argb: "FF0000C0" } }; if (i) c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFF8DC" } }; cs.getCell(`D${r}`).value = n; Object.assign(cs.getCell(`D${r}`), GRIS); });
     cs.getCell("C8").dataValidation = { type: "whole", operator: "between", formulae: [1, 15], showErrorMessage: true, error: "Entre 1 y 15 ruedas" };
 
@@ -354,12 +345,11 @@
     cs.getRow(rA + 1).values = ["Grupo", "Casos", "Regresos", "No regresan", "Censurados", "Proporción de regreso", "Referencia media", "Umbral (percentil)", "Exceso sobre umbral", "¿Supera el umbral?", "Posición en la referencia", "Ruedas medias hasta regreso", "|d0| medio (USD/bbl)", "Casos que cruzan balance", "Proporción sin cruzar balance"];
     cs.getRow(rA + 1).eachCell(c => Object.assign(c, HEAD)); cs.getRow(rA + 1).alignment = { wrapText: true, vertical: "middle", horizontal: "center" }; cs.getRow(rA + 1).height = 45;
     const filaG = {}; grupos.forEach((g, i) => { filaG[g.nombre] = rA + 2 + i; });
-    const obsDe = ids => { const c = emps.filter(e => ids.includes(e.id)).flatMap(e => e.ev.casos); const reg = c.filter(x => x.reg === 1).length, no = c.filter(x => x.reg === 0).length, cen = c.filter(x => x.reg === null).length, sc = c.filter(x => !x.cruza && x.reg !== null), rc = c.filter(x => x.reg === 1 && x.h);
-      return { n: c.length, reg, no, cen, prop: reg + no ? reg / (reg + no) : null, h: rc.length ? S.media(rc.map(x => x.h)) : null, d0: c.length ? S.media(c.map(x => Math.abs(x.d0))) : null, cruza: c.filter(x => x.cruza).length, propSc: sc.length ? sc.filter(x => x.reg === 1).length / sc.length : null }; };
+    const obsDe = ids => S.observado(emps, ids);
     const R = (id, c_) => `'Rango ${id}'!$${c_}$${RG[id].f0}:$${c_}$${RG[id].f0 + RG[id].n - 1}`;
     grupos.forEach((g, i) => {
       const r = filaG[g.nombre], f = cs.getRow(r), o = obsDe(g.ids), simC = `'Simulación'!$${SIM.colDe(i)}$${SIM.f0}:$${SIM.colDe(i)}$${SIM.fN}`, a = props[i].filter(v => v != null);
-      const um = S.percentil(a, .95), suma = c => g.ids.map(id => `${c}${filaG[id]}`).join("+");
+      const um = S.percentil(a, Q), suma = c => g.ids.map(id => `${c}${filaG[id]}`).join("+");
       f.getCell(1).value = g.nombre;
       if (!g.tipo) {
         const id = g.ids[0];
@@ -381,7 +371,7 @@
       [6, 7, 8, 11, 15].forEach(c => f.getCell(c).numFmt = "0.0%"); f.getCell(9).numFmt = "+0.0%;-0.0%"; f.getCell(12).numFmt = "0.0"; f.getCell(13).numFmt = "0.00";
       if (g.tipo === "total") f.eachCell(c => { c.font = { bold: true }; c.fill = SUB.fill; });
     });
-    const rTot = filaG["Total"], oT = obsDe(todos), aT = props[grupos.length - 1].filter(v => v != null), umT = S.percentil(aT, .95);
+    const rTot = filaG["Total"], oT = obsDe(todos), aT = props[grupos.length - 1].filter(v => v != null), umT = S.percentil(aT, Q);
     let r = rTot + 1;
     const dec = v => String(Math.round(v * 1000) / 10).replace(".", ","), lectura = (p, u) => `Lectura: la proporción de regreso (${dec(p)}%) ${p > u ? "supera" : "no supera"} el umbral (${dec(u)}%): la hipótesis ${p > u ? "se sostiene" : "no se sostiene"} con esta especificación.`;
     cs.getCell(`A${r}`).value = fx(`"Lectura: la proporción de regreso ("&ROUND(F${rTot}*100,1)&"%) "&IF(F${rTot}>H${rTot},"supera","no supera")&" el umbral ("&ROUND(H${rTot}*100,1)&"%): la hipótesis "&IF(F${rTot}>H${rTot},"se sostiene","no se sostiene")&" con esta especificación."`, lectura(oT.prop, umT));
@@ -402,7 +392,7 @@
     titPanel(r, "C. Comparación entre empresas (objetivo b). Correlación de las primas y diferencias entre los pares de cada región"); r++;
     cs.getRow(r).values = ["Correlación de primas", ...emps.map(e => e.id)]; cs.getRow(r).eachCell(c => Object.assign(c, HEAD)); r++;
     const serieCom = (a, b) => { const x = [], y = []; fechas.forEach(f => { if (Di[a][f] && Di[b][f] && co1[f] != null) { x.push(Di[a][f].xl - co1[f]); y.push(Di[b][f].xl - co1[f]); } }); return [x, y]; };
-    const corr = (x, y) => S.cov(x, y) / Math.sqrt(S.devsq(x) / (x.length - 1) * S.devsq(y) / (y.length - 1));
+    const { corr } = S;
     emps.forEach(e => { const f = cs.getRow(r); f.getCell(1).value = e.id; emps.forEach((o, j) => { const [x, y] = serieCom(e.id, o.id); f.getCell(2 + j).value = fx(`CORREL(${rIm(col(ubic[e.id] + 2))},${rIm(col(ubic[o.id] + 2))})`, corr(x, y)); f.getCell(2 + j).numFmt = "0.00"; }); r++; });
     r++;
     if (PARES.length) {
@@ -422,15 +412,11 @@
     // Panel D: dinámica de la prima
     titPanel(r, "D. Dinámica de la prima con un mismo balance: evidencia complementaria sobre reversión y ruido de cierre (7.6 y 8.4). Descriptiva"); r++;
     cs.getRow(r).values = ["Métrica", ...emps.map(e => e.id)]; cs.getRow(r).eachCell(c => Object.assign(c, HEAD)); r++;
-    const din = emps.map(e => { const d = [], l = [], dl = [], dd = [], fue = [];
-      for (let t = e.i0; t <= e.i1; t++) { if (t < 1) continue; const P = S.primaK(e, e.kIdx[t]); d.push(P[t] - P[t - 1]); l.push(P[t - 1]); if (t - 1 >= e.i0 && t - 1 >= 1) { const Q = S.primaK(e, e.kIdx[t - 1]); dl.push(Q[t - 1] - Q[t - 2]); dd.push(P[t] - P[t - 1]); } if (t >= S.VENTANA) fue.push(e.ev.fuera[t]); }
-      const b = S.cov(d, l) / (S.devsq(l) / (l.length - 1)), a0 = S.media(d) - b * S.media(l), res = d.map((v, i) => v - a0 - b * l[i]), se = Math.sqrt(res.reduce((x, y) => x + y * y, 0) / (d.length - 2)) / Math.sqrt(S.devsq(l));
-      const md = S.media(d), sdd = sd(d), n = d.length, skew = n / ((n - 1) * (n - 2)) * d.reduce((x, y) => x + ((y - md) / sdd) ** 3, 0), kurt = n * (n + 1) / ((n - 1) * (n - 2) * (n - 3)) * d.reduce((x, y) => x + ((y - md) / sdd) ** 4, 0) - 3 * (n - 1) ** 2 / ((n - 2) * (n - 3));
-      return { b, se, rho: 1 + b, ac: corr(dd, dl), ruido: Math.sqrt(Math.max(0, -S.cov(dd, dl) * (dd.length - 1) / dd.length)), fue: S.media(fue), skew, kurt, sdd }; });
+    const din = emps.map(S.dinamica);
     const filasD = [["% de ruedas fuera del rango (≈5 % si la prima fuera normal)", e => `SUM('Rango ${e.id}'!$K$${RG[e.id].r0}:$K$${RG[e.id].r1})/COUNT('Rango ${e.id}'!$K$${RG[e.id].r0}:$K$${RG[e.id].r1})`, d => d.fue, "0.0%"],
       ["Coeficiente AR(1) de la prima (ρ)", e => `1+SLOPE(${R(e.id, "T")},${R(e.id, "U")})`, d => d.rho, "0.000"],
-      ["Vida media del desvío (ruedas) = ln(0,5)/ln(ρ)", (e, q, rr) => `IF(AND(${q}${rr - 1}>0,${q}${rr - 1}<1),LN(0.5)/LN(${q}${rr - 1}),"sin reversión")`, d => d.rho > 0 && d.rho < 1 ? Math.log(.5) / Math.log(d.rho) : "sin reversión", "0.0"],
-      ["Estadístico t de (ρ−1), tipo Dickey-Fuller (referencia 5 %: −2,86)", e => `SLOPE(${R(e.id, "T")},${R(e.id, "U")})/(STEYX(${R(e.id, "T")},${R(e.id, "U")})/SQRT(DEVSQ(${R(e.id, "U")})))`, d => d.b / d.se, "0.00"],
+      ["Vida media del desvío (ruedas) = ln(0,5)/ln(ρ)", (e, q, rr) => `IF(AND(${q}${rr - 1}>0,${q}${rr - 1}<1),LN(0.5)/LN(${q}${rr - 1}),"sin reversión")`, d => d.vida ?? "sin reversión", "0.0"],
+      ["Estadístico t de (ρ−1), tipo Dickey-Fuller (referencia 5 %: −2,86)", e => `SLOPE(${R(e.id, "T")},${R(e.id, "U")})/(STEYX(${R(e.id, "T")},${R(e.id, "U")})/SQRT(DEVSQ(${R(e.id, "U")})))`, d => d.t, "0.00"],
       ["Autocorrelación de los cambios diarios de la prima", e => `CORREL(${R(e.id, "T")},${R(e.id, "V")})`, d => d.ac, "0.000"],
       ["Ruido de cierre implícito (USD/bbl) = √máx(0, −cov)", e => `SQRT(MAX(0,-COVAR(${R(e.id, "T")},${R(e.id, "V")})))`, d => d.ruido, "0.000"],
       ["Desvío de los cambios diarios (USD/bbl)", e => `STDEV(${R(e.id, "T")})`, d => d.sdd, "0.00"], ["Asimetría de los cambios diarios", e => `SKEW(${R(e.id, "T")})`, d => d.skew, "0.00"], ["Curtosis en exceso de los cambios diarios", e => `KURT(${R(e.id, "T")})`, d => d.kurt, "0.00"]];
@@ -439,7 +425,7 @@
 
     // Panel E: sensibilidades de 8.3
     titPanel(r, "E. Sensibilidades (8.3 y 8.4), con la referencia recalculada en cada fila. Valores calculados al exportar"); r++;
-    cs.getRow(r).values = ["Escenario", "Casos", "Regresos", "Censurados", "Proporción", "Referencia media", "Umbral P95", "Exceso", "¿Supera?"]; cs.getRow(r).eachCell(c => Object.assign(c, HEAD)); r++;
+    cs.getRow(r).values = ["Escenario", "Casos", "Regresos", "Censurados", "Proporción", "Referencia media", `Umbral P${String(percentil).replace(".", ",")}`, "Exceso", "¿Supera?"]; cs.getRow(r).eachCell(c => Object.assign(c, HEAD)); r++;
     const filaS = (v) => { const f = cs.getRow(r); f.values = v; [5, 6, 7].forEach(c => f.getCell(c).numFmt = "0.0%"); f.getCell(8).numFmt = "+0.0%;-0.0%"; f.getCell(9).alignment = { horizontal: "center" }; r++; };
     sens.forEach(s => filaS([s.nombre, s.cas, s.reg, s.cen, s.prop, s.ref, s.umbral, s.prop - s.umbral, s.prop > s.umbral ? "Sí" : "No"]));
     { const c = obsCas.filter(x => !x.cruza && x.reg !== null), reg = c.filter(x => x.reg === 1).length, m = sens[0]; filaS(["Solo casos que no cruzan un balance (referencia principal)", c.length, reg, 0, reg / c.length, m.ref, m.umbral, reg / c.length - m.umbral, reg / c.length > m.umbral ? "Sí" : "No"]); }

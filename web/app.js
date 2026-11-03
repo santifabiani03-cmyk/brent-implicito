@@ -348,29 +348,79 @@
         `<tr><td><b>${e}</b></td><td class="mono">${k.periodo}</td><td class="mono">${k.publicado}</td><td>${k.faltan.length ? `<span class="chip pend">faltan ${k.faltan.length}</span>` : `<span class="chip ok">completa</span>`}</td><td class="note">${esc(k.arrastrados.join(", ")) || "—"}</td><td class="note">${Object.entries(k.docs || {}).map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>`).join(" · ") || "release citado"}</td></tr>`)).join("") + "</tbody>";
   }
 
-  // ---------- descarga a Excel (web/excel.js)
-  const X = { activos: new Set() };
+  // ---------- prueba de la hipótesis y descarga a Excel (web/excel_stats.js, web/excel.js)
+  const X = { activos: new Set(), pct: 95, corrida: 0, res: null, sens: null, t: null };
+  const TIF = ["2024-07-01", "2026-06-30"];
+  const pc = v => v == null ? "—" : fmt(v * 100, 1) + " %";
+  const pctTxt = () => String(X.pct).replace(".", ",");
+  function xPintar() {       // con el percentil solo cambia el umbral: no hace falta volver a simular
+    const r = X.res, S = window.BIStats; if (!r) return;
+    const Q = X.pct / 100, fila = g => { const a = g.sim, u = S.percentil(a, Q), o = g.obs; return { ...g, u, ref: a.length ? S.media(a) : null, sup: o.prop != null && u != null && o.prop > u, pos: o.prop == null ? null : a.filter(v => v <= o.prop).length / a.length }; };
+    const gs = r.grupos.map(fila), T = gs[gs.length - 1], o = T.obs;
+    const kp = [["Desvíos amplios", o.n], ["Regresan en el plazo", o.reg], ["Proporción de regreso", pc(o.prop)], ["Referencia media", pc(T.ref)], [`Umbral (P${pctTxt()})`, pc(T.u)], ["¿Supera el umbral?", T.sup ? "Sí" : "No"]];
+    $("#x-kpis").innerHTML = kp.map(([a, b]) => `<div><span>${a}</span><b>${b}</b></div>`).join("");
+    let lect = `La proporción de regreso (${pc(o.prop)}) ${T.sup ? "supera" : "no supera"} el umbral (${pc(T.u)}): con la especificación principal la hipótesis ${T.sup ? "se sostiene" : "no se sostiene"}.`;
+    if (X.sens) { const n = X.sens.filter(s => s.prop > S.percentil(s.sim, Q)).length; lect += ` Supera el umbral en ${n} de ${X.sens.length} escenarios de sensibilidad.`; }
+    $("#x-lect").textContent = lect;
+    $("#x-tabla").innerHTML = `<thead><tr><th>Grupo</th><th class="num">Casos</th><th class="num">Regresos</th><th class="num">No regresan</th><th class="num">Censurados</th><th class="num">Proporción</th><th class="num">Referencia media</th><th class="num">Umbral</th><th class="num">Exceso</th><th>¿Supera?</th><th class="num">Posición en la referencia</th><th class="num">Ruedas hasta regreso</th><th class="num">|d0| medio</th><th class="num">Cruzan balance</th></tr></thead><tbody>` +
+      gs.map(g => { const x = g.obs, ex = x.prop != null && g.u != null ? x.prop - g.u : null; return `<tr class="${g.tipo === "total" ? "xtotal" : ""}"><td>${esc(g.nombre)}</td><td class="num">${x.n}</td><td class="num">${x.reg}</td><td class="num">${x.no}</td><td class="num">${x.cen}</td><td class="num">${pc(x.prop)}</td><td class="num">${pc(g.ref)}</td><td class="num">${pc(g.u)}</td><td class="num">${ex == null ? "—" : (ex >= 0 ? "+" : "") + fmt(ex * 100, 1) + " pp"}</td><td>${x.prop == null ? "—" : `<span class="${g.sup ? "si" : "no"}">${g.sup ? "Sí" : "No"}</span>`}</td><td class="num">${pc(g.pos)}</td><td class="num">${fmt(x.h, 1)}</td><td class="num">${fmt(x.d0, 2)}</td><td class="num">${x.cruza}</td></tr>`; }).join("") + "</tbody>";
+    if (X.sens) {
+      const m = X.sens[0], cr = r.sinCruzar, filas = X.sens.map(s => [s.nombre, s.cas, s.reg, s.prop, s.sim]).concat(cr.nSc ? [["Solo casos que no cruzan un balance", cr.nSc, cr.regSc, cr.regSc / cr.nSc, m.sim]] : []);
+      $("#x-sens").innerHTML = `<thead><tr><th>Escenario</th><th class="num">Casos</th><th class="num">Regresos</th><th class="num">Proporción</th><th class="num">Referencia media</th><th class="num">Umbral (P${pctTxt()})</th><th class="num">Exceso</th><th>¿Supera?</th></tr></thead><tbody>` +
+        filas.map(([n, c, g, p, a]) => { const u = S.percentil(a, Q), sup = p > u; return `<tr><td>${esc(n)}</td><td class="num">${c}</td><td class="num">${g}</td><td class="num">${pc(p)}</td><td class="num">${pc(S.media(a))}</td><td class="num">${pc(u)}</td><td class="num">${(p - u >= 0 ? "+" : "") + fmt((p - u) * 100, 1)} pp</td><td><span class="${sup ? "si" : "no"}">${sup ? "Sí" : "No"}</span></td></tr>`; }).join("") + "</tbody>";
+    } else $("#x-sens").innerHTML = `<tbody><tr><td class="note">Calculando sensibilidades…</td></tr></tbody>`;
+    const dn = r.dinamica, cf = [["% de ruedas fuera del rango (≈5 % si fuera normal)", d => pc(d.fue)], ["Coeficiente AR(1), ρ", d => fmt(d.rho, 3)], ["Vida media del desvío (ruedas)", d => d.vida == null ? "sin reversión" : fmt(d.vida, 0)], ["t de (ρ−1), tipo Dickey-Fuller (5 %: −2,86)", d => fmt(d.t, 2)], ["Autocorrelación de los cambios diarios", d => fmt(d.ac, 3)], ["Ruido de cierre implícito (USD/bbl)", d => fmt(d.ruido, 2)], ["Desvío de los cambios diarios (USD/bbl)", d => fmt(d.sdd, 2)]];
+    $("#x-din").innerHTML = `<thead><tr><th>Métrica</th>${dn.map(d => `<th class="num">${d.id}</th>`).join("")}</tr></thead><tbody>` + cf.map(([n, f]) => `<tr><td>${n}</td>${dn.map(d => `<td class="num">${f(d)}</td>`).join("")}</tr>`).join("") + "</tbody>";
+  }
+  async function xCalcular() {
+    const S = window.BIStats, id = ++X.corrida, sigue = () => id === X.corrida, desde = $("#x-desde").value, hasta = $("#x-hasta").value;
+    const avisar = t => { $("#x-kpis").innerHTML = ""; $("#x-lect").textContent = t; ["#x-tabla", "#x-sens", "#x-din"].forEach(q => { $(q).innerHTML = ""; }); };
+    X.res = X.sens = null;
+    if (!desde || !hasta || desde > hasta) return avisar("Revisá el rango: 'Desde' tiene que ser anterior a 'Hasta'.");
+    if (!X.activos.size) return avisar("Elegí al menos una empresa.");
+    const emps = D.empresas.filter(e => X.activos.has(e.id)).map(e => S.preparar(D, e.id, desde, hasta)).filter(Boolean);
+    if (!emps.length || emps.some(e => e.n < S.MIN_RUEDAS)) return avisar("No hay suficientes ruedas para ese rango y esas empresas.");
+    avisar("Simulando la referencia…");
+    await new Promise(r => setTimeout(r));
+    emps.forEach(e => { e.ev = S.evaluar(e, S.PRINCIPAL); });
+    const base = S.calibrar(emps), cor = await S.simular(emps, base, S.PRINCIPAL, S.NSIM, S.SEMILLA, sigue);
+    if (!cor || !sigue()) return;
+    X.res = { grupos: S.grupos(emps, D).map(g => ({ ...g, obs: S.observado(emps, g.ids), sim: cor.map(c => S.propSim(c, emps, g.ids)).filter(v => v != null) })),
+      sinCruzar: S.observado(emps, emps.map(e => e.id)), dinamica: emps.map(e => ({ id: e.id, ...S.dinamica(e) })) };
+    xPintar();
+    const sens = await S.sensibilidades(emps, base, null, sigue);
+    if (!sens || !sigue()) return;
+    X.sens = sens; xPintar();
+  }
   function xInit() {
     const hi = D.historia; if (!hi || !window.BIExcel) { $("#x-panel").hidden = true; return; }
     const ids = Object.keys(hi.series).filter(e => hi.series[e].fecha.length);
     ids.forEach(e => X.activos.add(e));
-    const todas = ids.flatMap(e => hi.series[e].fecha).sort();
+    const todas = ids.flatMap(e => hi.series[e].fecha).sort(), recalc = () => { clearTimeout(X.t); X.t = setTimeout(xCalcular, 250); };
     $("#x-desde").min = $("#x-hasta").min = todas[0]; $("#x-desde").max = $("#x-hasta").max = todas.at(-1);
-    const usar = () => { $("#x-desde").value = H.desde; $("#x-hasta").value = H.hasta; };
-    usar(); $("#x-usar").onclick = usar;
+    const poner = (a, b) => { $("#x-desde").value = a; $("#x-hasta").value = b; recalc(); };
+    $("#x-desde").value = TIF[0]; $("#x-hasta").value = TIF[1];
+    $("#x-tif").onclick = () => poner(TIF[0], TIF[1]); $("#x-usar").onclick = () => poner(H.desde, H.hasta);
+    $("#x-desde").onchange = $("#x-hasta").onchange = recalc;
+    $("#x-nsim").textContent = window.BIStats.NSIM.toLocaleString("es-AR");
+    try { const g = parseFloat(localStorage.getItem("bi_pct")); if (g >= 50 && g <= 99.9) X.pct = g; } catch (e) {}
+    $("#x-pct").value = X.pct;
+    $("#x-pct").oninput = () => { const v = parseFloat($("#x-pct").value); if (v >= 50 && v <= 99.9) { X.pct = v; try { localStorage.setItem("bi_pct", v); } catch (e) {} xPintar(); } };
+    $("#x-pct").onchange = () => { $("#x-pct").value = X.pct; };
     $("#x-emp").innerHTML = D.empresas.map(e => `<button type="button" data-e="${e.id}" aria-pressed="${X.activos.has(e.id)}" ${ids.includes(e.id) ? "" : "disabled title='Sin serie'"}><i style="background:${COL[e.id]}"></i>${e.id}</button>`).join("");
-    document.querySelectorAll("#x-emp button").forEach(b => b.onclick = () => { const e = b.dataset.e; X.activos.has(e) ? X.activos.delete(e) : X.activos.add(e); b.setAttribute("aria-pressed", X.activos.has(e)); });
+    document.querySelectorAll("#x-emp button").forEach(b => b.onclick = () => { const e = b.dataset.e; X.activos.has(e) ? X.activos.delete(e) : X.activos.add(e); b.setAttribute("aria-pressed", X.activos.has(e)); recalc(); });
     $("#x-bajar").onclick = () => {
-      const desde = $("#x-desde").value, hasta = $("#x-hasta").value, empresas = [...X.activos];
-      const est = $("#x-estado");
+      const desde = $("#x-desde").value, hasta = $("#x-hasta").value, empresas = [...X.activos], est = $("#x-estado");
       if (!desde || !hasta || desde > hasta) { est.textContent = "Revisá el rango: 'Desde' tiene que ser anterior a 'Hasta'."; return; }
       if (!empresas.length) { est.textContent = "Elegí al menos una empresa."; return; }
       $("#x-bajar").disabled = true; est.textContent = "Armando el Excel…";
-      window.BIExcel.exportar(D, { desde, hasta, empresas, CAMPOS, avance: t => { est.textContent = t; } })
-        .then(r => { est.textContent = `Listo: ${r.filas} días × ${r.empresas} empresas. ${r.regresos} de ${r.casos} desvíos regresan (${fmt(r.prop * 100, 1)} %; umbral ${fmt(r.umbral * 100, 1)} %). Control Excel vs web: máx. ${fmt(r.maxDif, 3)} USD/bbl.`; })
+      window.BIExcel.exportar(D, { desde, hasta, empresas, CAMPOS, percentil: X.pct, avance: t => { est.textContent = t; } })
+        .then(r => { est.textContent = `Listo: ${r.filas} días × ${r.empresas} empresas, percentil ${pctTxt()}. Control Excel vs web: máx. ${fmt(r.maxDif, 3)} USD/bbl.`; })
         .catch(err => { est.textContent = "No se pudo armar el Excel: " + err.message; })
         .finally(() => { $("#x-bajar").disabled = false; });
     };
+    // se calcula la primera vez que el panel se ve: no frena la carga de la página
+    if (window.IntersectionObserver) { const ob = new IntersectionObserver(v => { if (v.some(x => x.isIntersecting)) { ob.disconnect(); xCalcular(); } }); ob.observe($("#x-panel")); } else xCalcular();
   }
 
   cargar().then(d => {

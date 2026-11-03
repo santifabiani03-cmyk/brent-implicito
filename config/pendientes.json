@@ -45,7 +45,7 @@
   ],
   "pendientes": [
     {
-      "tarea": "Definir el percentil del umbral de la referencia simulada: la tesis no lo fija y el Excel usa 95 (editable en la hoja Consistencia). Con P95 y la ventana 3T2024–2T2026 el total supera el umbral (61,3 % vs 58,5 %), pero no con ±2,5 desvíos ni con plazo de 5 ruedas",
+      "tarea": "Definir el percentil del umbral de la referencia simulada: la tesis no lo fija. Es editable en Serie histórica → Prueba de la hipótesis (95 por defecto) y el Excel baja con el elegido",
       "prioridad": "alta",
       "estado": "pendiente",
       "area": "Metodología"

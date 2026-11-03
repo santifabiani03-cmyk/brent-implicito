@@ -122,7 +122,7 @@
   }
 
   /* N corridas. Devuelve para cada corrida [casos, regresos] por empresa (mismo orden que emps). */
-  async function simular(emps, base, cfg, N, seed, avance) {
+  async function simular(emps, base, cfg, N, seed, sigue) {
     const rnd = rng32(seed), res = [], P = emps.map(e => new Float64Array(e.n));
     const normal = () => Math.sqrt(-2 * Math.log(1 - rnd())) * Math.cos(2 * Math.PI * rnd());
     const ini = emps.map(e => impK(e, e.kIdx[0])[0]), draw = new Int32Array(base.nCal);
@@ -136,7 +136,7 @@
         }
         return reglaSim(e, p, cfg);
       }));
-      if (avance && c % 100 === 99) { avance(c + 1); await new Promise(r => setTimeout(r)); }
+      if (c % 100 === 99) { if (sigue && !sigue()) return null; await new Promise(r => setTimeout(r)); }
     }
     return res;
   }
@@ -154,5 +154,46 @@
     const s = a.filter(v => v != null).sort((x, y) => x - y); if (!s.length) return null;
     const p = q * (s.length - 1), f = Math.floor(p); return s[f] + (p - f) * ((s[f + 1] ?? s[f]) - s[f]);
   }
-  window.BIStats = { VENTANA, coef, despeje, preparar, primaK, rangoK, impK, evaluar, calibrar, simular, grupos, propSim, percentil, media, devsq, cov };
+  const corr = (x, y) => cov(x, y) / Math.sqrt(devsq(x) / (x.length - 1) * devsq(y) / (y.length - 1));
+  const sd = a => Math.sqrt(devsq(a) / (a.length - 1));
+
+  // Especificación principal y sensibilidades de 8.3. Misma semilla en la página y en el Excel: dan los mismos números.
+  const PRINCIPAL = { z: 2, plazo: 10, rec: .5 }, NSIM = 2000, NSENS = 1000, SEMILLA = 20261103, MIN_RUEDAS = 40;
+  const ESCENARIOS = [["Especificación principal (±2 desvíos, 10 ruedas, ½ d0)", PRINCIPAL], ["Banda de ±1,5 desvíos", { ...PRINCIPAL, z: 1.5 }], ["Banda de ±2,5 desvíos", { ...PRINCIPAL, z: 2.5 }],
+    ["Plazo de 5 ruedas", { ...PRINCIPAL, plazo: 5 }], ["Plazo de 15 ruedas", { ...PRINCIPAL, plazo: 15 }], ["Recorrido mínimo de ⅓ d0", { ...PRINCIPAL, rec: 1 / 3 }],
+    ["Recorrido mínimo de ⅔ d0", { ...PRINCIPAL, rec: 2 / 3 }], ["Ventana que reinicia con cada balance", { ...PRINCIPAL, reset: true }]];
+  async function sensibilidades(emps, base, avance, sigue) {
+    const ids = emps.map(e => e.id), out = [];
+    for (let i = 0; i < ESCENARIOS.length; i++) {
+      if (avance) avance(i + 1, ESCENARIOS.length);
+      const [nombre, cfg] = ESCENARIOS[i]; let cas = 0, reg = 0, cen = 0;
+      emps.forEach(e => { const c = evaluar(e, cfg).casos; cas += c.length; reg += c.filter(x => x.reg === 1).length; cen += c.filter(x => x.reg === null).length; });
+      const r = await simular(emps, base, cfg, NSENS, SEMILLA + i + 1, sigue);
+      if (!r) return null;
+      out.push({ nombre, cas, reg, cen, prop: reg / (cas - cen), sim: r.map(c => propSim(c, emps, ids)).filter(v => v != null) });
+    }
+    return out;
+  }
+  // Resultado observado de un grupo de empresas, con e.ev = evaluar(e, PRINCIPAL)
+  function observado(emps, ids) {
+    const c = emps.filter(e => ids.includes(e.id)).flatMap(e => e.ev.casos), reg = c.filter(x => x.reg === 1).length, no = c.filter(x => x.reg === 0).length, cen = c.filter(x => x.reg === null).length;
+    const sc = c.filter(x => !x.cruza && x.reg !== null), rc = c.filter(x => x.reg === 1 && x.h);
+    return { n: c.length, reg, no, cen, prop: reg + no ? reg / (reg + no) : null, h: rc.length ? media(rc.map(x => x.h)) : null, d0: c.length ? media(c.map(x => Math.abs(x.d0))) : null,
+      cruza: c.filter(x => x.cruza).length, propSc: sc.length ? sc.filter(x => x.reg === 1).length / sc.length : null, nSc: sc.length, regSc: sc.filter(x => x.reg === 1).length };
+  }
+  // Dinámica de la prima con un mismo balance (panel D): AR(1), vida media, ruido de cierre y forma de los cambios diarios
+  function dinamica(e) {
+    const d = [], l = [], dl = [], dd = [], fue = [];
+    for (let t = e.i0; t <= e.i1; t++) {
+      if (t < 1) continue;
+      const P = primaK(e, e.kIdx[t]); d.push(P[t] - P[t - 1]); l.push(P[t - 1]);
+      if (t - 1 >= e.i0 && t - 1 >= 1) { const Q = primaK(e, e.kIdx[t - 1]); dl.push(Q[t - 1] - Q[t - 2]); dd.push(P[t] - P[t - 1]); }
+      if (t >= VENTANA) fue.push(e.ev.fuera[t]);
+    }
+    const b = cov(d, l) / (devsq(l) / (l.length - 1)), a0 = media(d) - b * media(l), res = d.map((v, i) => v - a0 - b * l[i]), se = Math.sqrt(res.reduce((x, y) => x + y * y, 0) / (d.length - 2)) / Math.sqrt(devsq(l));
+    const md = media(d), sdd = sd(d), n = d.length, skew = n / ((n - 1) * (n - 2)) * d.reduce((x, y) => x + ((y - md) / sdd) ** 3, 0), kurt = n * (n + 1) / ((n - 1) * (n - 2) * (n - 3)) * d.reduce((x, y) => x + ((y - md) / sdd) ** 4, 0) - 3 * (n - 1) ** 2 / ((n - 2) * (n - 3));
+    const rho = 1 + b;
+    return { b, se, rho, t: b / se, vida: rho > 0 && rho < 1 ? Math.log(.5) / Math.log(rho) : null, ac: corr(dd, dl), ruido: Math.sqrt(Math.max(0, -cov(dd, dl) * (dd.length - 1) / dd.length)), fue: media(fue), skew, kurt, sdd };
+  }
+  window.BIStats = { VENTANA, PRINCIPAL, NSIM, NSENS, SEMILLA, MIN_RUEDAS, ESCENARIOS, coef, despeje, preparar, primaK, rangoK, impK, evaluar, calibrar, simular, sensibilidades, observado, dinamica, grupos, propSim, percentil, media, devsq, cov, corr, sd };
 })();
