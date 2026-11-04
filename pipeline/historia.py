@@ -174,10 +174,11 @@ def calibrar(c, q, ed, fin, macro_q, spot, precio_pub, fx_pub, sem_pub, memoria,
     for k, v in ins.items():
         if v.get("origen") != "arrastrado":
             memoria[k] = (v, iq, q)
+    eb12, n_eb = ebitda_12m(ebitdas, iq) if integrada else (None, None)
     if integrada:
-        poner_refinacion(ins, *ebitda_12m(ebitdas, iq), eb_q["fuente"] if eb_q else None)
+        poner_refinacion(ins, eb12, n_eb, eb_q["fuente"] if eb_q else None)
     faltan = [k for k in model.CAMPOS_REQUERIDOS if k not in ins]
-    return {"inputs": ins, "acciones_mm": acc, "arrastrados": arrastrados, "faltan": faltan}
+    return {"inputs": ins, "acciones_mm": acc, "arrastrados": arrastrados, "faltan": faltan, "ebitda_trimestres": n_eb}
 
 
 def main(desde: str = "2023-12-31"):
@@ -305,7 +306,7 @@ def main(desde: str = "2023-12-31"):
     rng = lambda s: {"fecha": [d for d in sorted(s) if d >= Q[1]], "valor": [round(s[d], 2) for d in sorted(s) if d >= Q[1]]}
     resultado = {"actualizado": ahora_iso(), "desde": Q[0], "series": series, "brent_spot": rng(spot), "brent_1l": rng(brent_1l), "co1_bloomberg_hasta": max(co1_bb) if co1_bb else None,
                  "calibraciones": {e: [{"periodo": k["periodo"], "publicado": k["publicado"], "docs": k["docs"], "fallas": k["fallas"],
-                                        "faltan": k["faltan"], "arrastrados": k["arrastrados"], "acciones_mm": k["acciones_mm"],
+                                        "faltan": k["faltan"], "arrastrados": k["arrastrados"], "acciones_mm": k["acciones_mm"], "ebitda_trimestres": k.get("ebitda_trimestres"),
                                         "inputs": {kk: {"valor": v["valor"], "origen": v["origen"]} for kk, v in k["inputs"].items()}}
                                        for k in ls] for e, ls in calib.items()}}
     guardar("serie.json", resultado)

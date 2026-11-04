@@ -22,6 +22,14 @@
   // implícito con los parámetros de un balance y el riesgo país de la fecha (7.4)
   const despejeDia = (x, crp, cap, aj_) => despeje(coef({ ...x, crp }, aj_), cap);
   const plano = k => Object.fromEntries(Object.entries(k.inputs).map(([n, v]) => [n, v[0]]));
+  // banda de 8.3, igual que BANDA en engine/model.py: costo de capital ±1 punto porcentual y costos ±10 %
+  const BANDA = { wacc: 0.01, costos: 0.10 };
+  const conWacc = (x, d) => ({ ...x, rf: x.rf + d / (1 - x.peso_deuda) });
+  const conCostos = (x, d) => ({ ...x, lifting_usd_boe: x.lifting_usd_boe * (1 + d), otros_costos_usd_boe: x.otros_costos_usd_boe * (1 + d) });
+  function bandaDia(x, crp, cap) {
+    const v = [conWacc(x, -BANDA.wacc), conWacc(x, BANDA.wacc), conCostos(x, -BANDA.costos), conCostos(x, BANDA.costos)].map(y => despejeDia(y, crp, cap));
+    return { v, min: Math.min(...v), max: Math.max(...v) };
+  }
 
   /* Serie de una empresa en ruedas (días con acción y CO1), con 20 ruedas antes del rango (ventana) y 15 después (evaluación). */
   function preparar(D, id, desde, hasta) {
@@ -200,5 +208,5 @@
     const rho = 1 + b;
     return { b, se, rho, t: b / se, vida: rho > 0 && rho < 1 ? Math.log(.5) / Math.log(rho) : null, ac: corr(dd, dl), ruido: Math.sqrt(Math.max(0, -cov(dd, dl) * (dd.length - 1) / dd.length)), fue: media(fue), skew, kurt, sdd };
   }
-  window.BIStats = { VENTANA, PRINCIPAL, NSIM, NSENS, SEMILLA, MIN_RUEDAS, ESCENARIOS, coef, despeje, despejeDia, plano, preparar, primaK, rangoK, impK, evaluar, calibrar, simular, sensibilidades, observado, dinamica, grupos, propSim, percentil, media, devsq, cov, corr, sd };
+  window.BIStats = { VENTANA, PRINCIPAL, NSIM, NSENS, SEMILLA, MIN_RUEDAS, ESCENARIOS, BANDA, conWacc, conCostos, bandaDia, coef, despeje, despejeDia, plano, preparar, primaK, rangoK, impK, evaluar, calibrar, simular, sensibilidades, observado, dinamica, grupos, propSim, percentil, media, devsq, cov, corr, sd };
 })();

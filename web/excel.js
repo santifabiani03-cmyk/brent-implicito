@@ -23,6 +23,14 @@
   const X0 = 26;      // primera columna (1-based) de la matriz prima/media/desvío/ρ por balance en las hojas Rango
   const HOLGURA = 20; // ruedas extra de la matriz: permiten mover una fecha de publicación sin salir de lo calculado
   const BANDAS = [1.5, 1.75, 2, 2.25, 2.5];   // bandas con referencia simulada al exportar: las que ofrece la celda de desvíos
+  const CB = { t: 77, bM: 78, b0M: 79, pM: 80, bP: 81, b0P: 82, pP: 83, imp: 84, min: 85, max: 86, fuera: 87 };   // banda de sensibilidad (8.3) en las hojas de empresa
+  const CN = { t: 89, seg: 90, e12: 91, base: 92, fd: 93, val: 94, cap: 95, rat: 96 };                            // valor no upstream (7.4) en las integradas
+  const PBANDA = { w: "Banda!$B$2", c: "Banda!$D$2" };
+  const BK = 15;      // columnas por empresa en la hoja Banda: 6 a la vista y 9 de cálculo
+  const colB = (j, d) => col(2 + BK * j + d);
+  // segmentos que entran al EBITDA no upstream: la definición de cada empresa, ver inputs/bloomberg/<ID>_notas.md
+  const SEGMENTOS = { YPF: "Midstream y Downstream + GNL y Gas Integrado + Nuevas Energías (antes: Downstream + Gas y Energía). Sin Administración Central",
+    SU: "Refining & Marketing. Sin Corporate & Eliminations", PBR: "Refino, Transporte y Comercialización + Gas y Energías de Baja Emisión" };
 
   let cargando = null;
   function libreria() {
@@ -37,7 +45,7 @@
   const fechaXL = f => new Date(f + "T00:00:00Z");
   const fx = (formula, result) => ({ formula, result: result === undefined || result === null || Number.isNaN(result) ? undefined : result });
 
-  function hojaEmpresa(wb, e, cals, CAMPOS) {
+  function hojaEmpresa(wb, e, cals, CAMPOS, ext) {
     const ws = wb.addWorksheet(e.id, { views: [{ state: "frozen", xSplit: 2, ySplit: 4 }] });
     ws.getColumn(1).width = 44; ws.getColumn(2).width = 11;
     ws.getCell("A1").value = `${e.id} — ${e.nombre}: insumos de cada balance y despeje del Brent implícito`;
@@ -53,7 +61,7 @@
       fila.getCell(1).value = (CAMPOS[k] || [k])[0]; fila.getCell(2).value = (CAMPOS[k] || [k, ""])[1];
       cals.forEach((cal, j) => { const c = fila.getCell(3 + j), v = cal.inputs[k], e12 = k === "valor_no_upstream_musd" && cal.inputs.ebitda_no_up_12m_musd?.[0], L = col(2 + j);
         // refinación (7.4): EBITDA de 12 meses × (1 − impuesto) × factor de descuento, con el WACC y el horizonte de esta misma columna
-        c.value = e12 ? fx(`${e12}*(1-${L}${R_.tasa_impuesto})*${L}${C.v}/${L}${C.q}`, v[0]) : (v ? v[0] : null); c.numFmt = pct ? "0.00%" : "#,##0.00"; });
+        c.value = e12 ? fx(`${L}${CN.e12}*(1-${L}${R_.tasa_impuesto})*${L}${C.v}/${L}${C.q}`, v[0]) : (v ? v[0] : null); c.numFmt = pct ? "0.00%" : "#,##0.00"; });
     });
     ws.getCell(`A${C.wacc - 1}`).value = "Cálculo (fórmulas sobre los insumos de arriba)"; Object.assign(ws.getCell(`A${C.wacc - 1}`), SUB);
     const R = R_;
@@ -86,6 +94,34 @@
     ws.getCell(`A${o0}`).value = "Origen de cada dato"; Object.assign(ws.getCell(`A${o0}`), SUB);
     ORDEN.forEach((k, i) => { const fila = ws.getRow(o0 + 1 + i); fila.getCell(1).value = (CAMPOS[k] || [k])[0];
       cals.forEach((cal, j) => { const v = cal.inputs[k]; fila.getCell(3 + j).value = v ? (ORIGEN[v[1]] || v[1]) : "—"; }); });
+    // banda de sensibilidad (8.3): los costos cambian B, B0 y Pk; el WACC ± se aplica rueda a rueda en la hoja Banda
+    const S = window.BIStats, jB = ext.j, rg = d => `Banda!$${colB(jB, d)}$5:$${colB(jB, d)}$${ext.ult}`, rgNb = rg(6);
+    ws.getCell(`A${CB.t}`).value = "Banda de sensibilidad (8.3): coeficientes con costos ±. El WACC ± se aplica rueda a rueda en la hoja Banda"; Object.assign(ws.getCell(`A${CB.t}`), SUB);
+    const cst = c => `(${c}${R.lifting_usd_boe}+${c}${R.otros_costos_usd_boe})`, dVal = (c, s1) => `${s1}${c}${C.v}*${PBANDA.c}*${cst(c)}`;
+    [[CB.bM, "B con costos −", "MUSD", c => `${c}${C.B}${dVal(c, "+")}*(1-${c}${R.tasa_impuesto})`, -1, "B"], [CB.b0M, "B0 con costos −", "MUSD", c => `${c}${C.B0}${dVal(c, "+")}`, -1, "B0"], [CB.pM, "Pk con costos −", "USD/bbl", c => `${c}${C.pk}-${PBANDA.c}*${cst(c)}/${c}${C.a}`, -1, "pk"],
+     [CB.bP, "B con costos +", "MUSD", c => `${c}${C.B}${dVal(c, "-")}*(1-${c}${R.tasa_impuesto})`, 1, "B"], [CB.b0P, "B0 con costos +", "MUSD", c => `${c}${C.B0}${dVal(c, "-")}`, 1, "B0"], [CB.pP, "Pk con costos +", "USD/bbl", c => `${c}${C.pk}+${PBANDA.c}*${cst(c)}/${c}${C.a}`, 1, "pk"]]
+      .forEach(([f, lab, u, fm, sg, cl]) => { const fila = ws.getRow(f); fila.getCell(1).value = lab; fila.getCell(2).value = u;
+        cals.forEach((cal, j) => { const c = col(2 + j), cell = fila.getCell(3 + j); cell.value = fx(fm(c), S.coef(S.conCostos(cal._x, sg * S.BANDA.costos))[cl]); cell.numFmt = "#,##0.00"; }); });
+    [[CB.imp, "Implícito medio con este balance, en el rango", "USD/bbl", 0, "imp"], [CB.min, "Banda: mínimo medio", "USD/bbl", 1, "min"], [CB.max, "Banda: máximo medio", "USD/bbl", 2, "max"], [CB.fuera, "Ruedas con el CO1 fuera de la banda", "%", 5, "fuera", "0%"]]
+      .forEach(([f, lab, u, d, cl, nf]) => { const fila = ws.getRow(f); fila.getCell(1).value = lab; fila.getCell(2).value = u;
+        cals.forEach((cal, j) => { const cell = fila.getCell(3 + j), v = ext.porBal[cal.periodo]?.[cl];
+          cell.value = fx(`IFERROR(AVERAGEIF(${rgNb},${j + 1},${rg(d)}),"")`, v ?? ""); cell.numFmt = nf || "#,##0.00"; }); });
+    // valor no upstream (7.4), solo en las integradas
+    if (cals.some(k => k.inputs.ebitda_no_up_12m_musd?.[0])) {
+      const hR = `'Rango ${e.id}'!`, rc = l => `${hR}$${l}$5:$${l}$${4 + ext.n}`;
+      ws.getCell(`A${CN.t}`).value = "Valor no upstream (7.4): EBITDA de 12 meses × (1 − impuesto) × V/Q, sin múltiplo ni valor terminal"; Object.assign(ws.getCell(`A${CN.t}`), SUB);
+      ws.getCell(`A${CN.seg}`).value = "Segmentos incluidos: " + (SEGMENTOS[e.id] || "—"); Object.assign(ws.getCell(`A${CN.seg}`), GRIS);
+      const fi = { [CN.e12]: ["EBITDA de 12 meses de esos segmentos (editable)", "MUSD"], [CN.base]: ["Base del EBITDA", "—"], [CN.fd]: ["Factor de descuento V/Q (años equivalentes)", "años"],
+        [CN.val]: ["Valor no upstream que entra en B", "MUSD"], [CN.cap]: ["Capitalización media mientras rige el balance", "MUSD"], [CN.rat]: ["Valor no upstream / capitalización", "%"] };
+      Object.entries(fi).forEach(([f, [lab, u]]) => { ws.getCell(+f, 1).value = lab; ws.getCell(+f, 2).value = u; });
+      cals.forEach((cal, j) => { const c = col(2 + j), cc = 3 + j, q = ext.porBal[cal.periodo] || {}, n_ = cal.ebitda_trimestres;
+        ws.getCell(CN.e12, cc).value = cal.inputs.ebitda_no_up_12m_musd?.[0] ?? null; ws.getCell(CN.e12, cc).numFmt = "#,##0.00";
+        ws.getCell(CN.base, cc).value = n_ === 4 ? "12 meses" : n_ ? `${n_} trim. anualizados` : "—"; ws.getCell(CN.base, cc).alignment = { wrapText: true };
+        ws.getCell(CN.fd, cc).value = fx(`${c}${C.v}/${c}${C.q}`, cal._k.V / cal._k.Q); ws.getCell(CN.fd, cc).numFmt = "0.00";
+        ws.getCell(CN.val, cc).value = fx(`${c}${R.valor_no_upstream_musd}`, cal.inputs.valor_no_upstream_musd?.[0]); ws.getCell(CN.val, cc).numFmt = "#,##0.00";
+        ws.getCell(CN.cap, cc).value = fx(`IFERROR(AVERAGEIF(${rc("E")},${j + 1},${rc("C")}),"")`, q.cap ?? ""); ws.getCell(CN.cap, cc).numFmt = "#,##0";
+        ws.getCell(CN.rat, cc).value = fx(`IFERROR(${c}${CN.val}/${c}${CN.cap},"")`, q.cap ? cal.inputs.valor_no_upstream_musd?.[0] / q.cap : ""); ws.getCell(CN.rat, cc).numFmt = "0%"; });
+    }
     for (let j = 0; j < cals.length; j++) ws.getColumn(3 + j).width = 13;
   }
 
@@ -239,7 +275,7 @@
       CALS[e.id] = e.cals;
       const s = hi.series[e.id], porP = Object.fromEntries(e.cals.map(k => [k.periodo, k._x]));
       Di[e.id] = {};
-      s.fecha.forEach((f, i) => { if (f < desde || f > hasta) return; const p = s.periodos[s.cal_idx[i]]; if (porP[p]) Di[e.id][f] = { cap: s.cap_musd[i], bal: p, xl: S.despejeDia(porP[p], s.crp[i], s.cap_musd[i]), web: s.implicito[i] }; });
+      s.fecha.forEach((f, i) => { if (f < desde || f > hasta) return; const p = s.periodos[s.cal_idx[i]]; if (porP[p]) Di[e.id][f] = { cap: s.cap_musd[i], bal: p, crp: s.crp[i], xl: S.despejeDia(porP[p], s.crp[i], s.cap_musd[i]), web: s.implicito[i], bd: S.bandaDia(porP[p], s.crp[i], s.cap_musd[i]), webMin: s.banda_min[i], webMax: s.banda_max[i] }; });
     });
     const fechas = [...new Set([...emps.flatMap(e => Object.keys(Di[e.id])), ...Object.keys(co1).filter(f => f >= desde && f <= hasta)])].sort();
 
@@ -269,6 +305,7 @@
      ["• Dashboard: indicadores y gráficos de la prima y del Brent implícito. Cada gráfico lee las celdas de las otras hojas."],
      ["• Consistencia: prueba de la hipótesis (6 y 6.1): casos, regresos y comparación con la referencia simulada, por empresa, región y estructura, más descripción de la prima, comparación entre pares, dinámica y sensibilidades."],
      ["• Implícitos: por día, CO1, y para cada empresa capitalización (MUSD), balance vigente, Brent implícito (fórmula) y prima = implícito − CO1; diferencias de prima entre pares."],
+     ["• Banda: banda de sensibilidad diaria de cada empresa (8.3), con los supuestos editables y si el CO1 queda fuera; las columnas de cálculo se abren con el botón + de arriba."],
      ["• Resumen: signo, magnitud y variabilidad de la prima (objetivo a)."],
      ["• Una hoja por empresa: insumos de cada balance y cálculo con fórmulas (editables)."],
      ["• Rango <empresa>: rango habitual, casos y regresos rueda a rueda, con fórmulas."],
@@ -277,7 +314,8 @@
      ["Método (forma cerrada del motor)", { bold: true }],
      ["Producción plana Q hasta agotar las reservas probadas (máx. 30 años), flujos a mitad de año descontados al WACC → volumen descontado V."],
      ["Valor del patrimonio = A·P + B, con A = V·a·(1−t) y B = V·(m·(1−t) + t·DD&A − capex/boe) + no-upstream − deuda neta − minoritarios."],
-     ["Integradas: no-upstream = EBITDA de 12 meses de esos segmentos × (1−t) × V/Q, con el WACC y el horizonte del upstream, sin múltiplo ni valor terminal (7.4). El EBITDA está escrito dentro de la fórmula de cada celda."],
+     ["Integradas: no-upstream = EBITDA de 12 meses de esos segmentos × (1−t) × V/Q, con el WACC y el horizonte del upstream, sin múltiplo ni valor terminal (7.4). El bloque \"Valor no upstream\" de la hoja de cada integrada muestra los segmentos, el EBITDA editable, los trimestres que lo forman (si hay menos de 4 publicados, se anualiza su promedio), V/Q y el cociente contra la capitalización."],
+     ["Banda de sensibilidad (8.3): recalcula el implícito de cada rueda con el WACC ±1 punto y con los costos (lifting y otros) ±10 %, uno por vez; la banda va del menor al mayor de los cuatro. Solo fuera de ella la prima se lee como información del mercado (7.1). Cubre los parámetros, no el sesgo de especificación. El WACC también mueve el valor no upstream; los costos solo tocan el upstream."],
      ["Riesgo país (7.4 y 8.2): entre balances varían la capitalización, el CO1 y el riesgo país. La hoja de cada empresa muestra el WACC con el riesgo país del día de publicación; cada rueda usa el suyo (columna Riesgo país de las hojas Rango, editable). Argentina: EMBI (ArgentinaDatos). Brasil: CDS a 5 años (Bloomberg). Norteamérica: 0."],
      ["Brent implícito P* = (capitalización − B) / A. Si P* < Pk (base imponible negativa), se usa el tramo sin impuesto: P* = (capitalización − B0) / A0."],
      ["a = participación del crudo × (1 − diferencial) × (1 − regalías − retenciones); m = margen por boe sin crudo (gas/NGL a precio fijo − lifting − otros costos)."],
@@ -295,7 +333,13 @@
     wb.addWorksheet("Consistencia", { views: [{ state: "frozen", ySplit: 2 }] });
 
     // --- hojas por empresa
-    emps.forEach(e => hojaEmpresa(wb, e.info, CALS[e.id], CAMPOS));
+    const ultB = 4 + fechas.length, media = a => a.length ? S.media(a) : undefined;
+    emps.forEach((e, j) => {
+      const porBal = {};
+      e.cals.forEach((k, ik) => { const ds = fechas.map(f => Di[e.id][f]).filter(d => d && d.bal === k.periodo), caps = e.cap.filter((_, t) => e.kIdx[t] === ik), conCo1 = fechas.filter(f => Di[e.id][f]?.bal === k.periodo && co1[f] != null).map(f => [Di[e.id][f].bd, co1[f]]);
+        porBal[k.periodo] = { imp: media(ds.map(d => d.xl)), min: media(ds.map(d => d.bd.min)), max: media(ds.map(d => d.bd.max)), fuera: media(conCo1.map(([b, c]) => c >= b.min && c <= b.max ? 0 : 1)), cap: media(caps) }; });
+      hojaEmpresa(wb, e.info, CALS[e.id], CAMPOS, { j, ult: ultB, n: e.n, porBal });
+    });
 
     // --- Implícitos
     const im = wb.addWorksheet("Implícitos", { views: [{ state: "frozen", xSplit: 2, ySplit: 4 }] });
@@ -331,10 +375,53 @@
     PARES.forEach((_, j) => im.getColumn(cPar0 + j).width = 11);
     const ult = 4 + fechas.length, rIm = c => `'Implícitos'!$${c}$5:$${c}$${ult}`;
 
+    // --- Banda de sensibilidad (8.3)
+    const bs = wb.addWorksheet("Banda", { views: [{ state: "frozen", xSplit: 2, ySplit: 4 }], properties: { outlineLevelCol: 1 } });
+    bs.getCell("A1").value = "Banda de sensibilidad del Brent implícito (8.3 y 7.1): la prima solo se lee como información del mercado si el CO1 queda fuera de la banda"; bs.getCell("A1").font = { bold: true, size: 13 };
+    bs.getCell("A2").value = "WACC ±"; bs.getCell("B2").value = S.BANDA.wacc; bs.getCell("B2").numFmt = "0.00%"; bs.getCell("C2").value = "Costos ±"; bs.getCell("D2").value = S.BANDA.costos; bs.getCell("D2").numFmt = "0%";
+    ["A2", "C2"].forEach(c => bs.getCell(c).font = { bold: true }); ["B2", "D2"].forEach(c => bs.getCell(c).fill = SUB.fill);
+    bs.getCell("E2").value = "Supuestos preliminares de 8.3: se pueden editar. Cada rueda usa el balance vigente y su riesgo país; se varía un supuesto por vez."; Object.assign(bs.getCell("E2"), GRIS);
+    bs.getCell("A3").value = "Fuera = 1: el CO1 queda fuera de la banda. Las columnas de cálculo de cada empresa (n.º de balance, WACC del día, ρ = V del escenario / V del balance y los cuatro escenarios) están agrupadas."; Object.assign(bs.getCell("A3"), GRIS);
+    const cabB = ["Fecha", "CO1 (USD/bbl)"];
+    emps.forEach(e => cabB.push(`${e.id} implícito`, `${e.id} banda mín.`, `${e.id} banda máx.`, `${e.id} prima mín.`, `${e.id} prima máx.`, `${e.id} fuera`, `${e.id} n.º bal.`, `${e.id} WACC día`, `${e.id} ρ base`, `${e.id} ρ WACC −`, `${e.id} ρ WACC +`, `${e.id} WACC −`, `${e.id} WACC +`, `${e.id} costos −`, `${e.id} costos +`));
+    bs.getRow(4).values = cabB; bs.getRow(4).eachCell(c => Object.assign(c, HEAD)); bs.getRow(4).alignment = { wrapText: true, vertical: "middle" }; bs.getRow(4).height = 46;
+    bs.getColumn(1).width = 11; bs.getColumn(2).width = 10;
+    emps.forEach((e, j) => { for (let d = 0; d < BK; d++) { const c = bs.getColumn(3 + BK * j + d); c.width = 9.5; if (d >= 6) { c.outlineLevel = 1; c.hidden = true; } } });
+    fechas.forEach((f, i) => {
+      const r = 5 + i, fila = bs.getRow(r), hayCo1 = co1[f] != null;
+      fila.getCell(1).value = fechaXL(f); fila.getCell(1).numFmt = "dd/mm/yyyy";
+      if (hayCo1) { fila.getCell(2).value = fx(`'Implícitos'!$B$${r}`, co1[f]); fila.getCell(2).numFmt = "0.00"; }
+      emps.forEach((e, j) => {
+        const d = Di[e.id][f]; if (!d) return;
+        const c0 = 3 + BK * j, L = k => `$${colB(j, k)}${r}`, id = e.id, t = e.fechas.indexOf(f), cal = e.cals.find(k => k.periodo === d.bal), x = cal._x, k0 = cal._k;
+        const ix = q => `INDEX('${id}'!$C$${q}:$Z$${q},${L(6)})`, capI = `'Implícitos'!$${col(ubic[id] - 1)}$${r}`, crpD = t >= 0 ? `'Rango ${id}'!$Y$${5 + t}` : d.crp;
+        const deuda = `(${ix(R_.deuda_neta_musd)}+${ix(R_.minoritarios_musd)})`;
+        const rho = w => `(${ix(C.q)}*(1+${w})^0.5*(1-(1+${w})^(-${ix(C.n)}))/${w}+${ix(C.rem)}*(1+${w})^(-(${ix(C.n)}+0.5)))/${ix(C.v)}`;
+        const esc_ = (rh, fB, fB0, fPk) => { const p1 = `(${capI}+${deuda}-(${ix(fB)}+${deuda})*${rh})/(${ix(C.A)}*${rh})`, p0 = `(${capI}+${deuda}-(${ix(fB0)}+${deuda})*${rh})/(${ix(C.A0)}*${rh})`; return `IF(${p1}<${ix(fPk)},${p0},${p1})`; };
+        const V_ = y => S.coef({ ...y, crp: d.crp }).V / k0.V;
+        fila.getCell(c0 + 6).value = fx(`MATCH('Implícitos'!$${col(ubic[id])}$${r},'${id}'!$C$4:$Z$4,0)`, e.cals.indexOf(cal) + 1);
+        fila.getCell(c0 + 7).value = fx(`${ix(C.wacc)}+(1-${ix(R_.peso_deuda)})*${ix(R_.lambda_crp)}*(${crpD}-${ix(R_.crp)})`, S.coef({ ...x, crp: d.crp }).r); fila.getCell(c0 + 7).numFmt = "0.00%";
+        fila.getCell(c0 + 8).value = fx(rho(L(7)), V_(x));
+        fila.getCell(c0 + 9).value = fx(rho(`(${L(7)}-${PBANDA.w})`), V_(S.conWacc(x, -S.BANDA.wacc)));
+        fila.getCell(c0 + 10).value = fx(rho(`(${L(7)}+${PBANDA.w})`), V_(S.conWacc(x, S.BANDA.wacc)));
+        [8, 9, 10].forEach(k => fila.getCell(c0 + k).numFmt = "0.0000");
+        [esc_(L(9), C.B, C.B0, C.pk), esc_(L(10), C.B, C.B0, C.pk), esc_(L(8), CB.bM, CB.b0M, CB.pM), esc_(L(8), CB.bP, CB.b0P, CB.pP)].forEach((fm, k) => { fila.getCell(c0 + 11 + k).value = fx(fm, d.bd.v[k]); fila.getCell(c0 + 11 + k).numFmt = "0.00"; });
+        const esc4 = `${L(11)}:${L(14)}`;
+        fila.getCell(c0).value = fx(`'Implícitos'!$${col(ubic[id] + 1)}$${r}`, d.xl);
+        fila.getCell(c0 + 1).value = fx(`MIN(${esc4})`, d.bd.min); fila.getCell(c0 + 2).value = fx(`MAX(${esc4})`, d.bd.max);
+        if (hayCo1) {
+          fila.getCell(c0 + 3).value = fx(`${L(1)}-$B${r}`, d.bd.min - co1[f]); fila.getCell(c0 + 4).value = fx(`${L(2)}-$B${r}`, d.bd.max - co1[f]);
+          fila.getCell(c0 + 5).value = fx(`IF(AND($B${r}>=${L(1)},$B${r}<=${L(2)}),0,1)`, co1[f] >= d.bd.min && co1[f] <= d.bd.max ? 0 : 1);
+        }
+        [0, 1, 2, 3, 4].forEach(k => fila.getCell(c0 + k).numFmt = "0.00");
+      });
+    });
+
     // --- Control
     const ct = wb.addWorksheet("Control", { views: [{ state: "frozen", xSplit: 1, ySplit: 4 }] });
     ct.getCell("A1").value = "Control: implícito de este Excel vs. implícito de la web (motor por bisección, tolerancia 0,005, más el redondeo de la web a 2 decimales)"; ct.getCell("A1").font = { bold: true };
-    ct.getRow(4).values = ["Fecha", ...emps.flatMap(e => [`${e.id} web`, `${e.id} Excel − web`])];
+    const cB0 = 2 + 2 * emps.length;   // a la derecha, la banda: mayor diferencia entre los extremos del Excel y los de la web
+    ct.getRow(4).values = ["Fecha", ...emps.flatMap(e => [`${e.id} web`, `${e.id} Excel − web`]), ...emps.flatMap(e => [`${e.id} banda mín. web`, `${e.id} banda máx. web`, `${e.id} banda: máx. |Excel − web|`])];
     ct.getRow(4).eachCell(c => Object.assign(c, HEAD)); ct.getColumn(1).width = 11;
     fechas.forEach((f, i) => {
       const r = 5 + i, fila = ct.getRow(r); fila.getCell(1).value = fechaXL(f); fila.getCell(1).numFmt = "dd/mm/yyyy";
@@ -342,6 +429,10 @@
         const cw = 2 + 2 * j, ci = col(ubic[e.id] + 1), cwL = col(cw - 1);
         fila.getCell(cw).value = d.web; fila.getCell(cw).numFmt = "0.00";
         fila.getCell(cw + 1).value = fx(`'Implícitos'!${ci}${r}-${cwL}${r}`, d.xl - d.web); fila.getCell(cw + 1).numFmt = "0.000"; });
+      emps.forEach((e, j) => { const d = Di[e.id][f]; if (!d || d.webMin == null || d.webMax == null) return;
+        const cw = cB0 + 3 * j, lMin = col(cw - 1), lMax = col(cw);
+        fila.getCell(cw).value = d.webMin; fila.getCell(cw + 1).value = d.webMax; fila.getCell(cw).numFmt = fila.getCell(cw + 1).numFmt = "0.00";
+        fila.getCell(cw + 2).value = fx(`MAX(ABS(Banda!$${colB(j, 1)}$${r}-${lMin}${r}),ABS(Banda!$${colB(j, 2)}$${r}-${lMax}${r}))`, Math.max(Math.abs(d.bd.min - d.webMin), Math.abs(d.bd.max - d.webMax))); fila.getCell(cw + 2).numFmt = "0.000"; });
     });
 
     // --- Resumen (objetivo a)
@@ -368,6 +459,18 @@
         else cell.value = fx(f_(`'Implícitos'!${ci}5:${ci}${ult}`), js(q === "i" ? impls[e.id] : primas[e.id]));
       });
     });
+
+    // banda de sensibilidad (8.3), en el mismo cuadro
+    const rB0_ = 5 + met.length;
+    rs.getCell(rB0_, 1).value = "Banda de sensibilidad (8.3): hoja Banda"; Object.assign(rs.getCell(rB0_, 1), SUB);
+    const rgB = (j, d) => `Banda!$${colB(j, d)}$5:$${colB(j, d)}$${ult}`, datB = e => fechas.map(f => Di[e.id][f]).filter(Boolean), conCo = e => fechas.filter(f => Di[e.id][f] && co1[f] != null).map(f => ({ b: Di[e.id][f].bd, c: co1[f] }));
+    [["Ancho medio de la banda", "0.00", j => `AVERAGE(${rgB(j, 2)})-AVERAGE(${rgB(j, 1)})`, e => S.media(datB(e).map(d => d.bd.max - d.bd.min))],
+     ["Prima con el extremo inferior (media)", "0.00", j => `AVERAGE(${rgB(j, 3)})`, e => S.media(conCo(e).map(x => x.b.min - x.c))],
+     ["Prima con el extremo superior (media)", "0.00", j => `AVERAGE(${rgB(j, 4)})`, e => S.media(conCo(e).map(x => x.b.max - x.c))],
+     ["% de ruedas con el CO1 fuera de la banda", "0%", j => `AVERAGE(${rgB(j, 5)})`, e => S.media(conCo(e).map(x => x.c >= x.b.min && x.c <= x.b.max ? 0 : 1))],
+     ["Control banda: máx. |Excel − web|", "0.000", j => { const l = col(cB0 + 3 * j + 1); return `MAX(Control!$${l}$5:$${l}$${ult})`; }, e => Math.max(...datB(e).filter(d => d.webMin != null && d.webMax != null).map(d => Math.max(Math.abs(d.bd.min - d.webMin), Math.abs(d.bd.max - d.webMax))))]]
+      .forEach(([lab, nf, fm, js], i) => { const fila = rs.getRow(rB0_ + 1 + i); fila.getCell(1).value = lab; filaRs[lab] = rB0_ + 1 + i;
+        emps.forEach((e, j) => { const cell = fila.getCell(2 + j); cell.value = fx(fm(j), js(e)); cell.numFmt = nf; }); });
 
     // --- Rango por empresa y Simulación
     const RG = {};
@@ -543,7 +646,11 @@
     emps.forEach((e, i) => { const q = RG[e.id], h = `'Rango ${e.id}'!`, rg = c => `${h}$${c}$${q.r0}:$${c}$${q.r1}`, nm = c => `${h}$${c}$4`, cC = (i % 3) * 8, fC = fg + Math.floor(i / 3) * 16;
       poner({ titulo: `${e.id}: prima, rango habitual y casos`, tipo: "line", fmtY: "0", mesesEje: 6, series: [{ nombreRef: nm("F"), cat: rg("A"), val: rg("F"), color: COLORES[e.id] }, { nombreRef: nm("G"), cat: rg("A"), val: rg("G"), color: "888888", ancho: 9525 }, { nombreRef: nm("I"), cat: rg("A"), val: rg("I"), color: "BBBBBB", ancho: 9525, guion: "dash" }, { nombreRef: nm("J"), cat: rg("A"), val: rg("J"), color: "BBBBBB", ancho: 9525, guion: "dash" }, { nombreRef: nm("W"), cat: rg("A"), val: rg("W"), color: "D62728", soloMarca: true }] }, cC, fC, cC + 8, fC + 15); });
 
-    const orden = ["Leeme", "Dashboard", "Consistencia", "Implícitos", "Resumen", ...emps.map(e => e.id), ...emps.map(e => "Rango " + e.id), "Simulación", "Control"];
+    const fgB = fg + Math.ceil(emps.length / 3) * 16, catB = `Banda!$A$5:$A$${ult}`, serB = (l, color, extra) => ({ nombreRef: `Banda!$${l}$4`, cat: catB, val: `Banda!$${l}$5:$${l}$${ult}`, color, ...extra });
+    emps.forEach((e, j) => { const cC = (j % 3) * 8, fC = fgB + Math.floor(j / 3) * 16;
+      poner({ titulo: `${e.id}: implícito, banda de sensibilidad y CO1 (USD/bbl)`, tipo: "line", fmtY: "0", mesesEje: 6, series: [serB(colB(j, 0), COLORES[e.id]), serB(colB(j, 1), "999999", { ancho: 9525, guion: "dash" }), serB(colB(j, 2), "999999", { ancho: 9525, guion: "dash" }), serB("B", "111111", { ancho: 19050 })] }, cC, fC, cC + 8, fC + 15); });
+
+    const orden = ["Leeme", "Dashboard", "Consistencia", "Implícitos", "Banda", "Resumen", ...emps.map(e => e.id), ...emps.map(e => "Rango " + e.id), "Simulación", "Control"];
     orden.forEach((n, i) => { const w = wb.getWorksheet(n); if (w) w.orderNo = i; });
     wb.views = [{ activeTab: 1 }];
     const buf0 = await wb.xlsx.writeBuffer();

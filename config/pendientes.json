@@ -11,6 +11,10 @@
       "texto": "Los estados contables de las 6 salen de la terminal Bloomberg (inputs/bloomberg/<ID>.csv) y pisan a EDGAR/yfinance trimestre a trimestre; EDGAR completa los operativos de VIST, YPF, EOG y PBR. Suncor reemplaza a ConocoPhillips (panel del TIF). Suncor y PRIO no traen operativos en Bloomberg: se cargaron de sus releases (SEC 6-K / RI de PRIO) con link por dato en <ID>_operativos.csv. Desde el 04/11/2026 también el CO1 histórico y el CDS de Brasil."
     },
     {
+      "titulo": "Excel: banda de sensibilidad y valor no upstream (04/11/2026)",
+      "texto": "La descarga suma la hoja Banda (8.3): el implícito de cada rueda con WACC ±1 punto y costos ±10 %, supuestos editables, si el CO1 queda fuera y el control contra la web. La hoja de cada integrada muestra cómo se forma el valor no upstream: segmentos, EBITDA de 12 meses editable, trimestres anualizados, V/Q y cociente contra la capitalización."
+    },
+    {
       "titulo": "Excel: dashboard y prueba de la hipótesis (03/11/2026)",
       "texto": "La descarga suma una pestaña Dashboard (13 gráficos nativos conectados a celdas) y una pestaña Consistencia con la regla de 6.1 en fórmulas, la referencia simulada sin reversión, descripción de la prima, comparación entre pares, dinámica y sensibilidades."
     },
