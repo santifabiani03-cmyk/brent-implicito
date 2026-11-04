@@ -38,3 +38,16 @@ Los ingresos por campo suman el total de ingresos_mm en los 12 trimestres (dif. 
 1. ingresos_mm, 2026-06-30 = 1389.982504 (Income Statement, fila 13 "Revenue", col L).
 2. deuda_mm, 2026-06-30 = 4927.027613 (Balance Sheet, filas 49 "ST Debt" 921.4851195 + 58 "LT Debt" 4005.542493, col L).
 3. ebitda_mm, 2025-12-31 = 356.746568 (Income Statement, fila 60 "EBITDA", col N).
+
+## Precio FOB, regalías e impuestos (releases de resultados, `PRIO_operativos.csv`)
+- `p_crudo_fob`: la empresa publica el FOB en texto solo en 2T24, 4T25, 1T26 y 2T26 (y 3T25 como 68,32 - 4,17). Para el resto se calcula con su propia tabla:
+  Receita Total - FOB / Offtakes. La misma cuenta reproduce los cinco publicados (el mayor desvío es de redondeo: 1T26 da 75,345 contra 75,34).
+- Cada valor sale del release de ese trimestre y lleva su fecha de publicación, así no hay anticipación. Los releases posteriores reexpresan comparativos
+  (2T24: FOB 699.875 en el original, 707.387 en el de 2T25): se usa el original.
+- Definición única, FOB antes de impuestos: Receita Total menos comercialización. Los originales de 3T23 y 4T23 restan también los impuestos en esa línea
+  (791.788 y 633.765); ahí se rearma con sus propias filas (802.950 y 638.286), que es lo que muestran los comparativos de 3T24 y 4T24.
+- `regalias_mm`: fila "Royalties", desde 1T25 "Royalties e Participação Especial". La participación especial no se puede separar. El cociente es sobre el ingreso FOB
+  (`ingresos_fob_mm`) y es irregular: 1T26 da 6,4 % por el estorno de la provisión de 4T25, 2T26 da 13,4 % por la participación especial de Peregrino.
+- `retenciones_mm`: fila "Impostos de venda interna e exportação". Mezcla impuestos de venta interna con el de exportación; solo 2T26 (8,5 %) refleja el impuesto
+  de exportación vigente desde 12/03/2026. En 1T24 y 2T24 el release no trae monto (se carga 0).
+- Gas: la empresa informa producción y ventas solo en barriles, sin línea de venta de gas. `prod_otros_kboed` queda en 0 porque no está informado.

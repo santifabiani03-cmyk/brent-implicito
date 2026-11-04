@@ -7,10 +7,10 @@ from engine import model
 BOE_MMBTU = 5.8   # 1 boe ≈ 5,8 MMBtu (convención de industria)
 
 
-def _brent_trimestre(spot: list, fin: str):
+def _brent_trimestre(co1: list, fin: str):
     f = dt.date.fromisoformat(fin)
     ini = dt.date(f.year, f.month - 2, 1)
-    vals = [v for d, v in spot if ini.isoformat() <= d <= fin]
+    vals = [v for d, v in co1 if ini.isoformat() <= d <= fin]
     return (sum(vals) / len(vals), len(vals)) if vals else (None, 0)
 
 
@@ -36,7 +36,7 @@ def poner_refinacion(ins: dict, eb12: float | None, n: int, fuente) -> None:
                                      "nota": f"EBITDA 12 m ({eb12:,.0f}) × (1 − impuesto) × factor de descuento ({model.factor_descuento(i):.2f}), con el WACC y el horizonte del upstream, sin múltiplo ni valor terminal (7.4)"}
 
 
-def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | None, sem: dict, edgar_all: dict | None = None) -> dict:
+def derivar(c: dict, ed: dict, y: dict, macro: dict, co1: list, cap: float | None, sem: dict, edgar_all: dict | None = None) -> dict:
     out = {}
     semv = lambda k: (sem.get(k) or {}).get("valor")
     # regalías: impuestos y volúmenes del mismo período (en un 10-K, el año); el resto usa el trimestre si el release lo trae
@@ -101,11 +101,11 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
             f"1 − Medanito/Brent (SE, promedio {meses[0]['mes']} a {meses[-1]['mes']}): Vista vende 100 % a paridad de exportación, el Medanito es su referencia")
     else:
         pc = V.get("p_crudo") or (sem.get("p_crudo") or {}).get("valor")
-        br, n = _brent_trimestre(spot, per) if per else (None, 0)
+        br, n = _brent_trimestre(co1, per) if per else (None, 0)
         if pc and br:
             fuente = url("p_crudo") or (sem.get("p_crudo") or {}).get("fuente")
             put("diferencial_pct", 1 - pc / br, "derivado", fuente,
-                f"1 − precio realizado ({pc:.2f}) / Brent Dated promedio del trimestre ({br:.2f}, FRED, {n} ruedas)")
+                f"1 − precio realizado ({pc:.2f}) / CO1 promedio del trimestre ({br:.2f}, {n} ruedas): la misma referencia que la prima")
         elif "diferencial_anual" in (ed.get("valores") or {}):
             da = ed["valores"]["diferencial_anual"]
             put("diferencial_pct", da["valor"], "derivado", da["fuente"],
@@ -123,6 +123,9 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
                       + VA.get("gas_mmcfd", 0) * VA.get("p_gas_mcf", 0)) / 1000
         put("regalias_pct", V["toti_musd"] / ing, "derivado", url("toti_musd"),
             "Impuestos distintos de ganancias / ingreso upstream (volumen × precio). Los volúmenes SEC ya son netos de regalías")
+    elif "regalias_kusd" in V and "ingresos_fob_musd" in V:
+        put("regalias_pct", V["regalias_kusd"] / 1000 / V["ingresos_fob_musd"], "derivado", url("regalias_kusd"),
+            "Royalties y participación especial / Receita Total - FOB del trimestre (release)")
     elif "regalias_kusd" in V and V.get("ingresos_musd"):
         put("regalias_pct", V["regalias_kusd"] / 1000 / V["ingresos_musd"], "derivado", url("regalias_kusd"),
             "Regalías y otros / ingresos totales del trimestre (release)")
@@ -138,9 +141,9 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
             "Regalía estándar 10 % (Lei 9.478/1997, art. 47); no incluye participación especial")
 
     # ---------- derechos de exportación
-    if "retenciones_musd" in V and (V.get("ingresos_bb_musd") or V.get("ingresos_musd")):
+    if "retenciones_musd" in V and (V.get("ingresos_fob_musd") or V.get("ingresos_bb_musd") or V.get("ingresos_musd")):
         de_bb = ed["valores"]["retenciones_musd"].get("doc") == "bloomberg" and V.get("ingresos_bb_musd")
-        ing_r = V["ingresos_bb_musd"] if de_bb else V.get("ingresos_musd")   # numerador y denominador de la misma fuente
+        ing_r = V.get("ingresos_fob_musd") or (V["ingresos_bb_musd"] if de_bb else V.get("ingresos_musd"))   # numerador y denominador de la misma fuente
         put("retencion_pct", V["retenciones_musd"] / ing_r, "derivado", url("retenciones_musd"),
             "Derechos de exportación del trimestre / ingresos brutos")
     else:

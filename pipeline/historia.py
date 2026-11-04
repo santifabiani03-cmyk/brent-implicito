@@ -190,7 +190,8 @@ def main(desde: str = "2023-12-31"):
     px["PBR_PREF"] = serie_yahoo("PBR-A", inicio_px)
     fx = serie_yahoo("BRL=X", inicio_px)
     co1_bb = bloomberg.leer_co1()
-    brent_1l = {**serie_yahoo("BZ=F", inicio_px), **co1_bb}   # Bloomberg manda; Yahoo completa los días que faltan y lo posterior
+    inicio_co1 = (dt.date.fromisoformat(desde) - dt.timedelta(days=100)).isoformat()   # cubre el primer trimestre entero: el diferencial usa su promedio
+    brent_1l = {**serie_yahoo("BZ=F", inicio_co1), **co1_bb}   # Bloomberg manda; Yahoo completa los días que faltan y lo posterior
     spot = serie_fred("DCOILBRENTEU")
     rf = serie_fred("DGS10")
     rp = riesgo_pais.series()
@@ -219,7 +220,7 @@ def main(desde: str = "2023-12-31"):
         a = fin.get("acciones_bs")
         return a / 1e6 if a else None
 
-    calib, spot_l = {}, sorted(spot.items())
+    calib, co1_l = {}, sorted(brent_1l.items())
     for c in emps:
         cache = HIST / f"fin_{c['id']}.json"
         try:
@@ -257,7 +258,7 @@ def main(desde: str = "2023-12-31"):
             d = damo_para(pub)
             macro_q = {"rf": {"valor": al_dia(rf, pub) / 100, "fecha": pub, "fuente": "FRED DGS10"}, "damodaran": d, "argentina": ar,
                        "crp_dia": crp_dia(c["region"], rp, pub)}
-            cal = calibrar(c, q, ed, fin, macro_q, spot_l, al_dia(px[c["id"]], pub), al_dia(fx, pub), sem_q, memoria, acciones_ref, ebitdas)
+            cal = calibrar(c, q, ed, fin, macro_q, co1_l, al_dia(px[c["id"]], pub), al_dia(fx, pub), sem_q, memoria, acciones_ref, ebitdas)
             cal.update({"periodo": q, "publicado": pub, "docs": {k: v["url"] for k, v in (ed.get("docs") or {}).items()},
                         "fallas": ed.get("fallas", [])})
             lista.append(cal)

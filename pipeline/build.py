@@ -69,6 +69,7 @@ def main():
     macro = cargar("macro.json", {})
     cot = mercado.get("cotizaciones", {})
     serie = cargar("serie.json", {})
+    co1_hist = list(zip(serie.get("brent_1l", {}).get("fecha", []), serie.get("brent_1l", {}).get("valor", [])))
     rp = riesgo_pais.series()
     empresas = []
     for c in companias():
@@ -146,7 +147,7 @@ def main():
         if cap and mc_y and abs(cap / mc_y - 1) > 0.25:
             nota_cap = (nota_cap or "") + f" ⚠️ difiere >25 % de la capitalización de Yahoo ({mc_y:,.0f} MUSD): revisar acciones"
         # derivación desde EDGAR + macro (pisa a lo automático de baja prioridad y a las semillas; el equipo pisa todo)
-        der = derivar(c, ed_c, y, {**macro, "crp_dia": crp_dia(c["region"], rp, ahora_iso()[:10])}, (brent or {}).get("spot", []), cap, sem, edgar)
+        der = derivar(c, ed_c, y, {**macro, "crp_dia": crp_dia(c["region"], rp, ahora_iso()[:10])}, co1_hist, cap, sem, edgar)
         for k, v in der.items():
             if k in sem and v["origen"] == "supuesto":
                 continue

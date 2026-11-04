@@ -11,7 +11,8 @@ DIR = RAIZ / "inputs" / "bloomberg"
 FX_TICKER = {"BRL": "BRL=X", "CAD": "CAD=X", "ARS": "ARS=X"}
 # variable Bloomberg → clave de EDGAR que entiende derivar() (montos del trimestre en MUSD)
 A_EDGAR = {"ingresos_mm": "ingresos_musd", "dda_mm": "dda_musd", "sga_mm": "sga_musd", "opex_mm": "opex_musd",
-           "toti_mm": "toti_musd", "retenciones_mm": "retenciones_musd", "ebitda_no_up_mm": "ebitda_no_up_q"}
+           "toti_mm": "toti_musd", "retenciones_mm": "retenciones_musd", "ebitda_no_up_mm": "ebitda_no_up_q",
+           "ingresos_fob_mm": "ingresos_fob_musd"}   # PRIO: "Receita Total - FOB" de sus releases
 FISICAS = ("crudo_kbd", "bitumen_kbd", "ngl_kbd", "gas_mmcfd", "total_kboed", "reservas_mmboe", "reservas_crudo_mmbbl")
 PRECIOS = ("p_crudo", "p_ngl", "p_gas_mcf", "p_gas_mmbtu", "lifting_boe", "dda_boe")
 FLUJOS = ("ingresos_mm", "dda_mm", "sga_mm", "opex_mm", "toti_mm", "regalias_mm", "retenciones_mm", "capex_mm",

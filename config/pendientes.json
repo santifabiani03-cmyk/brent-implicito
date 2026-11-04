@@ -4,11 +4,11 @@
   "importante": [
     {
       "titulo": "Riesgo país diario (04/11/2026)",
-      "texto": "El WACC usa el diferencial soberano de cada rueda (7.4 y 8.2): EMBI en Argentina, CDS en Brasil y 0 en Norteamérica. Con los insumos corregidos, 139 de 231 desvíos regresan (60,2 %), con un umbral P95 de 58,2–58,6 %: se sostiene con poco margen."
+      "texto": "El WACC usa el diferencial soberano de cada rueda (7.4 y 8.2): EMBI en Argentina, CDS en Brasil y 0 en Norteamérica. Con los insumos corregidos y el diferencial contra el CO1, 140 de 233 desvíos regresan (60,1 %), con un umbral P95 de 58,2–58,7 %: se sostiene con poco margen."
     },
     {
       "titulo": "Datos Bloomberg (14/10/2026)",
-      "texto": "Los estados contables de las 6 salen de la terminal Bloomberg (inputs/bloomberg/<ID>.csv) y pisan a EDGAR/yfinance trimestre a trimestre; EDGAR completa los operativos de VIST, YPF, EOG y PBR. Suncor reemplaza a ConocoPhillips (panel del TIF). Suncor y PRIO no traen operativos en Bloomberg: se cargaron de sus releases (SEC 6-K / RI de PRIO) con link por dato en <ID>_operativos.csv."
+      "texto": "Los estados contables de las 6 salen de la terminal Bloomberg (inputs/bloomberg/<ID>.csv) y pisan a EDGAR/yfinance trimestre a trimestre; EDGAR completa los operativos de VIST, YPF, EOG y PBR. Suncor reemplaza a ConocoPhillips (panel del TIF). Suncor y PRIO no traen operativos en Bloomberg: se cargaron de sus releases (SEC 6-K / RI de PRIO) con link por dato en <ID>_operativos.csv. Desde el 04/11/2026 también el CO1 histórico y el CDS de Brasil."
     },
     {
       "titulo": "Excel: dashboard y prueba de la hipótesis (03/11/2026)",
@@ -20,7 +20,7 @@
     },
     {
       "titulo": "Todo el pipeline es automático",
-      "texto": "EDGAR (10-Q/10-K y releases 6-K) → producción, precios realizados, costos por boe, impuestos a la producción, EBITDA de segmentos. yfinance, SEC y CVM → capex, deuda, acciones. FRED y Damodaran → rf, ERP, riesgo país, betas, múltiplos. Secretaría de Energía → Medanito y regalías. Corre sola cada día hábil; cualquier campo se puede pisar."
+      "texto": "EDGAR (10-Q/10-K y releases 6-K) → producción, precios realizados, costos por boe, impuestos a la producción, EBITDA de segmentos. Bloomberg, yfinance, SEC y CVM → capex, deuda, acciones. FRED y Damodaran → rf, ERP y betas. ArgentinaDatos y Bloomberg → riesgo país. Secretaría de Energía → Medanito y regalías. Corre sola cada día hábil; cualquier campo se puede pisar."
     },
     {
       "titulo": "Serie histórica día por día",
@@ -40,7 +40,7 @@
     },
     {
       "titulo": "Referencia: CO1",
-      "texto": "La prima se calcula contra el primer futuro de Brent, con el CO12 como control (6.1 y 7.1). El CO1 histórico sale de Bloomberg; Yahoo BZ=F completa los días que faltan y lo posterior a la última exportación. El spot Dated y la curva quedan solo como comparación."
+      "texto": "La prima se calcula contra el primer futuro de Brent, con el CO12 como control (6.1 y 7.1). El CO1 histórico sale de Bloomberg; Yahoo BZ=F completa los días que faltan y lo posterior a la última exportación. El spot Dated y la curva quedan solo como comparación. El diferencial de realización también se mide contra el CO1."
     },
     {
       "titulo": "Fuentes y límites",
@@ -49,28 +49,22 @@
   ],
   "pendientes": [
     {
-      "tarea": "Entrega final: declarar en 8.1 y 8.2 que el riesgo país de Argentina sale del EMBI publicado por ArgentinaDatos y no de Bloomberg, explicar por qué (CDS con saltos y un hueco de cinco meses), que en Brasil es CDS y agregar la fuente a la bibliografía. Verificar el origen de la serie en esa API antes de citarla",
+      "tarea": "Texto de la entrega final: (1) declarar en 8.1 y 8.2 que Argentina sale del EMBI de ArgentinaDatos, por qué no del CDS de Bloomberg (saltos y un hueco de cinco meses), que Brasil es CDS, y citar la fuente tras verificar su origen; (2) explicar en 8.2 la refinación por flujos, sin múltiplo, y que los primeros balances se anualizan (1T24: 2 trimestres; 2T24: 3); (3) declarar el sesgo de nivel: el CO1 casi nunca cae dentro de la banda, y en YPF (horizonte de 5 a 7 años y WACC alto) la prima sale muy alta; (4) explicar en 7.2 que el diferencial se mide contra el CO1 promedio del trimestre y que puede ser negativo (EOG en 2T26: −1,5 %); (5) declarar en 8.1 que el FOB de PRIO se calcula como ingreso FOB sobre barriles vendidos de sus releases cuando no lo publica en texto",
       "prioridad": "alta",
       "estado": "pendiente",
       "area": "TIF"
     },
     {
-      "tarea": "La hipótesis se sostiene con poco margen: 139 de 231 (60,2 %) contra P95 de 58,2–58,6 % según la semilla, y por empresa casi nunca supera. Tratarla como un resultado débil al redactar, y correr de nuevo si cambian los datos",
+      "tarea": "Interpretar la hipótesis al redactar: se sostiene con poco margen (140 de 233, 60,1 %, contra P95 de 58,2–58,7 % según la semilla) y por empresa casi nunca supera. Además, la prima es muy persistente en nivel con un mismo balance (ρ de 0,977 a 1,000; vida media de 29 a 85 ruedas, y sin reversión apreciable en Vista), aunque los desvíos respecto de la banda móvil regresen. Correr de nuevo si cambian los datos",
       "prioridad": "alta",
       "estado": "pendiente",
       "area": "Metodología"
     },
     {
-      "tarea": "Decidir contra qué Brent se mide el diferencial de realización: hoy es el Dated promedio del trimestre, mientras la prima usa el CO1. En 2T26 difieren 6 USD/bbl (102,6 vs 96,7). Medirlo contra el CO1 da 137 de 230 (59,6 %)",
+      "tarea": "Definir contra qué Brent se mide el diferencial de realización — Resuelto (decisión del grupo, 04/11/2026): contra el CO1 promedio del trimestre, la misma referencia que la prima. Petrobras sigue con su dato anual del 20-F contra el Brent Dated anual.",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Metodología"
-    },
-    {
-      "tarea": "Entrega final: explicar en 8.2 cómo se valúa la refinación (flujos con el WACC y el horizonte del upstream, sin múltiplo) y anualizar los primeros balances de la ventana, que tienen menos de 4 trimestres (1T24: 2; 2T24: 3)",
-      "prioridad": "alta",
-      "estado": "pendiente",
-      "area": "TIF"
     },
     {
       "tarea": "Revisar insumos atípicos — Resuelto: EOG usaba el año en vez del trimestre en los 4T y no leía el GP&T de 1T24; el capex de PRIO en 4T23 y 1T24 incluía compras de campos (ahora se anualizan los trimestres de Bloomberg). El diferencial de Vista en 1T26 (25,5 %) es real: su release informa 60,1 USD/bbl.",
@@ -91,9 +85,9 @@
       "area": "Metodología"
     },
     {
-      "tarea": "Integradas: verificar si el DD&A que se carga al upstream es el consolidado, como el capex y el SG&A. El método por flujos cuenta con eso para no duplicar gastos. Tampoco está medido si el gas de Petrobras se cuenta en parte dos veces (upstream y G&LCE)",
+      "tarea": "Integradas: DD&A consolidado y gas de Petrobras — Resuelto: el DD&A de YPF, Suncor y Petrobras es el consolidado de Bloomberg, igual que capex y SG&A, así que el método por flujos no duplica gastos. El posible doble conteo del gas de Petrobras (G&LCE, USD 1.381 M de 11.903 M de EBITDA) mueve el implícito 1,8 USD/bbl: entra en la sensibilidad de ±30 %.",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Modelo"
     },
     {
@@ -103,21 +97,15 @@
       "area": "Metodología"
     },
     {
-      "tarea": "La prima es muy persistente en nivel con un mismo balance (ρ ≈ 0,99, vida media de 50 a 240 ruedas) aunque los desvíos amplios regresen: discutirlo al interpretar la hipótesis, que trabaja sobre la banda móvil",
-      "prioridad": "alta",
-      "estado": "pendiente",
-      "area": "Metodología"
-    },
-    {
       "tarea": "PBR: el implícito da negativo o casi cero hasta nov-2024 (prima de −100 a −70) por el valor de refinación con múltiplo: revisar esos balances antes de leer la prima de Petrobras — Resuelto: no era el modelo. Los releases de 1T24 y 2T24 están en reales y el EBITDA de segmentos se leía como dólares (refinación de USD 306.000 M). Convertido al promedio del trimestre: la serie ya no tiene ruedas vacías en la ventana.",
       "prioridad": "alta",
       "estado": "resuelto",
       "area": "Modelo"
     },
     {
-      "tarea": "Referencia simulada: el CO1 de Bloomberg es el cierre del día, así que el desfase horario se sigue midiendo como ruido de cierre, como prevé 8.4 si falta historia intradiaria. Falta el control con CO12",
+      "tarea": "Referencia simulada con CO1 de cierre — Resuelto: el desfase horario se mide como ruido de cierre, como prevé 8.4 si falta historia intradiaria. El control con CO12 sigue en el pendiente de Bloomberg.",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Datos"
     },
     {
@@ -127,22 +115,22 @@
       "area": "Datos"
     },
     {
-      "tarea": "Suncor: la hoja Segments del Excel mezcla datos de Freeport-McMoRan (filas 76–519): revisar qué filas se usaron",
+      "tarea": "Suncor: la hoja Segments mezcla datos de Freeport-McMoRan — Resuelto: de 268 datos tomados de esa hoja, 256 están en las filas de Suncor (1–73), ninguno aparece solo en las de Freeport y 12 son cálculos.",
       "prioridad": "alta",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Modelo"
     },
     {
-      "tarea": "PRIO: precio realizado FOB cargado solo donde el release lo publica (2T24, 4T25, 1T26, 2T26); en los demás trimestres queda el 'Brent de referencia' ponderado, que subestima el diferencial. Regalías al 10 % legal (supuesto)",
+      "tarea": "Petrobras: Brasil cobra impuesto de exportación de crudo desde el 12/03/2026 (aparece en PRIO en 2T26, 8,5 % del ingreso FOB). Revisar si los releases de Petrobras lo muestran y cargarlo: hoy su retención no lo incluye",
       "prioridad": "media",
-      "estado": "en curso",
+      "estado": "pendiente",
       "area": "Datos"
     },
     {
-      "tarea": "Declarar en la entrega final el sesgo de nivel de la prima en la ventana: el CO1 casi nunca cae dentro de la banda, que no cubre el sesgo de especificación (8.3). YPF es el caso extremo: su horizonte es de 5 a 7 años con un WACC alto, así que el valor por flujos es bajo y la prima sale muy alta. Los valores actualizados están en la pestaña Serie histórica",
-      "prioridad": "alta",
-      "estado": "pendiente",
-      "area": "TIF"
+      "tarea": "PRIO: precio FOB, regalías y gas — Resuelto (04/11/2026): el FOB de los trimestres sin dato en texto es Receita Total - FOB / Offtakes de cada release (reproduce los cinco que la empresa publica). Regalías y participación especial reales sobre ingreso FOB (de 6,4 % a 13,4 %; no se pueden separar entre sí) en vez del 10 % legal. Impuestos de venta y exportación reales (hasta 8,5 % en 2T26). Gas: la empresa no lo informa, queda en 0",
+      "prioridad": "media",
+      "estado": "en curso",
+      "area": "Datos"
     },
     {
       "tarea": "Petrobras antes de 2T25: los reportes de producción están en PDF (EDGAR no los lee como texto); cargar esos trimestres a mano o leer el PDF — Resuelto: la producción trimestral sale de Bloomberg desde 1T2024 (INFO PBR US.xlsx).",
@@ -232,12 +220,6 @@
       "tarea": "Diferencial de Petrobras (hoy supuesto 0: no publica precio realizado de crudo) — Resuelto: precio de venta anual de crudo y NGL en Brasil (20-F) vs Brent Dated anual; se usa el del ejercicio anterior (sin look-ahead): 4,1 % / 6,8 % / 4,3 %.",
       "prioridad": "media",
       "estado": "resuelto",
-      "area": "Datos"
-    },
-    {
-      "tarea": "PRIO: gas no desagregado (hoy 0) y regalías sin participación especial",
-      "prioridad": "media",
-      "estado": "pendiente",
       "area": "Datos"
     },
     {

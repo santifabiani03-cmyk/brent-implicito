@@ -98,6 +98,28 @@ def test_derivar_usa_trimestre_y_regalias_del_ano():
     assert abs(d["regalias_pct"]["valor"] - 292 / (365 * 100 * 80 / 1000)) < 1e-9
 
 
+def test_prio_fob_de_sus_releases():
+    """Receita Total - FOB / Offtakes reproduce los FOB publicados, y todos los trimestres cargados tienen dato con fuente."""
+    from pipeline import bloomberg
+    d = bloomberg.leer("PRIO")
+    for q, publicado in (("2024-06-30", 81.86), ("2025-12-31", 55.49), ("2026-03-31", 75.34), ("2026-06-30", 87.69)):
+        assert d[q]["p_crudo_fob"]["valor"] == publicado
+    for q in ("2023-09-30", "2024-03-31", "2024-09-30", "2024-12-31", "2025-03-31", "2025-06-30", "2025-09-30"):
+        f = d[q]["p_crudo_fob"]
+        assert f["fuente_url"].startswith("https://") and f["valor"] < d[q]["p_crudo"]["valor"]
+
+
+def test_prio_regalias_e_impuestos_sobre_ingreso_fob():
+    from pipeline.derivar import derivar
+    val = lambda v: {"valor": v, "doc": "bloomberg"}
+    ed = {"docs": {"bloomberg": {"url": "u", "periodo": "2026-06-30", "dias": 91}},
+          "valores": {"p_crudo": val(87.69), "crudo_kbd": val(172.0), "total_kboed": val(172.0), "regalias_kusd": val(179434.0), "ingresos_fob_musd": val(1337.464),
+                      "ingresos_musd": val(1389.98), "ingresos_bb_musd": val(1389.98), "retenciones_musd": val(113.952)}}
+    d = derivar({"id": "PRIO", "region": "Brasil", "perfil": "pure-play"}, ed, {}, {}, [("2026-05-01", 96.68)], None, {}, None)
+    assert abs(d["regalias_pct"]["valor"] - 179.434 / 1337.464) < 1e-9 and abs(d["retencion_pct"]["valor"] - 113.952 / 1337.464) < 1e-9
+    assert abs(d["diferencial_pct"]["valor"] - (1 - 87.69 / 96.68)) < 1e-9
+
+
 def test_capex_prio_anualiza_sin_cuatro_trimestres():
     from pipeline import bloomberg
     f = lambda v: {"valor": v, "moneda": "USD"}
