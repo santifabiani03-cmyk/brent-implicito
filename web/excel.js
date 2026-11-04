@@ -20,7 +20,8 @@
   const GRIS = { font: { italic: true, color: { argb: "FF555555" } } };
   const COLORES = { VIST: "1F77B4", YPF: "D9730D", EOG: "2E8B57", SU: "C8A415", PRIO: "C2185B", PBR: "6A3FA0" };
   const CFG = { z: "Consistencia!$C$7", plazo: "Consistencia!$C$8", rec: "Consistencia!$C$9", pct: "Consistencia!$C$10" };
-  const X0 = 24;      // primera columna (1-based) de la matriz prima/media/desvío por balance en las hojas Rango
+  const X0 = 25;      // primera columna (1-based) de la matriz prima/media/desvío por balance en las hojas Rango
+  const HOLGURA = 20; // ruedas extra de la matriz: permiten mover una fecha de publicación sin salir de lo calculado
   const BANDAS = [1.5, 1.75, 2, 2.25, 2.5];   // bandas con referencia simulada al exportar: las que ofrece la celda de desvíos
 
   let cargando = null;
@@ -45,7 +46,7 @@
     Object.assign(ws.getCell("A2"), GRIS);
     ws.getRow(4).values = ["Variable", "Unidad", ...cals.map(k => k.periodo)];
     ws.getRow(5).values = ["Publicado (rige desde)", "fecha", ...cals.map(k => fechaXL(k.publicado))];
-    ws.getRow(4).eachCell(c => Object.assign(c, HEAD));
+    ws.getRow(4).eachCell((c, i) => { Object.assign(c, HEAD); if (i > 2) c.numFmt = "@"; });
     ws.getRow(5).eachCell((c, i) => { if (i > 2) c.numFmt = "dd/mm/yyyy"; });
     ORDEN.forEach((k, i) => {
       const fila = ws.getRow(F0 + i), pct = (CAMPOS[k] || [])[1]?.startsWith("%");
@@ -89,29 +90,34 @@
   }
 
   /* Hoja de cálculo del rango habitual: todo con fórmulas sobre la hoja de la empresa. */
-  function hojaRango(wb, e, ev, cfg) {
+  function hojaRango(wb, e, ev, cfg, im) {
     const ws = wb.addWorksheet("Rango " + e.id, { views: [{ state: "frozen", xSplit: 1, ySplit: 4 }] });
     const K = e.cals.length, n = e.n, f0 = 5, S = window.BIStats;
     const lastCol = col(X0 - 1 + 3 * K - 1), MAT = `$${col(X0 - 1)}$${f0}:$${lastCol}$${f0 + n - 1}`;
     ws.getCell("A1").value = `${e.id}: rango habitual y casos (6.1). Fórmulas conectadas a la hoja ${e.id} y a los parámetros de Consistencia.`; ws.getCell("A1").font = { bold: true, size: 12 };
     ws.getCell("A2").value = "A la derecha, prima/media/desvío con los parámetros de cada balance: la ventana (20 ruedas previas) se recalcula con el balance vigente y cada caso se evalúa con el del día del desvío.";
     Object.assign(ws.getCell("A2"), GRIS);
-    const cab = ["Fecha", "CO1", "Cap. (MUSD)", "Balance", "n.º bal.", "Prima", "Media 20", "Desvío 20", "Inferior", "Superior", "Fuera", "Inicio caso", "d0", "Signo", "Fin eval.", "Ruedas que cumplen", "Regresó", "Ruedas hasta regreso", "Cruza balance", "Δ prima (mismo bal.)", "Prima t−1", "Δ prima t−1", "Marca caso"];
+    const cab = ["Fecha", "CO1", "Cap. (MUSD)", "Balance", "n.º bal.", "Prima", "Media 20", "Desvío 20", "Inferior", "Superior", "Fuera", "Inicio caso", "d0", "Signo", "Fin eval.", "Ruedas que cumplen", "Regresó", "Ruedas hasta regreso", "Cruza balance", "Δ prima (mismo bal.)", "Prima t−1", "Δ prima t−1", "Marca caso", "Caso n.º"];
     e.cals.forEach(k => cab.push(`Prima|${k.periodo}`, `Media|${k.periodo}`, `Desvío|${k.periodo}`));
     ws.getRow(4).values = cab; ws.getRow(4).eachCell(c => Object.assign(c, HEAD)); ws.getRow(4).alignment = { wrapText: true, vertical: "middle" }; ws.getRow(4).height = 42;
     ws.getColumn(1).width = 11; ws.getColumn(4).width = 11;
-    const porT = Object.fromEntries(ev.casos.map(c => [c.t, c]));
+    const porT = Object.fromEntries(ev.casos.map(c => [c.t, c])), vigente = balanceVigente(e.id, K);
+    let nCaso = 0;
     for (let t = 0; t < n; t++) {
       const r = f0 + t, pos = t + 1, fila = ws.getRow(r), k = e.kIdx[t], enRango = t >= e.i0 && t <= e.i1, conRango = t >= S.VENTANA;
       const c1 = `3*($E${r}-1)+1`, kP = S.primaK(e, k), { m, s } = S.rangoK(e, k);
       fila.getCell(1).value = fechaXL(e.fechas[t]); fila.getCell(1).numFmt = "dd/mm/yyyy";
-      fila.getCell(2).value = e.co1[t]; fila.getCell(2).numFmt = "0.00";
-      fila.getCell(3).value = e.cap[t]; fila.getCell(3).numFmt = "#,##0";
-      fila.getCell(4).value = e.bal[t];
+      // en el rango elegido, el mercado se edita en Implícitos; afuera (ventana y evaluación) solo existe acá
+      const rI = enRango && im.tiene(e.fechas[t]) ? im.fila[e.fechas[t]] : null;
+      fila.getCell(2).value = rI ? fx(`'Implícitos'!$B$${rI}`, e.co1[t]) : e.co1[t]; fila.getCell(2).numFmt = "0.00";
+      fila.getCell(3).value = rI ? fx(`'Implícitos'!$${im.cap}$${rI}`, e.cap[t]) : e.cap[t]; fila.getCell(3).numFmt = "#,##0";
+      fila.getCell(4).value = fx(vigente(`$A${r}`), e.bal[t]);
       fila.getCell(5).value = fx(`MATCH(D${r},'${e.id}'!$C$4:$Z$4,0)`, k + 1);
-      fila.getCell(6).value = fx(`INDEX(${MAT},${pos},${c1})`, kP[t]); fila.getCell(6).numFmt = "0.00";
+      // celda vacía = fecha de publicación movida más allá de lo calculado: error visible, no un 0 silencioso
+      const leer = d => `IF(INDEX(${MAT},${pos},${c1}+${d})="",NA(),INDEX(${MAT},${pos},${c1}+${d}))`;
+      fila.getCell(6).value = fx(leer(0), kP[t]); fila.getCell(6).numFmt = "0.00";
       if (conRango) {
-        fila.getCell(7).value = fx(`INDEX(${MAT},${pos},${c1}+1)`, m[t]); fila.getCell(8).value = fx(`INDEX(${MAT},${pos},${c1}+2)`, s[t]);
+        fila.getCell(7).value = fx(leer(1), m[t]); fila.getCell(8).value = fx(leer(2), s[t]);
         fila.getCell(9).value = fx(`G${r}-${CFG.z}*H${r}`, m[t] - cfg.z * s[t]); fila.getCell(10).value = fx(`G${r}+${CFG.z}*H${r}`, m[t] + cfg.z * s[t]);
         fila.getCell(11).value = fx(`IF(OR(F${r}<I${r},F${r}>J${r}),1,0)`, ev.fuera[t]);
         [7, 8, 9, 10].forEach(c => fila.getCell(c).numFmt = "0.00");
@@ -130,6 +136,8 @@
         fila.getCell(18).value = fx(`IF(L${r}=1,IF(P${r}>0,MATCH(1,INDEX(${cond}*${cond2},0),0),""),"")`, c && c.h ? c.h : "");
         fila.getCell(19).value = fx(`IF(L${r}=1,IF(INDEX($E$${f0}:$E$${f0 + n - 1},O${r})<>E${r},1,0),"")`, c ? c.cruza : "");
         fila.getCell(23).value = { formula: `IF(L${r}=1,F${r},NA())`, result: c ? kP[t] : { error: "#N/A" } }; fila.getCell(23).numFmt = "0.00";
+        if (c) nCaso++;
+        fila.getCell(24).value = fx(`N(X${r - 1})+L${r}`, nCaso);
       }
       if (enRango && t >= 1) {
         fila.getCell(20).value = fx(`INDEX(${MAT},${pos},${c1})-INDEX(${MAT},${pos - 1},${c1})`, kP[t] - kP[t - 1]);
@@ -140,12 +148,12 @@
     }
     e.cals.forEach((cal, k) => {       // matriz: una terna por balance, solo donde hace falta (ventana + vigencia + evaluación)
       const cP = X0 + 3 * k, lP = col(cP - 1), hoja = `'${e.id}'!`, cb = col(2 + k), P = S.primaK(e, k), { m, s } = S.rangoK(e, k);
-      const a0 = Math.max(0, e.primero[k] - S.VENTANA), a1 = Math.min(n - 1, e.ultimo[k] + 15);
+      const a0 = Math.max(0, e.primero[k] - S.VENTANA - HOLGURA), a1 = Math.min(n - 1, e.ultimo[k] + 15 + HOLGURA);
       for (let t = a0; t <= a1; t++) {
         const r = f0 + t, fila = ws.getRow(r), p1 = `($C${r}-${hoja}${cb}$${C.B})/${hoja}${cb}$${C.A}`;
         fila.getCell(cP).value = fx(`IF(${p1}<${hoja}${cb}$${C.pk},($C${r}-${hoja}${cb}$${C.B0})/${hoja}${cb}$${C.A0},${p1})-$B${r}`, P[t]);
         fila.getCell(cP).numFmt = "0.00";
-        if (t >= S.VENTANA && t >= e.primero[k]) {
+        if (t >= S.VENTANA && t >= e.primero[k] - HOLGURA) {
           fila.getCell(cP + 1).value = fx(`AVERAGE(${lP}${r - 20}:${lP}${r - 1})`, m[t]); fila.getCell(cP + 2).value = fx(`STDEV(${lP}${r - 20}:${lP}${r - 1})`, s[t]);
           fila.getCell(cP + 1).numFmt = fila.getCell(cP + 2).numFmt = "0.00";
         }
@@ -154,14 +162,17 @@
     return { f0, n, r0: f0 + Math.max(e.i0, S.VENTANA), r1: f0 + e.i1 };
   }
 
+  /* Balance vigente en una fecha: el último publicado hasta ese día (6.1). Recorre las columnas, así no depende de que estén ordenadas. */
+  const balanceVigente = (id, K) => f => `LOOKUP(2,1/('${id}'!$C$5:$${col(1 + K)}$5<=${f}),'${id}'!$C$4:$${col(1 + K)}$4)`;
+
   /* Referencia simulada: una fila por corrida, con la proporción de regresos de cada grupo (fuente de los percentiles de Consistencia). */
-  function hojaSimulacion(wb, emps, grupos, bandas, base, N, seed) {
+  function hojaSimulacion(wb, emps, grupos, bandas, base, N, seed, sens, RG, filaTot, CF) {
     const ws = wb.addWorksheet("Simulación", { views: [{ state: "frozen", ySplit: 24 }] }), S = window.BIStats;
     ws.getCell("A1").value = "Referencia simulada sin reversión (6.1 y 7.7)"; ws.getCell("A1").font = { bold: true, size: 13 };
     ["Cada corrida aplica la misma regla a una prima simulada: CO1 OBSERVADO menos un Brent implícito sin reversión, de modo que los regresos debidos al propio CO1 quedan en la referencia.",
      "Cambio diario del implícito = β·ΔCO1 + u. β y u salen de los cambios diarios observados con un mismo balance; u se remuestrea por fecha y en conjunto entre empresas, lo que conserva volatilidad y correlación y elimina la autocorrelación.",
      "Desfase horario remanente: sin historia intradiaria del CO1 (8.4), el ruido de cierre se mide con la autocovarianza de primer orden de u, σε² = máx(0, −cov(u_t, u_t−1)), y se suma como error i.i.d. sobre el nivel; la varianza del paseo aleatorio se reduce en 2σε².",
-     `${N} corridas por banda; semilla ${seed}; ${base.nPool} fechas en el remuestreo conjunto. Estos valores se calculan al exportar: la celda de desvíos de Consistencia elige qué bloque se usa; plazo y recorrido no los cambian.`]
+     `${N} corridas por banda; semilla ${seed}; ${base.nPool} fechas en el remuestreo conjunto. Estos valores se calculan al exportar: la celda de desvíos de Consistencia elige qué bloque se usa. Si se editan datos o insumos, no se recalculan y Consistencia lo avisa.`]
       .forEach((t, i) => { ws.getCell(`A${3 + i}`).value = t; Object.assign(ws.getCell(`A${3 + i}`), GRIS); });
     ws.getRow(8).values = ["Calibración", "β (ΔCO1)", "Vol. diaria u (USD/bbl)", "Autocorr. u (1)", "σε ruido (USD/bbl)"]; [1, 2, 3, 4, 5].forEach(c => Object.assign(ws.getCell(8, c), HEAD));
     ws.getRow(8).alignment = { wrapText: true, vertical: "middle" };
@@ -172,11 +183,29 @@
     const todas = bandas.map(b => grupos.map(g => b.corridas.map(c => S.propSim(c, emps, g.ids)))), iP = bandas.findIndex(b => b.z === S.PRINCIPAL.z), props = todas[iP];
     for (let i = 0; i < N; i++) { const f = ws.getRow(f0 + i); f.getCell(1).value = i + 1; todas.forEach((pb, k) => grupos.forEach((g, j) => { const v = pb[j][i]; if (v != null) { const x = f.getCell(2 + k * nG + j); x.value = v; x.numFmt = "0.0%"; } })); }
     ws.getColumn(1).width = 14; for (let c = 2; c <= 1 + nG * bandas.length; c++) ws.getColumn(c).width = 12;
+    // corridas de cada sensibilidad: permiten que el panel E siga al percentil
+    const cS = 2 + nG * bandas.length, colSens = i => `'Simulación'!$${col(cS - 1 + i)}$${f0}:$${col(cS - 1 + i)}$${f0 + sens[i].sim.length - 1}`;
+    sens.forEach((x, i) => { const h = ws.getCell(24, cS + i); h.value = `Sens. ${i + 1}: ${x.nombre}`; Object.assign(h, HEAD); ws.getColumn(cS + i).width = 12;
+      x.sim.forEach((v, q) => { const c = ws.getCell(f0 + q, cS + i); c.value = v; c.numFmt = "0.0%"; }); });
     const rZ = 9 + emps.length + 1, rE = rZ + 1 + bandas.length, listaZ = `$A$${rZ + 1}:$A$${rE - 1}`, matriz = `$B$${f0}:$${col(nG * bandas.length)}$${fN}`;
     ws.getCell(rZ, 1).value = "Bandas simuladas"; Object.assign(ws.getCell(rZ, 1), HEAD);
     bandas.forEach((b, k) => { ws.getCell(rZ + 1 + k, 1).value = b.z; });
     ws.getCell(rE, 1).value = "Bloque elegido"; ws.getCell(rE, 2).value = fx(`IFERROR(MATCH(Consistencia!$C$7,${listaZ},0),0)`, iP + 1);
     const columna = (g, h = "") => `INDEX(${h}${matriz},0,(${h}$B$${rE}-1)*${nG}+${g + 1})`;
+    // control: si cambian los datos con los que se simuló, la referencia ya no es la de esos datos
+    ["Empresa", "Datos al exportar", "Datos actuales", "Casos previos"].forEach((t, c) => { const x = ws.getCell(8, 7 + c); x.value = t; Object.assign(x, HEAD); });
+    const suma = a => a.reduce((x, y) => x + y, 0), rD = 9 + emps.length, serial = f => Date.parse(f + "T00:00:00Z") / 864e5 + 25569;
+    emps.forEach((e, i) => { const r = 9 + i, K = e.cals.length, u = col(1 + K), rg = c => `'Rango ${e.id}'!$${c}$${RG[e.id].f0}:$${c}$${RG[e.id].f0 + RG[e.id].n - 1}`;
+      // el no-upstream de las integradas es fórmula en la hoja: se usa ese valor, no el redondeado de los insumos, que difiere en milésimas
+      const dNU = k => { const eb = k.inputs.ebitda_no_up_12m_musd?.[0]; return eb ? eb * (1 - k.inputs.tasa_impuesto[0]) * k._k.V / k._k.Q - k.inputs.valor_no_upstream_musd[0] : 0; };
+      const val = suma(e.co1) + suma(e.cap) + suma(e.cals.map(k => k._k.A + k._k.B + k._k.A0 + k._k.B0 + k._k.pk + 2 * dNU(k) + serial(k.publicado)));
+      ws.getCell(r, 7).value = e.id; ws.getCell(r, 8).value = val;
+      ws.getCell(r, 9).value = fx(`SUM(${rg("B")})+SUM(${rg("C")})+SUM('${e.id}'!$C$${C.A}:$${u}$${C.pk})+SUM('${e.id}'!$C$5:$${u}$5)`, val);
+      ws.getCell(r, 10).value = i ? fx(`IFERROR(SUM(Consistencia!$B$${filaTot - nG + 1}:$B$${filaTot - nG + i}),0)`, suma(emps.slice(0, i).map(x => x.ev.casos.length))) : 0; });
+    const rF = rD + 1, previos = `'Simulación'!$J$9:$J$${rD - 1}`, nombres = `'Simulación'!$G$9:$G$${rD - 1}`;
+    ws.getCell(rF, 7).value = "Datos editados"; ws.getCell(rF, 8).value = fx(`IFERROR(IF(SUMPRODUCT(--(ABS(H9:H${rD - 1}-I9:I${rD - 1})>0.001))>0,1,0),0)`, 0);
+    ws.getCell(rF + 1, 7).value = "Perfil no plano"; ws.getCell(rF + 1, 8).value = fx(emps.map(e => `COUNTIF('${e.id}'!$C$${C.plano}:$Z$${C.plano},"no plano*")`).join("+"), 0);
+    ws.getCell(rF + 2, 7).value = "Referencia aplicable"; ws.getCell(rF + 2, 8).value = fx(`IFERROR(IF(OR(ISERROR(Consistencia!$B$${filaTot}),$B$${rE}=0,Consistencia!$C$8<>${CF.plazo},ABS(Consistencia!$C$9-${CF.rec})>=0.000001),0,1),0)`, 1);
     // histograma de la proporción total (alimenta el gráfico del Dashboard); los intervalos cubren todas las bandas
     const cH = 3 + nG + 1, L = i => col(cH - 1 + i), rH = 8;
     ["Desde", "Hasta", "Intervalo", "Simulaciones", "Observada"].forEach((t, c) => { const x = ws.getCell(rH, cH + c); x.value = t; Object.assign(x, HEAD); });
@@ -188,7 +217,7 @@
       ws.getCell(r, cH + 2).value = fx(`TEXT(${L(0)}${r},"0%")&"–"&TEXT(${L(1)}${r},"0%")`, `${Math.round(a * 100)}%–${Math.round(b * 100)}%`);
       ws.getCell(r, cH + 3).value = fx(`IF($B$${rE}=0,0,COUNTIFS(${rng},">="&${L(0)}${r},${rng},"<"&${L(1)}${r}))`, cuentas[i]);
     }
-    return { columna: g => columna(g, "'Simulación'!"), listaZ: `'Simulación'!${listaZ}`, elegido: `'Simulación'!$B$${rE}`, props, hist: { col: L, r0: rH + 1, r1: rH + nb, cH, cuentas, mx, mn } };
+    return { columna: g => columna(g, "'Simulación'!"), listaZ: `'Simulación'!${listaZ}`, colSens, previos, nombres, editado: `'Simulación'!$H$${rF}`, noPlano: `'Simulación'!$H$${rF + 1}`, valida: `'Simulación'!$H$${rF + 2}`, props, hist: { col: L, r0: rH + 1, r1: rH + nb, cH, cuentas, mx, mn } };
   }
 
   async function exportar(D, opts) {
@@ -219,7 +248,7 @@
     for (const [k, z] of BANDAS.entries()) {
       avance(`Simulando la banda de ±${String(z).replace(".", ",")} desvíos…`);
       const cfg = { ...CF, z }, cas = emps.flatMap(e => S.evaluar(e, cfg).casos).filter(c => c.reg !== null);
-      bandas.push({ z, obs: cas.filter(c => c.reg === 1).length / cas.length, corridas: z === CF.z ? corridas : await S.simular(emps, base, cfg, NSIM, SEMILLA + 100 + k) });
+      bandas.push({ z, nCasos: cas.length, obs: cas.filter(c => c.reg === 1).length / cas.length, corridas: z === CF.z ? corridas : await S.simular(emps, base, cfg, NSIM, SEMILLA + 100 + k) });
     }
     const sens = (await S.sensibilidades(emps, base, (i, n) => avance(`Sensibilidades (${i}/${n})…`))).map(x => ({ ...x, ref: S.media(x.sim), umbral: S.percentil(x.sim, Q) }));
     avance("Armando las hojas…");
@@ -252,7 +281,9 @@
      ["Cierre diario de Yahoo Finance BZ=F como proxy del CO1 Comdty de Bloomberg (el archivo bajado de la terminal vino vacío). No es el precio a la hora de cierre de cada acción que pide 6.1: sin historia intradiaria, el desfase se trata como ruido de cierre en la referencia (8.4)."],
      ["La prima usa el CO1 del mismo día; los días sin cotización de alguna de las dos quedan en blanco. Las hojas Rango incluyen hasta 20 ruedas antes y 15 después del rango elegido, para la ventana y la evaluación."],
      [""],
-     ["Los insumos son editables: cambiar un valor en la hoja de una empresa recalcula su implícito, sus casos y los gráficos."],
+     ["Los insumos son editables: cambiar un valor en la hoja de una empresa recalcula su implícito, sus casos y los gráficos. La fecha de publicación decide qué balance rige cada día."],
+     ["CO1 y capitalización del rango elegido se editan en Implícitos; las hojas Rango los toman de ahí. Las ruedas previas y posteriores al rango solo están en la hoja Rango de cada empresa."],
+     ["La referencia simulada y el panel E se calculan al exportar. Si se editan datos o insumos no se recalculan, y la fila 11 de Consistencia lo avisa."],
     ].forEach(([t, f], i) => { const c = lm.getCell(`A${i + 1}`); c.value = t; if (f) c.font = f; c.alignment = { wrapText: true }; });
 
     wb.addWorksheet("Dashboard", { views: [{ showGridLines: false }] });
@@ -282,7 +313,7 @@
         const rng = fr => `'${e.id}'!$C$${fr}:$Z$${fr}`, k = `MATCH(${cB}${r},'${e.id}'!$C$4:$Z$4,0)`;
         const p1 = `(${cC}${r}-INDEX(${rng(C.B)},${k}))/INDEX(${rng(C.A)},${k})`;
         fila.getCell(c0).value = d.cap; fila.getCell(c0).numFmt = "#,##0";
-        fila.getCell(c0 + 1).value = d.bal;
+        fila.getCell(c0 + 1).value = fx(balanceVigente(e.id, CALS[e.id].length)(`$A${r}`), d.bal);
         fila.getCell(c0 + 2).value = fx(`IF(${p1}<INDEX(${rng(C.pk)},${k}),(${cC}${r}-INDEX(${rng(C.B0)},${k}))/INDEX(${rng(C.A0)},${k}),${p1})`, d.xl);
         fila.getCell(c0 + 2).numFmt = "0.00";
         if (co1[f] != null) { fila.getCell(c0 + 3).value = fx(`${cI}${r}-$B${r}`, d.xl - co1[f]); fila.getCell(c0 + 3).numFmt = "0.00"; }
@@ -298,7 +329,7 @@
 
     // --- Control
     const ct = wb.addWorksheet("Control", { views: [{ state: "frozen", xSplit: 1, ySplit: 4 }] });
-    ct.getCell("A1").value = "Control: implícito de este Excel vs. implícito de la web (motor por bisección, tolerancia 0,005)"; ct.getCell("A1").font = { bold: true };
+    ct.getCell("A1").value = "Control: implícito de este Excel vs. implícito de la web (motor por bisección, tolerancia 0,005, más el redondeo de la web a 2 decimales)"; ct.getCell("A1").font = { bold: true };
     ct.getRow(4).values = ["Fecha", ...emps.flatMap(e => [`${e.id} web`, `${e.id} Excel − web`])];
     ct.getRow(4).eachCell(c => Object.assign(c, HEAD)); ct.getColumn(1).width = 11;
     fechas.forEach((f, i) => {
@@ -328,7 +359,7 @@
       emps.forEach((e, j) => {
         const cell = fila.getCell(2 + j); cell.numFmt = nf; rs.getColumn(2 + j).width = 12;
         const ci = col(ubic[e.id] + (q === "i" ? 1 : 2));
-        if (q === "n") cell.value = CALS[e.id].length;
+        if (q === "n") cell.value = fx(`COUNTA('${e.id}'!$C$4:$Z$4)`, CALS[e.id].length);
         else if (q === "c") { const cd = col(2 + 2 * j), a = Object.values(Di[e.id]).filter(d => d.web != null).map(d => Math.abs(d.xl - d.web)); cell.value = fx(`MAX(MAX(Control!${cd}5:${cd}${ult}),-MIN(Control!${cd}5:${cd}${ult}))`, Math.max(...a)); }
         else cell.value = fx(f_(`'Implícitos'!${ci}5:${ci}${ult}`), js(q === "i" ? impls[e.id] : primas[e.id]));
       });
@@ -336,9 +367,10 @@
 
     // --- Rango por empresa y Simulación
     const RG = {};
-    emps.forEach(e => { RG[e.id] = hojaRango(wb, e, e.ev, CF); });
+    const filaIm = Object.fromEntries(fechas.map((f, i) => [f, 5 + i]));
+    emps.forEach(e => { RG[e.id] = hojaRango(wb, e, e.ev, CF, { fila: filaIm, cap: col(ubic[e.id] - 1), tiene: f => !!Di[e.id][f] }); });
     const obsCas = emps.flatMap(e => e.ev.casos);
-    const SIM = hojaSimulacion(wb, emps, grupos, bandas, base, NSIM, SEMILLA), props = SIM.props;
+    const rA = 12, SIM = hojaSimulacion(wb, emps, grupos, bandas, base, NSIM, SEMILLA, sens, RG, rA + 1 + grupos.length, CF), props = SIM.props;
 
     // --- Consistencia
     const cs = wb.getWorksheet("Consistencia");
@@ -348,19 +380,21 @@
     cs.getCell("A3").value = "Hipótesis (6): la proporción de desvíos amplios que regresa a su rango habitual en el corto plazo supera el umbral de una referencia simulada sin reversión. Es una comparación descriptiva con una referencia, no una prueba de significación (7.7).";
     cs.mergeCells("A3:O3"); cs.getCell("A3").alignment = { wrapText: true, vertical: "top" }; cs.getRow(3).height = 32;
     const titPanel = (r, t) => { const c = cs.getCell(`A${r}`); c.value = t; cs.mergeCells(`A${r}:O${r}`); Object.assign(c, SUB); };
-    titPanel(5, "Especificación (6.1). Banda y percentil recalculan el panel A completo, umbral incluido. Plazo y recorrido no tienen referencia simulada: el panel A deja de dar veredicto y hay que leer el panel E");
-    [["Ventana del rango habitual (ruedas previas)", S.VENTANA, "Fija: 20 ruedas ≈ un mes bursátil"], ["Banda: desvíos estándar", CF.z, "Principal: 2. Elegir de la lista: cada valor tiene su referencia simulada"], ["Plazo de regreso (ruedas, máx. 15)", CF.plazo, "Principal: 10. Sensibilidad: 5 y 15"],
+    titPanel(5, "Especificación (6.1). Banda y percentil recalculan el panel A, umbral incluido. Plazo y recorrido no tienen referencia simulada: el panel A deja de dar veredicto y hay que leer el panel E. La fila 11 avisa si algo no es comparable");
+    [["Ventana del rango habitual (ruedas previas)", S.VENTANA, "Fija, no se edita: 20 ruedas ≈ un mes bursátil"], ["Banda: desvíos estándar", CF.z, "Principal: 2. Elegir de la lista: cada valor tiene su referencia simulada"], ["Plazo de regreso (ruedas, máx. 15)", CF.plazo, "Principal: 10. Sensibilidad: 5 y 15"],
      ["Recorrido mínimo hacia la media (× d0)", CF.rec, "Principal: ½. Sensibilidad: ⅓ y ⅔"], ["Percentil de la referencia usado como umbral", percentil, "Elegido en la página; la tesis no fija el percentil"]]
-      .forEach(([l, v, n], i) => { const r = 6 + i; cs.getCell(`A${r}`).value = l; const c = cs.getCell(`C${r}`); c.value = v; c.font = { bold: true, color: { argb: "FF0000C0" } }; if (i) c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFF8DC" } }; cs.getCell(`D${r}`).value = n; Object.assign(cs.getCell(`D${r}`), GRIS); });
+      .forEach(([l, v, n], i) => { const r = 6 + i; cs.getCell(`A${r}`).value = l; const c = cs.getCell(`C${r}`); c.value = v; c.font = i ? { bold: true, color: { argb: "FF0000C0" } } : { bold: true }; if (i) c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFF8DC" } }; cs.getCell(`D${r}`).value = n; Object.assign(cs.getCell(`D${r}`), GRIS); });
     cs.getCell("C8").dataValidation = { type: "whole", operator: "between", formulae: [1, 15], showErrorMessage: true, error: "Entre 1 y 15 ruedas" };
     cs.getCell("C7").dataValidation = { type: "list", allowBlank: false, formulae: [SIM.listaZ], showErrorMessage: true, error: "Elegí una banda de la lista: son las que tienen referencia simulada" };
+    cs.getCell("C9").dataValidation = { type: "decimal", operator: "between", formulae: [0, 1], showErrorMessage: true, error: "Entre 0 y 1: es la fracción de d0 que debe recorrer" };
+    cs.getCell("C10").dataValidation = { type: "decimal", operator: "between", formulae: [0, 100], showErrorMessage: true, error: "Entre 0 y 100" };
     // La referencia se simula al exportar: sin corridas para esa especificación, comparar con otra daría un veredicto falso
-    const AVISO = "$A$11", nc = fm => `IF(${AVISO}<>"","n/c",${fm})`;
+    const rTot = rA + 1 + grupos.length, nc = fm => `IF(${SIM.valida}=0,"n/c",${fm})`;
     cs.mergeCells("A11:O11"); cs.getCell("A11").font = { bold: true, color: { argb: "FFC00000" } };
-    cs.getCell("A11").value = fx(`IF(AND(${SIM.elegido}>0,$C$8=${CF.plazo},ABS($C$9-${CF.rec})<0.000001),"","Atención: la referencia simulada existe para las bandas de la lista, con ${CF.plazo} ruedas y ½ d0. Con otra especificación el panel A no da veredicto (n/c): usar el panel E, que la recalcula.")`, "");
+    cs.getCell("A11").value = fx(`IF(ISERROR($B$${rTot}),"Atención: hay errores en los casos (por ejemplo, una fecha de publicación movida más allá de lo calculado). El panel A no da veredicto: revisá las hojas de empresa y Rango.",IF(${SIM.valida}=0,"Atención: la referencia simulada existe para las bandas de la lista, con ${CF.plazo} ruedas y ½ d0. Con otra especificación el panel A no da veredicto (n/c): usar el panel E, que la recalcula.",IF(${SIM.noPlano}>0,"Atención: hay balances con perfil de producción no plano. La forma cerrada de este Excel no los contempla: el implícito sale como si fuera plano.",IF(${SIM.editado}=1,"Atención: se editaron insumos o datos de mercado. Casos y regresos se actualizan, pero la referencia simulada y el panel E quedan como al exportar: el umbral es aproximado.",""))))`, "");
 
     // Panel A: objetivo c) y prueba de la hipótesis
-    const rA = 12; titPanel(rA, "A. Regreso de los desvíos amplios frente a la referencia simulada (objetivo c y hipótesis)");
+    titPanel(rA, "A. Regreso de los desvíos amplios frente a la referencia simulada (objetivo c y hipótesis)");
     cs.getRow(rA + 1).values = ["Grupo", "Casos", "Regresos", "No regresan", "Censurados", "Proporción de regreso", "Referencia media", "Umbral (percentil)", "Exceso sobre umbral", "¿Supera el umbral?", "Posición en la referencia", "Ruedas medias hasta regreso", "|d0| medio (USD/bbl)", "Casos que cruzan balance", "Proporción sin cruzar balance"];
     cs.getRow(rA + 1).eachCell(c => Object.assign(c, HEAD)); cs.getRow(rA + 1).alignment = { wrapText: true, vertical: "middle", horizontal: "center" }; cs.getRow(rA + 1).height = 45;
     const filaG = {}; grupos.forEach((g, i) => { filaG[g.nombre] = rA + 2 + i; });
@@ -382,7 +416,7 @@
         f.getCell("L").value = fx(pond("L", "C"), o.h ?? ""); f.getCell("M").value = fx(pond("M", "B"), o.d0 ?? "");
         f.getCell("O").value = fx(`IFERROR((${g.ids.map(id => `COUNTIFS(${R(id, "Q")},1,${R(id, "S")},0)`).join("+")})/(${g.ids.map(id => `COUNTIFS(${R(id, "Q")},1,${R(id, "S")},0)+COUNTIFS(${R(id, "Q")},0,${R(id, "S")},0)`).join("+")}),"")`, o.propSc ?? "");
       }
-      f.getCell(6).value = fx(`IF(C${r}+D${r}>0,C${r}/(C${r}+D${r}),"")`, o.prop ?? "");
+      f.getCell(6).value = fx(`IF(ISERROR(B${r}),"n/c",IF(C${r}+D${r}>0,C${r}/(C${r}+D${r}),""))`, o.prop ?? "");
       f.getCell(7).value = fx(nc(`AVERAGE(${simC})`), S.media(a)); f.getCell(8).value = fx(nc(`PERCENTILE(${simC},$C$10/100)`), um);
       f.getCell(9).value = fx(nc(`IF(F${r}="","",F${r}-H${r})`), o.prop == null ? "" : o.prop - um);
       f.getCell(10).value = fx(nc(`IF(F${r}="","",IF(F${r}>H${r},"Sí","No"))`), o.prop == null ? "" : (o.prop > um ? "Sí" : "No")); f.getCell(10).alignment = { horizontal: "center" };
@@ -390,10 +424,10 @@
       [6, 7, 8, 11, 15].forEach(c => f.getCell(c).numFmt = "0.0%"); f.getCell(9).numFmt = "+0.0%;-0.0%"; f.getCell(12).numFmt = "0.0"; f.getCell(13).numFmt = "0.00";
       if (g.tipo === "total") f.eachCell(c => { c.font = { bold: true }; c.fill = SUB.fill; });
     });
-    const rTot = filaG["Total"], oT = obsDe(todos), aT = props[grupos.length - 1].filter(v => v != null), umT = S.percentil(aT, Q);
+    const oT = obsDe(todos), aT = props[grupos.length - 1].filter(v => v != null), umT = S.percentil(aT, Q);
     let r = rTot + 1;
     const dec = v => String(Math.round(v * 1000) / 10).replace(".", ","), lectura = (p, u) => `Lectura: la proporción de regreso (${dec(p)}%) ${p > u ? "supera" : "no supera"} el umbral (${dec(u)}%): la hipótesis ${p > u ? "se sostiene" : "no se sostiene"} con esta especificación.`;
-    cs.getCell(`A${r}`).value = fx(`IF(${AVISO}<>"","Lectura: proporción de regreso de "&ROUND(F${rTot}*100,1)&"% con esta especificación; sin veredicto, ver panel E.","Lectura: la proporción de regreso ("&ROUND(F${rTot}*100,1)&"%) "&IF(F${rTot}>H${rTot},"supera","no supera")&" el umbral ("&ROUND(H${rTot}*100,1)&"%): la hipótesis "&IF(F${rTot}>H${rTot},"se sostiene","no se sostiene")&" con esta especificación.")`, lectura(oT.prop, umT));
+    cs.getCell(`A${r}`).value = fx(`IF(${SIM.valida}=0,IF(ISNUMBER(F${rTot}),"Lectura: proporción de regreso de "&ROUND(F${rTot}*100,1)&"% con esta especificación; sin veredicto, ver panel E.","Lectura: sin veredicto, hay errores en los casos."),"Lectura: la proporción de regreso ("&ROUND(F${rTot}*100,1)&"%) "&IF(F${rTot}>H${rTot},"supera","no supera")&" el umbral ("&ROUND(H${rTot}*100,1)&"%): la hipótesis "&IF(F${rTot}>H${rTot},"se sostiene","no se sostiene")&" con esta especificación.")`, lectura(oT.prop, umT));
     cs.getCell(`A${r}`).font = { bold: true }; r += 1;
     cs.getCell(`A${r}`).value = "Por empresa hay pocos casos y el umbral es más alto: el contraste de la hipótesis es el total. Censurado: sin regreso y con menos ruedas posteriores que el plazo; no entra en el denominador."; Object.assign(cs.getCell(`A${r}`), GRIS); r += 2;
 
@@ -415,7 +449,7 @@
     emps.forEach(e => { const f = cs.getRow(r); f.getCell(1).value = e.id; emps.forEach((o, j) => { const [x, y] = serieCom(e.id, o.id); f.getCell(2 + j).value = fx(`CORREL(${rIm(col(ubic[e.id] + 2))},${rIm(col(ubic[o.id] + 2))})`, corr(x, y)); f.getCell(2 + j).numFmt = "0.00"; }); r++; });
     r++;
     if (PARES.length) {
-      cs.getRow(r).values = ["Par (misma región; perfil puro − integrada)", "Diferencia media", "|Diferencia| media", "Desvío", "Mínima", "Máxima", "% días perfil puro > integrada"]; cs.getRow(r).eachCell(c => Object.assign(c, HEAD)); cs.getRow(r).alignment = { wrapText: true, vertical: "middle" }; cs.getRow(r).height = 32; r++;
+      cs.getRow(r).values = ["Par (misma región; perfil puro − integrada)", "Diferencia media", "|Diferencia| media", "Desvío", "Mínima", "Máxima", "% días perfil puro > integrada"]; cs.getRow(r).eachCell(c => Object.assign(c, HEAD)); cs.getRow(r).alignment = { wrapText: true, vertical: "middle" }; cs.getRow(r).height = 48; r++;
       PARES.forEach(([a, b], j) => { const rg = rIm(col(cPar0 + j - 1)), [x, y] = serieCom(a, b), d = x.map((v, i) => v - y[i]), f = cs.getRow(r);
         f.getCell(1).value = `${a} − ${b} (${D.empresas.find(e => e.id === a).region})`;
         [[`AVERAGE(${rg})`, S.media(d)], [`(SUMIF(${rg},">0")-SUMIF(${rg},"<0"))/COUNT(${rg})`, abs(d)], [`STDEV(${rg})`, sd(d)], [`MIN(${rg})`, Math.min(...d)], [`MAX(${rg})`, Math.max(...d)]].forEach(([fm, js], k) => { f.getCell(2 + k).value = fx(fm, js); f.getCell(2 + k).numFmt = "0.00"; });
@@ -432,7 +466,7 @@
     titPanel(r, "D. Dinámica de la prima con un mismo balance: evidencia complementaria sobre reversión y ruido de cierre (7.6 y 8.4). Descriptiva"); r++;
     cs.getRow(r).values = ["Métrica", ...emps.map(e => e.id)]; cs.getRow(r).eachCell(c => Object.assign(c, HEAD)); r++;
     const din = emps.map(S.dinamica);
-    const filasD = [["% de ruedas fuera del rango (≈5 % si la prima fuera normal)", e => `SUM('Rango ${e.id}'!$K$${RG[e.id].r0}:$K$${RG[e.id].r1})/COUNT('Rango ${e.id}'!$K$${RG[e.id].r0}:$K$${RG[e.id].r1})`, d => d.fue, "0.0%"],
+    const filasD = [[fx(`"% de ruedas fuera del rango (≈"&ROUND(200*(1-NORMSDIST($C$7)),1)&" % si la prima fuera normal)"`, "% de ruedas fuera del rango (≈4,6 % si la prima fuera normal)"), e => `SUM('Rango ${e.id}'!$K$${RG[e.id].r0}:$K$${RG[e.id].r1})/COUNT('Rango ${e.id}'!$K$${RG[e.id].r0}:$K$${RG[e.id].r1})`, d => d.fue, "0.0%"],
       ["Coeficiente AR(1) de la prima (ρ)", e => `1+SLOPE(${R(e.id, "T")},${R(e.id, "U")})`, d => d.rho, "0.000"],
       ["Vida media del desvío (ruedas) = ln(0,5)/ln(ρ)", (e, q, rr) => `IF(AND(${q}${rr - 1}>0,${q}${rr - 1}<1),LN(0.5)/LN(${q}${rr - 1}),"sin reversión")`, d => d.vida ?? "sin reversión", "0.0"],
       ["Estadístico t de (ρ−1), tipo Dickey-Fuller (referencia 5 %: −2,86)", e => `SLOPE(${R(e.id, "T")},${R(e.id, "U")})/(STEYX(${R(e.id, "T")},${R(e.id, "U")})/SQRT(DEVSQ(${R(e.id, "U")})))`, d => d.t, "0.00"],
@@ -443,25 +477,39 @@
     cs.getCell(`A${r}`).value = "Un ρ menor que 1 con vida media de días es compatible con desvíos transitorios; una vida media larga, con una prima persistente. La regla del panel A es la que define la hipótesis."; Object.assign(cs.getCell(`A${r}`), GRIS); r += 2;
 
     // Panel E: sensibilidades de 8.3
-    titPanel(r, "E. Sensibilidades (8.3 y 8.4), con la referencia recalculada en cada fila. Valores calculados al exportar"); r++;
-    cs.getRow(r).values = ["Escenario", "Casos", "Regresos", "Censurados", "Proporción", "Referencia media", `Umbral P${String(percentil).replace(".", ",")}`, "Exceso", "¿Supera?"]; cs.getRow(r).eachCell(c => Object.assign(c, HEAD)); r++;
-    const filaS = (v) => { const f = cs.getRow(r); f.values = v; [5, 6, 7].forEach(c => f.getCell(c).numFmt = "0.0%"); f.getCell(8).numFmt = "+0.0%;-0.0%"; f.getCell(9).alignment = { horizontal: "center" }; r++; };
-    sens.forEach(s => filaS([s.nombre, s.cas, s.reg, s.cen, s.prop, s.ref, s.umbral, s.prop - s.umbral, s.prop > s.umbral ? "Sí" : "No"]));
-    { const c = obsCas.filter(x => !x.cruza && x.reg !== null), reg = c.filter(x => x.reg === 1).length, m = sens[0]; filaS(["Solo casos que no cruzan un balance (referencia principal)", c.length, reg, 0, reg / c.length, m.ref, m.umbral, reg / c.length - m.umbral, reg / c.length > m.umbral ? "Sí" : "No"]); }
+    titPanel(r, "E. Sensibilidades (8.3 y 8.4), con la referencia recalculada en cada fila. Casos y corridas se calculan al exportar; el umbral sigue al percentil"); r++;
+    cs.getRow(r).values = ["Escenario", "Casos", "Regresos", "Censurados", "Proporción", "Referencia media", fx(`"Umbral P"&$C$10`, `Umbral P${String(percentil).replace(".", ",")}`), "Exceso", "¿Supera?"]; cs.getRow(r).eachCell(c => Object.assign(c, HEAD)); cs.getRow(r).alignment = { wrapText: true, vertical: "middle" }; cs.getRow(r).height = 32; r++;
+    const filaS = (nom, cas, reg, cen, prop, x, iS) => { const f = cs.getRow(r), c = SIM.colSens(iS);
+      f.values = [nom, cas, reg, cen, prop, fx(`AVERAGE(${c})`, x.ref), fx(`PERCENTILE(${c},$C$10/100)`, x.umbral), fx(`E${r}-G${r}`, prop - x.umbral), fx(`IF(E${r}>G${r},"Sí","No")`, prop > x.umbral ? "Sí" : "No")];
+      [5, 6, 7].forEach(k => f.getCell(k).numFmt = "0.0%"); f.getCell(8).numFmt = "+0.0%;-0.0%"; f.getCell(9).alignment = { horizontal: "center" }; r++; };
+    sens.forEach((s, i) => filaS(s.nombre, s.cas, s.reg, s.cen, s.prop, s, i));
+    { const c = obsCas.filter(x => !x.cruza && x.reg !== null), reg = c.filter(x => x.reg === 1).length; filaS("Solo casos que no cruzan un balance (referencia principal)", c.length, reg, 0, reg / c.length, sens[0], 0); }
     cs.getCell(`A${r}`).value = `Corridas: ${NSENS} por escenario (${NSIM} en el panel A), por eso la principal puede diferir unas décimas. El control contra el CO12 de 8.4 no se calcula: no hay historia del CO12 en la web.`; Object.assign(cs.getCell(`A${r}`), GRIS); r += 2;
 
-    // Panel F: lista de casos
-    titPanel(r, "F. Casos de la especificación principal (lista al exportar; los valores leen las hojas Rango)"); r++;
+    // Panel F: lista de casos; cada fila busca el n-ésimo caso, así sigue a banda, plazo y recorrido
+    titPanel(r, "F. Casos con la especificación elegida (siguen a banda, plazo y recorrido; los valores leen las hojas Rango)"); r++;
+    const capF = Math.max(...bandas.map(b => b.nCasos)) + 30;
+    cs.getCell(`A${r}`).value = fx(`IF(N($B$${rTot})>${capF},"Hay más casos que las ${capF} filas de esta lista: el resto se ve en las hojas Rango.","")`, ""); cs.getCell(`A${r}`).font = { bold: true, color: { argb: "FFC00000" } }; r++;
     cs.getRow(r).values = ["Empresa", "Fecha del desvío", "Balance", "Prima", "Media 20", "d0", "Regresó", "Ruedas hasta regreso", "Cruza balance"]; cs.getRow(r).eachCell(c => Object.assign(c, HEAD)); cs.getRow(r).alignment = { wrapText: true, vertical: "middle" }; r++;
-    emps.forEach(e => e.ev.casos.forEach(c => { const f = cs.getRow(r), q = RG[e.id].f0 + c.t, h = `'Rango ${e.id}'!`, m = S.rangoK(e, c.k).m[c.t];
-      f.getCell(1).value = e.id; f.getCell(2).value = fx(`${h}A${q}`, fechaXL(e.fechas[c.t])); f.getCell(2).numFmt = "dd/mm/yyyy"; f.getCell(3).value = fx(`${h}D${q}`, e.bal[c.t]);
-      f.getCell(4).value = fx(`${h}F${q}`, m + c.d0); f.getCell(5).value = fx(`${h}G${q}`, m); f.getCell(6).value = fx(`${h}M${q}`, c.d0); [4, 5, 6].forEach(k => f.getCell(k).numFmt = "0.00");
-      f.getCell(7).value = fx(`${h}Q${q}`, c.reg === null ? "censurado" : c.reg); f.getCell(8).value = fx(`${h}R${q}`, c.h ?? ""); f.getCell(9).value = fx(`${h}S${q}`, c.cruza); r++; }));
+    [17, 18, 19].forEach(c => { cs.getColumn(c).hidden = true; });   // auxiliares: empresa, n.º de caso dentro de ella y fila en su hoja Rango
+    const elige = (c_, q) => `CHOOSE($Q${q},${emps.map(e => R(e.id, c_)).join(",")})`, casosF = emps.flatMap(e => e.ev.casos.map(c => ({ e, c })));
+    for (let j = 1; j <= capF; j++, r++) {
+      const f = cs.getRow(r), x = casosF[j - 1], lee = c_ => `IF($S${r}="","",INDEX(${elige(c_, r)},$S${r}))`;
+      f.getCell(17).value = fx(`IFERROR(IF(${j}>$B$${rTot},"",MATCH(${j - 1},${SIM.previos},1)),"")`, x ? emps.indexOf(x.e) + 1 : "");
+      f.getCell(18).value = fx(`IF($Q${r}="","",${j}-INDEX(${SIM.previos},$Q${r}))`, x ? x.e.ev.casos.indexOf(x.c) + 1 : "");
+      f.getCell(19).value = fx(`IF($Q${r}="","",IFERROR(MATCH($R${r},${elige("X", r)},0),""))`, x ? x.c.t + 1 : "");
+      const m = x ? S.rangoK(x.e, x.c.k).m[x.c.t] : null;
+      f.getCell(1).value = fx(`IF($S${r}="","",INDEX(${SIM.nombres},$Q${r}))`, x ? x.e.id : "");
+      f.getCell(2).value = fx(lee("A"), x ? fechaXL(x.e.fechas[x.c.t]) : ""); f.getCell(2).numFmt = "dd/mm/yyyy";
+      f.getCell(3).value = fx(lee("D"), x ? x.e.bal[x.c.t] : "");
+      f.getCell(4).value = fx(lee("F"), x ? m + x.c.d0 : ""); f.getCell(5).value = fx(lee("G"), x ? m : ""); f.getCell(6).value = fx(lee("M"), x ? x.c.d0 : ""); [4, 5, 6].forEach(k => f.getCell(k).numFmt = "0.00");
+      f.getCell(7).value = fx(lee("Q"), x ? (x.c.reg === null ? "censurado" : x.c.reg) : ""); f.getCell(8).value = fx(lee("R"), x ? x.c.h ?? "" : ""); f.getCell(9).value = fx(lee("S"), x ? x.c.cruza : "");
+    }
 
     // --- observada en el histograma
     const sh = wb.getWorksheet("Simulación"), H_ = SIM.hist;
     for (let q = H_.r0; q <= H_.r1; q++) { const a = sh.getCell(q, H_.cH).value, b = sh.getCell(q, H_.cH + 1).value;
-      sh.getCell(q, H_.cH + 4).value = fx(`IF(AND(Consistencia!${AVISO}="",Consistencia!$F$${rTot}>=${H_.col(0)}${q},Consistencia!$F$${rTot}<${H_.col(1)}${q}),MAX(${H_.col(3)}$${H_.r0}:${H_.col(3)}$${H_.r1}),0)`, oT.prop >= a && oT.prop < b ? H_.mx : 0); }
+      sh.getCell(q, H_.cH + 4).value = fx(`IF(AND(${SIM.valida}=1,Consistencia!$F$${rTot}>=${H_.col(0)}${q},Consistencia!$F$${rTot}<${H_.col(1)}${q}),MAX(${H_.col(3)}$${H_.r0}:${H_.col(3)}$${H_.r1}),0)`, oT.prop >= a && oT.prop < b ? H_.mx : 0); }
 
     // --- Dashboard
     const ds = wb.getWorksheet("Dashboard");
