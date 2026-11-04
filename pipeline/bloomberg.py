@@ -18,6 +18,8 @@ FLUJOS = ("ingresos_mm", "dda_mm", "sga_mm", "opex_mm", "toti_mm", "regalias_mm"
           "intereses_mm", "impuesto_ganancias_mm", "resultado_antes_imp_mm", "ebitda_mm", "ebitda_no_up_mm")
 STOCKS = ("deuda_mm", "caja_mm", "minoritarios_mm")
 _fx_cache: dict = {}
+# Sin 4 trimestres de Bloomberg se anualizan los que hay: el capex anual de respaldo de PRIO (2023) incluye compras de campos
+CAPEX_ANUALIZADO = {"PRIO"}
 
 
 # campos de Bloomberg que no corresponden a la definición del modelo (ver <ID>_notas.md):
@@ -204,6 +206,11 @@ def ttm(emp: str, q: str, datos: dict | None = None) -> dict:
     """Flujos TTM (4 trimestres terminados en q) en MUSD, solo si están los 4."""
     datos = leer(emp) if datos is None else datos
     qs = sorted(p for p in datos if p <= q and len(p) == 10 and p[5:] in ("03-31", "06-30", "09-30", "12-31"))[-4:]
+    if emp in CAPEX_ANUALIZADO and 2 <= len(qs) < 4 and qs[-1] == q:
+        vals = [a_usd(datos[p]["capex_mm"], p, "flujo") if "capex_mm" in datos[p] else None for p in qs]
+        if all(v is not None for v in vals):
+            netos = [capex_sin_adquisiciones(datos, p, v) for v, p in zip(vals, qs)]
+            return {"capex_musd_ttm": abs(sum(netos)) / len(netos) * 4}
     if len(qs) < 4 or qs[-1] != q:
         return {}
     out = {}

@@ -39,7 +39,11 @@ def poner_refinacion(ins: dict, eb12: float | None, n: int, fuente) -> None:
 def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | None, sem: dict, edgar_all: dict | None = None) -> dict:
     out = {}
     semv = lambda k: (sem.get(k) or {}).get("valor")
-    V = {k: v["valor"] for k, v in (ed.get("valores") or {}).items()}
+    # regalías: impuestos y volúmenes del mismo período (en un 10-K, el año); el resto usa el trimestre si el release lo trae
+    VA = {k: v["valor"] for k, v in (ed.get("valores") or {}).items()}
+    q4 = {k[:-3]: v for k, v in (ed.get("valores") or {}).items() if k.endswith("_q4")}
+    ed = {**ed, "valores": {**(ed.get("valores") or {}), **q4}}
+    V = {k: v["valor"] for k, v in ed["valores"].items()}
     docs = ed.get("docs") or {}
     url = lambda campo: docs.get((ed["valores"][campo]["doc"]))["url"] if campo in V else None
     per = next(iter(docs.values()), {}).get("periodo")
@@ -115,8 +119,8 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
         put("regalias_pct", V["regalias_os_musd"] / bruto, "derivado", url("regalias_os_musd"),
             f"Regalías Oil Sands / (producción Oil Sands × precio realizado antes de regalías) del trimestre ({bruto:,.0f} MUSD)")
     elif "toti_musd" in V and crudo:
-        ing = dias * (V["crudo_kbd"] * V["p_crudo"] + V.get("bitumen_kbd", 0) * V["p_crudo"] + V.get("ngl_kbd", 0) * V.get("p_ngl", 0)
-                      + V.get("gas_mmcfd", 0) * V.get("p_gas_mcf", 0)) / 1000
+        ing = dias * (VA["crudo_kbd"] * VA["p_crudo"] + VA.get("bitumen_kbd", 0) * VA["p_crudo"] + VA.get("ngl_kbd", 0) * VA.get("p_ngl", 0)
+                      + VA.get("gas_mmcfd", 0) * VA.get("p_gas_mcf", 0)) / 1000
         put("regalias_pct", V["toti_musd"] / ing, "derivado", url("toti_musd"),
             "Impuestos distintos de ganancias / ingreso upstream (volumen × precio). Los volúmenes SEC ya son netos de regalías")
     elif "regalias_kusd" in V and V.get("ingresos_musd"):

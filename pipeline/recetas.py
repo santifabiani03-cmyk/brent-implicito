@@ -6,6 +6,8 @@ Si una empresa cambia el formato de su reporte, el patrón deja de matchear: el 
 y la página lo marca, en vez de tomar un número equivocado. Rangos = control de plausibilidad."""
 
 N = r"(\(?-?[\d][\d,]*\.?\d*\)?)"   # número con miles y decimales
+# Tabla del release anual de EOG: T1–T4 y año anterior, T1–T4 y año corriente. El 4T corriente es el noveno número de la fila.
+Q4 = r"(?:(?:\$ )?[\d,.]+ ){8}(?:\$ )?" + N
 
 RECETAS = {
     "EOG": {"docs": {"periodico": {"descubrir": "submissions", "forms": ["10-Q", "10-K"]},
@@ -19,11 +21,19 @@ RECETAS = {
             "p_ngl":          ("periodico", r"Average Natural Gas Liquids Prices \(\$/Bbl\).{0,80}?United States \$ " + N, (1, 150)),
             "p_gas_mcf":      ("periodico", r"Average Natural Gas Prices \(\$/Mcf\).{0,200}?Composite " + N, (0.1, 30)),
             "lifting_boe":    ("periodico", r"costs per barrel of oil equivalent \(Boe\).{0,200}?Lease and Well \$ " + N, (0.5, 60)),
-            "gpt_boe":        ("periodico", r"\(GP&T\) " + N, (0, 40)),
+            "gpt_boe":        ("periodico", [r"\(GP&T\) " + N, r"Lease and Well \$ \d+\.\d\d \$ \d+\.\d\d Gathering, Processing and Transportation Costs " + N], (0, 40)),   # dos decimales: otra tabla repite el rótulo en millones
             "ga_boe":         ("periodico", r"General and Administrative \(G&A\) " + N, (0, 20)),
             "dda_boe":        ("periodico", r"\(DD&A\) - Oil and Gas Properties " + N, (1, 60)),
             "toti_musd":      ("periodico", r"Taxes Other Than Income " + N, (0, 50000)),
             "reservas_mmboe": ("reservas", r"(?s).*Ending Reserves [\d,]+ [\d,]+ (?:—|[\d,]+) (?P<v>[\d,]+)", (100, 50000)),
+            # el 10-K informa el año: en los 4T, volúmenes y precios del trimestre salen del release
+            "crudo_kbd_q4":   ("reservas", r"Crude Oil and Condensate Volumes \(MBbld\).{0,400}?Total " + Q4, (50, 3000)),
+            "ngl_kbd_q4":     ("reservas", r"Natural Gas Liquids Volumes \(MBbld\).{0,300}?Total " + Q4, (0, 2000)),
+            "gas_mmcfd_q4":   ("reservas", r"Natural Gas Volumes \(MMcfd\).{0,400}?Total " + Q4, (0, 20000)),
+            "total_kboed_q4": ("reservas", r"Crude Oil Equivalent Volumes \(MBoed\).{0,400}?Total " + Q4, (50, 5000)),
+            "p_crudo_q4":     ("reservas", r"Average Crude Oil and Condensate Prices \(\$/Bbl\).{0,400}?Composite " + Q4, (15, 250)),
+            "p_ngl_q4":       ("reservas", r"Average Natural Gas Liquids Prices \(\$/Bbl\).{0,300}?Composite " + Q4, (1, 150)),
+            "p_gas_mcf_q4":   ("reservas", r"Average Natural Gas Prices \(\$/Mcf\).{0,400}?Composite " + Q4, (0.1, 30)),
         }},
     "COP": {"docs": {"periodico": {"descubrir": "submissions", "forms": ["10-Q", "10-K"]},
                      "reservas": {"descubrir": "fts", "q": '"year-end proved reserves"', "forms": "8-K", "solo_q4": True}},

@@ -163,6 +163,8 @@ def extraer_periodo(emp: str, cik: int, q_fin: str) -> dict:
             docs[clave], textos[clave] = d, t
     valores, fallas = {}, []
     for campo, (clave, patrones, (lo, hi)) in rec["campos"].items():
+        if rec["docs"][clave].get("solo_q4") and not q_fin.endswith("12-31"):
+            continue                   # ese documento solo existe en los cuartos trimestres
         t = textos.get(clave)
         patrones = [patrones] if isinstance(patrones, (str, tuple)) else patrones
         m, factor = None, 1

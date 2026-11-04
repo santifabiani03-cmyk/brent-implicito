@@ -58,6 +58,54 @@ def test_petrobras_en_reales(monkeypatch):
     assert historia.reales_a_usd(usd, "2024-09-30")["valores"]["ebitda_rtm_q"]["valor"] == 1078
 
 
+def test_eog_cuarto_trimestre_del_release():
+    """Filas reales del release 4T24 de EOG: el noveno número es el 4T corriente, no el año (77,40)."""
+    import re
+    from pipeline.recetas import RECETAS
+    from pipeline.fetch_edgar import _num
+    c = RECETAS["EOG"]["campos"]
+    p = ("Average Crude Oil and Condensate Prices ($/Bbl) (B) United States $ 77.27 $ 74.98 $ 83.61 $ 80.61 $ 79.18 $ 78.46 $ 82.71 $ 76.95 $ 71.68 $ 77.42 "
+         "Trinidad 68.98 64.88 71.38 69.21 65.58 67.50 70.75 63.15 60.47 64.43 Composite 77.26 74.97 83.60 80.60 79.17 78.45 82.69 76.92 71.66 77.40 Natural")
+    assert _num(re.search(c["p_crudo_q4"][1], p).group(1)) == 71.66
+    v = ("Crude Oil and Condensate Volumes (MBbld) (A) United States 457.1 476.0 482.8 484.6 475.2 486.8 490.1 491.8 493.5 490.6 Trinidad 0.6 0.6 0.5 0.6 0.6 0.6 0.6 1.2 1.1 0.8 "
+         "Total 457.7 476.6 483.3 485.2 475.8 487.4 490.7 493.0 494.6 491.4 Average")
+    assert _num(re.search(c["crudo_kbd_q4"][1], v).group(1)) == 494.6
+    g = "Natural Gas Volumes (MMcfd) (A) United States 1,475 1,513 1,562 1,653 1,551 1,658 1,668 1,745 1,840 1,728 Trinidad 164 155 142 178 160 200 204 225 252 220 Total 1,639 1,668 1,704 1,831 1,711 1,858 1,872 1,970 2,092 1,948 Average"
+    assert _num(re.search(c["gas_mmcfd_q4"][1], g).group(1)) == 2092
+
+
+def test_eog_gpt_con_redaccion_vieja():
+    import re
+    from pipeline.recetas import RECETAS
+    pats = RECETAS["EOG"]["campos"]["gpt_boe"][1]
+    # primero aparece la tabla de compensación en acciones, en millones, con el mismo rótulo: no hay que tomarla
+    t = ("Lease and Well $ 13 $ 12 Gathering, Processing and Transportation Costs 2 1 Exploration Costs 6 5 "
+         "Lease and Well $ 4.23 $ 4.23 Gathering, Processing and Transportation Costs 4.41 4.65 Depreciation")
+    assert next(re.search(p, t) for p in pats if re.search(p, t)).group(1) == "4.41"
+
+
+def test_derivar_usa_trimestre_y_regalias_del_ano():
+    """En un 10-K, producción y precio son los del 4T del release; las regalías, impuestos y volúmenes del año."""
+    from pipeline.derivar import derivar
+    val = lambda v, d="periodico": {"valor": v, "doc": d}
+    ed = {"docs": {"periodico": {"url": "u", "periodo": "2024-12-31", "dias": 365}},
+          "valores": {"crudo_kbd": val(100.0), "p_crudo": val(80.0), "total_kboed": val(150.0), "toti_musd": val(292.0),
+                      "crudo_kbd_q4": val(110.0, "periodico"), "p_crudo_q4": val(70.0, "periodico"), "total_kboed_q4": val(160.0, "periodico")}}
+    c = {"id": "EOG", "region": "Norteamérica", "perfil": "pure-play"}
+    d = derivar(c, ed, {}, {}, [("2024-11-01", 75.0)], None, {}, None)
+    assert d["prod_crudo_kbd"]["valor"] == 110 and d["prod_otros_kboed"]["valor"] == 50
+    assert abs(d["diferencial_pct"]["valor"] - (1 - 70 / 75)) < 1e-9
+    assert abs(d["regalias_pct"]["valor"] - 292 / (365 * 100 * 80 / 1000)) < 1e-9
+
+
+def test_capex_prio_anualiza_sin_cuatro_trimestres():
+    from pipeline import bloomberg
+    f = lambda v: {"valor": v, "moneda": "USD"}
+    d = {"2023-09-30": {"capex_mm": f(200.0)}, "2023-12-31": {"capex_mm": f(100.0)}, "2024-03-31": {"capex_mm": f(300.0), "capex_adquisiciones_mm": f(60.0)}}
+    assert bloomberg.ttm("PRIO", "2024-03-31", d)["capex_musd_ttm"] == (200 + 100 + 240) / 3 * 4
+    assert bloomberg.ttm("VIST", "2024-03-31", d) == {}
+
+
 def test_riesgo_pais_al_dia():
     """Último dato disponible; sin dato anterior, None; regiones sin serie (mercados desarrollados), 0."""
     from pipeline.riesgo_pais import al_dia

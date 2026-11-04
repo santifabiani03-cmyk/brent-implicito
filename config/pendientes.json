@@ -4,7 +4,7 @@
   "importante": [
     {
       "titulo": "Riesgo país diario (04/11/2026)",
-      "texto": "El WACC usa el diferencial soberano de cada rueda (7.4 y 8.2): EMBI en Argentina, CDS en Brasil y 0 en Norteamérica. La hipótesis pasó de 137 de 225 (60,9 %) a 135 de 228 (59,2 %), con un umbral P95 de 58,3–58,7 %: se sostiene por poco."
+      "texto": "El WACC usa el diferencial soberano de cada rueda (7.4 y 8.2): EMBI en Argentina, CDS en Brasil y 0 en Norteamérica. Con los insumos corregidos, 139 de 231 desvíos regresan (60,2 %), con un umbral P95 de 58,2–58,6 %: se sostiene con poco margen."
     },
     {
       "titulo": "Datos Bloomberg (14/10/2026)",
@@ -55,8 +55,14 @@
       "area": "TIF"
     },
     {
-      "tarea": "La hipótesis quedó justa: 135 de 228 (59,2 %) contra P95 de 58,3–58,7 % según la semilla, y por empresa o grupo casi nunca supera. Tratarla como un resultado débil al redactar, y correr de nuevo si cambian los datos",
+      "tarea": "La hipótesis se sostiene con poco margen: 139 de 231 (60,2 %) contra P95 de 58,2–58,6 % según la semilla, y por empresa casi nunca supera. Tratarla como un resultado débil al redactar, y correr de nuevo si cambian los datos",
       "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Metodología"
+    },
+    {
+      "tarea": "Decidir contra qué Brent se mide el diferencial de realización: hoy es el Dated promedio del trimestre, mientras la prima usa el CO1. En 2T26 difieren 6 USD/bbl (102,6 vs 96,7). Medirlo contra el CO1 da 137 de 230 (59,6 %)",
+      "prioridad": "media",
       "estado": "pendiente",
       "area": "Metodología"
     },
@@ -67,9 +73,9 @@
       "area": "TIF"
     },
     {
-      "tarea": "Revisar insumos atípicos que no están verificados: otros costos de EOG en 4T23 y 1T24 (17,7 y 16,9 USD/boe, mediana 6,6), capex de PRIO en 4T23 y 1T24 (unos USD 2.700 M, mediana 1.013), diferencial de Vista en 1T26 (25,5 %) y diferenciales negativos de EOG en 4T24 y 4T25",
+      "tarea": "Revisar insumos atípicos — Resuelto: EOG usaba el año en vez del trimestre en los 4T y no leía el GP&T de 1T24; el capex de PRIO en 4T23 y 1T24 incluía compras de campos (ahora se anualizan los trimestres de Bloomberg). El diferencial de Vista en 1T26 (25,5 %) es real: su release informa 60,1 USD/bbl.",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Datos"
     },
     {
