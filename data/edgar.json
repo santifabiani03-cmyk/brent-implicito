@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-04T04:09:28+00:00",
+  "actualizado": "2026-11-04T04:43:07+00:00",
   "hasta": "2026-11-04",
   "empresas": {
     "VIST": {
@@ -178,7 +178,14 @@
         }
       },
       "fallas": [
-        "reservas_mmboe: no encontrado"
+        "reservas_mmboe: no encontrado",
+        "crudo_kbd_q4: no encontrado",
+        "ngl_kbd_q4: no encontrado",
+        "gas_mmcfd_q4: no encontrado",
+        "total_kboed_q4: no encontrado",
+        "p_crudo_q4: no encontrado",
+        "p_ngl_q4: no encontrado",
+        "p_gas_mcf_q4: no encontrado"
       ]
     },
     "PBR": {
