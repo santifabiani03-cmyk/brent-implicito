@@ -20,7 +20,7 @@
   const GRIS = { font: { italic: true, color: { argb: "FF555555" } } };
   const COLORES = { VIST: "1F77B4", YPF: "D9730D", EOG: "2E8B57", SU: "C8A415", PRIO: "C2185B", PBR: "6A3FA0" };
   const CFG = { z: "Consistencia!$C$7", plazo: "Consistencia!$C$8", rec: "Consistencia!$C$9", pct: "Consistencia!$C$10" };
-  const X0 = 25;      // primera columna (1-based) de la matriz prima/media/desvío por balance en las hojas Rango
+  const X0 = 26;      // primera columna (1-based) de la matriz prima/media/desvío/ρ por balance en las hojas Rango
   const HOLGURA = 20; // ruedas extra de la matriz: permiten mover una fecha de publicación sin salir de lo calculado
   const BANDAS = [1.5, 1.75, 2, 2.25, 2.5];   // bandas con referencia simulada al exportar: las que ofrece la celda de desvíos
 
@@ -93,20 +93,21 @@
   function hojaRango(wb, e, ev, cfg, im) {
     const ws = wb.addWorksheet("Rango " + e.id, { views: [{ state: "frozen", xSplit: 1, ySplit: 4 }] });
     const K = e.cals.length, n = e.n, f0 = 5, S = window.BIStats;
-    const lastCol = col(X0 - 1 + 3 * K - 1), MAT = `$${col(X0 - 1)}$${f0}:$${lastCol}$${f0 + n - 1}`;
+    const lastCol = col(X0 - 1 + 4 * K - 1), MAT = `$${col(X0 - 1)}$${f0}:$${lastCol}$${f0 + n - 1}`;
     ws.getCell("A1").value = `${e.id}: rango habitual y casos (6.1). Fórmulas conectadas a la hoja ${e.id} y a los parámetros de Consistencia.`; ws.getCell("A1").font = { bold: true, size: 12 };
-    ws.getCell("A2").value = "A la derecha, prima/media/desvío con los parámetros de cada balance: la ventana (20 ruedas previas) se recalcula con el balance vigente y cada caso se evalúa con el del día del desvío.";
+    ws.getCell("A2").value = "A la derecha, prima/media/desvío con los parámetros de cada balance y el riesgo país de cada rueda (columna Y): la ventana (20 ruedas previas) se recalcula con el balance vigente y cada caso se evalúa con el del día del desvío. ρ = volumen descontado con el WACC del día / con el WACC del balance.";
     Object.assign(ws.getCell("A2"), GRIS);
-    const cab = ["Fecha", "CO1", "Cap. (MUSD)", "Balance", "n.º bal.", "Prima", "Media 20", "Desvío 20", "Inferior", "Superior", "Fuera", "Inicio caso", "d0", "Signo", "Fin eval.", "Ruedas que cumplen", "Regresó", "Ruedas hasta regreso", "Cruza balance", "Δ prima (mismo bal.)", "Prima t−1", "Δ prima t−1", "Marca caso", "Caso n.º"];
-    e.cals.forEach(k => cab.push(`Prima|${k.periodo}`, `Media|${k.periodo}`, `Desvío|${k.periodo}`));
+    const cab = ["Fecha", "CO1", "Cap. (MUSD)", "Balance", "n.º bal.", "Prima", "Media 20", "Desvío 20", "Inferior", "Superior", "Fuera", "Inicio caso", "d0", "Signo", "Fin eval.", "Ruedas que cumplen", "Regresó", "Ruedas hasta regreso", "Cruza balance", "Δ prima (mismo bal.)", "Prima t−1", "Δ prima t−1", "Marca caso", "Caso n.º", "Riesgo país"];
+    e.cals.forEach(k => cab.push(`Prima|${k.periodo}`, `Media|${k.periodo}`, `Desvío|${k.periodo}`, `ρ|${k.periodo}`));
     ws.getRow(4).values = cab; ws.getRow(4).eachCell(c => Object.assign(c, HEAD)); ws.getRow(4).alignment = { wrapText: true, vertical: "middle" }; ws.getRow(4).height = 42;
     ws.getColumn(1).width = 11; ws.getColumn(4).width = 11;
     const porT = Object.fromEntries(ev.casos.map(c => [c.t, c])), vigente = balanceVigente(e.id, K);
     let nCaso = 0;
     for (let t = 0; t < n; t++) {
       const r = f0 + t, pos = t + 1, fila = ws.getRow(r), k = e.kIdx[t], enRango = t >= e.i0 && t <= e.i1, conRango = t >= S.VENTANA;
-      const c1 = `3*($E${r}-1)+1`, kP = S.primaK(e, k), { m, s } = S.rangoK(e, k);
+      const c1 = `4*($E${r}-1)+1`, kP = S.primaK(e, k), { m, s } = S.rangoK(e, k);
       fila.getCell(1).value = fechaXL(e.fechas[t]); fila.getCell(1).numFmt = "dd/mm/yyyy";
+      fila.getCell(25).value = e.crp[t]; fila.getCell(25).numFmt = "0.00%";
       // en el rango elegido, el mercado se edita en Implícitos; afuera (ventana y evaluación) solo existe acá
       const rI = enRango && im.tiene(e.fechas[t]) ? im.fila[e.fechas[t]] : null;
       fila.getCell(2).value = rI ? fx(`'Implícitos'!$B$${rI}`, e.co1[t]) : e.co1[t]; fila.getCell(2).numFmt = "0.00";
@@ -146,12 +147,17 @@
         [20, 21, 22].forEach(c => fila.getCell(c).numFmt = "0.00");
       }
     }
-    e.cals.forEach((cal, k) => {       // matriz: una terna por balance, solo donde hace falta (ventana + vigencia + evaluación)
-      const cP = X0 + 3 * k, lP = col(cP - 1), hoja = `'${e.id}'!`, cb = col(2 + k), P = S.primaK(e, k), { m, s } = S.rangoK(e, k);
+    e.cals.forEach((cal, k) => {       // matriz: cuatro columnas por balance, solo donde hace falta (ventana + vigencia + evaluación)
+      const cP = X0 + 4 * k, lP = col(cP - 1), hoja = `'${e.id}'!`, cb = col(2 + k), P = S.primaK(e, k), { m, s } = S.rangoK(e, k), lR = col(cP + 2);
+      const cel = f => `${hoja}${cb}$${f}`, deuda = `(${cel(R_.deuda_neta_musd)}+${cel(R_.minoritarios_musd)})`;
       const a0 = Math.max(0, e.primero[k] - S.VENTANA - HOLGURA), a1 = Math.min(n - 1, e.ultimo[k] + 15 + HOLGURA);
       for (let t = a0; t <= a1; t++) {
-        const r = f0 + t, fila = ws.getRow(r), p1 = `($C${r}-${hoja}${cb}$${C.B})/${hoja}${cb}$${C.A}`;
-        fila.getCell(cP).value = fx(`IF(${p1}<${hoja}${cb}$${C.pk},($C${r}-${hoja}${cb}$${C.B0})/${hoja}${cb}$${C.A0},${p1})-$B${r}`, P[t]);
+        // WACC del día (7.4). A y B + deuda son proporcionales al volumen descontado, también con la refinación por flujos: basta ρ
+        const r = f0 + t, fila = ws.getRow(r), w = `(${cel(C.wacc)}+(1-${cel(R_.peso_deuda)})*${cel(R_.lambda_crp)}*($Y${r}-${cel(R_.crp)}))`, rho = `$${lR}${r}`;
+        const vol = `${cel(C.q)}*(1+${w})^0.5*(1-(1+${w})^(-${cel(C.n)}))/${w}+${cel(C.rem)}*(1+${w})^(-(${cel(C.n)}+0.5))`;
+        fila.getCell(cP + 3).value = fx(`(${vol})/${cel(C.v)}`, S.coef({ ...cal._x, crp: e.crp[t] }).V / cal._k.V); fila.getCell(cP + 3).numFmt = "0.0000";
+        const p1 = `($C${r}+${deuda}-(${cel(C.B)}+${deuda})*${rho})/(${cel(C.A)}*${rho})`, p0 = `($C${r}+${deuda}-(${cel(C.B0)}+${deuda})*${rho})/(${cel(C.A0)}*${rho})`;
+        fila.getCell(cP).value = fx(`IF(${p1}<${cel(C.pk)},${p0},${p1})-$B${r}`, P[t]);
         fila.getCell(cP).numFmt = "0.00";
         if (t >= S.VENTANA && t >= e.primero[k] - HOLGURA) {
           fila.getCell(cP + 1).value = fx(`AVERAGE(${lP}${r - 20}:${lP}${r - 1})`, m[t]); fila.getCell(cP + 2).value = fx(`STDEV(${lP}${r - 20}:${lP}${r - 1})`, s[t]);
@@ -196,11 +202,9 @@
     ["Empresa", "Datos al exportar", "Datos actuales", "Casos previos"].forEach((t, c) => { const x = ws.getCell(8, 7 + c); x.value = t; Object.assign(x, HEAD); });
     const suma = a => a.reduce((x, y) => x + y, 0), rD = 9 + emps.length, serial = f => Date.parse(f + "T00:00:00Z") / 864e5 + 25569;
     emps.forEach((e, i) => { const r = 9 + i, K = e.cals.length, u = col(1 + K), rg = c => `'Rango ${e.id}'!$${c}$${RG[e.id].f0}:$${c}$${RG[e.id].f0 + RG[e.id].n - 1}`;
-      // el no-upstream de las integradas es fórmula en la hoja: se usa ese valor, no el redondeado de los insumos, que difiere en milésimas
-      const dNU = k => { const eb = k.inputs.ebitda_no_up_12m_musd?.[0]; return eb ? eb * (1 - k.inputs.tasa_impuesto[0]) * k._k.V / k._k.Q - k.inputs.valor_no_upstream_musd[0] : 0; };
-      const val = suma(e.co1) + suma(e.cap) + suma(e.cals.map(k => k._k.A + k._k.B + k._k.A0 + k._k.B0 + k._k.pk + 2 * dNU(k) + serial(k.publicado)));
+      const val = suma(e.co1) + suma(e.cap) + suma(e.crp) + suma(e.cals.map(k => k._k.A + k._k.B + k._k.A0 + k._k.B0 + k._k.pk + serial(k.publicado)));
       ws.getCell(r, 7).value = e.id; ws.getCell(r, 8).value = val;
-      ws.getCell(r, 9).value = fx(`SUM(${rg("B")})+SUM(${rg("C")})+SUM('${e.id}'!$C$${C.A}:$${u}$${C.pk})+SUM('${e.id}'!$C$5:$${u}$5)`, val);
+      ws.getCell(r, 9).value = fx(`SUM(${rg("B")})+SUM(${rg("C")})+SUM(${rg("Y")})+SUM('${e.id}'!$C$${C.A}:$${u}$${C.pk})+SUM('${e.id}'!$C$5:$${u}$5)`, val);
       ws.getCell(r, 10).value = i ? fx(`IFERROR(SUM(Consistencia!$B$${filaTot - nG + 1}:$B$${filaTot - nG + i}),0)`, suma(emps.slice(0, i).map(x => x.ev.casos.length))) : 0; });
     const rF = rD + 1, previos = `'Simulación'!$J$9:$J$${rD - 1}`, nombres = `'Simulación'!$G$9:$G$${rD - 1}`;
     ws.getCell(rF, 7).value = "Datos editados"; ws.getCell(rF, 8).value = fx(`IFERROR(IF(SUMPRODUCT(--(ABS(H9:H${rD - 1}-I9:I${rD - 1})>0.001))>0,1,0),0)`, 0);
@@ -233,9 +237,9 @@
     const Di = {}, CALS = {};
     emps.forEach(e => {
       CALS[e.id] = e.cals;
-      const s = hi.series[e.id], porP = Object.fromEntries(e.cals.map(k => [k.periodo, k._k]));
+      const s = hi.series[e.id], porP = Object.fromEntries(e.cals.map(k => [k.periodo, k._x]));
       Di[e.id] = {};
-      s.fecha.forEach((f, i) => { if (f < desde || f > hasta) return; const p = s.periodos[s.cal_idx[i]]; if (porP[p]) Di[e.id][f] = { cap: s.cap_musd[i], bal: p, xl: despeje(porP[p], s.cap_musd[i]), web: s.implicito[i] }; });
+      s.fecha.forEach((f, i) => { if (f < desde || f > hasta) return; const p = s.periodos[s.cal_idx[i]]; if (porP[p]) Di[e.id][f] = { cap: s.cap_musd[i], bal: p, xl: S.despejeDia(porP[p], s.crp[i], s.cap_musd[i]), web: s.implicito[i] }; });
     });
     const fechas = [...new Set([...emps.flatMap(e => Object.keys(Di[e.id])), ...Object.keys(co1).filter(f => f >= desde && f <= hasta)])].sort();
 
@@ -274,11 +278,12 @@
      ["Producción plana Q hasta agotar las reservas probadas (máx. 30 años), flujos a mitad de año descontados al WACC → volumen descontado V."],
      ["Valor del patrimonio = A·P + B, con A = V·a·(1−t) y B = V·(m·(1−t) + t·DD&A − capex/boe) + no-upstream − deuda neta − minoritarios."],
      ["Integradas: no-upstream = EBITDA de 12 meses de esos segmentos × (1−t) × V/Q, con el WACC y el horizonte del upstream, sin múltiplo ni valor terminal (7.4). El EBITDA está escrito dentro de la fórmula de cada celda."],
+     ["Riesgo país (7.4 y 8.2): entre balances varían la capitalización, el CO1 y el riesgo país. La hoja de cada empresa muestra el WACC con el riesgo país del día de publicación; cada rueda usa el suyo (columna Riesgo país de las hojas Rango, editable). Argentina: EMBI (ArgentinaDatos). Brasil: CDS a 5 años (Bloomberg). Norteamérica: 0."],
      ["Brent implícito P* = (capitalización − B) / A. Si P* < Pk (base imponible negativa), se usa el tramo sin impuesto: P* = (capitalización − B0) / A0."],
      ["a = participación del crudo × (1 − diferencial) × (1 − regalías − retenciones); m = margen por boe sin crudo (gas/NGL a precio fijo − lifting − otros costos)."],
      [""],
      ["CO1 (Brent, primer futuro ICE)", { bold: true }],
-     ["Cierre diario de Yahoo Finance BZ=F como proxy del CO1 Comdty de Bloomberg (el archivo bajado de la terminal vino vacío). No es el precio a la hora de cierre de cada acción que pide 6.1: sin historia intradiaria, el desfase se trata como ruido de cierre en la referencia (8.4)."],
+     [`Cierre diario del CO1 Comdty de Bloomberg hasta el ${hi.co1_bloomberg_hasta || "—"}; los días que faltan y lo posterior, Yahoo Finance BZ=F. No es el precio a la hora de cierre de cada acción que pide 6.1: sin historia intradiaria, el desfase se trata como ruido de cierre en la referencia (8.4).`],
      ["La prima usa el CO1 del mismo día; los días sin cotización de alguna de las dos quedan en blanco. Las hojas Rango incluyen hasta 20 ruedas antes y 15 después del rango elegido, para la ventana y la evaluación."],
      [""],
      ["Los insumos son editables: cambiar un valor en la hoja de una empresa recalcula su implícito, sus casos y los gráficos. La fecha de publicación decide qué balance rige cada día."],
@@ -295,7 +300,7 @@
     // --- Implícitos
     const im = wb.addWorksheet("Implícitos", { views: [{ state: "frozen", xSplit: 2, ySplit: 4 }] });
     im.getCell("A1").value = "Brent implícito diario por empresa y CO1"; im.getCell("A1").font = { bold: true, size: 13 };
-    im.getCell("A2").value = "Implícito = fórmula sobre la hoja de cada empresa (balance vigente ese día). Prima = implícito − CO1, en USD/bbl.";
+    im.getCell("A2").value = "Implícito = fórmula de la hoja Rango de cada empresa (balance vigente y riesgo país de ese día). Prima = implícito − CO1, en USD/bbl.";
     Object.assign(im.getCell("A2"), GRIS);
     const cab = ["Fecha", "CO1 (USD/bbl)"], ubic = {};
     emps.forEach((e, j) => { ubic[e.id] = 3 + 4 * j; cab.push(`${e.id} cap. (MUSD)`, `${e.id} balance`, `${e.id} implícito`, `${e.id} prima`); });
@@ -308,13 +313,12 @@
       fila.getCell(1).value = fechaXL(f); fila.getCell(1).numFmt = "dd/mm/yyyy";
       if (co1[f] != null) { fila.getCell(2).value = co1[f]; fila.getCell(2).numFmt = "0.00"; }
       emps.forEach(e => {
-        const c0 = ubic[e.id], d = Di[e.id][f], cC = col(c0 - 1), cB = col(c0), cI = col(c0 + 1);
+        const c0 = ubic[e.id], d = Di[e.id][f], cI = col(c0 + 1);
         if (!d) return;
-        const rng = fr => `'${e.id}'!$C$${fr}:$Z$${fr}`, k = `MATCH(${cB}${r},'${e.id}'!$C$4:$Z$4,0)`;
-        const p1 = `(${cC}${r}-INDEX(${rng(C.B)},${k}))/INDEX(${rng(C.A)},${k})`;
+        const t = e.fechas.indexOf(f), rR = 5 + t;   // fila de esa fecha en la hoja Rango; sin CO1 ese día no hay rueda y queda el valor calculado
         fila.getCell(c0).value = d.cap; fila.getCell(c0).numFmt = "#,##0";
         fila.getCell(c0 + 1).value = fx(balanceVigente(e.id, CALS[e.id].length)(`$A${r}`), d.bal);
-        fila.getCell(c0 + 2).value = fx(`IF(${p1}<INDEX(${rng(C.pk)},${k}),(${cC}${r}-INDEX(${rng(C.B0)},${k}))/INDEX(${rng(C.A0)},${k}),${p1})`, d.xl);
+        fila.getCell(c0 + 2).value = t >= 0 ? fx(`'Rango ${e.id}'!$F$${rR}+'Rango ${e.id}'!$B$${rR}`, d.xl) : d.xl;
         fila.getCell(c0 + 2).numFmt = "0.00";
         if (co1[f] != null) { fila.getCell(c0 + 3).value = fx(`${cI}${r}-$B${r}`, d.xl - co1[f]); fila.getCell(c0 + 3).numFmt = "0.00"; }
       });

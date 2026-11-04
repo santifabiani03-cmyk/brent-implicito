@@ -1,7 +1,11 @@
 {
   "_nota": "Se edita a mano. Se muestra en la página (botón 'Estado y pendientes'). estado: pendiente | en curso | resuelto. prioridad: alta | media | baja.",
-  "actualizado": "2026-11-03",
+  "actualizado": "2026-11-04",
   "importante": [
+    {
+      "titulo": "Riesgo país diario (04/11/2026)",
+      "texto": "El WACC usa el diferencial soberano de cada rueda (7.4 y 8.2): EMBI en Argentina, CDS en Brasil y 0 en Norteamérica. La hipótesis pasó de 137 de 225 (60,9 %) a 135 de 228 (59,2 %), con un umbral P95 de 58,3–58,7 %: se sostiene por poco."
+    },
     {
       "titulo": "Datos Bloomberg (14/10/2026)",
       "texto": "Los estados contables de las 6 salen de la terminal Bloomberg (inputs/bloomberg/<ID>.csv) y pisan a EDGAR/yfinance trimestre a trimestre; EDGAR completa los operativos de VIST, YPF, EOG y PBR. Suncor reemplaza a ConocoPhillips (panel del TIF). Suncor y PRIO no traen operativos en Bloomberg: se cargaron de sus releases (SEC 6-K / RI de PRIO) con link por dato en <ID>_operativos.csv."
@@ -28,22 +32,34 @@
     },
     {
       "titulo": "Vista: riesgo argentino dentro del implícito",
-      "texto": "WACC 13,7 % con prima país 9,7 % (Damodaran). El implícito de Vista mezcla expectativa de crudo con riesgo país: es el contraargumento central de la defensa. El riesgo país pasa a ser diario cuando esté la serie de Argentina."
+      "texto": "El riesgo país de Argentina va de 4,2 % a 16,5 % en la ventana y entra cada día al WACC. El implícito de Vista mezcla expectativa de crudo con riesgo país: es el contraargumento central de la defensa."
     },
     {
       "titulo": "Refinación por flujos, sin múltiplos",
-      "texto": "En las integradas la refinación se valúa con el EBITDA de 12 meses después de impuesto, descontado con el WACC y el horizonte del upstream (7.4). Es un término fijo en cada balance: cambia el nivel de la prima y las comparaciones entre empresas, no la prueba de la hipótesis. Eso deja de estar garantizado cuando el riesgo país pase a ser diario, porque el WACC cambiaría cada rueda."
+      "texto": "En las integradas la refinación se valúa con el EBITDA de 12 meses después de impuesto, descontado con el WACC y el horizonte del upstream (7.4). Su efecto sobre el implícito no depende del WACC: desplaza el nivel de la prima y las comparaciones entre empresas, no la prueba de la hipótesis."
     },
     {
       "titulo": "Referencia: CO1",
-      "texto": "La prima se calcula contra el primer futuro de Brent, con el CO12 como control (6.1 y 7.1). La web usa Yahoo BZ=F como aproximación hasta tener la serie de Bloomberg. El spot Dated y la curva quedan solo como comparación."
+      "texto": "La prima se calcula contra el primer futuro de Brent, con el CO12 como control (6.1 y 7.1). El CO1 histórico sale de Bloomberg; Yahoo BZ=F completa los días que faltan y lo posterior a la última exportación. El spot Dated y la curva quedan solo como comparación."
     },
     {
       "titulo": "Fuentes y límites",
-      "texto": "Bloomberg es la fuente principal del TIF (8.1). Los estados contables ya salen de la terminal; las cotizaciones y el CO1 de la web siguen en Yahoo. PRIO no es registrante SEC: usa Bloomberg, CVM y releases citados."
+      "texto": "Bloomberg es la fuente principal del TIF (8.1). Los estados contables y el CO1 histórico ya salen de la terminal; las cotizaciones de la web siguen en Yahoo. PRIO no es registrante SEC: usa Bloomberg, CVM y releases citados."
     }
   ],
   "pendientes": [
+    {
+      "tarea": "Entrega final: declarar en 8.1 y 8.2 que el riesgo país de Argentina sale del EMBI publicado por ArgentinaDatos y no de Bloomberg, explicar por qué (CDS con saltos y un hueco de cinco meses), que en Brasil es CDS y agregar la fuente a la bibliografía. Verificar el origen de la serie en esa API antes de citarla",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "TIF"
+    },
+    {
+      "tarea": "La hipótesis quedó justa: 135 de 228 (59,2 %) contra P95 de 58,3–58,7 % según la semilla, y por empresa o grupo casi nunca supera. Tratarla como un resultado débil al redactar, y correr de nuevo si cambian los datos",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "Metodología"
+    },
     {
       "tarea": "Entrega final: explicar en 8.2 cómo se valúa la refinación (flujos con el WACC y el horizonte del upstream, sin múltiplo) y anualizar los primeros balances de la ventana, que tienen menos de 4 trimestres (1T24: 2; 2T24: 3)",
       "prioridad": "alta",
@@ -57,9 +73,9 @@
       "area": "Datos"
     },
     {
-      "tarea": "Riesgo país diario, como pide 7.4 y 8.2 (decisión del grupo, 03/11/2026): reemplazar la prima anual de Damodaran por el diferencial soberano de cada fecha dentro del WACC. Toca la serie histórica y las fórmulas del Excel. Bloqueado hasta tener la serie de Argentina",
+      "tarea": "Riesgo país diario, como pide 7.4 y 8.2 — Resuelto (04/11/2026): el WACC cambia en cada rueda. Argentina: EMBI de ArgentinaDatos, porque el CDS de Bloomberg no sirve. Brasil: CDS de Bloomberg. Norteamérica: 0. Prima de mercado: Damodaran, fija por balance.",
       "prioridad": "alta",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Modelo"
     },
     {
@@ -93,13 +109,13 @@
       "area": "Modelo"
     },
     {
-      "tarea": "Referencia simulada con CO1 de cierre (Yahoo BZ=F): el desfase horario se mide como ruido de cierre, como prevé 8.4 si falta historia intradiaria. Falta el CO1 de Bloomberg y el control con CO12",
+      "tarea": "Referencia simulada: el CO1 de Bloomberg es el cierre del día, así que el desfase horario se sigue midiendo como ruido de cierre, como prevé 8.4 si falta historia intradiaria. Falta el control con CO12",
       "prioridad": "media",
       "estado": "pendiente",
       "area": "Datos"
     },
     {
-      "tarea": "Bloomberg: volver a bajar el riesgo país de Argentina (el CDS salta entre dos niveles, trae valores de 9 y 21 pb y un hueco de jun–nov 2025), el CO1 (el archivo vino vacío), el CO12 y las cotizaciones. Lista exacta en inputs/bloomberg/PEDIDO_TERMINAL.md",
+      "tarea": "Bloomberg: falta el CO12 y las cotizaciones. Para reemplazar el EMBI público: función CRP de Argentina y Brasil en USD, o el EMBI de ambos. Lista exacta en inputs/bloomberg/PEDIDO_TERMINAL.md",
       "prioridad": "alta",
       "estado": "pendiente",
       "area": "Datos"
@@ -135,9 +151,9 @@
       "area": "Datos"
     },
     {
-      "tarea": "YPF: saltos grandes en la serie al entrar cada balance — Refinación resuelta por flujos; falta el riesgo país diario, que es la otra causa (Damodaran: 16 % en 2025 vs 9,7 % en 2026)",
+      "tarea": "YPF: saltos en la serie al entrar cada balance — Resuelto en lo que tocaba a refinación y riesgo país anual. Lo que queda viene de los cambios propios de cada balance (reservas, capex, deuda).",
       "prioridad": "media",
-      "estado": "pendiente",
+      "estado": "resuelto",
       "area": "Modelo"
     },
     {

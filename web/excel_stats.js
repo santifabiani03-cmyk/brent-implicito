@@ -5,18 +5,23 @@
   const VENTANA = 20;
 
   // forma cerrada del motor (engine/model.py) con perfil plano: V = A·P + B, o A0·P + B0 si la base imponible es negativa
-  function coef(x) {
+  // la refinación (7.4) es proporcional a V: sigue al WACC; aj(valor, r, x) permite cambiarla en las sensibilidades
+  function coef(x, aj_ = v => v) {
     const r = (1 - x.peso_deuda) * (x.rf + x.beta * x.erp + x.lambda_crp * x.crp) + x.peso_deuda * x.kd * (1 - x.tasa_impuesto);
     const Q = (x.prod_crudo_kbd + x.prod_otros_kboed) * 365 / 1000, sh = x.prod_crudo_kbd / (x.prod_crudo_kbd + x.prod_otros_kboed);
     const nf = Math.floor(x.reservas_1p_mmboe / Q), n = Math.min(nf, 30), rem = nf >= 30 ? 0 : x.reservas_1p_mmboe - n * Q;
     const V = Q * Math.pow(1 + r, 0.5) * (1 - Math.pow(1 + r, -n)) / r + rem * Math.pow(1 + r, -(n + 0.5));
     const t = x.tasa_impuesto, a = sh * (1 - x.diferencial_pct) * ((1 - x.regalias_pct) - x.retencion_pct);
     const m = (1 - sh) * x.precio_otros_usd_boe * (1 - x.regalias_pct) - x.lifting_usd_boe - x.otros_costos_usd_boe;
-    const cb = x.capex_musd_anual / Q, aj = x.valor_no_upstream_musd - x.deuda_neta_musd - x.minoritarios_musd;
+    const noUp = x.ebitda_no_up_12m_musd ? x.ebitda_no_up_12m_musd * (1 - x.tasa_impuesto) * V / Q : x.valor_no_upstream_musd;
+    const cb = x.capex_musd_anual / Q, aj = aj_(noUp, r, x) - x.deuda_neta_musd - x.minoritarios_musd;
     return { r, Q, sh, n, rem, V, a, m, cb, aj, A: V * a * (1 - t), B: V * (m * (1 - t) + t * x.dda_usd_boe - cb) + aj,
       A0: V * a, B0: V * (m - cb) + aj, pk: (x.dda_usd_boe - m) / a };
   }
   const despeje = (k, cap) => { const p = (cap - k.B) / k.A; return p < k.pk ? (cap - k.B0) / k.A0 : p; };
+  // implícito con los parámetros de un balance y el riesgo país de la fecha (7.4)
+  const despejeDia = (x, crp, cap, aj_) => despeje(coef({ ...x, crp }, aj_), cap);
+  const plano = k => Object.fromEntries(Object.entries(k.inputs).map(([n, v]) => [n, v[0]]));
 
   /* Serie de una empresa en ruedas (días con acción y CO1), con 20 ruedas antes del rango (ventana) y 15 después (evaluación). */
   function preparar(D, id, desde, hasta) {
@@ -30,16 +35,16 @@
     const bal = idx.map(i => s.periodos[s.cal_idx[i]]);
     const usados = [...new Set(bal)];
     const cals = hi.calibraciones[id].filter(k => usados.includes(k.periodo) && !k.faltan.length)
-      .map(k => ({ ...k, _k: coef(Object.fromEntries(Object.entries(k.inputs).map(([n, v]) => [n, v[0]]))) }));
+      .map(k => ({ ...k, _x: plano(k), _k: coef(plano(k)) }));
     const posK = Object.fromEntries(cals.map((k, i) => [k.periodo, i]));
-    const e = { id, fechas: idx.map(i => s.fecha[i]), co1: idx.map(i => co1[s.fecha[i]]), cap: idx.map(i => s.cap_musd[i]),
+    const e = { id, fechas: idx.map(i => s.fecha[i]), co1: idx.map(i => co1[s.fecha[i]]), cap: idx.map(i => s.cap_musd[i]), crp: idx.map(i => s.crp[i]),
       web: idx.map(i => s.implicito[i]), bal, kIdx: bal.map(p => posK[p]), cals, i0: a - ini, i1: b - ini };
     e.n = e.fechas.length;
     e.primero = cals.map((_, k) => e.kIdx.indexOf(k));
     e.ultimo = cals.map((_, k) => e.kIdx.lastIndexOf(k));
     return e;
   }
-  const impK = (e, k) => e._imp?.[k] || ((e._imp = e._imp || [])[k] = e.cap.map(c => despeje(e.cals[k]._k, c)));
+  const impK = (e, k) => e._imp?.[k] || ((e._imp = e._imp || [])[k] = e.cap.map((c, j) => despejeDia(e.cals[k]._x, e.crp[j], c)));
   const primaK = (e, k) => e._pr?.[k] || ((e._pr = e._pr || [])[k] = impK(e, k).map((v, j) => v - e.co1[j]));
   function rangoK(e, k) {           // media y desvío muestral de las 20 ruedas previas, con los parámetros del balance k
     if (e._ra?.[k]) return e._ra[k];
@@ -195,5 +200,5 @@
     const rho = 1 + b;
     return { b, se, rho, t: b / se, vida: rho > 0 && rho < 1 ? Math.log(.5) / Math.log(rho) : null, ac: corr(dd, dl), ruido: Math.sqrt(Math.max(0, -cov(dd, dl) * (dd.length - 1) / dd.length)), fue: media(fue), skew, kurt, sdd };
   }
-  window.BIStats = { VENTANA, PRINCIPAL, NSIM, NSENS, SEMILLA, MIN_RUEDAS, ESCENARIOS, coef, despeje, preparar, primaK, rangoK, impK, evaluar, calibrar, simular, sensibilidades, observado, dinamica, grupos, propSim, percentil, media, devsq, cov, corr, sd };
+  window.BIStats = { VENTANA, PRINCIPAL, NSIM, NSENS, SEMILLA, MIN_RUEDAS, ESCENARIOS, coef, despeje, despejeDia, plano, preparar, primaK, rangoK, impK, evaluar, calibrar, simular, sensibilidades, observado, dinamica, grupos, propSim, percentil, media, devsq, cov, corr, sd };
 })();

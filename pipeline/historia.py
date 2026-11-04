@@ -16,7 +16,7 @@ from .fetch_edgar import extraer_periodo
 from .fetch_macro import damodaran, argentina
 from .derivar import derivar, ebitda_12m, poner_refinacion
 from .recetas import RECETAS
-from . import bloomberg
+from . import bloomberg, riesgo_pais
 from engine import model
 
 HIST = RAIZ / "data" / "historia"
@@ -114,6 +114,14 @@ def fin_trimestre(F: dict, q: str, moneda_div: float) -> dict:
             "fuente": f"Yahoo Finance vía yfinance ({'TTM al ' + q if usa_q else 'anual ≤ ' + q})"}
 
 
+def crp_dia(region: str, rp: dict, fecha: str) -> dict | None:
+    """Input de riesgo país para derivar(): diferencial soberano de la fecha; 0 en mercados desarrollados (8.2)."""
+    v = riesgo_pais.al_dia(rp, region, fecha)
+    if v is None:
+        return None
+    return {"valor": v, "fuente": riesgo_pais.FUENTES.get(region), "nota": f"Diferencial soberano al {fecha}; cambia rueda a rueda (7.4)" if region in rp else "Mercado desarrollado: sin prima (8.2)"}
+
+
 def reales_a_usd(ed: dict, q: str) -> dict:
     """Petrobras publicó los resultados de 1T24 y 2T24 en R$ (archivo …rs_6k.htm; desde 3T24, …usd_6k.htm). El EBITDA de
     segmentos se pasa a USD con el promedio del trimestre; sin tipo de cambio se descarta y lo completa Bloomberg."""
@@ -181,9 +189,11 @@ def main(desde: str = "2023-12-31"):
     px = {c["id"]: serie_yahoo(c["ticker_precio"], inicio_px) for c in emps}
     px["PBR_PREF"] = serie_yahoo("PBR-A", inicio_px)
     fx = serie_yahoo("BRL=X", inicio_px)
-    brent_1l = serie_yahoo("BZ=F", inicio_px)
+    co1_bb = bloomberg.leer_co1()
+    brent_1l = {**serie_yahoo("BZ=F", inicio_px), **co1_bb}   # Bloomberg manda; Yahoo completa los días que faltan y lo posterior
     spot = serie_fred("DCOILBRENTEU")
     rf = serie_fred("DGS10")
+    rp = riesgo_pais.series()
     ar = argentina()
     damo = {}
     def damo_para(fecha):
@@ -245,7 +255,8 @@ def main(desde: str = "2023-12-31"):
             fin = fin_trimestre(F, q, (al_dia(fx, pub) if c["moneda_estados_yf"] == "BRL" else 1.0))
             fin = {**fin, **bloomberg.fin_bloomberg(c["id"], q, bbd)}
             d = damo_para(pub)
-            macro_q = {"rf": {"valor": al_dia(rf, pub) / 100, "fecha": pub, "fuente": "FRED DGS10"}, "damodaran": d, "argentina": ar}
+            macro_q = {"rf": {"valor": al_dia(rf, pub) / 100, "fecha": pub, "fuente": "FRED DGS10"}, "damodaran": d, "argentina": ar,
+                       "crp_dia": crp_dia(c["region"], rp, pub)}
             cal = calibrar(c, q, ed, fin, macro_q, spot_l, al_dia(px[c["id"]], pub), al_dia(fx, pub), sem_q, memoria, acciones_ref, ebitdas)
             cal.update({"periodo": q, "publicado": pub, "docs": {k: v["url"] for k, v in (ed.get("docs") or {}).items()},
                         "fallas": ed.get("fallas", [])})
@@ -255,13 +266,12 @@ def main(desde: str = "2023-12-31"):
         calib[c["id"]] = lista
 
     # --- serie diaria
-    dias = sorted(d for d in px["EOG"] if d >= Q[1])
     series = {}
     for c in emps:
         cals = [k for k in calib[c["id"]] if not k["faltan"]]
-        out = {"fecha": [], "implicito": [], "banda_min": [], "banda_max": [], "cap_musd": [], "calibracion": []}
+        out = {"fecha": [], "implicito": [], "banda_min": [], "banda_max": [], "cap_musd": [], "calibracion": [], "crp": []}
         cache_i = {}
-        for d in dias:
+        for d in sorted(d for d in px[c["id"]] if d >= Q[1]):   # calendario propio: PRIO cotiza en los feriados de EE. UU. (6.1)
             vig = [k for k in cals if k["publicado"] <= d]
             p = px[c["id"]].get(d)
             if not vig or p is None:
@@ -280,16 +290,19 @@ def main(desde: str = "2023-12-31"):
                 continue
             if k["periodo"] not in cache_i:
                 cache_i[k["periodo"]] = model.Inputs.desde_dict({kk: v["valor"] for kk, v in k["inputs"].items()})
-            i = cache_i[k["periodo"]]
+            crp_d = riesgo_pais.al_dia(rp, c["region"], d)
+            if crp_d is None:
+                continue
+            i = model.con_crp(cache_i[k["periodo"]], crp_d)     # entre balances varían la capitalización y el riesgo país (7.4)
             bi = model.brent_implicito(i, cap)
             bd = model.banda(i, cap)
-            out["fecha"].append(d); out["implicito"].append(bi["valor"]); out["cap_musd"].append(round(cap, 1))
+            out["fecha"].append(d); out["implicito"].append(bi["valor"]); out["cap_musd"].append(round(cap, 1)); out["crp"].append(round(crp_d, 6))
             out["banda_min"].append(bd["min"]); out["banda_max"].append(bd["max"]); out["calibracion"].append(k["periodo"])
         series[c["id"]] = out
         print(f"serie: {c['id']} {len(out['fecha'])} días" + (f", {out['fecha'][0]} → {out['fecha'][-1]}" if out["fecha"] else ""))
 
     rng = lambda s: {"fecha": [d for d in sorted(s) if d >= Q[1]], "valor": [round(s[d], 2) for d in sorted(s) if d >= Q[1]]}
-    resultado = {"actualizado": ahora_iso(), "desde": Q[0], "series": series, "brent_spot": rng(spot), "brent_1l": rng(brent_1l),
+    resultado = {"actualizado": ahora_iso(), "desde": Q[0], "series": series, "brent_spot": rng(spot), "brent_1l": rng(brent_1l), "co1_bloomberg_hasta": max(co1_bb) if co1_bb else None,
                  "calibraciones": {e: [{"periodo": k["periodo"], "publicado": k["publicado"], "docs": k["docs"], "fallas": k["fallas"],
                                         "faltan": k["faltan"], "arrastrados": k["arrastrados"], "acciones_mm": k["acciones_mm"],
                                         "inputs": {kk: {"valor": v["valor"], "origen": v["origen"]} for kk, v in k["inputs"].items()}}

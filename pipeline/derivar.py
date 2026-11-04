@@ -186,8 +186,12 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
         put("rf", macro["rf"]["valor"], "macro", macro["rf"]["fuente"], f"UST 10 años al {macro['rf']['fecha']}")
     if d.get("erp"):
         put("erp", d["erp"]["valor"], "macro", d["erp"]["fuente"], "ERP de mercado maduro")
-    crp = (d.get("crp") or {}).get(c["region"], {})
-    put("crp", crp.get("valor"), "macro", crp.get("fuente"), "Prima de riesgo país (default spread × volatilidad relativa)")
+    dia = macro.get("crp_dia")
+    if dia:      # diferencial soberano del día de publicación; en la serie histórica cambia rueda a rueda (7.4)
+        put("crp", dia["valor"], "macro", dia.get("fuente"), dia.get("nota"))
+    else:
+        crp = (d.get("crp") or {}).get(c["region"], {})
+        put("crp", crp.get("valor"), "macro", crp.get("fuente"), "Prima de riesgo país (default spread × volatilidad relativa)")
     put("lambda_crp", 1.0, "supuesto", None, "Exposición unitaria al riesgo país (caso base, MT 7.2.2)")
     deuda, t = y.get("deuda_musd"), tm.get("valor")
     bu = ((d.get("beta_u") or {}).get(c["perfil"]) or {})

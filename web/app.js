@@ -204,7 +204,7 @@
 
   function fuentes() {
     $("#gen").textContent = `data.json generado ${new Date(D.generado).toLocaleString("es-AR")}`;
-    const nom = { "mercado.json": "Cotizaciones (Yahoo Finance)", "brent.json": "Brent spot FRED + curva ICE", "fx.json": "USD/BRL (BCB PTAX)", "fund_sec.json": "Balances EOG (SEC XBRL)", "fund_cvm.json": "Balances PRIO, Petrobras (CVM)", "fund_yf.json": "Estados financieros de las 6 (yfinance)", "ar_se.json": "Producción y reservas operadas VIST, YPF (Secretaría de Energía)", "edgar.json": "Releases y 10-Q/10-K (SEC EDGAR)", "macro.json": "rf, ERP, riesgo país, betas (FRED, Damodaran) y Medanito (SE)" };
+    const nom = { "mercado.json": "Cotizaciones (Yahoo Finance)", "brent.json": "Brent spot FRED + curva ICE", "fx.json": "USD/BRL (BCB PTAX)", "fund_sec.json": "Balances EOG (SEC XBRL)", "fund_cvm.json": "Balances PRIO, Petrobras (CVM)", "fund_yf.json": "Estados financieros de las 6 (yfinance)", "ar_se.json": "Producción y reservas operadas VIST, YPF (Secretaría de Energía)", "edgar.json": "Releases y 10-Q/10-K (SEC EDGAR)", "macro.json": "rf, ERP, betas (FRED, Damodaran) y Medanito (SE)", "riesgo_pais.json": "Riesgo país de Argentina: EMBI (ArgentinaDatos)" };
     $("#t-fuentes").innerHTML = `<thead><tr><th>Fuente</th><th>Estado</th><th>Última actualización</th></tr></thead><tbody>` +
       D.fuentes_estado.map(f => `<tr><td>${nom[f.archivo] || f.archivo}</td><td><span class="st ${f.estado === "ok" ? "ok" : f.estado === "desactualizado" ? "desactualizado" : "sin"}"></span>${f.estado}</td><td class="mono">${f.actualizado ? new Date(f.actualizado).toLocaleString("es-AR") : "—"}</td></tr>`).join("") +
       `<tr><td>Inputs editados por el equipo (inputs/operativos.csv)</td><td><span class="st ${D.empresas.some(e => Object.values(e.inputs).some(v => v.origen === "equipo")) ? "ok" : "sin"}"></span>${D.empresas.some(e => Object.values(e.inputs).some(v => v.origen === "equipo")) ? "con datos" : "sin cargar"}</td><td class="mono">—</td></tr></tbody>`;
@@ -277,7 +277,7 @@
     document.querySelectorAll("#h-emp button").forEach(b => b.onclick = () => { const e = b.dataset.e; H.activos.has(e) ? H.activos.delete(e) : H.activos.add(e); b.setAttribute("aria-pressed", H.activos.has(e)); hDraw(); });
     const inicio = Object.fromEntries(ids.map(e => [e, hi.series[e].fecha[0]]));
     $("#h-nota").textContent = "Cobertura: " + D.empresas.map(e => `${e.id} desde ${inicio[e.id] || "—"}`).join(" · ") +
-      ". PRIO y Suncor: estados contables de Bloomberg y operativos de sus releases (link por dato). Con una sola empresa elegida se dibuja su banda de sensibilidad.";
+      `. CO1 de Bloomberg hasta ${hi.co1_bloomberg_hasta || "—"}; lo que falta y lo posterior, Yahoo BZ=F. PRIO y Suncor: estados contables de Bloomberg y operativos de sus releases (link por dato). Con una sola empresa elegida se dibuja su banda de sensibilidad.`;
     hDraw();
   }
   const enRango = f => f >= H.desde && f <= H.hasta;
@@ -342,12 +342,11 @@
   // sensibilidad al valor de refinación (objetivos a y b): cada escenario cambia solo ese término en cada balance
   function hRefi(ref) {
     const S = window.BIStats, hi = D.historia; if (!S) return;
-    const ESC = [["Caso base: flujos con horizonte finito (7.4)", x => x.valor_no_upstream_musd], ["Caso base −30 %", x => x.valor_no_upstream_musd * .7], ["Caso base +30 %", x => x.valor_no_upstream_musd * 1.3],
-      ["Perpetuidad sin crecimiento (tiene valor terminal)", (x, k) => (x.ebitda_no_up_12m_musd || 0) * (1 - x.tasa_impuesto) / k.r], ["Sin refinación", () => 0]];
-    const primas = (id, fn) => { const s = hi.series[id], cal = Object.fromEntries(hi.calibraciones[id].map(k => [k.periodo, k])), kk = {}, o = {};
-      s.fecha.forEach((f, i) => { if (!enRango(f) || ref[f] == null || s.cap_musd[i] == null) return; const p = s.periodos[s.cal_idx[i]];
-        if (!(p in kk)) { const x = Object.fromEntries(Object.entries(cal[p].inputs).map(([n, v]) => [n, v[0]])); kk[p] = S.coef({ ...x, valor_no_upstream_musd: fn(x, S.coef(x)) }); }
-        o[f] = S.despeje(kk[p], s.cap_musd[i]) - ref[f]; }); return o; };
+    const ESC = [["Caso base: flujos con horizonte finito (7.4)", v => v], ["Caso base −30 %", v => v * .7], ["Caso base +30 %", v => v * 1.3],
+      ["Perpetuidad sin crecimiento (tiene valor terminal)", (v, r, x) => (x.ebitda_no_up_12m_musd || 0) * (1 - x.tasa_impuesto) / r], ["Sin refinación", () => 0]];
+    const primas = (id, fn) => { const s = hi.series[id], cal = Object.fromEntries(hi.calibraciones[id].map(k => [k.periodo, S.plano(k)])), o = {};
+      s.fecha.forEach((f, i) => { if (!enRango(f) || ref[f] == null || s.cap_musd[i] == null) return;
+        o[f] = S.despejeDia(cal[s.periodos[s.cal_idx[i]]], s.crp[i], s.cap_musd[i], fn) - ref[f]; }); return o; };
     const INT = ["YPF", "SU", "PBR"], PARES = [["VIST", "YPF"], ["EOG", "SU"], ["PRIO", "PBR"]];
     const filas = ESC.map(([n, fn]) => { const P = Object.fromEntries(D.empresas.map(e => [e.id, primas(e.id, fn)]));
       const celdaP = id => { const v = Object.values(P[id]); return v.length ? sg(S.media(v)) : "—"; };

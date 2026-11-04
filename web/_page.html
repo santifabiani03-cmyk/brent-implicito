@@ -207,13 +207,13 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
   <section role="tabpanel" id="serie" hidden>
     <div class="panel">
       <h2>Brent implícito día por día</h2>
-      <p class="sub">Cada balance trimestral configura el modelo desde el día en que se publicó; entre balances solo se mueve la capitalización bursátil. La prima es el implícito menos el CO1. Las marcas de abajo son los días en que entró un balance nuevo.</p>
+      <p class="sub">Cada balance trimestral configura el modelo desde el día en que se publicó; entre balances se mueven la capitalización bursátil y el riesgo país (7.4). La prima es el implícito menos el CO1. Las marcas de abajo son los días en que entró un balance nuevo.</p>
       <div class="ctrl">
         <label class="lbl" for="h-desde">Desde <input type="date" id="h-desde"></label>
         <label class="lbl" for="h-hasta">Hasta <input type="date" id="h-hasta"></label>
         <div class="btns" id="h-presets"></div>
         <label class="lbl" for="h-ref">Brent de referencia
-          <select id="h-ref"><option value="brent_1l">CO1: primer futuro (Yahoo BZ=F)</option><option value="brent_spot">Spot Dated (FRED), solo comparación</option></select></label>
+          <select id="h-ref"><option value="brent_1l">CO1: primer futuro (Bloomberg)</option><option value="brent_spot">Spot Dated (FRED), solo comparación</option></select></label>
         <label class="lbl" for="h-vista">Ver
           <select id="h-vista"><option value="implicito">Brent implícito</option><option value="prima">Prima (implícito − referencia)</option></select></label>
       </div>
@@ -249,7 +249,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
           <li><b>Referencia:</b> <span id="x-nsim"></span> corridas de la misma regla sobre una prima sin reversión: CO1 observado menos un implícito que cambia con β·ΔCO1 más residuos remuestreados por fecha y en conjunto entre empresas (conserva volatilidad y correlación), más ruido de cierre medido con la autocovarianza de esos residuos.</li>
           <li><b>Umbral:</b> el análisis usa P95 (decisión del grupo); el percentil se puede cambiar arriba para ver cuánto depende el resultado de esa elección.</li>
           <li><b>A confirmar por el grupo:</b> que la ventana excluya el día del desvío y que el rango siga moviéndose durante la evaluación.</li>
-          <li><b>Limitaciones:</b> el CO1 es el cierre de Yahoo BZ=F (el archivo de Bloomberg vino vacío), no el precio a la hora de cierre de cada acción; falta el control con CO12. El riesgo país sigue siendo el de Damodaran, fijo por balance, hasta tener el CDS de Argentina (7.4 lo pide diario).</li>
+          <li><b>Limitaciones:</b> el CO1 de Bloomberg es el cierre del día, no el precio a la hora de cierre de cada acción; falta el control con CO12. El riesgo país de Argentina es el EMBI de ArgentinaDatos y el de Brasil, el CDS de Bloomberg: son medidas parecidas pero no iguales.</li>
         </ul>
       </details>
       <h3 class="xsub">Descargar en Excel</h3>
@@ -304,6 +304,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
       </div>
       <p style="margin-top:14px">El despeje busca, por bisección entre USD 10 y 300, el Brent en el que <b>valor del patrimonio = capitalización bursátil</b>. Funciona porque en una productora el valor crece siempre con el precio: hay un único cruce. En una integrada (YPF, Suncor, Petrobras) la refinación se valúa aparte, como un término fijo, y por eso su implícito es menos informativo (7.3).</p>
       <p><b>Refinación:</b> EBITDA de 12 meses de los segmentos no-upstream × (1 − impuesto) × factor de descuento, con el mismo WACC y el mismo horizonte que el upstream. No usa múltiplos ni valor terminal (7.4). El capex y el SG&amp;A consolidados ya se cargan al flujo del upstream.</p>
+      <p><b>Riesgo país:</b> diferencial soberano de cada rueda dentro del WACC (7.4 y 8.2). Argentina: EMBI (ArgentinaDatos), porque el CDS de la terminal trae saltos y un hueco de cinco meses. Brasil: CDS a 5 años (Bloomberg). Norteamérica: 0. La prima de mercado sigue siendo la de Damodaran, fija por balance.</p>
       <p><b>Prima de Brent implícito:</b> diferencia diaria, en USD/bbl, entre el implícito y el CO1. Es positiva si la cotización incorpora un barril más caro que el de futuros y negativa si lo incorpora más barato.</p>
       <p><b>Modo proyección:</b> la misma cadena hacia adelante. Fijás un Brent y ves a qué precio debería cotizar la acción.</p>
       <p><b>Banda (8.3):</b> el implícito se recalcula con el costo de capital ±1 punto porcentual y los costos (lifting y otros) ±10 %, de a un supuesto por vez. Son supuestos preliminares: cubren la incertidumbre de los parámetros, no el sesgo de especificación del método.</p>
@@ -312,7 +313,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     <div class="flow">
       <div><span class="lbl">Todos los días hábiles · automático</span><h3>Mercado</h3><ul><li>Cotizaciones: Yahoo Finance</li><li>Brent spot: FRED (EIA)</li><li>Curva ICE Brent: Yahoo</li><li>USD/BRL: BCB PTAX</li></ul></div>
       <div><span class="lbl">Cada trimestre · SEC EDGAR</span><h3>Operativos</h3><ul><li>Encuentra el último 10-Q/10-K (EOG) o release 6-K (YPF, VIST, PBR); Suncor y PRIO salen de Bloomberg y de sus releases citados</li><li>Lee producción, precio realizado, lifting, costos por boe, impuestos a la producción, EBITDA de segmentos</li><li>Calcula diferencial vs Brent del trimestre, regalías, precio de gas/NGL</li></ul></div>
-      <div><span class="lbl">Cada trimestre · automático</span><h3>Balance y costo de capital</h3><ul><li>Capex, DD&A, SG&A, intereses, deuda, acciones: Bloomberg (terminal UADE), con yfinance, SEC y CVM de respaldo</li><li>rf (FRED), ERP, riesgo país y betas (Damodaran)</li></ul></div>
+      <div><span class="lbl">Cada trimestre · automático</span><h3>Balance y costo de capital</h3><ul><li>Capex, DD&A, SG&A, intereses, deuda, acciones: Bloomberg (terminal UADE), con yfinance, SEC y CVM de respaldo</li><li>rf (FRED), ERP y betas (Damodaran)</li><li>Riesgo país diario: EMBI de Argentina (ArgentinaDatos) y CDS de Brasil (Bloomberg)</li></ul></div>
       <div><span class="lbl">Orquestación</span><h3>GitHub Actions</h3><ul><li>19:30 ART: baja datos, corre tests y motor</li><li>Escribe data.json y publica la web</li><li>Cada corrida queda como commit: evidencia para el Anexo III</li></ul></div>
     </div>
   </section>
@@ -321,7 +322,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     <div class="panel"><h2>Estado de las fuentes</h2><p class="sub" id="gen"></p><div class="tbl"><table id="t-fuentes"></table></div></div>
     <div class="panel"><h2>Documentos leídos en EDGAR</h2><p class="sub">Último reporte de resultados de cada empresa. Si un patrón no encuentra un dato (porque cambió el formato del reporte), queda listado acá y el campo pasa al siguiente nivel de fuente.</p><div class="tbl"><table id="t-edgar"></table></div></div>
     <div class="panel"><h2>Datos de balance tomados automáticamente</h2><p class="sub">Deuda neta = deuda financiera − caja e inversiones corrientes. Hay que verificarla contra el filing antes de usarla en el TIF.</p><div class="tbl"><table id="t-fund"></table></div></div>
-    <div class="banner warn"><strong>Bloomberg.</strong> Es la fuente principal del TIF (8.1). Los estados contables ya salen de la terminal; las cotizaciones y el CO1 de esta página siguen en Yahoo Finance, y los resultados de la entrega final se corren con la serie de Bloomberg exportada.</div>
+    <div class="banner warn"><strong>Bloomberg.</strong> Es la fuente principal del TIF (8.1). Los estados contables y el CO1 histórico ya salen de la terminal; el CO1 posterior a la última exportación y las cotizaciones de esta página siguen en Yahoo Finance. Los resultados de la entrega final tienen que correrse con las cotizaciones de Bloomberg.</div>
   </section>
 </main>
 <dialog id="notas" aria-labelledby="notas-t">

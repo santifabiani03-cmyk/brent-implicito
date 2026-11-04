@@ -97,6 +97,12 @@ def valor_refinacion(i: Inputs) -> float:
     return i.ebitda_no_up_12m_musd * (1 - i.tasa_impuesto) * factor_descuento(i)
 
 
+def con_crp(i: Inputs, crp: float) -> Inputs:
+    """Inputs de un balance con el riesgo país de una fecha (TIF 7.4). La refinación sigue al WACC del día."""
+    out = replace(i, crp=crp)
+    return replace(out, valor_no_upstream_musd=valor_refinacion(out)) if out.ebitda_no_up_12m_musd else out
+
+
 def valor_patrimonio(i: Inputs, brent: float) -> float:
     """Valor del patrimonio (MUSD) para un Brent constante."""
     r = wacc(i)

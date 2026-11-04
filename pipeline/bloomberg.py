@@ -32,6 +32,23 @@ OPER = {"p_crudo_cad": ("p_crudo", "CAD"), "lifting_boe_cad": ("lifting_boe", "C
         "rm_resultado_antes_imp_mm_cad": ("rm_rai_mm", "CAD"), "rm_dda_mm_cad": ("rm_dda_mm", "CAD")}
 
 
+def fecha_co1(valor) -> str:
+    """Fecha de la exportación del CO1. Las celdas de texto vienen mm/dd/aaaa; las de fecha, con día y mes invertidos por Excel."""
+    if isinstance(valor, dt.datetime):
+        return dt.date(valor.year, valor.day, valor.month).isoformat()
+    m, d, a = str(valor).split("/")
+    return dt.date(int(a), int(m), int(d)).isoformat()
+
+
+def leer_co1() -> dict:
+    """{fecha: CO1 Comdty} de inputs/bloomberg/co1.csv; vacío si no existe."""
+    p = DIR / "co1.csv"
+    if not p.exists():
+        return {}
+    with p.open(encoding="utf-8-sig") as fh:
+        return {r["fecha"]: float(r["co1"]) for r in csv.DictReader(fh)}
+
+
 def leer(emp: str) -> dict:
     """{periodo: {variable: fila}}: <ID>_operativos.csv (públicos) y encima <ID>.csv (Bloomberg)."""
     out = defaultdict(dict)

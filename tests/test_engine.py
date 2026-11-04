@@ -58,6 +58,46 @@ def test_petrobras_en_reales(monkeypatch):
     assert historia.reales_a_usd(usd, "2024-09-30")["valores"]["ebitda_rtm_q"]["valor"] == 1078
 
 
+def test_riesgo_pais_al_dia():
+    """Último dato disponible; sin dato anterior, None; regiones sin serie (mercados desarrollados), 0."""
+    from pipeline.riesgo_pais import al_dia
+    s = {"Argentina": {"2025-01-02": .07, "2025-01-06": .08}}
+    assert al_dia(s, "Argentina", "2025-01-05") == .07 and al_dia(s, "Argentina", "2025-01-06") == .08
+    assert al_dia(s, "Argentina", "2024-12-31") is None
+    assert al_dia(s, "Norteamérica", "2025-01-05") == 0.0
+
+
+def test_crp_diario_mueve_wacc_y_refinacion():
+    d = dict(SINTETICO, ebitda_no_up_12m_musd=500.0)
+    i = model.Inputs.desde_dict(d)
+    j = model.con_crp(i, 0.05)
+    assert abs(model.wacc(j) - model.wacc(i) - (1 - i.peso_deuda) * 0.05) < 1e-12
+    assert abs(j.valor_no_upstream_musd - model.valor_refinacion(j)) < 1e-9 and j.valor_no_upstream_musd < model.valor_refinacion(i)
+    k = model.con_crp(model.Inputs.desde_dict(SINTETICO), 0.05)
+    assert k.valor_no_upstream_musd == 0
+
+
+def test_despeje_diario_js_igual_al_motor():
+    """La forma cerrada de la estadística y del Excel, con el riesgo país del día, da lo mismo que la bisección del motor."""
+    base = dict(SINTETICO, crecimiento_anual=0, anios_crecimiento=0, declino_anual=0, ebitda_no_up_12m_musd=500.0)
+    base["valor_no_upstream_musd"] = model.valor_refinacion(model.Inputs.desde_dict(base))
+    i = model.con_crp(model.Inputs.desde_dict(base), 0.06)
+    cap = model.valor_patrimonio(i, 80.0)
+    js = pathlib.Path(__file__).resolve().parents[1] / "web" / "excel_stats.js"
+    code = f"""global.window={{}}; require({json.dumps(str(js))}); const S=window.BIStats, x={json.dumps(base)};
+      console.log(JSON.stringify(S.despejeDia(x, 0.06, {cap})))"""
+    assert abs(json.loads(subprocess.check_output(["node", "-e", code])) - 80.0) < 0.005
+
+
+def test_fecha_co1():
+    """La exportación mezcla texto mm/dd/aaaa con fechas de Excel que tienen día y mes invertidos."""
+    import datetime as dt
+    from pipeline.bloomberg import fecha_co1
+    assert fecha_co1("10/30/2026") == "2026-10-30"
+    assert fecha_co1(dt.datetime(2026, 3, 11)) == "2026-11-03"
+    assert fecha_co1(dt.datetime(2023, 8, 12)) == "2023-12-08"
+
+
 def test_regalias_vista_con_llamada_de_nota():
     """En 2024 el release escribe "Royalties and others (1) (56,790 )": el (1) es una nota, no el monto."""
     import re

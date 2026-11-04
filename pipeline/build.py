@@ -4,10 +4,11 @@ from collections import defaultdict
 from .common import RAIZ, cargar, ahora_iso, companias
 from engine import model
 from .derivar import derivar, poner_refinacion
-from . import bloomberg
+from .historia import crp_dia
+from . import bloomberg, riesgo_pais
 
 MAX_EDAD_H = {"mercado.json": 48, "brent.json": 96, "fx.json": 96, "fund_sec.json": 24 * 120, "fund_cvm.json": 24 * 120,
-              "fund_yf.json": 24 * 120, "ar_se.json": 24 * 45, "edgar.json": 24 * 7, "macro.json": 24 * 7, "serie.json": 24 * 7}
+              "fund_yf.json": 24 * 120, "ar_se.json": 24 * 45, "edgar.json": 24 * 7, "macro.json": 24 * 7, "serie.json": 24 * 7, "riesgo_pais.json": 96}
 
 
 def inputs_equipo(archivo: str = "operativos.csv", origen: str = "equipo") -> dict:
@@ -68,6 +69,7 @@ def main():
     macro = cargar("macro.json", {})
     cot = mercado.get("cotizaciones", {})
     serie = cargar("serie.json", {})
+    rp = riesgo_pais.series()
     empresas = []
     for c in companias():
         q, f, eq = cot.get(c["id"], {}), fund.get(c["id"], {}), equipo.get(c["id"], {})
@@ -144,7 +146,7 @@ def main():
         if cap and mc_y and abs(cap / mc_y - 1) > 0.25:
             nota_cap = (nota_cap or "") + f" ⚠️ difiere >25 % de la capitalización de Yahoo ({mc_y:,.0f} MUSD): revisar acciones"
         # derivación desde EDGAR + macro (pisa a lo automático de baja prioridad y a las semillas; el equipo pisa todo)
-        der = derivar(c, ed_c, y, macro, (brent or {}).get("spot", []), cap, sem, edgar)
+        der = derivar(c, ed_c, y, {**macro, "crp_dia": crp_dia(c["region"], rp, ahora_iso()[:10])}, (brent or {}).get("spot", []), cap, sem, edgar)
         for k, v in der.items():
             if k in sem and v["origen"] == "supuesto":
                 continue
