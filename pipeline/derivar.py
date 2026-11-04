@@ -45,7 +45,7 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, co1: list, cap: float | Non
     ed = {**ed, "valores": {**(ed.get("valores") or {}), **q4}}
     V = {k: v["valor"] for k, v in ed["valores"].items()}
     docs = ed.get("docs") or {}
-    url = lambda campo: docs.get((ed["valores"][campo]["doc"]))["url"] if campo in V else None
+    url = lambda campo: (ed["valores"][campo].get("fuente") or docs.get(ed["valores"][campo]["doc"])["url"]) if campo in V else None
     per = next(iter(docs.values()), {}).get("periodo")
     if not per:   # sin EDGAR (PRIO): período de la semilla, ej. "2T2026"
         t_ = next((v.get("trimestre") for v in sem.values() if str(v.get("trimestre", ""))[:2] in TRIM), None)
@@ -145,7 +145,7 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, co1: list, cap: float | Non
         de_bb = ed["valores"]["retenciones_musd"].get("doc") == "bloomberg" and V.get("ingresos_bb_musd")
         ing_r = V.get("ingresos_fob_musd") or (V["ingresos_bb_musd"] if de_bb else V.get("ingresos_musd"))   # numerador y denominador de la misma fuente
         put("retencion_pct", V["retenciones_musd"] / ing_r, "derivado", url("retenciones_musd"),
-            "Derechos de exportación del trimestre / ingresos brutos")
+            "Impuestos de venta interna y exportación / Receita Total - FOB del trimestre (release)" if "ingresos_fob_musd" in V else "Derechos de exportación del trimestre / ingresos brutos")
     else:
         put("retencion_pct", 0.0, "supuesto", None, "Sin derechos de exportación informados (AR: Dto. 59/2026 exime no convencional hasta USD 65; editar si aplica)")
 

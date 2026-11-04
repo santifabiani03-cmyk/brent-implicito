@@ -118,6 +118,9 @@ def test_prio_regalias_e_impuestos_sobre_ingreso_fob():
     d = derivar({"id": "PRIO", "region": "Brasil", "perfil": "pure-play"}, ed, {}, {}, [("2026-05-01", 96.68)], None, {}, None)
     assert abs(d["regalias_pct"]["valor"] - 179.434 / 1337.464) < 1e-9 and abs(d["retencion_pct"]["valor"] - 113.952 / 1337.464) < 1e-9
     assert abs(d["diferencial_pct"]["valor"] - (1 - 87.69 / 96.68)) < 1e-9
+    ed["valores"]["regalias_kusd"]["fuente"] = "https://release (p.12)"
+    d = derivar({"id": "PRIO", "region": "Brasil", "perfil": "pure-play"}, ed, {}, {}, [("2026-05-01", 96.68)], None, {}, None)
+    assert d["regalias_pct"]["fuente"] == "https://release (p.12)" and d["retencion_pct"]["fuente"] == "u"   # cada dato cita su propia fuente; sin ella, el documento
 
 
 def test_capex_prio_anualiza_sin_cuatro_trimestres():
