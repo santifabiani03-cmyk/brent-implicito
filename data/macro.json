@@ -1,9 +1,9 @@
 {
-  "actualizado": "2026-11-04T05:43:18+00:00",
+  "actualizado": "2026-11-04T23:49:00+00:00",
   "errores": {},
   "rf": {
-    "valor": 0.049100000000000005,
-    "fecha": "2026-11-02",
+    "valor": 0.0495,
+    "fecha": "2026-11-03",
     "fuente": "FRED DGS10 (UST 10 años)"
   },
   "damodaran": {
@@ -56,12 +56,6 @@
   },
   "argentina": {
     "serie": [
-      {
-        "mes": "2024-07",
-        "medanito_usd_bbl": 76.03245608919597,
-        "brent_usd_bbl": 85.15304347826086,
-        "regalias_pct_neuquen": 0.1146013559731807
-      },
       {
         "mes": "2024-08",
         "medanito_usd_bbl": 69.93100000240533,
@@ -199,6 +193,12 @@
         "medanito_usd_bbl": 81.45095228833263,
         "brent_usd_bbl": 85.3990909090909,
         "regalias_pct_neuquen": 0.11447813426520523
+      },
+      {
+        "mes": "2026-07",
+        "medanito_usd_bbl": 76.87700418449057,
+        "brent_usd_bbl": 83.75869565217391,
+        "regalias_pct_neuquen": 0.11524123900620896
       }
     ],
     "fuente": "http://www.energia.gob.ar/contenidos/archivos/Reorganizacion/informacion_del_mercado/mercado_hidrocarburos/informacion_estadistica/regalias/Regalias_CRUDO.zip (Informe de Regalías, SE; últimos 2 meses provisorios excluidos; precio Neuquén como proxy de Medanito (la SE dejó de publicar el tipo de crudo) y Brent Dated FRED)"
