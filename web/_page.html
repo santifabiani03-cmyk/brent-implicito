@@ -262,6 +262,11 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
       <div class="tbl"><table id="h-test"></table></div>
     </div>
     <div class="panel">
+      <h2>Sensibilidad al valor de refinación</h2>
+      <p class="sub">Sobre el rango del gráfico, en USD/bbl. La refinación es un término fijo en cada balance: cambia el nivel de la prima pero no sus desvíos, así que no mueve la prueba de la hipótesis. Entre paréntesis, el porcentaje de ruedas en que la primera empresa del par supera a la segunda.</p>
+      <div class="tbl"><table id="h-refi"></table></div>
+    </div>
+    <div class="panel">
       <h2>Balances usados</h2>
       <p class="sub">Qué reporte configuró cada tramo de la serie. "Arrastrado" = el dato no estaba en ese reporte y se mantuvo el del anterior (máximo 2 trimestres; reservas, 4).</p>
       <div class="tbl"><table id="h-cal"></table></div>
@@ -298,6 +303,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
         <div class="step"><b>Valor del patrimonio</b><span>VP al WACC − deuda neta</span></div>
       </div>
       <p style="margin-top:14px">El despeje busca, por bisección entre USD 10 y 300, el Brent en el que <b>valor del patrimonio = capitalización bursátil</b>. Funciona porque en una productora el valor crece siempre con el precio: hay un único cruce. En una integrada (YPF, Suncor, Petrobras) la refinación se valúa aparte, como un término fijo, y por eso su implícito es menos informativo (7.3).</p>
+      <p><b>Refinación:</b> EBITDA de 12 meses de los segmentos no-upstream × (1 − impuesto) × factor de descuento, con el mismo WACC y el mismo horizonte que el upstream. No usa múltiplos ni valor terminal (7.4). El capex y el SG&amp;A consolidados ya se cargan al flujo del upstream.</p>
       <p><b>Prima de Brent implícito:</b> diferencia diaria, en USD/bbl, entre el implícito y el CO1. Es positiva si la cotización incorpora un barril más caro que el de futuros y negativa si lo incorpora más barato.</p>
       <p><b>Modo proyección:</b> la misma cadena hacia adelante. Fijás un Brent y ves a qué precio debería cotizar la acción.</p>
       <p><b>Banda (8.3):</b> el implícito se recalcula con el costo de capital ±1 punto porcentual y los costos (lifting y otros) ±10 %, de a un supuesto por vez. Son supuestos preliminares: cubren la incertidumbre de los parámetros, no el sesgo de especificación del método.</p>
@@ -306,7 +312,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     <div class="flow">
       <div><span class="lbl">Todos los días hábiles · automático</span><h3>Mercado</h3><ul><li>Cotizaciones: Yahoo Finance</li><li>Brent spot: FRED (EIA)</li><li>Curva ICE Brent: Yahoo</li><li>USD/BRL: BCB PTAX</li></ul></div>
       <div><span class="lbl">Cada trimestre · SEC EDGAR</span><h3>Operativos</h3><ul><li>Encuentra el último 10-Q/10-K (EOG) o release 6-K (YPF, VIST, PBR); Suncor y PRIO salen de Bloomberg y de sus releases citados</li><li>Lee producción, precio realizado, lifting, costos por boe, impuestos a la producción, EBITDA de segmentos</li><li>Calcula diferencial vs Brent del trimestre, regalías, precio de gas/NGL</li></ul></div>
-      <div><span class="lbl">Cada trimestre · automático</span><h3>Balance y costo de capital</h3><ul><li>Capex, DD&A, SG&A, intereses, deuda, acciones: Bloomberg (terminal UADE), con yfinance, SEC y CVM de respaldo</li><li>rf (FRED), ERP, riesgo país, betas y múltiplos (Damodaran)</li></ul></div>
+      <div><span class="lbl">Cada trimestre · automático</span><h3>Balance y costo de capital</h3><ul><li>Capex, DD&A, SG&A, intereses, deuda, acciones: Bloomberg (terminal UADE), con yfinance, SEC y CVM de respaldo</li><li>rf (FRED), ERP, riesgo país y betas (Damodaran)</li></ul></div>
       <div><span class="lbl">Orquestación</span><h3>GitHub Actions</h3><ul><li>19:30 ART: baja datos, corre tests y motor</li><li>Escribe data.json y publica la web</li><li>Cada corrida queda como commit: evidencia para el Anexo III</li></ul></div>
     </div>
   </section>

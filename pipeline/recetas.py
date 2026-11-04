@@ -63,7 +63,7 @@ RECETAS = {
             "p_crudo":        ("release", r"Oil \(\$/bbl\) (?:\(\d\) )?" + N, (15, 250)),
             "p_gas_mmbtu":    ("release", r"Natural Gas \(\$/MMBTU\) " + N, (0.1, 30)),
             "lifting_boe":    ("release", r"Lifting cost \(\$/boe\) " + N, (0.5, 60)),
-            "regalias_kusd":  ("release", r"Royalties and others \(?" + N, (0, 5000000)),
+            "regalias_kusd":  ("release", r"Royalties and others (?:\(\d\) )?\(?" + N, (0, 5000000)),   # "(1)" es llamada de nota
             "ingresos_musd":  ("release", r"Total revenues in Q\d \d{4} were " + N + r" \$MM", (1, 50000)),
             "reservas_mmboe": ("release", r"Total proved reserves as of December 31, \d{4}, totaled " + N + r" MMboe", (10, 20000)),
         }},

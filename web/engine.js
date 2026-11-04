@@ -21,6 +21,10 @@
     return out;
   }
 
+  function factorDescuento(i) { const r = wacc(i), q1 = (i.prod_crudo_kbd + i.prod_otros_kboed) * 365 / 1000;
+    return q1 ? perfil(i).reduce((s, q, k) => s + q / Math.pow(1 + r, k + 0.5), 0) / q1 : 0; }
+  const valorRefinacion = i => (i.ebitda_no_up_12m_musd || 0) * (1 - i.tasa_impuesto) * factorDescuento(i);
+
   function valorPatrimonio(i, brent) {
     const r = wacc(i), share = i.prod_crudo_kbd / (i.prod_crudo_kbd + i.prod_otros_kboed);
     const qb1 = (i.prod_crudo_kbd + i.prod_otros_kboed) * 365 / 1000, capexBoe = qb1 ? i.capex_musd_anual / qb1 : 0;
@@ -47,16 +51,18 @@
   function perturbar(i, k, d) { const x = { ...i };
     if (k === "wacc_pp") x.rf += d / (1 - x.peso_deuda);
     else if (k === "costos_rel") { x.lifting_usd_boe *= 1 + d; x.otros_costos_usd_boe *= 1 + d; }
-    else if (k.endsWith("_rel")) x[k.slice(0, -4)] *= 1 + d; else x[k] += d; return x; }
+    else if (k.endsWith("_rel")) x[k.slice(0, -4)] *= 1 + d; else x[k] += d;
+    if (x.ebitda_no_up_12m_musd) x.valor_no_upstream_musd = valorRefinacion(x);
+    return x; }
   function banda(i, cap) { const v = BANDA.map(([k, d]) => brentImplicito(perturbar(i, k, d), cap).valor).filter(x => x !== null);
     return v.length ? { min: Math.min(...v), max: Math.max(...v) } : { min: null, max: null }; }
-  const SENSIBLES = ["diferencial_pct","lifting_usd_boe","capex_musd_anual","reservas_1p_mmboe","precio_otros_usd_boe","crp","beta","deuda_neta_musd"];
+  const SENSIBLES = ["diferencial_pct","lifting_usd_boe","capex_musd_anual","reservas_1p_mmboe","precio_otros_usd_boe","crp","beta","deuda_neta_musd","ebitda_no_up_12m_musd"];
   function sensibilidad(i, cap, rel = 0.10) { const base = brentImplicito(i, cap).valor;
-    return SENSIBLES.filter(k => i[k] !== 0).map(k => ({ input: k, base,
+    return SENSIBLES.filter(k => i[k]).map(k => ({ input: k, base,
       menos10: brentImplicito(perturbar(i, k + "_rel", -rel), cap).valor, mas10: brentImplicito(perturbar(i, k + "_rel", rel), cap).valor }))
       .sort((a, b) => Math.abs((b.mas10 || 0) - (b.menos10 || 0)) - Math.abs((a.mas10 || 0) - (a.menos10 || 0))); }
   const precioObjetivo = (i, brent, acciones, ratio = 1, fx = 1) => valorPatrimonio(i, brent) / acciones * ratio * fx;
 
-  root.MotorBrent = { CAMPOS, wacc, perfil, valorPatrimonio, brentImplicito, banda, sensibilidad, precioObjetivo };
+  root.MotorBrent = { CAMPOS, wacc, perfil, factorDescuento, valorRefinacion, valorPatrimonio, brentImplicito, banda, sensibilidad, precioObjetivo };
   if (typeof module !== "undefined") module.exports = root.MotorBrent;
 })(typeof window !== "undefined" ? window : globalThis);

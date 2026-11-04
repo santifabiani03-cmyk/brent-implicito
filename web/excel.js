@@ -50,7 +50,9 @@
     ORDEN.forEach((k, i) => {
       const fila = ws.getRow(F0 + i), pct = (CAMPOS[k] || [])[1]?.startsWith("%");
       fila.getCell(1).value = (CAMPOS[k] || [k])[0]; fila.getCell(2).value = (CAMPOS[k] || [k, ""])[1];
-      cals.forEach((cal, j) => { const c = fila.getCell(3 + j); const v = cal.inputs[k]; c.value = v ? v[0] : null; c.numFmt = pct ? "0.00%" : "#,##0.00"; });
+      cals.forEach((cal, j) => { const c = fila.getCell(3 + j), v = cal.inputs[k], e12 = k === "valor_no_upstream_musd" && cal.inputs.ebitda_no_up_12m_musd?.[0], L = col(2 + j);
+        // refinación (7.4): EBITDA de 12 meses × (1 − impuesto) × factor de descuento, con el WACC y el horizonte de esta misma columna
+        c.value = e12 ? fx(`${e12}*(1-${L}${R_.tasa_impuesto})*${L}${C.v}/${L}${C.q}`, v[0]) : (v ? v[0] : null); c.numFmt = pct ? "0.00%" : "#,##0.00"; });
     });
     ws.getCell(`A${C.wacc - 1}`).value = "Cálculo (fórmulas sobre los insumos de arriba)"; Object.assign(ws.getCell(`A${C.wacc - 1}`), SUB);
     const R = R_;
@@ -242,6 +244,7 @@
      ["Método (forma cerrada del motor)", { bold: true }],
      ["Producción plana Q hasta agotar las reservas probadas (máx. 30 años), flujos a mitad de año descontados al WACC → volumen descontado V."],
      ["Valor del patrimonio = A·P + B, con A = V·a·(1−t) y B = V·(m·(1−t) + t·DD&A − capex/boe) + no-upstream − deuda neta − minoritarios."],
+     ["Integradas: no-upstream = EBITDA de 12 meses de esos segmentos × (1−t) × V/Q, con el WACC y el horizonte del upstream, sin múltiplo ni valor terminal (7.4). El EBITDA está escrito dentro de la fórmula de cada celda."],
      ["Brent implícito P* = (capitalización − B) / A. Si P* < Pk (base imponible negativa), se usa el tramo sin impuesto: P* = (capitalización − B0) / A0."],
      ["a = participación del crudo × (1 − diferencial) × (1 − regalías − retenciones); m = margen por boe sin crudo (gas/NGL a precio fijo − lifting − otros costos)."],
      [""],

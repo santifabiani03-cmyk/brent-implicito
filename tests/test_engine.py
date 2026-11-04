@@ -58,6 +58,56 @@ def test_petrobras_en_reales(monkeypatch):
     assert historia.reales_a_usd(usd, "2024-09-30")["valores"]["ebitda_rtm_q"]["valor"] == 1078
 
 
+def test_regalias_vista_con_llamada_de_nota():
+    """En 2024 el release escribe "Royalties and others (1) (56,790 )": el (1) es una nota, no el monto."""
+    import re
+    from pipeline.recetas import RECETAS
+    from pipeline.fetch_edgar import _num
+    pat = RECETAS["VIST"]["campos"]["regalias_kusd"][1]
+    assert abs(_num(re.search(pat, "Royalties and others (1) (56,790 ) (44,782 )").group(1))) == 56790
+    assert abs(_num(re.search(pat, "Royalties and others (68,254 ) (73,896 )").group(1))) == 68254
+
+
+def test_refinacion_por_flujos():
+    """TIF 7.4: flujo de 12 meses después de impuesto, con el mismo WACC y horizonte que el upstream. Se recalcula si cambia el WACC."""
+    d = dict(SINTETICO, crecimiento_anual=0, anios_crecimiento=0, declino_anual=0, valor_no_upstream_musd=0, ebitda_no_up_12m_musd=500.0)
+    i = model.Inputs.desde_dict(d)
+    r, q = model.wacc(i), (100 + 20) * 365 / 1000
+    a_mano = sum(min(q, 400 - q * (t - 1)) / (1 + r) ** (t - .5) for t in range(1, 11) if 400 - q * (t - 1) > 0) / q
+    assert abs(model.factor_descuento(i) - a_mano) < 1e-9
+    assert abs(model.valor_refinacion(i) - 500 * .7 * a_mano) < 1e-6
+    sube = model._perturbar(i, "wacc_pp", 0.01)
+    assert sube.valor_no_upstream_musd < model.valor_refinacion(i) and abs(sube.valor_no_upstream_musd - model.valor_refinacion(sube)) < 1e-9
+    costos = model._perturbar(i, "costos_rel", 0.10)
+    assert abs(costos.valor_no_upstream_musd - model.valor_refinacion(i)) < 1e-9
+
+
+def test_refinacion_12m():
+    """Anualiza lo publicado en los últimos 4 trimestres: al principio de la serie hay menos."""
+    from pipeline.derivar import ebitda_12m
+    s = [(100, 10.0), (101, 20.0), (102, 30.0), (103, 40.0), (104, 50.0)]
+    assert ebitda_12m(s, 100) == (40.0, 1)
+    assert ebitda_12m(s, 102) == (80.0, 3)
+    assert ebitda_12m(s, 104) == (140.0, 4)
+    assert ebitda_12m([], 104) == (None, 0)
+
+
+def test_paridad_refinacion_js():
+    d = dict(SINTETICO, ebitda_no_up_12m_musd=500.0)
+    i = model.Inputs.desde_dict(d)
+    d["valor_no_upstream_musd"] = model.valor_refinacion(i)
+    i = model.Inputs.desde_dict(d)
+    cap = model.valor_patrimonio(i, 80.0)
+    js = pathlib.Path(__file__).resolve().parents[1] / "web" / "engine.js"
+    code = f"""const M=require({json.dumps(str(js))}); const i={json.dumps(d)};
+      console.log(JSON.stringify({{f:M.factorDescuento(i), v:M.valorRefinacion(i), banda:M.banda(i,{cap}), sens:M.sensibilidad(i,{cap})}}))"""
+    out = json.loads(subprocess.check_output(["node", "-e", code]))
+    assert abs(out["f"] - model.factor_descuento(i)) < 1e-9 and abs(out["v"] - model.valor_refinacion(i)) < 1e-6
+    assert out["banda"] == model.banda(i, cap)
+    py = {s["input"]: (s["menos10"], s["mas10"]) for s in model.sensibilidad(i, cap)}
+    assert {s["input"]: (s["menos10"], s["mas10"]) for s in out["sens"]} == py and "ebitda_no_up_12m_musd" in py
+
+
 def test_paridad_js():
     i = model.Inputs.desde_dict(SINTETICO)
     caps = [model.valor_patrimonio(i, b) for b in (45, 80, 130)]

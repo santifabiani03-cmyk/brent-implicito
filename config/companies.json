@@ -47,7 +47,7 @@
       "referencia_natural": "Brent (Medanito / Escalante)",
       "descripcion": "Petrolera integrada con control estatal: upstream (Vaca Muerta y convencional), refinación y red de estaciones de servicio. El crudo es a la vez lo que vende y lo que compra.",
       "por_que_esta": "Contraste integrado en Argentina: permite ver cuánto se degrada el despeje cuando el downstream amortigua el precio.",
-      "cuidado": "Requiere separar el valor del downstream (se fija como parámetro con banda ancha). Riesgo argentino y litigios específicos (evento idiosincrático que el modelo no ve).",
+      "cuidado": "Requiere separar el valor de la refinación, que se valúa aparte con sus flujos. Riesgo argentino y litigios específicos (evento idiosincrático que el modelo no ve).",
       "ir_url": "https://inversores.ypf.com",
       "ticker_yf_fund": "YPF",
       "moneda_estados_yf": "USD",

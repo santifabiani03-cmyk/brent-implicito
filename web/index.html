@@ -262,6 +262,11 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
       <div class="tbl"><table id="h-test"></table></div>
     </div>
     <div class="panel">
+      <h2>Sensibilidad al valor de refinación</h2>
+      <p class="sub">Sobre el rango del gráfico, en USD/bbl. La refinación es un término fijo en cada balance: cambia el nivel de la prima pero no sus desvíos, así que no mueve la prueba de la hipótesis. Entre paréntesis, el porcentaje de ruedas en que la primera empresa del par supera a la segunda.</p>
+      <div class="tbl"><table id="h-refi"></table></div>
+    </div>
+    <div class="panel">
       <h2>Balances usados</h2>
       <p class="sub">Qué reporte configuró cada tramo de la serie. "Arrastrado" = el dato no estaba en ese reporte y se mantuvo el del anterior (máximo 2 trimestres; reservas, 4).</p>
       <div class="tbl"><table id="h-cal"></table></div>
@@ -298,6 +303,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
         <div class="step"><b>Valor del patrimonio</b><span>VP al WACC − deuda neta</span></div>
       </div>
       <p style="margin-top:14px">El despeje busca, por bisección entre USD 10 y 300, el Brent en el que <b>valor del patrimonio = capitalización bursátil</b>. Funciona porque en una productora el valor crece siempre con el precio: hay un único cruce. En una integrada (YPF, Suncor, Petrobras) la refinación se valúa aparte, como un término fijo, y por eso su implícito es menos informativo (7.3).</p>
+      <p><b>Refinación:</b> EBITDA de 12 meses de los segmentos no-upstream × (1 − impuesto) × factor de descuento, con el mismo WACC y el mismo horizonte que el upstream. No usa múltiplos ni valor terminal (7.4). El capex y el SG&amp;A consolidados ya se cargan al flujo del upstream.</p>
       <p><b>Prima de Brent implícito:</b> diferencia diaria, en USD/bbl, entre el implícito y el CO1. Es positiva si la cotización incorpora un barril más caro que el de futuros y negativa si lo incorpora más barato.</p>
       <p><b>Modo proyección:</b> la misma cadena hacia adelante. Fijás un Brent y ves a qué precio debería cotizar la acción.</p>
       <p><b>Banda (8.3):</b> el implícito se recalcula con el costo de capital ±1 punto porcentual y los costos (lifting y otros) ±10 %, de a un supuesto por vez. Son supuestos preliminares: cubren la incertidumbre de los parámetros, no el sesgo de especificación del método.</p>
@@ -306,7 +312,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     <div class="flow">
       <div><span class="lbl">Todos los días hábiles · automático</span><h3>Mercado</h3><ul><li>Cotizaciones: Yahoo Finance</li><li>Brent spot: FRED (EIA)</li><li>Curva ICE Brent: Yahoo</li><li>USD/BRL: BCB PTAX</li></ul></div>
       <div><span class="lbl">Cada trimestre · SEC EDGAR</span><h3>Operativos</h3><ul><li>Encuentra el último 10-Q/10-K (EOG) o release 6-K (YPF, VIST, PBR); Suncor y PRIO salen de Bloomberg y de sus releases citados</li><li>Lee producción, precio realizado, lifting, costos por boe, impuestos a la producción, EBITDA de segmentos</li><li>Calcula diferencial vs Brent del trimestre, regalías, precio de gas/NGL</li></ul></div>
-      <div><span class="lbl">Cada trimestre · automático</span><h3>Balance y costo de capital</h3><ul><li>Capex, DD&A, SG&A, intereses, deuda, acciones: Bloomberg (terminal UADE), con yfinance, SEC y CVM de respaldo</li><li>rf (FRED), ERP, riesgo país, betas y múltiplos (Damodaran)</li></ul></div>
+      <div><span class="lbl">Cada trimestre · automático</span><h3>Balance y costo de capital</h3><ul><li>Capex, DD&A, SG&A, intereses, deuda, acciones: Bloomberg (terminal UADE), con yfinance, SEC y CVM de respaldo</li><li>rf (FRED), ERP, riesgo país y betas (Damodaran)</li></ul></div>
       <div><span class="lbl">Orquestación</span><h3>GitHub Actions</h3><ul><li>19:30 ART: baja datos, corre tests y motor</li><li>Escribe data.json y publica la web</li><li>Cada corrida queda como commit: evidencia para el Anexo III</li></ul></div>
     </div>
   </section>
@@ -353,6 +359,10 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     return out;
   }
 
+  function factorDescuento(i) { const r = wacc(i), q1 = (i.prod_crudo_kbd + i.prod_otros_kboed) * 365 / 1000;
+    return q1 ? perfil(i).reduce((s, q, k) => s + q / Math.pow(1 + r, k + 0.5), 0) / q1 : 0; }
+  const valorRefinacion = i => (i.ebitda_no_up_12m_musd || 0) * (1 - i.tasa_impuesto) * factorDescuento(i);
+
   function valorPatrimonio(i, brent) {
     const r = wacc(i), share = i.prod_crudo_kbd / (i.prod_crudo_kbd + i.prod_otros_kboed);
     const qb1 = (i.prod_crudo_kbd + i.prod_otros_kboed) * 365 / 1000, capexBoe = qb1 ? i.capex_musd_anual / qb1 : 0;
@@ -379,17 +389,19 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
   function perturbar(i, k, d) { const x = { ...i };
     if (k === "wacc_pp") x.rf += d / (1 - x.peso_deuda);
     else if (k === "costos_rel") { x.lifting_usd_boe *= 1 + d; x.otros_costos_usd_boe *= 1 + d; }
-    else if (k.endsWith("_rel")) x[k.slice(0, -4)] *= 1 + d; else x[k] += d; return x; }
+    else if (k.endsWith("_rel")) x[k.slice(0, -4)] *= 1 + d; else x[k] += d;
+    if (x.ebitda_no_up_12m_musd) x.valor_no_upstream_musd = valorRefinacion(x);
+    return x; }
   function banda(i, cap) { const v = BANDA.map(([k, d]) => brentImplicito(perturbar(i, k, d), cap).valor).filter(x => x !== null);
     return v.length ? { min: Math.min(...v), max: Math.max(...v) } : { min: null, max: null }; }
-  const SENSIBLES = ["diferencial_pct","lifting_usd_boe","capex_musd_anual","reservas_1p_mmboe","precio_otros_usd_boe","crp","beta","deuda_neta_musd"];
+  const SENSIBLES = ["diferencial_pct","lifting_usd_boe","capex_musd_anual","reservas_1p_mmboe","precio_otros_usd_boe","crp","beta","deuda_neta_musd","ebitda_no_up_12m_musd"];
   function sensibilidad(i, cap, rel = 0.10) { const base = brentImplicito(i, cap).valor;
-    return SENSIBLES.filter(k => i[k] !== 0).map(k => ({ input: k, base,
+    return SENSIBLES.filter(k => i[k]).map(k => ({ input: k, base,
       menos10: brentImplicito(perturbar(i, k + "_rel", -rel), cap).valor, mas10: brentImplicito(perturbar(i, k + "_rel", rel), cap).valor }))
       .sort((a, b) => Math.abs((b.mas10 || 0) - (b.menos10 || 0)) - Math.abs((a.mas10 || 0) - (a.menos10 || 0))); }
   const precioObjetivo = (i, brent, acciones, ratio = 1, fx = 1) => valorPatrimonio(i, brent) / acciones * ratio * fx;
 
-  root.MotorBrent = { CAMPOS, wacc, perfil, valorPatrimonio, brentImplicito, banda, sensibilidad, precioObjetivo };
+  root.MotorBrent = { CAMPOS, wacc, perfil, factorDescuento, valorRefinacion, valorPatrimonio, brentImplicito, banda, sensibilidad, precioObjetivo };
   if (typeof module !== "undefined") module.exports = root.MotorBrent;
 })(typeof window !== "undefined" ? window : globalThis);
 </script>
@@ -722,7 +734,9 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     ORDEN.forEach((k, i) => {
       const fila = ws.getRow(F0 + i), pct = (CAMPOS[k] || [])[1]?.startsWith("%");
       fila.getCell(1).value = (CAMPOS[k] || [k])[0]; fila.getCell(2).value = (CAMPOS[k] || [k, ""])[1];
-      cals.forEach((cal, j) => { const c = fila.getCell(3 + j); const v = cal.inputs[k]; c.value = v ? v[0] : null; c.numFmt = pct ? "0.00%" : "#,##0.00"; });
+      cals.forEach((cal, j) => { const c = fila.getCell(3 + j), v = cal.inputs[k], e12 = k === "valor_no_upstream_musd" && cal.inputs.ebitda_no_up_12m_musd?.[0], L = col(2 + j);
+        // refinación (7.4): EBITDA de 12 meses × (1 − impuesto) × factor de descuento, con el WACC y el horizonte de esta misma columna
+        c.value = e12 ? fx(`${e12}*(1-${L}${R_.tasa_impuesto})*${L}${C.v}/${L}${C.q}`, v[0]) : (v ? v[0] : null); c.numFmt = pct ? "0.00%" : "#,##0.00"; });
     });
     ws.getCell(`A${C.wacc - 1}`).value = "Cálculo (fórmulas sobre los insumos de arriba)"; Object.assign(ws.getCell(`A${C.wacc - 1}`), SUB);
     const R = R_;
@@ -914,6 +928,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
      ["Método (forma cerrada del motor)", { bold: true }],
      ["Producción plana Q hasta agotar las reservas probadas (máx. 30 años), flujos a mitad de año descontados al WACC → volumen descontado V."],
      ["Valor del patrimonio = A·P + B, con A = V·a·(1−t) y B = V·(m·(1−t) + t·DD&A − capex/boe) + no-upstream − deuda neta − minoritarios."],
+     ["Integradas: no-upstream = EBITDA de 12 meses de esos segmentos × (1−t) × V/Q, con el WACC y el horizonte del upstream, sin múltiplo ni valor terminal (7.4). El EBITDA está escrito dentro de la fórmula de cada celda."],
      ["Brent implícito P* = (capitalización − B) / A. Si P* < Pk (base imponible negativa), se usa el tramo sin impuesto: P* = (capitalización − B0) / A0."],
      ["a = participación del crudo × (1 − diferencial) × (1 − regalías − retenciones); m = margen por boe sin crudo (gas/NGL a precio fijo − lifting − otros costos)."],
      [""],
@@ -1187,7 +1202,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
     reservas_1p_mmboe: ["Reservas probadas (1P)", "MMboe"], crecimiento_anual: ["Crecimiento de producción", "%/año"],
     anios_crecimiento: ["Años de crecimiento", "años"], declino_anual: ["Declino posterior", "%/año"],
     deuda_neta_musd: ["Deuda neta", "MUSD"], minoritarios_musd: ["Intereses minoritarios", "MUSD"],
-    valor_no_upstream_musd: ["Valor segmentos no-upstream", "MUSD"], rf: ["Tasa libre de riesgo", "%"], beta: ["Beta", "—"],
+    ebitda_no_up_12m_musd: ["EBITDA no-upstream, 12 meses", "MUSD"], valor_no_upstream_musd: ["Valor segmentos no-upstream", "MUSD"], rf: ["Tasa libre de riesgo", "%"], beta: ["Beta", "—"],
     erp: ["Prima de mercado", "%"], crp: ["Prima riesgo país", "%"], lambda_crp: ["Exposición al riesgo país (λ)", "—"],
     kd: ["Costo de la deuda", "%"], peso_deuda: ["Peso de la deuda D/V", "%"]
   };
@@ -1195,7 +1210,7 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
   const SINT = { prod_crudo_kbd: 100, prod_otros_kboed: 20, precio_otros_usd_boe: 20, diferencial_pct: 0.1, regalias_pct: 0.12,
     retencion_pct: 0, lifting_usd_boe: 10, otros_costos_usd_boe: 5, capex_musd_anual: 800, dda_usd_boe: 12, tasa_impuesto: 0.3,
     reservas_1p_mmboe: 400, crecimiento_anual: 0.05, anios_crecimiento: 3, declino_anual: 0.1, deuda_neta_musd: 1000,
-    minoritarios_musd: 0, valor_no_upstream_musd: 0, rf: 0.04, beta: 1.1, erp: 0.05, crp: 0, lambda_crp: 1, kd: 0.07, peso_deuda: 0.3 };
+    minoritarios_musd: 0, ebitda_no_up_12m_musd: 0, valor_no_upstream_musd: 0, rf: 0.04, beta: 1.1, erp: 0.05, crp: 0, lambda_crp: 1, kd: 0.07, peso_deuda: 0.3 };
 
   const $ = s => document.querySelector(s);
   const fmt = (v, d = 2) => v == null || isNaN(v) ? "—" : Number(v).toLocaleString("es-AR", { minimumFractionDigits: d, maximumFractionDigits: d });
@@ -1343,6 +1358,9 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
   function calcular() {
     const e = emp(), v = valores(), i = {}; const faltan = [];
     Object.keys(CAMPOS).forEach(k => { if (v[k].valor == null) faltan.push(CAMPOS[k][0]); else i[k] = +v[k].valor; });
+    // refinación (7.4): sigue al WACC, al horizonte y al EBITDA editados, salvo que se pise el valor a mano
+    if (over.valor_no_upstream_musd != null) i.ebitda_no_up_12m_musd = 0;
+    else if (i.ebitda_no_up_12m_musd && !faltan.length) i.valor_no_upstream_musd = M.valorRefinacion(i);
     const acc = e.inputs.acciones_mm?.valor ?? e.fundamentals.acciones_mm;
     let cap = sintetico ? null : e.mercado.cap_musd;
     const box = $("#resultado");
@@ -1512,7 +1530,23 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
       tip.style.left = Math.min(lx + 12, cw - 200) + "px"; tip.style.top = "12px";
     };
     $("#h-hit").onmouseleave = () => { tip.hidden = true; cross.setAttribute("visibility", "hidden"); };
-    hTest(act, ref, refF); hCal();
+    hTest(act, ref, refF); hCal(); hRefi(ref);
+  }
+  // sensibilidad al valor de refinación (objetivos a y b): cada escenario cambia solo ese término en cada balance
+  function hRefi(ref) {
+    const S = window.BIStats, hi = D.historia; if (!S) return;
+    const ESC = [["Caso base: flujos con horizonte finito (7.4)", x => x.valor_no_upstream_musd], ["Caso base −30 %", x => x.valor_no_upstream_musd * .7], ["Caso base +30 %", x => x.valor_no_upstream_musd * 1.3],
+      ["Perpetuidad sin crecimiento (tiene valor terminal)", (x, k) => (x.ebitda_no_up_12m_musd || 0) * (1 - x.tasa_impuesto) / k.r], ["Sin refinación", () => 0]];
+    const primas = (id, fn) => { const s = hi.series[id], cal = Object.fromEntries(hi.calibraciones[id].map(k => [k.periodo, k])), kk = {}, o = {};
+      s.fecha.forEach((f, i) => { if (!enRango(f) || ref[f] == null || s.cap_musd[i] == null) return; const p = s.periodos[s.cal_idx[i]];
+        if (!(p in kk)) { const x = Object.fromEntries(Object.entries(cal[p].inputs).map(([n, v]) => [n, v[0]])); kk[p] = S.coef({ ...x, valor_no_upstream_musd: fn(x, S.coef(x)) }); }
+        o[f] = S.despeje(kk[p], s.cap_musd[i]) - ref[f]; }); return o; };
+    const INT = ["YPF", "SU", "PBR"], PARES = [["VIST", "YPF"], ["EOG", "SU"], ["PRIO", "PBR"]];
+    const filas = ESC.map(([n, fn]) => { const P = Object.fromEntries(D.empresas.map(e => [e.id, primas(e.id, fn)]));
+      const celdaP = id => { const v = Object.values(P[id]); return v.length ? sg(S.media(v)) : "—"; };
+      const celdaD = ([a, b]) => { const d = Object.keys(P[a]).filter(f => P[b][f] != null).map(f => P[a][f] - P[b][f]); return d.length ? `${sg(S.media(d))} (${fmt(d.filter(v => v > 0).length / d.length * 100, 0)} %)` : "—"; };
+      return `<tr><td>${esc(n)}</td>${INT.map(id => `<td class="num">${celdaP(id)}</td>`).join("")}${PARES.map(p => `<td class="num">${celdaD(p)}</td>`).join("")}</tr>`; });
+    $("#h-refi").innerHTML = `<thead><tr><th>Valor de refinación</th>${INT.map(id => `<th class="num">Prima ${id}</th>`).join("")}${PARES.map(([a, b]) => `<th class="num">${a} − ${b}</th>`).join("")}</tr></thead><tbody>${filas.join("")}</tbody>`;
   }
   function hTest(act, ref, refF) {
     const hi = D.historia;

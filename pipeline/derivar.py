@@ -2,6 +2,7 @@
 Cada input sale con: valor, origen (edgar | derivado | macro | supuesto), fuente (link al documento) y la fórmula usada.
 Los 'supuesto' son convenciones del modelo, no datos: se muestran en ámbar y se editan desde la página."""
 import datetime as dt
+from engine import model
 
 BOE_MMBTU = 5.8   # 1 boe ≈ 5,8 MMBtu (convención de industria)
 
@@ -14,6 +15,25 @@ def _brent_trimestre(spot: list, fin: str):
 
 
 TRIM = {"1T": "03-31", "2T": "06-30", "3T": "09-30", "4T": "12-31"}
+
+
+def ebitda_12m(serie: list, iq: int) -> tuple:
+    """Serie [(índice de trimestre, EBITDA)] → (EBITDA de 12 meses, trimestres usados). Anualiza si hay menos de 4 publicados."""
+    vals = [e for q, e in serie if iq - 3 <= q <= iq]
+    return (sum(vals) / len(vals) * 4, len(vals)) if vals else (None, 0)
+
+
+def poner_refinacion(ins: dict, eb12: float | None, n: int, fuente) -> None:
+    """Valor de los segmentos no-upstream según TIF 7.4: flujo de 12 meses después de impuesto, mismo WACC y horizonte que el upstream.
+    Corre al final porque depende del WACC y de las reservas; si falta alguno de esos datos, el valor queda sin cargar."""
+    faltan = [k for k in model.CAMPOS_REQUERIDOS if k not in ins and k != "valor_no_upstream_musd"]
+    if eb12 is None or faltan:
+        return
+    i = model.Inputs.desde_dict({**{k: v["valor"] for k, v in ins.items()}, "valor_no_upstream_musd": 0, "ebitda_no_up_12m_musd": eb12})
+    base = "12 meses" if n == 4 else f"{n} trimestres anualizados"
+    ins["ebitda_no_up_12m_musd"] = {"valor": eb12, "origen": "derivado", "fuente": fuente, "nota": f"EBITDA de los segmentos no-upstream: {base}"}
+    ins["valor_no_upstream_musd"] = {"valor": model.valor_refinacion(i), "origen": "derivado", "fuente": fuente,
+                                     "nota": f"EBITDA 12 m ({eb12:,.0f}) × (1 − impuesto) × factor de descuento ({model.factor_descuento(i):.2f}), con el WACC y el horizonte del upstream, sin múltiplo ni valor terminal (7.4)"}
 
 
 def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | None, sem: dict, edgar_all: dict | None = None) -> dict:
@@ -149,16 +169,14 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, spot: list, cap: float | No
     elif y.get("dda_musd_ttm") and boe_anual:
         put("dda_usd_boe", y["dda_musd_ttm"] / boe_anual, "derivado", y.get("fuente"), "DD&A TTM (yfinance) / producción anual (EDGAR)")
 
-    # ---------- segmentos no-upstream (integradas): EBITDA del segmento × 4 × EV/EBITDA sectorial
-    d0 = macro.get("damodaran") or {}
+    # ---------- segmentos no-upstream: las integradas dejan el EBITDA del trimestre; el valor sale de poner_refinacion()
     if c["perfil"] == "integrada":
         eb = sum(V.get(k, 0) for k in ("ebitda_no_up_q", "ebitda_rtm_q", "ebitda_glce_q"))
-        mult = (d0.get("ev_ebitda_integradas") or {}).get("valor")
-        if eb and mult:
-            put("valor_no_upstream_musd", eb * 4 * mult, "derivado", url("ebitda_no_up_q") or url("ebitda_rtm_q"),
-                f"EBITDA ajustado de segmentos no-upstream del trimestre ({eb:,.0f}) × 4 × EV/EBITDA Oil/Gas Integrated de Damodaran ({mult:.2f}). Aproximación gruesa: banda ancha")
+        if eb:
+            put("ebitda_no_up_q_musd", eb, "derivado", url("ebitda_no_up_q") or url("ebitda_rtm_q"), "EBITDA de los segmentos no-upstream del trimestre")
     else:
         put("valor_no_upstream_musd", 0.0, "supuesto", None, "Perfil puro: sin segmentos no-upstream")
+        put("ebitda_no_up_12m_musd", 0.0, "parametro", None, "Perfil puro: sin segmentos no-upstream")
 
     # ---------- impuestos y costo de capital
     d = macro.get("damodaran") or {}

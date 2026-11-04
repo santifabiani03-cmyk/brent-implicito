@@ -14,7 +14,7 @@ import csv, io, json, sys, math, datetime as dt
 from .common import RAIZ, get, guardar, ahora_iso, companias, cargar
 from .fetch_edgar import extraer_periodo
 from .fetch_macro import damodaran, argentina
-from .derivar import derivar
+from .derivar import derivar, ebitda_12m, poner_refinacion
 from .recetas import RECETAS
 from . import bloomberg
 from engine import model
@@ -133,7 +133,7 @@ def reales_a_usd(ed: dict, q: str) -> dict:
 # ------------------------------------------------------------------ calibraciones
 def trimestres_idx(q: str) -> int:
     return int(q[:4]) * 4 + FINES.index(q[5:]) 
-def calibrar(c, q, ed, fin, macro_q, spot, precio_pub, fx_pub, sem_pub, memoria, acciones_ref):
+def calibrar(c, q, ed, fin, macro_q, spot, precio_pub, fx_pub, sem_pub, memoria, acciones_ref, ebitdas):
     ins = {}
     acc = acciones_ref(fin, c)
     cap = None
@@ -153,13 +153,21 @@ def calibrar(c, q, ed, fin, macro_q, spot, precio_pub, fx_pub, sem_pub, memoria,
     arrastrados = []
     edad_max = lambda k: 4 if k == "reservas_1p_mmboe" else 2      # trimestres: reservas son anuales
     iq = trimestres_idx(q)
+    eb_q = ins.pop("ebitda_no_up_q_musd", None)
+    if eb_q:
+        ebitdas.append((iq, eb_q["valor"]))
+    integrada = c["perfil"] == "integrada"
     for k in model.CAMPOS_REQUERIDOS:
+        if integrada and k == "valor_no_upstream_musd":
+            continue                   # se calcula abajo con el EBITDA de 12 meses
         if k not in ins and k in memoria and iq - memoria[k][1] <= edad_max(k):
             ins[k] = {**memoria[k][0], "origen": "arrastrado", "nota": f"Sin dato en {q}: se mantiene el publicado para {memoria[k][2]}"}
             arrastrados.append(k)
     for k, v in ins.items():
         if v.get("origen") != "arrastrado":
             memoria[k] = (v, iq, q)
+    if integrada:
+        poner_refinacion(ins, *ebitda_12m(ebitdas, iq), eb_q["fuente"] if eb_q else None)
     faltan = [k for k in model.CAMPOS_REQUERIDOS if k not in ins]
     return {"inputs": ins, "acciones_mm": acc, "arrastrados": arrastrados, "faltan": faltan}
 
@@ -208,7 +216,7 @@ def main(desde: str = "2023-12-31"):
             F = financieros(c["ticker_precio"]); cache.write_text(json.dumps(F))
         except Exception:  # noqa: BLE001
             F = json.loads(cache.read_text()) if cache.exists() else {"q": {}, "a": {}}
-        lista, memoria = [], {}
+        lista, memoria, ebitdas = [], {}, []
         bbd = bloomberg.leer(c["id"])
         for q in Q:
             # --- EDGAR (con caché)
@@ -238,7 +246,7 @@ def main(desde: str = "2023-12-31"):
             fin = {**fin, **bloomberg.fin_bloomberg(c["id"], q, bbd)}
             d = damo_para(pub)
             macro_q = {"rf": {"valor": al_dia(rf, pub) / 100, "fecha": pub, "fuente": "FRED DGS10"}, "damodaran": d, "argentina": ar}
-            cal = calibrar(c, q, ed, fin, macro_q, spot_l, al_dia(px[c["id"]], pub), al_dia(fx, pub), sem_q, memoria, acciones_ref)
+            cal = calibrar(c, q, ed, fin, macro_q, spot_l, al_dia(px[c["id"]], pub), al_dia(fx, pub), sem_q, memoria, acciones_ref, ebitdas)
             cal.update({"periodo": q, "publicado": pub, "docs": {k: v["url"] for k, v in (ed.get("docs") or {}).items()},
                         "fallas": ed.get("fallas", [])})
             lista.append(cal)

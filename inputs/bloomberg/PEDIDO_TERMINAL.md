@@ -26,9 +26,9 @@ Rango de todo lo diario: **01/04/2024 hasta hoy** (la ventana de la tesis necesi
 
 ⚠️ Confirmar cada ticker en la terminal: estos se anotaron por convención, no se comprobaron ahí.
 
-## 3. Opcional, para decidir el valor de refinación
+## 3. Opcional, solo como control del valor de refinación
 
-Múltiplo EV/EBITDA de refinadoras puras en cada fecha de la ventana (por ejemplo `VLO US Equity`, `MPC US Equity`, `PSX US Equity`). Damodaran no publica una categoría de refinación: solo Integrated (4 empresas), Production and Exploration y Distribution.
+La refinación ya no usa múltiplos: se valúa por flujos (7.4). Si sobra tiempo, el múltiplo EV/EBITDA de refinadoras puras en cada fecha de la ventana (por ejemplo `VLO US Equity`, `MPC US Equity`, `PSX US Equity`) sirve para contrastar el resultado.
 
 ## Formato
 

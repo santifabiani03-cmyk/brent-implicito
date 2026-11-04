@@ -3,7 +3,7 @@ import csv, json, datetime as dt
 from collections import defaultdict
 from .common import RAIZ, cargar, ahora_iso, companias
 from engine import model
-from .derivar import derivar
+from .derivar import derivar, poner_refinacion
 from . import bloomberg
 
 MAX_EDAD_H = {"mercado.json": 48, "brent.json": 96, "fx.json": 96, "fund_sec.json": 24 * 120, "fund_cvm.json": 24 * 120,
@@ -67,6 +67,7 @@ def main():
     edgar = cargar("edgar.json", {}).get("empresas", {})
     macro = cargar("macro.json", {})
     cot = mercado.get("cotizaciones", {})
+    serie = cargar("serie.json", {})
     empresas = []
     for c in companias():
         q, f, eq = cot.get(c["id"], {}), fund.get(c["id"], {}), equipo.get(c["id"], {})
@@ -152,6 +153,12 @@ def main():
             if k not in der and k not in ins:
                 ins[k] = v
         ins.update(eq)
+        # refinación (7.4): usa el EBITDA de 12 meses del último balance completo de la serie histórica
+        ins.pop("ebitda_no_up_q_musd", None)
+        if c["perfil"] == "integrada" and "valor_no_upstream_musd" not in eq:
+            ls = [k for k in serie.get("calibraciones", {}).get(c["id"], []) if not k["faltan"]]
+            e12 = ls[-1]["inputs"].get("ebitda_no_up_12m_musd", {}).get("valor") if ls else None
+            poner_refinacion(ins, e12, 4, f"Serie histórica, balance {ls[-1]['periodo']}" if ls else None)
         # --- motor
         plano = {k: v["valor"] for k, v in ins.items()}
         faltan = [k for k in model.CAMPOS_REQUERIDOS if plano.get(k) is None]

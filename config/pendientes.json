@@ -31,8 +31,8 @@
       "texto": "WACC 13,7 % con prima país 9,7 % (Damodaran). El implícito de Vista mezcla expectativa de crudo con riesgo país: es el contraargumento central de la defensa. El riesgo país pasa a ser diario cuando esté la serie de Argentina."
     },
     {
-      "titulo": "Petrobras: la refinación pesa mucho en 2026",
-      "texto": "El valor de refinación se estima con el EBITDA del trimestre × 4 × EV/EBITDA sectorial. Los trimestres de 2026 suben por ganancias de inventario, y la refinación llega al 76 % del EV. Hay alternativas analizadas: la decisión está pendiente."
+      "titulo": "Refinación por flujos, sin múltiplos",
+      "texto": "En las integradas la refinación se valúa con el EBITDA de 12 meses después de impuesto, descontado con el WACC y el horizonte del upstream (7.4). Es un término fijo en cada balance: cambia el nivel de la prima y las comparaciones entre empresas, no la prueba de la hipótesis. Eso deja de estar garantizado cuando el riesgo país pase a ser diario, porque el WACC cambiaría cada rueda."
     },
     {
       "titulo": "Referencia: CO1",
@@ -44,6 +44,18 @@
     }
   ],
   "pendientes": [
+    {
+      "tarea": "Entrega final: explicar en 8.2 cómo se valúa la refinación (flujos con el WACC y el horizonte del upstream, sin múltiplo) y anualizar los primeros balances de la ventana, que tienen menos de 4 trimestres (1T24: 2; 2T24: 3)",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "area": "TIF"
+    },
+    {
+      "tarea": "Revisar insumos atípicos que no están verificados: otros costos de EOG en 4T23 y 1T24 (17,7 y 16,9 USD/boe, mediana 6,6), capex de PRIO en 4T23 y 1T24 (unos USD 2.700 M, mediana 1.013), diferencial de Vista en 1T26 (25,5 %) y diferenciales negativos de EOG en 4T24 y 4T25",
+      "prioridad": "media",
+      "estado": "pendiente",
+      "area": "Datos"
+    },
     {
       "tarea": "Riesgo país diario, como pide 7.4 y 8.2 (decisión del grupo, 03/11/2026): reemplazar la prima anual de Damodaran por el diferencial soberano de cada fecha dentro del WACC. Toca la serie histórica y las fórmulas del Excel. Bloqueado hasta tener la serie de Argentina",
       "prioridad": "alta",
@@ -57,7 +69,7 @@
       "area": "Metodología"
     },
     {
-      "tarea": "Integradas: el capex y el SG&A consolidados se cargan todos al upstream, mientras la refinación se valúa aparte (Suncor: el capex de refinación llega al 15 % del total). YPF y Petrobras no traen capex por segmento en Bloomberg",
+      "tarea": "Integradas: verificar si el DD&A que se carga al upstream es el consolidado, como el capex y el SG&A. El método por flujos cuenta con eso para no duplicar gastos. Tampoco está medido si el gas de Petrobras se cuenta en parte dos veces (upstream y G&LCE)",
       "prioridad": "media",
       "estado": "pendiente",
       "area": "Modelo"
@@ -105,7 +117,7 @@
       "area": "Datos"
     },
     {
-      "tarea": "Declarar en la entrega final el sesgo de nivel de la prima en la ventana (VIST +93,5; YPF +118,1; EOG +40,7; PRIO +29,2; SU +7,3; PBR −15,7 USD/bbl): el CO1 casi nunca cae dentro de la banda, que no cubre el sesgo de especificación (8.3)",
+      "tarea": "Declarar en la entrega final el sesgo de nivel de la prima en la ventana: el CO1 casi nunca cae dentro de la banda, que no cubre el sesgo de especificación (8.3). YPF es el caso extremo: su horizonte es de 5 a 7 años con un WACC alto, así que el valor por flujos es bajo y la prima sale muy alta. Los valores actualizados están en la pestaña Serie histórica",
       "prioridad": "alta",
       "estado": "pendiente",
       "area": "TIF"
@@ -123,7 +135,7 @@
       "area": "Datos"
     },
     {
-      "tarea": "YPF: saltos grandes en la serie al entrar cada balance. Se resuelven con el valor de refinación y el riesgo país diario (ver esos pendientes)",
+      "tarea": "YPF: saltos grandes en la serie al entrar cada balance — Refinación resuelta por flujos; falta el riesgo país diario, que es la otra causa (Damodaran: 16 % en 2025 vs 9,7 % en 2026)",
       "prioridad": "media",
       "estado": "pendiente",
       "area": "Modelo"
@@ -159,9 +171,9 @@
       "area": "Modelo"
     },
     {
-      "tarea": "Valor de refinación de YPF, Suncor y Petrobras: decidir el método. El análisis de alternativas ya está hecho: no cambia la hipótesis, pero sí el nivel de la prima y el par Vista–YPF. En YPF la refinación llega a superar el EV de la empresa",
+      "tarea": "Valor de refinación de YPF, Suncor y Petrobras — Resuelto (decisión del grupo, 03/11/2026): por flujos según 7.4, con EBITDA de 12 meses × (1 − impuesto) × factor de descuento, mismo WACC y horizonte que el upstream, sin múltiplo ni valor terminal. La página informa ±30 %, perpetuidad y sin refinación como sensibilidad.",
       "prioridad": "alta",
-      "estado": "en curso",
+      "estado": "resuelto",
       "area": "Modelo"
     },
     {

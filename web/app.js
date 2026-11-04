@@ -9,7 +9,7 @@
     reservas_1p_mmboe: ["Reservas probadas (1P)", "MMboe"], crecimiento_anual: ["Crecimiento de producción", "%/año"],
     anios_crecimiento: ["Años de crecimiento", "años"], declino_anual: ["Declino posterior", "%/año"],
     deuda_neta_musd: ["Deuda neta", "MUSD"], minoritarios_musd: ["Intereses minoritarios", "MUSD"],
-    valor_no_upstream_musd: ["Valor segmentos no-upstream", "MUSD"], rf: ["Tasa libre de riesgo", "%"], beta: ["Beta", "—"],
+    ebitda_no_up_12m_musd: ["EBITDA no-upstream, 12 meses", "MUSD"], valor_no_upstream_musd: ["Valor segmentos no-upstream", "MUSD"], rf: ["Tasa libre de riesgo", "%"], beta: ["Beta", "—"],
     erp: ["Prima de mercado", "%"], crp: ["Prima riesgo país", "%"], lambda_crp: ["Exposición al riesgo país (λ)", "—"],
     kd: ["Costo de la deuda", "%"], peso_deuda: ["Peso de la deuda D/V", "%"]
   };
@@ -17,7 +17,7 @@
   const SINT = { prod_crudo_kbd: 100, prod_otros_kboed: 20, precio_otros_usd_boe: 20, diferencial_pct: 0.1, regalias_pct: 0.12,
     retencion_pct: 0, lifting_usd_boe: 10, otros_costos_usd_boe: 5, capex_musd_anual: 800, dda_usd_boe: 12, tasa_impuesto: 0.3,
     reservas_1p_mmboe: 400, crecimiento_anual: 0.05, anios_crecimiento: 3, declino_anual: 0.1, deuda_neta_musd: 1000,
-    minoritarios_musd: 0, valor_no_upstream_musd: 0, rf: 0.04, beta: 1.1, erp: 0.05, crp: 0, lambda_crp: 1, kd: 0.07, peso_deuda: 0.3 };
+    minoritarios_musd: 0, ebitda_no_up_12m_musd: 0, valor_no_upstream_musd: 0, rf: 0.04, beta: 1.1, erp: 0.05, crp: 0, lambda_crp: 1, kd: 0.07, peso_deuda: 0.3 };
 
   const $ = s => document.querySelector(s);
   const fmt = (v, d = 2) => v == null || isNaN(v) ? "—" : Number(v).toLocaleString("es-AR", { minimumFractionDigits: d, maximumFractionDigits: d });
@@ -165,6 +165,9 @@
   function calcular() {
     const e = emp(), v = valores(), i = {}; const faltan = [];
     Object.keys(CAMPOS).forEach(k => { if (v[k].valor == null) faltan.push(CAMPOS[k][0]); else i[k] = +v[k].valor; });
+    // refinación (7.4): sigue al WACC, al horizonte y al EBITDA editados, salvo que se pise el valor a mano
+    if (over.valor_no_upstream_musd != null) i.ebitda_no_up_12m_musd = 0;
+    else if (i.ebitda_no_up_12m_musd && !faltan.length) i.valor_no_upstream_musd = M.valorRefinacion(i);
     const acc = e.inputs.acciones_mm?.valor ?? e.fundamentals.acciones_mm;
     let cap = sintetico ? null : e.mercado.cap_musd;
     const box = $("#resultado");
@@ -334,7 +337,23 @@
       tip.style.left = Math.min(lx + 12, cw - 200) + "px"; tip.style.top = "12px";
     };
     $("#h-hit").onmouseleave = () => { tip.hidden = true; cross.setAttribute("visibility", "hidden"); };
-    hTest(act, ref, refF); hCal();
+    hTest(act, ref, refF); hCal(); hRefi(ref);
+  }
+  // sensibilidad al valor de refinación (objetivos a y b): cada escenario cambia solo ese término en cada balance
+  function hRefi(ref) {
+    const S = window.BIStats, hi = D.historia; if (!S) return;
+    const ESC = [["Caso base: flujos con horizonte finito (7.4)", x => x.valor_no_upstream_musd], ["Caso base −30 %", x => x.valor_no_upstream_musd * .7], ["Caso base +30 %", x => x.valor_no_upstream_musd * 1.3],
+      ["Perpetuidad sin crecimiento (tiene valor terminal)", (x, k) => (x.ebitda_no_up_12m_musd || 0) * (1 - x.tasa_impuesto) / k.r], ["Sin refinación", () => 0]];
+    const primas = (id, fn) => { const s = hi.series[id], cal = Object.fromEntries(hi.calibraciones[id].map(k => [k.periodo, k])), kk = {}, o = {};
+      s.fecha.forEach((f, i) => { if (!enRango(f) || ref[f] == null || s.cap_musd[i] == null) return; const p = s.periodos[s.cal_idx[i]];
+        if (!(p in kk)) { const x = Object.fromEntries(Object.entries(cal[p].inputs).map(([n, v]) => [n, v[0]])); kk[p] = S.coef({ ...x, valor_no_upstream_musd: fn(x, S.coef(x)) }); }
+        o[f] = S.despeje(kk[p], s.cap_musd[i]) - ref[f]; }); return o; };
+    const INT = ["YPF", "SU", "PBR"], PARES = [["VIST", "YPF"], ["EOG", "SU"], ["PRIO", "PBR"]];
+    const filas = ESC.map(([n, fn]) => { const P = Object.fromEntries(D.empresas.map(e => [e.id, primas(e.id, fn)]));
+      const celdaP = id => { const v = Object.values(P[id]); return v.length ? sg(S.media(v)) : "—"; };
+      const celdaD = ([a, b]) => { const d = Object.keys(P[a]).filter(f => P[b][f] != null).map(f => P[a][f] - P[b][f]); return d.length ? `${sg(S.media(d))} (${fmt(d.filter(v => v > 0).length / d.length * 100, 0)} %)` : "—"; };
+      return `<tr><td>${esc(n)}</td>${INT.map(id => `<td class="num">${celdaP(id)}</td>`).join("")}${PARES.map(p => `<td class="num">${celdaD(p)}</td>`).join("")}</tr>`; });
+    $("#h-refi").innerHTML = `<thead><tr><th>Valor de refinación</th>${INT.map(id => `<th class="num">Prima ${id}</th>`).join("")}${PARES.map(([a, b]) => `<th class="num">${a} − ${b}</th>`).join("")}</tr></thead><tbody>${filas.join("")}</tbody>`;
   }
   function hTest(act, ref, refF) {
     const hi = D.historia;

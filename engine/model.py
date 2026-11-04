@@ -10,7 +10,7 @@ Todo input operativo viene de inputs/operativos.csv (cargado y citado por el equ
 La misma lógica está replicada en web/engine.js; tests/test_paridad.py verifica que coincidan.
 """
 from __future__ import annotations
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, replace
 
 HORIZONTE_MAX = 30  # años
 
@@ -51,6 +51,7 @@ class Inputs:
     lambda_crp: float              # exposición al riesgo país (1 = caso base, ver MT 7.2.2)
     kd: float
     peso_deuda: float              # D/(D+E)
+    ebitda_no_up_12m_musd: float = 0.0   # integradas: EBITDA de 12 meses de los segmentos no-upstream; opcional
 
     @classmethod
     def desde_dict(cls, d: dict) -> "Inputs":
@@ -59,6 +60,7 @@ class Inputs:
             raise ValueError(f"Faltan inputs: {', '.join(faltan)}")
         vals = {c: float(d[c]) for c in CAMPOS_REQUERIDOS}
         vals["anios_crecimiento"] = int(vals["anios_crecimiento"])
+        vals["ebitda_no_up_12m_musd"] = float(d.get("ebitda_no_up_12m_musd") or 0)
         return cls(**vals)
 
 
@@ -81,6 +83,18 @@ def perfil_produccion(i: Inputs) -> list[float]:
         perfil.append(q)
         acumulado += q
     return perfil
+
+
+def factor_descuento(i: Inputs) -> float:
+    """Años equivalentes de flujo plano: Σ q·(1+r)^-(t-0,5) / q del primer año. Mismo WACC y horizonte que el upstream."""
+    r, q1 = wacc(i), (i.prod_crudo_kbd + i.prod_otros_kboed) * 365 / 1000
+    return sum(q / (1 + r) ** (t - 0.5) for t, q in enumerate(perfil_produccion(i), start=1)) / q1 if q1 else 0.0
+
+
+def valor_refinacion(i: Inputs) -> float:
+    """TIF 7.4: flujos en un horizonte finito, sin múltiplo ni valor terminal. El capex y el SG&A consolidados ya se cargan
+    al flujo del upstream con el mismo horizonte, por eso acá solo se resta el impuesto."""
+    return i.ebitda_no_up_12m_musd * (1 - i.tasa_impuesto) * factor_descuento(i)
 
 
 def valor_patrimonio(i: Inputs, brent: float) -> float:
@@ -139,7 +153,10 @@ def _perturbar(i: Inputs, clave: str, delta: float) -> Inputs:
         d[clave[:-4]] *= 1 + delta
     else:
         d[clave] += delta
-    return Inputs(**d)
+    out = Inputs(**d)
+    if out.ebitda_no_up_12m_musd:     # la refinación depende del WACC, del horizonte y del EBITDA: se recalcula
+        out = replace(out, valor_no_upstream_musd=valor_refinacion(out))
+    return out
 
 
 def banda(i: Inputs, cap: float) -> dict:
@@ -149,7 +166,7 @@ def banda(i: Inputs, cap: float) -> dict:
 
 
 SENSIBLES = ["diferencial_pct", "lifting_usd_boe", "capex_musd_anual", "reservas_1p_mmboe",
-             "precio_otros_usd_boe", "crp", "beta", "deuda_neta_musd"]
+             "precio_otros_usd_boe", "crp", "beta", "deuda_neta_musd", "ebitda_no_up_12m_musd"]
 
 
 def sensibilidad(i: Inputs, cap: float, rel: float = 0.10) -> list[dict]:
