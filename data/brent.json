@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-05T02:42:35+00:00",
+  "actualizado": "2026-11-05T18:22:10+00:00",
   "fuentes": {
     "spot": "FRED DCOILBRENTEU (EIA, Europe Brent Spot Price FOB)",
     "futuros": "ICE Brent vía Yahoo Finance (BZ=F y contratos BZ<mes><año>.NYM)"
@@ -1608,8 +1608,8 @@
   ],
   "primera_linea": {
     "ticker": "BZ=F",
-    "precio": 94.21,
-    "ts": 1793845951
+    "precio": 97.76,
+    "ts": 1793902326
   },
   "curva": [
     {
@@ -1620,38 +1620,38 @@
     },
     {
       "ticker": "BZF27.NYM",
-      "precio": 94.21,
-      "ts": 1793845951,
+      "precio": 97.76,
+      "ts": 1793902326,
       "vencimiento": "2027-01"
     },
     {
       "ticker": "BZG27.NYM",
-      "precio": 91.85,
-      "ts": 1793845948,
+      "precio": 94.42,
+      "ts": 1793902326,
       "vencimiento": "2027-02"
     },
     {
       "ticker": "BZH27.NYM",
-      "precio": 89.77,
-      "ts": 1793845651,
+      "precio": 91.63,
+      "ts": 1793902231,
       "vencimiento": "2027-03"
     },
     {
       "ticker": "BZJ27.NYM",
-      "precio": 88.12,
-      "ts": 1793845657,
+      "precio": 89.32,
+      "ts": 1793902210,
       "vencimiento": "2027-04"
     },
     {
       "ticker": "BZK27.NYM",
-      "precio": 86.22,
-      "ts": 1793844267,
+      "precio": 87.52,
+      "ts": 1793902237,
       "vencimiento": "2027-05"
     },
     {
       "ticker": "BZM27.NYM",
-      "precio": 84.85,
-      "ts": 1793844269,
+      "precio": 85.43,
+      "ts": 1793897835,
       "vencimiento": "2027-06"
     },
     {
@@ -1662,8 +1662,8 @@
     },
     {
       "ticker": "BZQ27.NYM",
-      "precio": 86.34,
-      "ts": 1793808240,
+      "precio": 82.63,
+      "ts": 1793861923,
       "vencimiento": "2027-08"
     },
     {
@@ -1686,8 +1686,8 @@
     },
     {
       "ticker": "BZZ27.NYM",
-      "precio": 79.09,
-      "ts": 1793845707,
+      "precio": 79.0,
+      "ts": 1793902265,
       "vencimiento": "2027-12"
     },
     {
@@ -1716,8 +1716,8 @@
     },
     {
       "ticker": "BZZ28.NYM",
-      "precio": 73.99,
-      "ts": 1793827104,
+      "precio": 74.01,
+      "ts": 1793887020,
       "vencimiento": "2028-12"
     }
   ]
