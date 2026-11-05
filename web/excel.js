@@ -264,7 +264,7 @@
     const ExcelJS = await libreria(), S = window.BIStats;
     const { desde, hasta, empresas, CAMPOS, avance = () => {}, percentil = 95 } = opts, Q = percentil / 100;
     const hi = D.historia, wb = new ExcelJS.Workbook(), { despeje } = S;
-    wb.creator = "Barril Implícito — TIF Finanzas UADE"; wb.created = new Date();
+    wb.creator = "Barril Bursátil — TIF Finanzas UADE"; wb.created = new Date();
     wb.calcProperties.fullCalcOnLoad = true;
     const emps = D.empresas.filter(e => empresas.includes(e.id) && hi.series[e.id] && hi.series[e.id].fecha.length)
       .map(e => { const p = S.preparar(D, e.id, desde, hasta); return p ? { ...p, info: e } : null; }).filter(Boolean);
@@ -296,7 +296,7 @@
     // --- Leeme
     const lm = wb.addWorksheet("Leeme");
     lm.getColumn(1).width = 125;
-    [["Barril Implícito — Brent implícito en la capitalización bursátil", { bold: true, size: 14 }],
+    [["Barril Bursátil — Brent implícito en la capitalización bursátil", { bold: true, size: 14 }],
      [`Generado: ${new Date().toLocaleString("es-AR")} · Rango: ${desde} a ${hasta} · Empresas: ${emps.map(e => e.id).join(", ")}`],
      [`Datos: serie de la web actualizada al ${(hi.actualizado || "").slice(0, 10)}. Estados contables: Bloomberg (terminal UADE) con EDGAR/releases para operativos (ver hoja de cada empresa, "Origen de cada dato").`],
      ["Si el archivo abre en Vista protegida, tocá \"Habilitar edición\" para que se actualicen fórmulas y gráficos."],

@@ -1,6 +1,7 @@
-<title>Barril Implícito</title>
+<title>Barril Bursátil</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-45 0 232 232'%3E%3Cstyle%3Epath%7Bfill:%230B1F2A%7Dpolyline%7Bstroke:%23fff%7D@media(prefers-color-scheme:dark)%7Bpath%7Bfill:%23E3EAE7%7Dpolyline%7Bstroke:%230B1F2A%7D%7D%3C/style%3E%3Cpath d='M71 0C88.75 64.96 142 97.44 142 161A71 71 0 0 1 0 161C0 97.44 53.25 64.96 71 0Z'/%3E%3Cpolyline points='25,172 51,146 71,160 99,116 117,126' fill='none' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@700&display=swap">
 <style>
 :root{
   --bg:#F2F5F4; --surface:#FFFFFF; --ink:#15201D; --muted:#5B6964; --line:#D5DDDA; --soft:#E7EDEB;
@@ -31,9 +32,16 @@ button,input,select{font:inherit;color:inherit}
 /* header */
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:14px 0}
 .brand{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;justify-content:space-between}
-.brand h1{font-size:26px;font-weight:700}
-.brand h1 span{color:var(--crude)}
-.brand p{margin:0;color:var(--muted);font-size:13px}
+.brand-l{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;min-width:0;flex:1 1 320px}
+.logo{display:flex;align-items:center;gap:10px;flex:none}
+.logo svg{width:34px;height:55px;display:block;flex:none}
+.logo .gota{fill:var(--ink)} .logo .cot{stroke:var(--bg)}
+.brand h1{font:700 23px/1.06 "Space Grotesk",var(--f-disp);letter-spacing:-.01em;text-wrap:initial}
+.brand h1 span{display:block}
+.brand-txt{flex:1 1 300px;min-width:0;border-left:1px solid var(--line);padding-left:18px}
+.brand p{margin:0;color:var(--muted);font-size:13px;line-height:1.4}
+.brand p.tif{color:var(--ink);font-weight:500}
+@media (max-width:720px){header.top{position:static}.brand-txt{flex-basis:100%;border-left:0;padding-left:0}}
 nav.tabs{display:flex;gap:4px;margin-top:12px;overflow-x:auto}
 nav.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:8px 12px;cursor:pointer;color:var(--muted);font-weight:600;white-space:nowrap}
 nav.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--accent)}
@@ -179,8 +187,17 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
 
 <header class="top"><div class="wrap">
   <div class="brand">
-    <div class="brand-l"><h1>Barril <span>Implícito</span></h1>
-    <p>Qué precio del Brent está pagando el mercado en seis petroleras · TIF Finanzas UADE 2C2026</p></div>
+    <div class="brand-l">
+      <div class="logo">
+        <svg viewBox="0 0 142 232" aria-hidden="true"><path class="gota" d="M71 0C88.75 64.96 142 97.44 142 161A71 71 0 0 1 0 161C0 97.44 53.25 64.96 71 0Z"/><polyline class="cot" points="25,172 51,146 71,160 99,116 117,126" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h1><span>Barril</span> <span>Bursátil</span></h1>
+      </div>
+      <div class="brand-txt">
+        <p class="tif">Trabajo de Investigación Final de estudiantes de la Licenciatura en Finanzas · UADE · 2C2026</p>
+        <p>Gastón Latigano · Santiago Fabiani · Mateo Murray · Nicolás Ramirez Silva</p>
+        <p>Qué precio del Brent está pagando el mercado en seis petroleras</p>
+      </div>
+    </div>
     <button class="btn-notas" id="b-notas" aria-haspopup="dialog">Estado y pendientes <span class="badge" id="n-pend">—</span></button>
   </div>
   <nav class="tabs" role="tablist">
