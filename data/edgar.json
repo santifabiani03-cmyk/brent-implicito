@@ -1,6 +1,6 @@
 {
-  "actualizado": "2026-11-05T18:26:38+00:00",
-  "hasta": "2026-11-05",
+  "actualizado": "2026-11-06T02:51:04+00:00",
+  "hasta": "2026-11-06",
   "empresas": {
     "VIST": {
       "docs": {
@@ -108,73 +108,73 @@
     "EOG": {
       "docs": {
         "periodico": {
-          "url": "https://www.sec.gov/Archives/edgar/data/821189/000082118926000149/eog-20260630.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/821189/000082118926000227/eog-20260930.htm",
           "form": "10-Q",
-          "fecha": "2026-08-04",
-          "periodo": "2026-06-30",
+          "fecha": "2026-11-05",
+          "periodo": "2026-09-30",
           "dias": 91
         }
       },
       "valores": {
         "crudo_kbd": {
-          "valor": 548.8,
+          "valor": 550.4,
           "doc": "periodico",
-          "texto": "Crude Oil and Condensate Volumes (MBbld) (1) United States 546.2 503.1 Trinidad 2.1 1.1 Other International (2) 0.5 — Total 548.8"
+          "texto": "Crude Oil and Condensate Volumes (MBbld) (1) United States 547.7 532.9 Trinidad 2.0 1.6 Other International (2) 0.7 — Total 550.4"
         },
         "ngl_kbd": {
-          "valor": 346.8,
+          "valor": 357.1,
           "doc": "periodico",
-          "texto": "Natural Gas Liquids Volumes (MBbld) (1) United States 346.8 258.4 Total 346.8"
+          "texto": "Natural Gas Liquids Volumes (MBbld) (1) United States 357.1 309.3 Total 357.1"
         },
         "gas_mmcfd": {
-          "valor": 3089.0,
+          "valor": 3153.0,
           "doc": "periodico",
-          "texto": "Natural Gas Volumes (MMcfd) (1) United States 2,784 1,977 Trinidad 293 252 Other International (2) 12 — Total 3,089"
+          "texto": "Natural Gas Volumes (MMcfd) (1) United States 2,882 2,511 Trinidad 260 230 Other International (2) 11 4 Total 3,153"
         },
         "total_kboed": {
-          "valor": 1410.4,
+          "valor": 1433.1,
           "doc": "periodico",
-          "texto": "Crude Oil Equivalent Volumes (MBoed) (4) United States 1,357.1 1,090.9 Trinidad 50.9 43.2 Other International 2.4 — Total 1,410.4"
+          "texto": "Crude Oil Equivalent Volumes (MBoed) (4) United States 1,385.1 1,260.7 Trinidad 45.6 39.8 Other International 2.4 0.7 Total 1,433.1"
         },
         "p_crudo": {
-          "valor": 98.15,
+          "valor": 86.72,
           "doc": "periodico",
-          "texto": "Average Crude Oil and Condensate Prices ($/Bbl) (3) United States $ 98.18 $ 64.84 Trinidad 88.87 54.50 Other International 103.40 — Composite 98.15"
+          "texto": "Average Crude Oil and Condensate Prices ($/Bbl) (3) United States $ 86.73 $ 65.97 Trinidad 84.62 57.74 Other International 87.96 — Composite 86.72"
         },
         "p_ngl": {
-          "valor": 24.41,
+          "valor": 26.13,
           "doc": "periodico",
-          "texto": "Average Natural Gas Liquids Prices ($/Bbl) (3) United States $ 24.41"
+          "texto": "Average Natural Gas Liquids Prices ($/Bbl) (3) United States $ 26.13"
         },
         "p_gas_mcf": {
-          "valor": 2.89,
+          "valor": 3.74,
           "doc": "periodico",
-          "texto": "Average Natural Gas Prices ($/Mcf) (3) United States $ 2.77 $ 2.87 Trinidad 3.99 3.65 Other International (2) 3.27 — Composite 2.89"
+          "texto": "Average Natural Gas Prices ($/Mcf) (3) United States $ 3.73 $ 2.71 Trinidad 3.92 3.80 Other International (2) 3.30 3.27 Composite 3.74"
         },
         "lifting_boe": {
-          "valor": 3.64,
+          "valor": 3.74,
           "doc": "periodico",
-          "texto": "costs per barrel of oil equivalent (Boe) for the three-month periods ended June 30, 2026 and 2025: Three Months Ended June 30, 2026 2025 Lease and Well $ 3.64"
+          "texto": "costs per barrel of oil equivalent (Boe) for the three-month periods ended September 30, 2026 and 2025: Three Months Ended September 30, 2026 2025 Lease and Wel"
         },
         "gpt_boe": {
-          "valor": 5.27,
+          "valor": 5.26,
           "doc": "periodico",
-          "texto": "(GP&T) 5.27"
+          "texto": "(GP&T) 5.26"
         },
         "ga_boe": {
-          "valor": 1.66,
+          "valor": 1.49,
           "doc": "periodico",
-          "texto": "General and Administrative (G&A) 1.66"
+          "texto": "General and Administrative (G&A) 1.49"
         },
         "dda_boe": {
-          "valor": 9.27,
+          "valor": 9.29,
           "doc": "periodico",
-          "texto": "(DD&A) - Oil and Gas Properties 9.27"
+          "texto": "(DD&A) - Oil and Gas Properties 9.29"
         },
         "toti_musd": {
-          "valor": 431.0,
+          "valor": 401.0,
           "doc": "periodico",
-          "texto": "Taxes Other Than Income 431"
+          "texto": "Taxes Other Than Income 401"
         }
       },
       "fallas": [

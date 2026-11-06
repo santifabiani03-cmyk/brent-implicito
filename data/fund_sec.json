@@ -1,37 +1,37 @@
 {
-  "actualizado": "2026-11-05T18:23:04+00:00",
+  "actualizado": "2026-11-06T02:47:31+00:00",
   "empresas": {
     "EOG": {
-      "fecha": "2026-06-30",
-      "acciones_mm": 524.529176,
-      "deuda_musd": 7926.0,
-      "caja_musd": 4907.0,
-      "deuda_neta_musd": 3019.0,
+      "fecha": "2026-09-30",
+      "acciones_mm": 518.484224,
+      "deuda_musd": 7922.0,
+      "caja_musd": 5747.0,
+      "deuda_neta_musd": 2175.0,
       "minoritarios_musd": 0.0,
       "detalle": {
         "acciones": {
           "tag": "dei:EntityCommonStockSharesOutstanding",
-          "end": "2026-07-28",
+          "end": "2026-10-29",
           "form": "10-Q",
-          "accn": "0000821189-26-000149"
+          "accn": "0000821189-26-000227"
         },
         "deuda_lp": {
           "tag": "us-gaap:LongTermDebtNoncurrent",
-          "end": "2026-06-30",
+          "end": "2026-09-30",
           "form": "10-Q",
-          "accn": "0000821189-26-000149"
+          "accn": "0000821189-26-000227"
         },
         "deuda_cp": {
           "tag": "us-gaap:LongTermDebtCurrent",
-          "end": "2026-06-30",
+          "end": "2026-09-30",
           "form": "10-Q",
-          "accn": "0000821189-26-000149"
+          "accn": "0000821189-26-000227"
         },
         "caja": {
           "tag": "us-gaap:CashAndCashEquivalentsAtCarryingValue",
-          "end": "2026-06-30",
+          "end": "2026-09-30",
           "form": "10-Q",
-          "accn": "0000821189-26-000149"
+          "accn": "0000821189-26-000227"
         },
         "inversiones_cp": null,
         "minoritarios": null
