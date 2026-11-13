@@ -1,6 +1,6 @@
 {
-  "actualizado": "2026-11-12T03:28:26+00:00",
-  "hasta": "2026-11-12",
+  "actualizado": "2026-11-13T03:01:46+00:00",
+  "hasta": "2026-11-13",
   "empresas": {
     "VIST": {
       "docs": {
@@ -191,10 +191,10 @@
     "PBR": {
       "docs": {
         "resultados": {
-          "url": "https://www.sec.gov/Archives/edgar/data/1119639/000129281426004129/pbrrmf2q26usd_6k.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1119639/000129281426005252/pbrrmf3q26usd_6k.htm",
           "form": "6-K",
-          "fecha": "2026-08-07",
-          "periodo": "2026-06-30",
+          "fecha": "2026-11-12",
+          "periodo": "2026-09-30",
           "dias": 91
         },
         "produccion": {
@@ -227,34 +227,34 @@
           "texto": "Total production (mboed) 3,512"
         },
         "lifting_boe": {
-          "valor": 6.33,
+          "valor": 6.12,
           "doc": "resultados",
-          "texto": "Lifting cost Brazil (US$/boe) 6.33"
+          "texto": "Lifting cost Brazil (US$/boe) 6.12"
         },
         "lifting_pt_boe": {
-          "valor": 23.88,
+          "valor": 21.03,
           "doc": "resultados",
-          "texto": "Lifting cost + Production taxes 23.88"
+          "texto": "Lifting cost + Production taxes 21.03"
         },
         "brent_q": {
-          "valor": 104.52,
+          "valor": 97.0,
           "doc": "resultados",
-          "texto": "Brent crude (US$/bbl) 104.52"
+          "texto": "Brent crude (US$/bbl) 97.00"
         },
         "ebitda_rtm_q": {
-          "valor": 3562.0,
+          "valor": 5880.0,
           "doc": "resultados",
-          "texto": "RTM RESULTS Variation (%) (1) US$ million 2Q26 1Q26 2Q25 1H26 1H25 2Q26 X 1Q26 2Q26 X 2Q25 1H26 X 1H25 Sales revenues 32,351 22,297 19,795 54,648 39,784 45.1 63"
+          "texto": "RTM RESULTS Variation (%) (1) US$ million 3Q26 2Q26 3Q25 9M26 9M25 3Q26 X 2Q26 3Q26 X 3Q25 9M26 X 9M25 Sales revenues 31,608 32,351 22,083 86,256 61,867 (2.3) 4"
         },
         "ebitda_glce_q": {
-          "valor": 419.0,
+          "valor": 521.0,
           "doc": "resultados",
-          "texto": "G&LCE RESULTS Variation (%) (1) US$ million 2Q26 1Q26 2Q25 1H26 1H25 2Q26 X 1Q26 2Q26 X 2Q25 1H26 X 1H25 Sales revenues 2,406 2,205 2,176 4,611 4,036 9.1 10.6 1"
+          "texto": "G&LCE RESULTS Variation (%) (1) US$ million 3Q26 2Q26 3Q25 9M26 9M25 3Q26 X 2Q26 3Q26 X 3Q25 9M26 X 9M25 Sales revenues 2,554 2,406 2,270 7,165 6,306 6.2 12.5 1"
         },
         "p_gas_boe": {
-          "valor": 59.1,
+          "valor": 57.4,
           "doc": "resultados",
-          "texto": "Natural gas sales price - Brazil (US$/bbl) 59.10"
+          "texto": "Natural gas sales price - Brazil (US$/bbl) 57.40"
         }
       },
       "fallas": [
