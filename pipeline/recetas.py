@@ -6,6 +6,7 @@ Si una empresa cambia el formato de su reporte, el patrón deja de matchear: el 
 y la página lo marca, en vez de tomar un número equivocado. Rangos = control de plausibilidad."""
 
 N = r"(\(?-?[\d][\d,]*\.?\d*\)?)"   # número con miles y decimales
+NS = r"\(?-?[\d][\d,]*\.?\d*\s?\)?"   # ídem, sin grupo y admitiendo "(144 )" (espacio antes del paréntesis, releases viejos)
 # Tabla del release anual de EOG: T1–T4 y año anterior, T1–T4 y año corriente. El 4T corriente es el noveno número de la fila.
 Q4 = r"(?:(?:\$ )?[\d,.]+ ){8}(?:\$ )?" + N
 
@@ -65,6 +66,13 @@ RECETAS = {
             "reservas_mmboe": ("release", r"Proved reserves \(P1\) closed in \d{4} at " + N + r" M+boe", (10, 20000)),
             "ebitda_no_up_q": ("release", [r"Adj\. EBITDA Upstream .{0,80}?Midstream & Downstream " + N,
                                            r"EBITDA & CAPEX BY SEGMENT.{0,160}?Downstream " + N], (-5000, 20000)),
+            # costos del upstream fuera del lifting (tabla de OPEX). Hasta 2T24 la tabla va de la columna más vieja a la
+            # más nueva ("4Q22 3Q23 4Q23 Y/Y Δ Q/Q Δ"): el trimestre actual es la tercera; desde 3T24, la primera.
+            "otros_up_opex_q": ("release", [r"Y/Y [Δ∆] Q/Q [Δ∆] (?:\S{4} \S{4} Y/Y [Δ∆] )?Lifting cost .{0,120}?Other Upstream "
+                                            + NS + " " + NS + r" (?P<v>" + NS + ")",
+                                            r"Lifting cost \(?[\d,]+\s?\)? .{0,120}?Other Upstream (" + NS + ")"], (-3000, 0)),
+            # costo corporativo: EBITDA del segmento Corp (la tabla por segmento siempre empieza por el trimestre actual)
+            "corp_ebitda_q":  ("release", r"EBITDA & CAPEX BY SEGMENT(?:(?!Total Adj).){0,700}?Corp\.? (" + NS + ")", (-3000, 3000)),
         }},
     "VIST": {"docs": {"release": {"descubrir": "fts", "q": '"Total (boe/d)"', "forms": "6-K", "debe_contener": "Lifting cost ($/boe)"}},
         "campos": {
@@ -95,6 +103,9 @@ RECETAS = {
             "ebitda_glce_q":  ("resultados", [r"G&LCE RESULTS.{0,900}?Adjusted EBITDA of the segment " + N,
                                               r"Adjusted EBITDA of the segment [\d,\.\(\)]+ .{0,8000}?Adjusted EBITDA of the segment [\d,\.\(\)]+ .{0,8000}?Adjusted EBITDA of the segment " + N], (-5000, 20000)),
             "p_gas_boe":      ("resultados", r"Natural gas sales price - Brazil \(US\$/bbl\) " + N, (1, 200)),
+            # G&A e I+D consolidados del trimestre (primera columna); los gastos comerciales quedan afuera: son de RTM y G&LCE
+            "ga_q":           ("resultados", r"General and administrative expenses (" + NS + ")", (-50000, 0)),
+            "id_q":           ("resultados", r"Research and development expenses (" + NS + ")", (-20000, 0)),
         }},
     # PRIO no es registrante SEC: no hay EDGAR. Se cubre con CVM + yfinance + semillas citadas.
 }

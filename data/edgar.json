@@ -99,6 +99,16 @@
           "valor": 1030.0,
           "doc": "release",
           "texto": "Adj. EBITDA Upstream 1,575 1,725 -9% 1,046 51% 4,449 2,614 70% Midstream & Downstream 1,030"
+        },
+        "otros_up_opex_q": {
+          "valor": -139.0,
+          "doc": "release",
+          "texto": "otros_up_opex_q -139"
+        },
+        "corp_ebitda_q": {
+          "valor": -164.0,
+          "doc": "release",
+          "texto": "corp_ebitda_q -164"
         }
       },
       "fallas": [
@@ -255,6 +265,16 @@
           "valor": 57.4,
           "doc": "resultados",
           "texto": "Natural gas sales price - Brazil (US$/bbl) 57.40"
+        },
+        "ga_q": {
+          "valor": -513.0,
+          "doc": "resultados",
+          "texto": "ga_q -513"
+        },
+        "id_q": {
+          "valor": -306.0,
+          "doc": "resultados",
+          "texto": "id_q -306"
         }
       },
       "fallas": [

@@ -1,5 +1,5 @@
 """Tests del motor con un caso SINTÉTICO (no corresponde a ninguna empresa; no usar en el TIF)."""
-import json, subprocess, pathlib, sys
+import json, re, subprocess, pathlib, sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from engine import model
 
@@ -307,3 +307,36 @@ def test_crecimiento_continuo_al_agotar_reservas():
     vals = [model.valor_con_crecimiento(i, 80.0, g / 1000) for g in range(0, 1001, 5)]
     saltos = [abs(b - a) for a, b in zip(vals, vals[1:])]
     assert max(saltos) < 0.05 * abs(vals[-1] - vals[0])
+
+
+def _campo(emp, campo, texto):
+    from pipeline.recetas import RECETAS
+    from pipeline.fetch_edgar import _num
+    pats = RECETAS[emp]["campos"][campo][1]
+    for p in ([pats] if isinstance(pats, str) else pats):
+        m = re.search(p, texto)
+        if m:
+            return _num(m.group("v") if "v" in m.groupdict() else m.group(1))
+
+
+def test_otros_costos_ypf_orden_de_columnas():
+    viejo = ("Unaudited Figures, in US$ million 2Q23 1Q24 2Q24 Y/Y Δ Q/Q Δ 1H23 1H24 Y/Y Δ Lifting cost (746 ) (617 ) (793 ) 6.3 % 28.5 % "
+             "(1,417 ) (1,410 ) -0.5 % Other Upstream (124 ) (140 ) (203 ) 63.4 % 45.2 %")
+    nuevo = ("Unaudited Figures, in US$ million 3Q26 2Q26 3Q25 Q/Q ∆ Y/Y ∆ 9M26 9M25 Y/Y ∆ Lifting cost (401) (427) (426) -6.0% -5.8% "
+             "(1,245) (1,795) -30.6% Other Upstream (139) (112) (184) 23.9% -24.3%")
+    corp = ("2.2 ADJ. EBITDA & CAPEX BY SEGMENT By Segment 3Q26 2Q26 Q/Q Δ 3Q25 Y/Y Δ 9M26 9M25 Δ Adj. EBITDA Upstream 1,575 1,725 -9% "
+            "1,046 51% New Energies 102 59 72% 61 66% 191 125 53% Corp (164) (154) 7% (103) 59% (465) (284) 64% Eliminations & Others (36)")
+    assert _campo("YPF", "otros_up_opex_q", viejo) == -203      # tercera columna en el formato viejo
+    assert _campo("YPF", "otros_up_opex_q", nuevo) == -139      # primera columna desde 3T24
+    assert _campo("YPF", "corp_ebitda_q", corp) == -164
+
+
+def test_otros_costos_pbr_y_paso_a_boe():
+    from pipeline.derivar import poner_otros_costos
+    t = ("Gross profit 17,691 19,493 11,217 48,524 31,617 Selling expenses (1,797) (1,746) (1,360) (5,058) (3,736) General and administrative "
+         "expenses (513) (556) (501) (1,548) (1,409) Exploration costs (208) (101) Research and development expenses (306) (296) (233)")
+    assert _campo("PBR", "ga_q", t) == -513 and _campo("PBR", "id_q", t) == -306
+    ins = {"prod_crudo_kbd": {"valor": 300.0}, "prod_otros_kboed": {"valor": 200.0},
+           "otros_costos_q_musd": {"valor": 460.0, "dias": 92, "fuente": "x", "fecha": "2026-09-30", "nota": "n"}}
+    assert poner_otros_costos(ins) and abs(ins["otros_costos_usd_boe"]["valor"] - 460 / (500 * 92 / 1000)) < 1e-9
+    assert "otros_costos_q_musd" not in ins

@@ -23,6 +23,19 @@ def ebitda_12m(serie: list, iq: int) -> tuple:
     return (sum(vals) / len(vals) * 4, len(vals)) if vals else (None, 0)
 
 
+def poner_otros_costos(ins: dict) -> bool:
+    """Pasa a USD/boe el monto trimestral de otros costos que dejó derivar() (integradas). Corre al final porque la producción
+    puede venir de una semilla o arrastrada. Devuelve True si cargó el valor."""
+    m = ins.pop("otros_costos_q_musd", None)
+    crudo, otros = (ins.get("prod_crudo_kbd") or {}).get("valor"), (ins.get("prod_otros_kboed") or {}).get("valor")
+    if not m or crudo is None or otros is None or crudo + otros <= 0:
+        return False
+    boe = (crudo + otros) * m["dias"] / 1000
+    ins["otros_costos_usd_boe"] = {"valor": m["valor"] / boe, "origen": "derivado", "fuente": m["fuente"], "fecha": m["fecha"],
+                                   "nota": m["nota"] + f" ({boe:,.1f} MMboe en {m['dias']} días)"}
+    return True
+
+
 def poner_refinacion(ins: dict, eb12: float | None, n: int, fuente) -> None:
     """Valor de los segmentos no-upstream según TIF 7.4: flujo de 12 meses después de impuesto, mismo WACC y horizonte que el upstream.
     Corre al final porque depende del WACC y de las reservas; si falta alguno de esos datos, el valor queda sin cargar."""
@@ -160,7 +173,23 @@ def derivar(c: dict, ed: dict, y: dict, macro: dict, co1: list, cap: float | Non
         put("lifting_usd_boe", V["lifting_boe"], "edgar", url("lifting_boe"), "Lifting cost informado por la empresa")
     elif "opex_musd" in V and mmboe_per:
         put("lifting_usd_boe", V["opex_musd"] / mmboe_per, "derivado", url("opex_musd"), "Production & operating expenses / MMboe del período")
-    if "opex_upstream_total_musd" in V and mmboe_per:
+    # integradas: los otros costos son los del upstream más la administración central. El SG&A consolidado incluye los
+    # gastos comerciales del downstream, que ya están descontados en el EBITDA de los segmentos que valúa la refinación:
+    # cargarlo al upstream los contaba dos veces. El monto del trimestre se pasa a USD/boe en poner_otros_costos().
+    monto = None
+    if "otros_up_opex_q" in V and "corp_ebitda_q" in V:            # YPF: OPEX "Other Upstream" + EBITDA del segmento Corp
+        monto = abs(V["otros_up_opex_q"]) + max(0.0, -V["corp_ebitda_q"])
+        nota_m = (f"(Other Upstream {abs(V['otros_up_opex_q']):,.0f} + Corp {max(0.0, -V['corp_ebitda_q']):,.0f} MUSD) / boe del "
+                  "trimestre. Sin los gastos comerciales del downstream ni los costos únicos de salida de campos maduros")
+        url_m = url("otros_up_opex_q")
+    elif "ga_q" in V and "id_q" in V:                                  # Petrobras: G&A + I+D consolidados, sin gastos comerciales
+        monto = abs(V["ga_q"]) + abs(V["id_q"])
+        nota_m = (f"(G&A {abs(V['ga_q']):,.0f} + I+D {abs(V['id_q']):,.0f} MUSD) / boe del trimestre. Sin los gastos comerciales "
+                  "(RTM y G&LCE); incluye el G&A de los otros segmentos, así que es conservador")
+        url_m = url("ga_q")
+    if monto is not None:
+        out["otros_costos_q_musd"] = {"valor": monto, "dias": dias, "origen": "derivado", "fuente": url_m, "fecha": per, "nota": nota_m}
+    elif "opex_upstream_total_musd" in V and mmboe_per:
         pass
     elif "gpt_boe" in V:
         put("otros_costos_usd_boe", V["gpt_boe"] + V.get("ga_boe", 0), "edgar", url("gpt_boe"), "GP&T + G&A por boe")

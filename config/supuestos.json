@@ -163,10 +163,10 @@
           "por_que": "La DD&A por boe del último período se usa como escudo fiscal porque no hay un calendario de amortización por activo y así el impuesto queda proporcional a la producción. Es un proxy: refleja el costo histórico de los activos. Si el escudo real fuera mayor, el modelo paga de más en impuestos, el valor baja y el implícito sube; si fuera menor, ocurre lo contrario."
         },
         {
-          "supuesto": "Integradas: costos consolidados al upstream.",
-          "detalle": "En las tres integradas el capex consolidado (incluido el downstream) se carga al flujo del upstream. En YPF y Petrobras también el SG&A consolidado; Suncor toma los costos del segmento upstream (Bloomberg).",
-          "donde": "engine/model.py · valor_refinacion; pipeline/derivar.py · otros_costos_usd_boe",
-          "por_que": "Las fuentes automáticas dan el capex y el SG&A consolidados, sin separar por segmento, y el modelo los carga al upstream para no omitir erogaciones. Con el capex el efecto se compensa: la refinación se valúa sin restar sus inversiones, pero esas inversiones ya las paga el upstream con el mismo horizonte. Con el SG&A no: el EBITDA de los segmentos no-upstream ya descuenta sus propios gastos comerciales, así que esos gastos se cuentan dos veces, el valor baja y el implícito sube. En YPF, usar solo los otros costos del upstream y los corporativos del release del 3T26 baja el implícito de 162 a entre 136 y 145. Petrobras tiene el mismo problema; Suncor no, porque toma los costos del segmento upstream."
+          "supuesto": "Integradas: capex consolidado y otros costos del upstream.",
+          "detalle": "El capex consolidado (incluido el downstream) se carga al flujo del upstream. Los otros costos no son el SG&A consolidado: YPF usa la línea 'Other Upstream' del OPEX más el costo del segmento Corp; Petrobras, el G&A y la I+D consolidados sin los gastos comerciales; Suncor, los costos del segmento upstream (Bloomberg). Todo del último trimestre, por boe.",
+          "donde": "pipeline/derivar.py · poner_otros_costos; pipeline/recetas.py",
+          "por_que": "El EBITDA de los segmentos no-upstream que valúa la refinación ya descuenta sus propios gastos comerciales y de administración; si además se carga el SG&A consolidado al upstream, esos gastos se cuentan dos veces, el valor baja y el implícito sube. Por eso al upstream se le carga solo lo suyo más la administración central, que no está en ningún segmento. En YPF se excluyen además los costos únicos de salida de campos maduros, que el release informa aparte y no se repiten en todo el horizonte. Con el capex el efecto se compensa: la refinación se valúa sin restar sus inversiones, pero el upstream las paga con el mismo horizonte. Corregir el doble conteo bajó el implícito de YPF en unos 20 USD/bbl y el de Petrobras en unos 8."
         }
       ]
     },

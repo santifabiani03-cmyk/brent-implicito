@@ -3,7 +3,7 @@ import csv, json, datetime as dt
 from collections import defaultdict
 from .common import RAIZ, cargar, ahora_iso, companias
 from engine import model
-from .derivar import derivar, poner_refinacion
+from .derivar import derivar, poner_refinacion, poner_otros_costos
 from .historia import crp_dia
 from . import bloomberg, riesgo_pais
 
@@ -156,6 +156,11 @@ def main():
             if k not in der and k not in ins:
                 ins[k] = v
         ins.update(eq)
+        # integradas: otros costos del upstream + administración central (sin el SG&A del downstream); el equipo pisa todo
+        if "otros_costos_usd_boe" in eq:
+            ins.pop("otros_costos_q_musd", None)
+        else:
+            poner_otros_costos(ins)
         # refinación (7.4): usa el EBITDA de 12 meses del último balance completo de la serie histórica
         ins.pop("ebitda_no_up_q_musd", None)
         if c["perfil"] == "integrada" and "valor_no_upstream_musd" not in eq:

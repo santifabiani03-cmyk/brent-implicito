@@ -14,7 +14,7 @@ import csv, io, json, sys, math, datetime as dt
 from .common import RAIZ, get, guardar, ahora_iso, companias, cargar
 from .fetch_edgar import extraer_periodo
 from .fetch_macro import damodaran, argentina_o_guardado
-from .derivar import derivar, ebitda_12m, poner_refinacion
+from .derivar import derivar, ebitda_12m, poner_refinacion, poner_otros_costos
 from .recetas import RECETAS
 from . import bloomberg, riesgo_pais
 from engine import model
@@ -129,7 +129,7 @@ def reales_a_usd(ed: dict, q: str) -> dict:
     if "rs_6k" not in url:
         return ed
     t, val = bloomberg.tc("BRL", q, "flujo"), dict(ed.get("valores") or {})
-    for k in ("ebitda_rtm_q", "ebitda_glce_q"):
+    for k in ("ebitda_rtm_q", "ebitda_glce_q", "ga_q", "id_q"):
         if k in val:
             if t:
                 val[k] = {**val[k], "valor": val[k]["valor"] / t}
@@ -171,6 +171,9 @@ def calibrar(c, q, ed, fin, macro_q, spot, precio_pub, fx_pub, sem_pub, memoria,
         if k not in ins and k in memoria and iq - memoria[k][1] <= edad_max(k):
             ins[k] = {**memoria[k][0], "origen": "arrastrado", "nota": f"Sin dato en {q}: se mantiene el publicado para {memoria[k][2]}"}
             arrastrados.append(k)
+    # integradas: otros costos del trimestre (upstream + administración central) con la producción ya completa; pisa al arrastrado
+    if poner_otros_costos(ins) and "otros_costos_usd_boe" in arrastrados:
+        arrastrados.remove("otros_costos_usd_boe")
     for k, v in ins.items():
         if v.get("origen") != "arrastrado":
             memoria[k] = (v, iq, q)
