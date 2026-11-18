@@ -200,6 +200,7 @@ def valor_con_crecimiento(i: Inputs, brent: float, g: float, n: int = N_CRECIMIE
     r = wacc(j)
     share_crudo = j.prod_crudo_kbd / (j.prod_crudo_kbd + j.prod_otros_kboed)
     p_crudo = brent * (1 - j.diferencial_pct)
+    q1 = (j.prod_crudo_kbd + j.prod_otros_kboed) * 365 / 1000
     ev = 0.0
     for t, q in enumerate(perfil_produccion(j), start=1):
         q_c, q_o = q * share_crudo, q * (1 - share_crudo)
@@ -208,7 +209,9 @@ def valor_con_crecimiento(i: Inputs, brent: float, g: float, n: int = N_CRECIMIE
         ebitda = ingreso * (1 - j.regalias_pct) - ing_crudo * j.retencion_pct \
             - q * (j.lifting_usd_boe + j.otros_costos_usd_boe)
         impuesto = j.tasa_impuesto * max(0.0, ebitda - q * j.dda_usd_boe)
-        capex = j.capex_musd_anual if t <= n else j.dda_usd_boe * q
+        # el año en que se agotan las reservas es parcial: su capex se prorratea (si no, el valor salta con g)
+        q_plena = q1 * (1 + g) ** (t - 1)
+        capex = j.capex_musd_anual * min(1.0, q / q_plena) if t <= n else j.dda_usd_boe * q
         ev += (ebitda - impuesto - capex) / (1 + r) ** (t - 0.5)
     return ev + i.valor_no_upstream_musd - i.deuda_neta_musd - i.minoritarios_musd
 

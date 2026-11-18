@@ -68,10 +68,12 @@
   function valorConCrecimiento(i, brent, g, n = N_CRECIMIENTO) {
     const j = { ...i, crecimiento_anual: g, anios_crecimiento: n, declino_anual: 0 };
     const r = wacc(j), share = j.prod_crudo_kbd / (j.prod_crudo_kbd + j.prod_otros_kboed), pc = brent * (1 - j.diferencial_pct);
+    const q1 = (j.prod_crudo_kbd + j.prod_otros_kboed) * 365 / 1000;
     let ev = 0;
     perfil(j).forEach((q, k) => { const t = k + 1, qc = q * share, qo = q * (1 - share), ic = qc * pc;
       const ebitda = (ic + qo * j.precio_otros_usd_boe) * (1 - j.regalias_pct) - ic * j.retencion_pct - q * (j.lifting_usd_boe + j.otros_costos_usd_boe);
-      const imp = j.tasa_impuesto * Math.max(0, ebitda - q * j.dda_usd_boe), capex = t <= n ? j.capex_musd_anual : j.dda_usd_boe * q;
+      const qPlena = q1 * Math.pow(1 + g, t - 1);   // año parcial al agotarse las reservas: capex prorrateado
+      const imp = j.tasa_impuesto * Math.max(0, ebitda - q * j.dda_usd_boe), capex = t <= n ? j.capex_musd_anual * Math.min(1, q / qPlena) : j.dda_usd_boe * q;
       ev += (ebitda - imp - capex) / Math.pow(1 + r, t - 0.5); });
     return ev + i.valor_no_upstream_musd - i.deuda_neta_musd - i.minoritarios_musd;
   }

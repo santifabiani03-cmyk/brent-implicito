@@ -299,3 +299,11 @@ def test_paridad_crecimiento_js():
         p = model.crecimiento_implicito(i, c, 80)
         assert r["estado"] == p["estado"] and (r["valor"] is None) == (p["valor"] is None)
         assert r["valor"] is None or abs(r["valor"] - p["valor"]) < 2e-4
+
+
+def test_crecimiento_continuo_al_agotar_reservas():
+    """Si las reservas se agotan dentro del tramo de crecimiento, el valor no puede saltar con g (capex del año parcial prorrateado)."""
+    i = model.Inputs.desde_dict(dict(SINTETICO, reservas_1p_mmboe=200.0))
+    vals = [model.valor_con_crecimiento(i, 80.0, g / 1000) for g in range(0, 1001, 5)]
+    saltos = [abs(b - a) for a, b in zip(vals, vals[1:])]
+    assert max(saltos) < 0.05 * abs(vals[-1] - vals[0])
