@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-18T02:42:11+00:00",
+  "actualizado": "2026-11-18T03:41:51+00:00",
   "empresas": {
     "VIST": {
       "cierre": "2026-09-30",
@@ -41,13 +41,13 @@
     },
     "EOG": {
       "cierre": "2026-09-30",
-      "capex_musd_ttm": 6559.0,
-      "dda_musd_ttm": 4880.0,
-      "costo_ventas_musd_ttm": 9299.0,
-      "ingresos_musd_ttm": 26324.0,
-      "tasa_impuesto_efectiva": 0.21687563537783802,
-      "sga_musd_ttm": 6263.0,
-      "intereses_musd_ttm": 270.0,
+      "capex_musd_ttm": 6678.0,
+      "dda_musd_ttm": 4970.0,
+      "costo_ventas_musd_ttm": 9514.0,
+      "ingresos_musd_ttm": 29086.0,
+      "tasa_impuesto_efectiva": 0.22245440729483282,
+      "sga_musd_ttm": 7053.0,
+      "intereses_musd_ttm": 266.0,
       "deuda_musd": 8262.0,
       "caja_musd": 5747.0,
       "deuda_neta_musd": 2515.0,

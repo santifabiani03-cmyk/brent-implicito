@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-18T02:41:04+00:00",
+  "actualizado": "2026-11-18T03:40:47+00:00",
   "cotizaciones": {
     "VIST": {
       "ticker": "VIST",
@@ -5046,10 +5046,6 @@
         [
           1794834000,
           62.630001068115234
-        ],
-        [
-          1794920400,
-          63.959999084472656
         ]
       ],
       "fuente": "Yahoo Finance chart API (PRIO3.SA)"
