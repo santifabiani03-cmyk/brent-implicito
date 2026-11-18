@@ -13,7 +13,7 @@ Los documentos de EDGAR ya leídos quedan en data/historia/ y no se vuelven a ba
 import csv, io, json, sys, math, datetime as dt
 from .common import RAIZ, get, guardar, ahora_iso, companias, cargar
 from .fetch_edgar import extraer_periodo
-from .fetch_macro import damodaran, argentina
+from .fetch_macro import damodaran, argentina_o_guardado
 from .derivar import derivar, ebitda_12m, poner_refinacion
 from .recetas import RECETAS
 from . import bloomberg, riesgo_pais
@@ -196,7 +196,7 @@ def main(desde: str = "2023-12-31"):
     spot = serie_fred("DCOILBRENTEU")
     rf = serie_fred("DGS10")
     rp = riesgo_pais.series()
-    ar = argentina()
+    ar = argentina_o_guardado()
     damo = {}
     def damo_para(fecha):
         anio = int(fecha[:4])

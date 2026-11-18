@@ -4,7 +4,7 @@
 - Beta desapalancada sectorial: Damodaran, betas.xls ('Oil/Gas (Production and Exploration)' / '(Integrated)').
 - Precio Medanito y Brent mensual (USD/m3) + regalías efectivas de Neuquén: Secretaría de Energía, Informe de Regalías."""
 import csv, io, zipfile
-from .common import get, guardar, ahora_iso
+from .common import get, guardar, cargar, ahora_iso
 
 DAMO = "https://pages.stern.nyu.edu/~adamodar/pc/datasets/"
 PAISES = {"Argentina": "Argentina", "Brasil": "Brazil", "Norteamérica": "United States"}
@@ -92,13 +92,28 @@ def argentina() -> dict:
     return {"serie": serie[-24:], "fuente": REG + " (Informe de Regalías, SE; últimos 2 meses provisorios excluidos" + nota + ")"}
 
 
+def argentina_o_guardado() -> dict:
+    """La SE no responde desde los servidores de GitHub (fuera del país): si la descarga falla, sigue la última serie guardada."""
+    try:
+        return argentina()
+    except Exception as e:  # noqa: BLE001
+        prev = (cargar("macro.json", {}) or {}).get("argentina") or {}
+        if not prev.get("serie"):
+            raise
+        print(f"⚠️ SE sin respuesta ({str(e)[:80]}): se usa la serie guardada, último mes {prev['serie'][-1]['mes']}")
+        return prev
+
+
 def main():
+    prev = cargar("macro.json", {}) or {}
     out = {"actualizado": ahora_iso(), "errores": {}}
     for k, fn in (("rf", rf), ("damodaran", damodaran), ("argentina", argentina)):
         try:
             out[k] = fn()
         except Exception as e:  # noqa: BLE001
             out["errores"][k] = str(e)
+            if prev.get(k):           # una descarga fallida no borra el último dato bueno
+                out[k] = prev[k]
     guardar("macro.json", out)
     d = out.get("damodaran", {})
     print("macro: rf", out.get("rf", {}).get("valor"), "| ERP", d.get("erp", {}).get("valor"),

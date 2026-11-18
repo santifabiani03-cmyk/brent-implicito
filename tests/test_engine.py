@@ -45,6 +45,22 @@ def test_banda_de_8_3():
     assert {k for k, _ in model.BANDA} == {"wacc_pp", "costos_rel"}
 
 
+def test_macro_sin_respuesta_conserva_el_ultimo_dato(monkeypatch):
+    """La SE no responde desde GitHub: la serie de regalías guardada no se borra y la historia la sigue usando."""
+    from pipeline import fetch_macro
+    viejo = {"actualizado": "2026-11-11", "argentina": {"serie": [{"mes": "2026-07", "regalias_pct_neuquen": 0.115}], "fuente": "SE"}}
+    guardado = {}
+    def cae():
+        raise RuntimeError("sin conexión")
+    monkeypatch.setattr(fetch_macro, "cargar", lambda nombre, defecto=None: viejo)
+    monkeypatch.setattr(fetch_macro, "guardar", lambda nombre, obj: guardado.update(obj))
+    for k in ("rf", "damodaran", "argentina"):
+        monkeypatch.setattr(fetch_macro, k, cae)
+    fetch_macro.main()
+    assert guardado["argentina"] == viejo["argentina"] and "argentina" in guardado["errores"]
+    assert fetch_macro.argentina_o_guardado() == viejo["argentina"]
+
+
 def test_petrobras_en_reales(monkeypatch):
     """Release en R$ (…rs_6k.htm): el EBITDA de segmentos pasa a USD. Release en USD: no se toca."""
     from pipeline import historia, bloomberg
