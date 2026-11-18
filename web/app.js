@@ -88,6 +88,13 @@
   const sg = (v, d = 1) => v == null || isNaN(v) ? "—" : (v >= 0 ? "+" : "") + fmt(v, d);
   const chipEstado = e => e.resultado.estado === "ok" ? `<span class="chip ok">Calibrada</span>` : `<span class="chip pend">Faltan ${e.resultado.faltan?.length ?? "?"} inputs</span>`;
 
+  // Crecimiento implícito: g anual durante N años que hace que el implícito sea igual al CO1 (escenario de diagnóstico, ver Supuestos)
+  const txtCrec = (r, corto = false) => !r ? "—" : r.estado === "ok" ? `${fmt(r.valor * 100, 1)} % anual × ${r.anios} años`
+    : corto ? { no_hace_falta: "no hace falta crecer", inalcanzable: "inalcanzable con las 1P", no_monotono: "no informativo" }[r.estado]
+    : { no_hace_falta: "no hace falta crecer: con producción plana y capex de mantenimiento el implícito ya queda en el CO1 o por debajo.",
+        inalcanzable: "inalcanzable: ni creciendo 100 % anual las reservas 1P alcanzan para justificar la capitalización.",
+        no_monotono: "no se informa: el valor no crece con el crecimiento." }[r.estado];
+
   function cards() {
     $("#cards").innerHTML = D.empresas.map(e => `
       <button class="card" data-id="${e.id}" aria-label="Abrir ${esc(e.nombre)}">
@@ -99,6 +106,7 @@
         </div>
         <div class="implied"><span class="lbl">Brent implícito</span><span class="v">${e.resultado.brent_implicito != null ? fmt(e.resultado.brent_implicito, 1) : "—"}</span>${chipEstado(e)}</div>
         ${e.resultado.brent_implicito != null ? `<div class="note">Prima <b class="num">${sg(e.resultado.brent_implicito - refBrent())}</b> USD/bbl frente al CO1 (${fmt(refBrent(), 1)})</div>` : ""}
+        ${e.resultado.crecimiento_implicito ? `<div class="note">Crecimiento que iguala al CO1: <b${e.resultado.crecimiento_implicito.estado === "ok" ? ' class="num"' : ""}>${txtCrec(e.resultado.crecimiento_implicito, true)}</b></div>` : ""}
       </button>`).join("");
     document.querySelectorAll(".card").forEach(b => b.onclick = () => { abrir(b.dataset.id); tab("empresa"); });
   }
@@ -179,6 +187,7 @@
     }
     if (sintetico) cap = M.valorPatrimonio(i, 75);
     const bi = M.brentImplicito(i, cap), bd = M.banda(i, cap), sens = M.sensibilidad(i, cap).slice(0, 5), ref = refBrent();
+    const crec = bi.estado === "ok" && ref ? M.crecimientoImplicito(i, cap, ref) : null;
     const prima = bi.valor == null ? null : bi.valor - ref, enBanda = bd.min != null && ref >= bd.min && ref <= bd.max;   // 7.1: solo fuera de la banda se lee como información del mercado
     const lectura = bi.valor == null ? "" : enBanda ? `El CO1 (${fmt(ref, 1)}) cae dentro de la banda: esta prima no se lee como información del mercado.` : `La cotización incorpora un barril <b>${prima > 0 ? "más caro" : "más barato"}</b> que el CO1 (${fmt(ref, 1)}). Es una lectura condicionada al modelo.`;
     const est = { debajo: "El valor del modelo supera la capitalización aun con Brent USD 10: revisar inputs.", encima: "Ni con Brent USD 300 el modelo alcanza la capitalización: revisar inputs.", no_monotono: "El valor no crece con el Brent: no hay despeje informativo." }[bi.estado] || "";
@@ -187,6 +196,9 @@
       <div class="result"><span class="big">${bi.valor != null ? fmt(bi.valor, 1) : "—"}</span>
         <span>USD/bbl · banda ${fmt(bd.min, 1)} – ${fmt(bd.max, 1)} · WACC ${fmt(M.wacc(i) * 100, 1)} %</span>
         ${prima != null ? `<span><b>Prima ${sg(prima)}</b> USD/bbl · banda de la prima ${bd.min != null ? `${sg(bd.min - ref)} a ${sg(bd.max - ref)}` : "—"}</span>` : ""}<span>${lectura}${est}</span></div>
+      ${crec ? `<h3 style="font-size:15px;margin-top:14px">Crecimiento que iguala al CO1</h3>
+      <p><b class="num">${txtCrec(crec)}</b></p>
+      <p class="note">Cuánto tendría que crecer la producción para que el implícito sea igual al CO1 (${fmt(ref, 1)}). Durante ${crec.anios} años crece con el capex actual y después queda plana con capex de mantenimiento (DD&amp;A por boe); el horizonte sigue cortado en las reservas 1P. Es un diagnóstico del sesgo del caso base, no una proyección. <button type="button" class="linkbtn" data-sup="crecimiento">Ver supuestos</button></p>` : ""}
       <h3 style="font-size:15px;margin-top:14px">Qué mueve el resultado (input ±10 %)</h3>
       <div class="tbl"><table><thead><tr><th>Input</th><th>−10 %</th><th>+10 %</th></tr></thead><tbody>
       ${sens.map(s => `<tr><td>${CAMPOS[s.input][0]}</td><td class="num">${fmt(s.menos10, 1)}</td><td class="num">${fmt(s.mas10, 1)}</td></tr>`).join("")}</tbody></table></div>
@@ -216,6 +228,18 @@
     const filas = Object.entries(D.edgar || {}).flatMap(([e, r]) => Object.entries(r.docs || {}).map(([k, d]) =>
       `<tr><td><b>${e}</b></td><td>${esc(k)}</td><td class="mono">${esc(d.periodo)}</td><td class="mono">${esc(d.fecha)}</td><td><a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.url.split("/").pop())}</a></td><td class="note">${(r.fallas || []).length ? esc(r.fallas.join("; ")) : "todos los campos leídos"}</td></tr>`));
     $("#t-edgar").innerHTML = `<thead><tr><th>Empresa</th><th>Documento</th><th>Período</th><th>Publicado</th><th>Archivo</th><th>Lectura</th></tr></thead><tbody>${filas.join("")}</tbody>`;
+  }
+
+  // Supuestos del modelo (config/supuestos.json → data.json): un grupo por bloque, con dónde vive cada supuesto
+  function supuestos() {
+    const S = D.supuestos || { grupos: [] };
+    $("#sup-intro").textContent = S.intro || "";
+    $("#sup-body").innerHTML = S.grupos.map(g => `<section class="sup-g" id="sup-${esc(g.id)}"><h3>${esc(g.titulo)}</h3><ul>${
+      g.items.map(x => `<li><b>${esc(x.supuesto)}</b> ${esc(x.detalle || "")}${x.donde ? `<span class="donde">${esc(x.donde)}</span>` : ""}</li>`).join("")}</ul></section>`).join("");
+  }
+  function abrirSup(id) {
+    const dl = $("#supuestos"); if (dl.showModal) dl.showModal(); else dl.setAttribute("open", "");
+    const g = id && document.getElementById("sup-" + id); if (g) g.scrollIntoView({ block: "start" });
   }
 
   let filtroArea = "Todas";
@@ -452,6 +476,11 @@
   cargar().then(d => {
     D = d; tape(); rail(); cards(); fuentes(); docsEdgar(); notas(); hInit(); xInit();
     $("#b-notas").onclick = () => { const dl = $("#notas"); if (dl.showModal) dl.showModal(); else dl.setAttribute("open", ""); };
+    supuestos();
+    $("#b-sup").onclick = () => abrirSup();
+    $("#b-sup-cerrar").onclick = () => $("#supuestos").close ? $("#supuestos").close() : $("#supuestos").removeAttribute("open");
+    $("#supuestos").addEventListener("click", ev => { if (ev.target.id === "supuestos") $("#supuestos").close(); });
+    $("#resultado").addEventListener("click", ev => { const b = ev.target.closest("[data-sup]"); if (b) abrirSup(b.dataset.sup); });
     $("#b-cerrar").onclick = () => $("#notas").close ? $("#notas").close() : $("#notas").removeAttribute("open");
     $("#notas").addEventListener("click", ev => { if (ev.target.id === "notas") $("#notas").close(); });
     document.querySelectorAll(".dlg-tabs button").forEach(b => b.onclick = () => notasTab(b.dataset.n)); abrir(D.empresas[0].id);

@@ -162,7 +162,13 @@ tr.xtotal td{font-weight:700;border-top:2px solid var(--line)}
 .btn-notas:hover{border-color:var(--ink)}
 .badge{font:600 11px/1 var(--f-mono);background:var(--crude);color:var(--surface);padding:3px 6px;border-radius:99px}
 dialog#notas{width:min(760px,calc(100vw - 32px));max-height:calc(100vh - 48px);border:1px solid var(--line);border-radius:8px;padding:0;background:var(--surface);color:var(--ink)}
-dialog#notas::backdrop{background:rgba(10,20,18,.45)}
+dialog#notas::backdrop,dialog#supuestos::backdrop{background:rgba(10,20,18,.45)}
+dialog#supuestos{width:min(820px,calc(100vw - 32px));max-height:calc(100vh - 48px);border:1px solid var(--line);border-radius:8px;padding:0;background:var(--surface);color:var(--ink)}
+.hdr-btns{display:flex;flex-wrap:wrap;gap:8px}
+.sup-g{scroll-margin-top:12px}.sup-g h3{font-size:16px;margin:4px 0 6px}
+.sup-g ul{margin:0;padding-left:18px;display:grid;gap:6px}.sup-g li{font-size:14px;max-width:75ch}
+.sup-g li .donde{display:block;color:var(--muted);font-size:12px}
+.linkbtn{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;cursor:pointer;font:inherit}
 .dlg-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px 0}
 .dlg-head h2{font-size:22px}
 #notas-fecha{padding:0 20px;margin:4px 0 0}
@@ -198,7 +204,8 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
         <p>Qué precio del Brent está pagando el mercado en seis petroleras</p>
       </div>
     </div>
-    <button class="btn-notas" id="b-notas" aria-haspopup="dialog">Estado y pendientes <span class="badge" id="n-pend">—</span></button>
+    <div class="hdr-btns"><button class="btn-notas" id="b-sup" aria-haspopup="dialog">Supuestos del modelo</button>
+<button class="btn-notas" id="b-notas" aria-haspopup="dialog">Estado y pendientes <span class="badge" id="n-pend">—</span></button></div>
   </div>
   <nav class="tabs" role="tablist">
     <button role="tab" id="tab-panel" aria-selected="true" data-tab="panel">Panel</button>
@@ -353,6 +360,11 @@ dialog#notas::backdrop{background:rgba(10,20,18,.45)}
   <div id="n-imp" class="dlg-body"></div>
   <div id="n-pen" class="dlg-body" hidden></div>
   <div id="n-aut" class="dlg-body" hidden></div>
+</dialog>
+<dialog id="supuestos" aria-labelledby="sup-t">
+  <div class="dlg-head"><h2 id="sup-t">Supuestos del modelo</h2><button class="btn" id="b-sup-cerrar" aria-label="Cerrar">Cerrar</button></div>
+  <p class="note" id="sup-intro" style="padding:0 20px"></p>
+  <div id="sup-body" class="dlg-body"></div>
 </dialog>
 <script>/*__ENGINE__*/</script>
 <script id="datos" type="application/json">/*__DATA__*/</script>

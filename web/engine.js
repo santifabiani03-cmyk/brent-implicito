@@ -63,6 +63,30 @@
       .sort((a, b) => Math.abs((b.mas10 || 0) - (b.menos10 || 0)) - Math.abs((a.mas10 || 0) - (a.menos10 || 0))); }
   const precioObjetivo = (i, brent, acciones, ratio = 1, fx = 1) => valorPatrimonio(i, brent) / acciones * ratio * fx;
 
-  root.MotorBrent = { CAMPOS, wacc, perfil, factorDescuento, valorRefinacion, valorPatrimonio, brentImplicito, banda, sensibilidad, precioObjetivo };
+  // Crecimiento implícito (réplica de engine/model.py): años 1..N crece a g con capex TTM fijo; después meseta con capex = DD&A/boe × q.
+  const N_CRECIMIENTO = 5, G_MAX = 1.0;
+  function valorConCrecimiento(i, brent, g, n = N_CRECIMIENTO) {
+    const j = { ...i, crecimiento_anual: g, anios_crecimiento: n, declino_anual: 0 };
+    const r = wacc(j), share = j.prod_crudo_kbd / (j.prod_crudo_kbd + j.prod_otros_kboed), pc = brent * (1 - j.diferencial_pct);
+    let ev = 0;
+    perfil(j).forEach((q, k) => { const t = k + 1, qc = q * share, qo = q * (1 - share), ic = qc * pc;
+      const ebitda = (ic + qo * j.precio_otros_usd_boe) * (1 - j.regalias_pct) - ic * j.retencion_pct - q * (j.lifting_usd_boe + j.otros_costos_usd_boe);
+      const imp = j.tasa_impuesto * Math.max(0, ebitda - q * j.dda_usd_boe), capex = t <= n ? j.capex_musd_anual : j.dda_usd_boe * q;
+      ev += (ebitda - imp - capex) / Math.pow(1 + r, t - 0.5); });
+    return ev + i.valor_no_upstream_musd - i.deuda_neta_musd - i.minoritarios_musd;
+  }
+  function crecimientoImplicito(i, cap, brent, n = N_CRECIMIENTO, tol = 1e-5) {
+    const f = g => valorConCrecimiento(i, brent, g, n) - cap, base = { anios: n, brent };
+    const pts = Array.from({ length: 21 }, (_, k) => f(k / 20 * G_MAX));
+    if (pts.some((v, k) => k && v < pts[k - 1])) return { valor: null, estado: "no_monotono", ...base };
+    if (pts[0] >= 0) return { valor: null, estado: "no_hace_falta", ...base };
+    if (pts[20] < 0) return { valor: null, estado: "inalcanzable", ...base };
+    let a = 0, b = G_MAX;
+    while (b - a > tol) { const m = (a + b) / 2; if (f(m) > 0) b = m; else a = m; }
+    return { valor: Math.round((a + b) / 2 * 1e4) / 1e4, estado: "ok", ...base };
+  }
+
+  root.MotorBrent = { CAMPOS, wacc, perfil, factorDescuento, valorRefinacion, valorPatrimonio, brentImplicito, banda, sensibilidad, precioObjetivo,
+    N_CRECIMIENTO, valorConCrecimiento, crecimientoImplicito };
   if (typeof module !== "undefined") module.exports = root.MotorBrent;
 })(typeof window !== "undefined" ? window : globalThis);

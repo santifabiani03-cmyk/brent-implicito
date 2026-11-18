@@ -187,6 +187,53 @@ def sensibilidad(i: Inputs, cap: float, rel: float = 0.10) -> list[dict]:
     return sorted(out, key=lambda x: -abs((x["mas10"] or 0) - (x["menos10"] or 0)))
 
 
+# --- Crecimiento implícito (diagnóstico, no cambia el despeje): ¿cuánto tendría que crecer la producción para que
+# el Brent implícito sea igual a un Brent de referencia (el CO1)? Escenario: años 1..N la producción crece a g y el
+# capex es el TTM fijo en MUSD (inversión de expansión); desde N+1 meseta con capex de mantenimiento = DD&A/boe × q.
+# El horizonte se sigue cortando en las reservas 1P y la refinación queda en el valor que trae el balance.
+N_CRECIMIENTO = 5      # años del tramo de crecimiento (supuesto del escenario)
+G_MAX = 1.0            # techo de la búsqueda: 100 % anual
+
+
+def valor_con_crecimiento(i: Inputs, brent: float, g: float, n: int = N_CRECIMIENTO) -> float:
+    j = replace(i, crecimiento_anual=g, anios_crecimiento=n, declino_anual=0.0)
+    r = wacc(j)
+    share_crudo = j.prod_crudo_kbd / (j.prod_crudo_kbd + j.prod_otros_kboed)
+    p_crudo = brent * (1 - j.diferencial_pct)
+    ev = 0.0
+    for t, q in enumerate(perfil_produccion(j), start=1):
+        q_c, q_o = q * share_crudo, q * (1 - share_crudo)
+        ing_crudo = q_c * p_crudo
+        ingreso = ing_crudo + q_o * j.precio_otros_usd_boe
+        ebitda = ingreso * (1 - j.regalias_pct) - ing_crudo * j.retencion_pct \
+            - q * (j.lifting_usd_boe + j.otros_costos_usd_boe)
+        impuesto = j.tasa_impuesto * max(0.0, ebitda - q * j.dda_usd_boe)
+        capex = j.capex_musd_anual if t <= n else j.dda_usd_boe * q
+        ev += (ebitda - impuesto - capex) / (1 + r) ** (t - 0.5)
+    return ev + i.valor_no_upstream_musd - i.deuda_neta_musd - i.minoritarios_musd
+
+
+def crecimiento_implicito(i: Inputs, cap: float, brent: float, n: int = N_CRECIMIENTO, tol: float = 1e-5) -> dict:
+    """Crecimiento anual durante n años que iguala el valor del escenario al Brent dado con la capitalización.
+    estado ∈ ok | no_hace_falta (con g = 0 ya alcanza) | inalcanzable (ni con G_MAX) | no_monotono."""
+    f = lambda g: valor_con_crecimiento(i, brent, g, n) - cap
+    pts = [f(k / 20 * G_MAX) for k in range(21)]
+    if any(b < a for a, b in zip(pts, pts[1:])):
+        return {"valor": None, "estado": "no_monotono", "anios": n, "brent": brent}
+    if pts[0] >= 0:
+        return {"valor": None, "estado": "no_hace_falta", "anios": n, "brent": brent}
+    if pts[-1] < 0:
+        return {"valor": None, "estado": "inalcanzable", "anios": n, "brent": brent}
+    a, b = 0.0, G_MAX
+    while b - a > tol:
+        m = (a + b) / 2
+        if f(m) > 0:
+            b = m
+        else:
+            a = m
+    return {"valor": round((a + b) / 2, 4), "estado": "ok", "anios": n, "brent": brent}
+
+
 def precio_objetivo(i: Inputs, brent: float, acciones_mm: float, ratio_adr: float = 1.0,
                     fx: float = 1.0) -> float:
     """Modo proyección: precio por unidad cotizada (ADR o acción) en moneda de cotización."""

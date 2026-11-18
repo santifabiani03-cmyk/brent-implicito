@@ -1,0 +1,126 @@
+{
+  "_nota": "Inventario de supuestos que muestra el botón 'Supuestos del modelo'. Si se cambia un supuesto en el código, actualizar acá. 'donde' apunta al archivo que lo implementa.",
+  "intro": "Todo lo que el modelo da por hecho para despejar el Brent implícito. Los supuestos no son datos: cambian el nivel del implícito y conviene leerlo con ellos a la vista.",
+  "grupos": [
+    {
+      "id": "flujo",
+      "titulo": "Estructura del flujo",
+      "items": [
+        {"supuesto": "Brent constante en el tiempo.", "detalle": "Se busca un único precio que se mantiene durante todo el horizonte; no hay curva de precios.", "donde": "engine/model.py · valor_patrimonio"},
+        {"supuesto": "Cadena de valor fija.", "detalle": "Precio de realización = Brent × (1 − diferencial); EBITDA = ingreso × (1 − regalías) − ingreso de crudo × derechos de exportación − producción × (lifting + otros costos).", "donde": "engine/model.py · valor_patrimonio"},
+        {"supuesto": "Impuesto sin quebrantos.", "detalle": "Impuesto = tasa × máx(0; EBITDA − DD&A por boe × producción). Un año con pérdida no genera crédito para los siguientes.", "donde": "engine/model.py · valor_patrimonio"},
+        {"supuesto": "Descuento a mitad de año.", "detalle": "Cada flujo anual se descuenta a (1 + WACC)^(t − 0,5).", "donde": "engine/model.py · valor_patrimonio"},
+        {"supuesto": "Sin valor terminal.", "detalle": "El valor termina cuando se agotan las reservas probadas o a los 30 años, lo que ocurra primero.", "donde": "engine/model.py · HORIZONTE_MAX, perfil_produccion"},
+        {"supuesto": "Del valor de la empresa al del patrimonio.", "detalle": "Patrimonio = valor presente del upstream + valor de los segmentos no-upstream − deuda neta − intereses minoritarios.", "donde": "engine/model.py · valor_patrimonio"},
+        {"supuesto": "Flujo antes de intereses y sin capital de trabajo.", "detalle": "Flujo libre = EBITDA − impuesto − capex. Los intereses entran por el WACC y la deuda se resta al final; no hay variación de capital de trabajo.", "donde": "engine/model.py · valor_patrimonio"},
+        {"supuesto": "Regalías sobre todo el ingreso; derechos de exportación solo sobre el crudo.", "detalle": "Las regalías se aplican al ingreso de crudo + gas/NGL; la retención, solo al ingreso de crudo.", "donde": "engine/model.py · valor_patrimonio"},
+        {"supuesto": "Valores en dólares constantes.", "detalle": "Precios y costos por boe no se indexan: no hay inflación de costos ni de precios a lo largo del horizonte.", "donde": "engine/model.py · valor_patrimonio"}
+      ]
+    },
+    {
+      "id": "produccion",
+      "titulo": "Producción y reservas",
+      "items": [
+        {"supuesto": "Producción del último trimestre, anualizada.", "detalle": "Crudo y gas + NGL en boe/día × 365.", "donde": "engine/model.py · perfil_produccion"},
+        {"supuesto": "Producción plana en el caso base.", "detalle": "Crecimiento 0 y declino 0 hasta agotar las reservas probadas; el último año es parcial.", "donde": "pipeline/derivar.py · crecimiento_anual, anios_crecimiento, declino_anual"},
+        {"supuesto": "Solo reservas probadas (1P).", "detalle": "Las reservas probables, posibles y los recursos no probados no entran. Esto empuja el implícito hacia arriba en empresas con mucho recurso sin probar, como las de Vaca Muerta.", "donde": "engine/model.py · perfil_produccion"},
+        {"supuesto": "Mezcla de crudo y gas constante.", "detalle": "La proporción de crudo del último trimestre se mantiene todo el horizonte.", "donde": "engine/model.py · valor_patrimonio"},
+        {"supuesto": "Base de las reservas.", "detalle": "Se usan las 1P por participación del último ejercicio. Las fuentes no siempre tienen la misma base: Vista informa reservas brutas de regalías e YPF netas.", "donde": "pipeline/build.py · reservas_1p_mmboe"}
+      ]
+    },
+    {
+      "id": "precios",
+      "titulo": "Precios",
+      "items": [
+        {"supuesto": "Gas y NGL a precio fijo.", "detalle": "El precio por boe del gas y los NGL no está ligado al Brent: se toma el precio realizado del último período y se mantiene. En Argentina es el que informa YPF, porque Vista no lo publica.", "donde": "pipeline/derivar.py · precio_otros_usd_boe"},
+        {"supuesto": "1 boe = 5,8 MMBtu.", "detalle": "Convención de industria para pasar el precio del gas de USD/MMBtu a USD/boe.", "donde": "pipeline/derivar.py · BOE_MMBTU"},
+        {"supuesto": "Diferencial de realización constante.", "detalle": "1 − precio realizado / CO1 promedio del trimestre, y se mantiene todo el horizonte. Si Vista no informa precio realizado: 1 − Medanito/Brent de los últimos 3 meses (SE). Petrobras: precio de venta anual del 20-F contra Brent Dated, o paridad si no hay dato.", "donde": "pipeline/derivar.py · diferencial_pct"},
+        {"supuesto": "Referencia de la prima: CO1.", "detalle": "La prima es implícito − primer futuro de Brent. En la página del día es BZ=F (Yahoo); en la serie histórica, el CO1 de Bloomberg hasta la última exportación.", "donde": "config/parametros.json · brent_referencia"}
+      ]
+    },
+    {
+      "id": "costos",
+      "titulo": "Costos, capex e impuestos",
+      "items": [
+        {"supuesto": "Costos por boe constantes.", "detalle": "Lifting y otros costos (G&A, transporte) del último trimestre, por boe.", "donde": "pipeline/derivar.py · lifting_usd_boe, otros_costos_usd_boe"},
+        {"supuesto": "Capex de los últimos 12 meses, por boe, todo el horizonte.", "detalle": "El capex TTM se divide por la producción del primer año y escala con la producción. Si es capex de expansión, el modelo lo cobra sin acreditar el crecimiento que compra (ver crecimiento implícito).", "donde": "engine/model.py · valor_patrimonio"},
+        {"supuesto": "El capex TTM puede incluir adquisiciones.", "detalle": "Sale del estado de flujos y no siempre separa compras de activos.", "donde": "pipeline/build.py · capex_musd_anual"},
+        {"supuesto": "Tasa de impuesto marginal del país.", "detalle": "Tasa marginal de Damodaran por país; la efectiva TTM queda solo como referencia.", "donde": "pipeline/derivar.py · tasa_impuesto"},
+        {"supuesto": "Amortización fiscal por boe constante.", "detalle": "DD&A del último período por boe como escudo fiscal.", "donde": "pipeline/derivar.py · dda_usd_boe"},
+        {"supuesto": "Integradas: costos consolidados al upstream.", "detalle": "En YPF, Suncor y Petrobras el capex y el SG&A consolidados (incluido el downstream) se cargan al flujo del upstream.", "donde": "engine/model.py · valor_refinacion"}
+      ]
+    },
+    {
+      "id": "wacc",
+      "titulo": "Costo de capital",
+      "items": [
+        {"supuesto": "CAPM con riesgo país aditivo.", "detalle": "ke = rf + β × ERP + λ × CRP; WACC = (1 − D/V) × ke + D/V × kd × (1 − t).", "donde": "engine/model.py · wacc"},
+        {"supuesto": "WACC constante en el horizonte.", "detalle": "Una sola tasa para todos los años del flujo.", "donde": "engine/model.py · wacc"},
+        {"supuesto": "Parámetros de mercado.", "detalle": "rf: bono del Tesoro de EE.UU. a 10 años (FRED). ERP de mercado maduro (Damodaran).", "donde": "pipeline/derivar.py · rf, erp"},
+        {"supuesto": "Beta sectorial reapalancada.", "detalle": "Beta desapalancada de Damodaran por perfil, reapalancada con la deuda sobre la capitalización de mercado (Hamada).", "donde": "pipeline/derivar.py · beta, peso_deuda"},
+        {"supuesto": "Costo de la deuda acotado.", "detalle": "Intereses TTM / deuda total, acotado entre rf y rf + 10 puntos porcentuales.", "donde": "pipeline/derivar.py · kd"},
+        {"supuesto": "Riesgo país y exposición unitaria.", "detalle": "λ = 1 (MT 7.2.2). Argentina: EMBI diario (ArgentinaDatos); Brasil: CDS a 5 años (Bloomberg); Norteamérica: 0.", "donde": "pipeline/derivar.py · crp, lambda_crp; config/parametros.json"}
+      ]
+    },
+    {
+      "id": "refinacion",
+      "titulo": "Refinación (integradas)",
+      "items": [
+        {"supuesto": "Flujo de la refinación en horizonte finito.", "detalle": "EBITDA de 12 meses de los segmentos no-upstream × (1 − impuesto) × factor de descuento con el mismo WACC y horizonte que el upstream. Sin múltiplos ni valor terminal (7.4).", "donde": "engine/model.py · valor_refinacion"},
+        {"supuesto": "EBITDA de 12 meses anualizado si falta historia.", "detalle": "Si hay menos de 4 trimestres, se anualizan los disponibles.", "donde": "pipeline/derivar.py · poner_refinacion"},
+        {"supuesto": "La refinación sigue al WACC del día.", "detalle": "Si cambia el riesgo país, se recalcula el valor de la refinación.", "donde": "engine/model.py · con_crp"}
+      ]
+    },
+    {
+      "id": "despeje",
+      "titulo": "Despeje, banda y sensibilidad",
+      "items": [
+        {"supuesto": "Despeje por bisección entre USD 10 y 300.", "detalle": "Se busca el Brent en el que el valor del patrimonio iguala la capitalización bursátil. Si no hay cruce en ese rango, no se informa implícito.", "donde": "engine/model.py · brent_implicito"},
+        {"supuesto": "Banda (8.3).", "detalle": "El implícito se recalcula con el WACC ±1 punto porcentual y con los costos (lifting y otros) ±10 %, de a un supuesto por vez. Cubre la incertidumbre de parámetros, no el sesgo de especificación.", "donde": "engine/model.py · BANDA"},
+        {"supuesto": "Sensibilidad ±10 %.", "detalle": "Cada input relevante se mueve ±10 % por separado para ver cuánto mueve el implícito.", "donde": "engine/model.py · sensibilidad"}
+      ]
+    },
+    {
+      "id": "serie",
+      "titulo": "Serie histórica diaria",
+      "items": [
+        {"supuesto": "Sin look-ahead.", "detalle": "Cada día usa el último balance con fecha de publicación anterior o igual a ese día.", "donde": "pipeline/historia.py"},
+        {"supuesto": "Capitalización del día.", "detalle": "Precio del día × acciones de ese balance (÷ ratio ADR; ÷ USD/BRL para PRIO).", "donde": "pipeline/historia.py"},
+        {"supuesto": "Dato faltante: se arrastra el último publicado.", "detalle": "Si un balance no trae un input, se mantiene el del balance anterior y queda marcado como arrastrado.", "donde": "pipeline/historia.py · calibrar"},
+        {"supuesto": "Banda diaria.", "detalle": "La banda se vuelve a calcular cada día con la calibración vigente, la capitalización y el riesgo país del día.", "donde": "pipeline/historia.py"},
+        {"supuesto": "Riesgo país diario, prima de mercado por balance.", "detalle": "El diferencial soberano cambia rueda a rueda; la ERP de Damodaran queda fija por balance.", "donde": "pipeline/historia.py · crp_dia"}
+      ]
+    },
+    {
+      "id": "empresa",
+      "titulo": "Supuestos por empresa o país",
+      "items": [
+        {"supuesto": "PRIO: sin gas separado.", "detalle": "Informa producción total sin desagregar gas: se toma gas + NGL = 0.", "donde": "pipeline/derivar.py"},
+        {"supuesto": "Petrobras: paridad Brent.", "detalle": "No publica precio realizado de crudo: diferencial 0.", "donde": "pipeline/derivar.py"},
+        {"supuesto": "Petrobras: capitalización con ordinarias y preferidas.", "detalle": "Acciones ON × precio de PBR + acciones PN × precio de PBR-A, divididas por el ratio del ADR.", "donde": "pipeline/build.py"},
+        {"supuesto": "PRIO: regalía estándar 10 %.", "detalle": "Lei 9.478/1997, art. 47, cuando no hay dato del release; no incluye participación especial.", "donde": "pipeline/derivar.py"},
+        {"supuesto": "Derechos de exportación 0 si no se informan.", "detalle": "Argentina: el Dto. 59/2026 exime al no convencional hasta USD 65.", "donde": "pipeline/derivar.py · retencion_pct"},
+        {"supuesto": "Productoras puras sin valor no-upstream.", "detalle": "VIST, EOG y PRIO: valor de segmentos no-upstream = 0.", "donde": "pipeline/derivar.py · valor_no_upstream_musd"}
+      ]
+    },
+    {
+      "id": "crecimiento",
+      "titulo": "Crecimiento que iguala al CO1 (diagnóstico)",
+      "items": [
+        {"supuesto": "Qué mide.", "detalle": "El crecimiento anual de la producción que hace falta para que el implícito sea igual al CO1. No cambia el despeje ni la prima: es una forma de leer el sesgo del caso base.", "donde": "engine/model.py · crecimiento_implicito"},
+        {"supuesto": "Cinco años de crecimiento con el capex actual.", "detalle": "Años 1 a 5: la producción crece a esa tasa y el capex es el TTM, fijo en millones de dólares.", "donde": "engine/model.py · N_CRECIMIENTO, valor_con_crecimiento"},
+        {"supuesto": "Después, meseta con capex de mantenimiento.", "detalle": "Desde el año 6 la producción queda plana y el capex = DD&A por boe × producción. La DD&A es un proxy grueso: refleja costo histórico, no costo de reposición.", "donde": "engine/model.py · valor_con_crecimiento"},
+        {"supuesto": "Las reservas 1P siguen siendo el tope.", "detalle": "Crecer más rápido agota antes las mismas reservas: con 1P fijas, crecer solo adelanta barriles.", "donde": "engine/model.py · perfil_produccion"},
+        {"supuesto": "Refinación fija.", "detalle": "En las integradas el valor de la refinación queda en el del balance, para aislar el upstream.", "donde": "engine/model.py · valor_con_crecimiento"},
+        {"supuesto": "Búsqueda entre 0 % y 100 % anual.", "detalle": "\"No hace falta crecer\": con g = 0 el implícito ya queda en el CO1 o por debajo. \"Inalcanzable\": ni con 100 % anual alcanza con las reservas 1P. No es guidance de las empresas.", "donde": "engine/model.py · G_MAX"}
+      ]
+    },
+    {
+      "id": "fuera",
+      "titulo": "Qué queda afuera",
+      "items": [
+        {"supuesto": "Eventos posteriores al balance.", "detalle": "Litigios, cambios de management o regulación no anticipada no entran. Si una empresa da un implícito raro, la primera hipótesis es un evento que el modelo no ve.", "donde": "Cómo funciona"}
+      ]
+    }
+  ]
+}

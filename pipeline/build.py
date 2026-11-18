@@ -171,6 +171,9 @@ def main():
             bi = model.brent_implicito(i, cap)
             resultado = {"estado": bi["estado"], "brent_implicito": bi.get("valor"), "wacc": model.wacc(i),
                          "banda": model.banda(i, cap), "sensibilidad": model.sensibilidad(i, cap)}
+            co1 = (brent.get("primera_linea") or {}).get("precio")   # misma referencia que la prima en la página
+            if co1:
+                resultado["crecimiento_implicito"] = model.crecimiento_implicito(i, cap, co1)
         empresas.append({**{k: c[k] for k in c}, "mercado": {**{k: q.get(k) for k in ("precio", "moneda", "ts", "fuente")},
                          "cap_musd": cap, "nota_cap": nota_cap, "serie_1y": q.get("serie_1y", [])[-260:]},
                          "fundamentals": {k: f.get(k) for k in ("fecha", "deuda_musd", "caja_musd", "deuda_neta_musd", "acciones_mm", "fuente")},
@@ -181,6 +184,7 @@ def main():
            "fuentes_estado": estado_fuentes(),
            "historia": _historia(),
            "notas": json.loads((RAIZ / "config" / "pendientes.json").read_text(encoding="utf-8")),
+           "supuestos": json.loads((RAIZ / "config" / "supuestos.json").read_text(encoding="utf-8")),
            "edgar": {e: {"docs": r.get("docs"), "fallas": r.get("fallas")} for e, r in edgar.items()}}
     (RAIZ / "web" / "data.json").write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     print("data.json:", len(empresas), "empresas;", sum(e["resultado"]["estado"] == "ok" for e in empresas), "calibradas")

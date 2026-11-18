@@ -271,3 +271,31 @@ def test_extraccion_sobre_texto():
          "Total 548.8 504.2 Average Crude Oil and Condensate Prices ($/Bbl) (3) United States $ 98.18 $ 64.84 Composite 98.15 64.82")
     assert re.search(RECETAS["EOG"]["campos"]["crudo_kbd"][1], t).group(1) == "548.8"
     assert re.search(RECETAS["EOG"]["campos"]["p_crudo"][1], t).group(1) == "98.15"
+
+
+def test_crecimiento_implicito_reproduce_y_estados():
+    """Con g = 0 y n = 0 el escenario es capex de mantenimiento (DD&A/boe); la búsqueda de g devuelve el g que iguala."""
+    i = model.Inputs.desde_dict(dict(SINTETICO, crecimiento_anual=0.0, anios_crecimiento=0, declino_anual=0.0))
+    cap = model.valor_con_crecimiento(i, 80.0, 0.12)
+    r = model.crecimiento_implicito(i, cap, 80.0)
+    assert r["estado"] == "ok" and abs(r["valor"] - 0.12) < 1e-3
+    assert model.crecimiento_implicito(i, cap * 0.5, 80.0)["estado"] == "no_hace_falta"
+    assert model.crecimiento_implicito(i, cap * 50, 80.0)["estado"] == "inalcanzable"
+    # años 1..n con el capex TTM y g = 0: mismo flujo que el motor salvo el capex de la meseta
+    j = model.Inputs.desde_dict(dict(SINTETICO, crecimiento_anual=0.0, anios_crecimiento=0, declino_anual=0.0, dda_usd_boe=800 / 43.8))
+    assert abs(model.valor_con_crecimiento(j, 70.0, 0.0, 0) - model.valor_patrimonio(j, 70.0)) < 1e-6
+
+
+def test_paridad_crecimiento_js():
+    i = model.Inputs.desde_dict(SINTETICO)
+    caps = [model.valor_con_crecimiento(i, 80.0, g) for g in (0.03, 0.15)] + [model.valor_patrimonio(i, 80.0) * 0.1, 1e7]
+    js = pathlib.Path(__file__).resolve().parents[1] / "web" / "engine.js"
+    code = f"""const M=require({json.dumps(str(js))}); const i={json.dumps(SINTETICO)};
+      console.log(JSON.stringify({{v:[0,0.1,0.3].map(g=>M.valorConCrecimiento(i,75,g)), c:{json.dumps(caps)}.map(c=>M.crecimientoImplicito(i,c,80))}}))"""
+    out = json.loads(subprocess.check_output(["node", "-e", code]))
+    for g, v in zip((0, 0.1, 0.3), out["v"]):
+        assert abs(model.valor_con_crecimiento(i, 75, g) - v) < 1e-6
+    for c, r in zip(caps, out["c"]):
+        p = model.crecimiento_implicito(i, c, 80)
+        assert r["estado"] == p["estado"] and (r["valor"] is None) == (p["valor"] is None)
+        assert r["valor"] is None or abs(r["valor"] - p["valor"]) < 2e-4
