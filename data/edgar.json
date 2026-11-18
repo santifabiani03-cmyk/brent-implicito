@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-18T17:54:52+00:00",
+  "actualizado": "2026-11-18T18:39:59+00:00",
   "hasta": "2026-11-18",
   "empresas": {
     "VIST": {
@@ -103,12 +103,12 @@
         "otros_up_opex_q": {
           "valor": -139.0,
           "doc": "release",
-          "texto": "otros_up_opex_q -139"
+          "texto": "Lifting cost (401) (427) (426) -6.0% -5.8% (1,245) (1,795) -30.6% Other Upstream (139)"
         },
         "corp_ebitda_q": {
           "valor": -164.0,
           "doc": "release",
-          "texto": "corp_ebitda_q -164"
+          "texto": "EBITDA & CAPEX BY SEGMENT By Segment 3Q26 2Q26 Q/Q Δ 3Q25 Y/Y Δ 9M26 9M25 Δ Adj. EBITDA Upstream 1,575 1,725 -9% 1,046 51% 4,449 2,614 70% Midstream & Downstrea"
         }
       },
       "fallas": [
@@ -269,12 +269,12 @@
         "ga_q": {
           "valor": -513.0,
           "doc": "resultados",
-          "texto": "ga_q -513"
+          "texto": "General and administrative expenses (513)"
         },
         "id_q": {
           "valor": -306.0,
           "doc": "resultados",
-          "texto": "id_q -306"
+          "texto": "Research and development expenses (306)"
         }
       },
       "fallas": [

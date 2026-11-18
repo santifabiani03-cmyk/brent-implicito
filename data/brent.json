@@ -1,26 +1,10 @@
 {
-  "actualizado": "2026-11-18T17:44:07+00:00",
+  "actualizado": "2026-11-18T18:29:23+00:00",
   "fuentes": {
     "spot": "FRED DCOILBRENTEU (EIA, Europe Brent Spot Price FOB)",
     "futuros": "ICE Brent vía Yahoo Finance (BZ=F y contratos BZ<mes><año>.NYM)"
   },
   "spot": [
-    [
-      "2025-04-14",
-      67.18
-    ],
-    [
-      "2025-04-15",
-      66.58
-    ],
-    [
-      "2025-04-16",
-      67.94
-    ],
-    [
-      "2025-04-17",
-      69.33
-    ],
     [
       "2025-04-22",
       68.93
@@ -1604,36 +1588,52 @@
     [
       "2026-11-11",
       92.14
+    ],
+    [
+      "2026-11-12",
+      95.42
+    ],
+    [
+      "2026-11-13",
+      95.17
+    ],
+    [
+      "2026-11-16",
+      92.9
+    ],
+    [
+      "2026-11-17",
+      92.94
     ]
   ],
   "primera_linea": {
     "ticker": "BZ=F",
-    "precio": 88.43,
-    "ts": 1795023241
+    "precio": 88.26,
+    "ts": 1795025944
   },
   "curva": [
     {
       "ticker": "BZF27.NYM",
-      "precio": 91.17,
-      "ts": 1795023243,
+      "precio": 91.05,
+      "ts": 1795025966,
       "vencimiento": "2027-01"
     },
     {
       "ticker": "BZG27.NYM",
-      "precio": 88.43,
-      "ts": 1795023241,
+      "precio": 88.25,
+      "ts": 1795025966,
       "vencimiento": "2027-02"
     },
     {
       "ticker": "BZH27.NYM",
-      "precio": 85.88,
-      "ts": 1795022781,
+      "precio": 86.0,
+      "ts": 1795025618,
       "vencimiento": "2027-03"
     },
     {
       "ticker": "BZJ27.NYM",
-      "precio": 83.97,
-      "ts": 1795022013,
+      "precio": 84.47,
+      "ts": 1795023345,
       "vencimiento": "2027-04"
     },
     {
@@ -1644,8 +1644,8 @@
     },
     {
       "ticker": "BZM27.NYM",
-      "precio": 81.88,
-      "ts": 1795014103,
+      "precio": 81.33,
+      "ts": 1795024444,
       "vencimiento": "2027-06"
     },
     {
