@@ -235,7 +235,8 @@
     const S = D.supuestos || { grupos: [] };
     $("#sup-intro").textContent = S.intro || "";
     $("#sup-body").innerHTML = S.grupos.map(g => `<section class="sup-g" id="sup-${esc(g.id)}"><h3>${esc(g.titulo)}</h3><ul>${
-      g.items.map(x => `<li><b>${esc(x.supuesto)}</b> ${esc(x.detalle || "")}${x.donde ? `<span class="donde">${esc(x.donde)}</span>` : ""}</li>`).join("")}</ul></section>`).join("");
+      g.items.map(x => `<li><b>${esc(x.supuesto)}</b> ${esc(x.detalle || "")}${x.donde ? `<span class="donde">${esc(x.donde)}</span>` : ""}${
+        x.por_que ? `<details class="porque"><summary>¿Por qué?</summary><p>${esc(x.por_que)}</p></details>` : ""}</li>`).join("")}</ul></section>`).join("");
   }
   function abrirSup(id) {
     const dl = $("#supuestos"); if (dl.showModal) dl.showModal(); else dl.setAttribute("open", "");
