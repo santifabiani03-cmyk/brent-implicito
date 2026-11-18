@@ -1,7 +1,7 @@
 {
-  "actualizado": "2026-11-18T03:45:10+00:00",
+  "actualizado": "2026-11-18T04:02:51+00:00",
   "errores": {
-    "argentina": "GET falló: http://www.energia.gob.ar/contenidos/archivos/Reorganizacion/informacion_del_mercado/mercado_hidrocarburos/informacion_estadistica/regalias/Regalias_CRUDO.zip → HTTPConnectionPool(host='www.energia.gob.ar', port=80): Max retries exceeded with url: /contenidos/archivos/Reorganizacion/informacion_del_mercado/mercado_hidrocarburos/informacion_estadistica/regalias/Regalias_CRUDO.zip (Caused by ConnectTimeoutError(<HTTPConnection(host='www.energia.gob.ar', port=80) at 0x7d783bae4c80>, 'Connection to www.energia.gob.ar timed out. (connect timeout=120)'))"
+    "argentina": "GET falló: http://www.energia.gob.ar/contenidos/archivos/Reorganizacion/informacion_del_mercado/mercado_hidrocarburos/informacion_estadistica/regalias/Regalias_CRUDO.zip → HTTPConnectionPool(host='www.energia.gob.ar', port=80): Max retries exceeded with url: /contenidos/archivos/Reorganizacion/informacion_del_mercado/mercado_hidrocarburos/informacion_estadistica/regalias/Regalias_CRUDO.zip (Caused by ConnectTimeoutError(<HTTPConnection(host='www.energia.gob.ar', port=80) at 0x7bb68fcbf4a0>, 'Connection to www.energia.gob.ar timed out. (connect timeout=120)'))"
   },
   "rf": {
     "valor": 0.0512,
