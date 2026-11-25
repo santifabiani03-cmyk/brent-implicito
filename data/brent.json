@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-24T06:18:46+00:00",
+  "actualizado": "2026-11-25T04:59:48+00:00",
   "fuentes": {
     "spot": "FRED DCOILBRENTEU (EIA, Europe Brent Spot Price FOB)",
     "futuros": "ICE Brent vía Yahoo Finance (BZ=F y contratos BZ<mes><año>.NYM)"
@@ -1608,44 +1608,44 @@
   ],
   "primera_linea": {
     "ticker": "BZ=F",
-    "precio": 86.27,
-    "ts": 1795500487
+    "precio": 87.48,
+    "ts": 1795582158
   },
   "curva": [
     {
       "ticker": "BZF27.NYM",
-      "precio": 88.83,
-      "ts": 1795500530,
+      "precio": 90.13,
+      "ts": 1795581976,
       "vencimiento": "2027-01"
     },
     {
       "ticker": "BZG27.NYM",
-      "precio": 86.29,
-      "ts": 1795500530,
+      "precio": 87.48,
+      "ts": 1795582158,
       "vencimiento": "2027-02"
     },
     {
       "ticker": "BZH27.NYM",
-      "precio": 84.2,
-      "ts": 1795500487,
+      "precio": 85.36,
+      "ts": 1795582158,
       "vencimiento": "2027-03"
     },
     {
       "ticker": "BZJ27.NYM",
-      "precio": 82.77,
-      "ts": 1795490959,
+      "precio": 84.55,
+      "ts": 1795550336,
       "vencimiento": "2027-04"
     },
     {
       "ticker": "BZK27.NYM",
-      "precio": 81.47,
-      "ts": 1795471150,
+      "precio": 82.57,
+      "ts": 1795529241,
       "vencimiento": "2027-05"
     },
     {
       "ticker": "BZM27.NYM",
-      "precio": 80.18,
-      "ts": 1795486364,
+      "precio": 81.57,
+      "ts": 1795572410,
       "vencimiento": "2027-06"
     },
     {
@@ -1680,8 +1680,8 @@
     },
     {
       "ticker": "BZZ27.NYM",
-      "precio": 75.34,
-      "ts": 1795489138,
+      "precio": 76.15,
+      "ts": 1795572701,
       "vencimiento": "2027-12"
     },
     {
@@ -1704,14 +1704,14 @@
     },
     {
       "ticker": "BZM28.NYM",
-      "precio": 72.55,
-      "ts": 1795448348,
+      "precio": 72.86,
+      "ts": 1795515865,
       "vencimiento": "2028-06"
     },
     {
       "ticker": "BZZ28.NYM",
-      "precio": 71.96,
-      "ts": 1795443617,
+      "precio": 71.82,
+      "ts": 1795551224,
       "vencimiento": "2028-12"
     }
   ]
