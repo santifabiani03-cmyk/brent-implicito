@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-26T04:19:32+00:00",
+  "actualizado": "2026-11-27T04:28:57+00:00",
   "empresas": {
     "VIST": {
       "cierre": "2026-09-30",
@@ -13,8 +13,8 @@
       "deuda_musd": 3725.352,
       "caja_musd": 789.541,
       "deuda_neta_musd": 2935.811,
-      "acciones_mm": 110.287402,
-      "mcap_yahoo_musd": 5532.016128,
+      "acciones_mm": 110.227402,
+      "mcap_yahoo_musd": 5529.006592,
       "minoritarios_musd": 194.847,
       "moneda_origen": "USD",
       "moneda_verificar": false,
@@ -79,22 +79,22 @@
     },
     "PRIO": {
       "cierre": "2026-09-30",
-      "capex_musd_ttm": 2446.2415639609007,
-      "dda_musd_ttm": 1220.611134721632,
-      "costo_ventas_musd_ttm": 2699.980816149596,
-      "ingresos_musd_ttm": 4449.840297492562,
+      "capex_musd_ttm": 2504.9639661595234,
+      "dda_musd_ttm": 1249.9120913553597,
+      "costo_ventas_musd_ttm": 2764.7942678341396,
+      "ingresos_musd_ttm": 4556.659393169237,
       "tasa_impuesto_efectiva": 0.15104080755293223,
-      "sga_musd_ttm": 26.050966765830854,
-      "intereses_musd_ttm": 260.4213655758606,
-      "deuda_musd": 4238.213174670633,
-      "caja_musd": 1098.1893752656183,
-      "deuda_neta_musd": 3140.0237994050144,
+      "sga_musd_ttm": 26.67632420011837,
+      "intereses_musd_ttm": 266.672820213766,
+      "deuda_musd": 4339.952128955889,
+      "caja_musd": 1124.5515788740731,
+      "deuda_neta_musd": 3215.4005500818157,
       "acciones_mm": 791.606701,
-      "mcap_yahoo_musd": 47892.205568,
+      "mcap_yahoo_musd": 49435.840512,
       "minoritarios_musd": 0.0,
       "moneda_origen": "BRL",
       "moneda_verificar": false,
-      "fuente": "Yahoo Finance vía yfinance (PRIO3.SA), últimos 4 trimestres al 2026-09-30; BRL→USD con PTAX 5.8825"
+      "fuente": "Yahoo Finance vía yfinance (PRIO3.SA), últimos 4 trimestres al 2026-09-30; BRL→USD con PTAX 5.7446"
     },
     "PBR": {
       "cierre": "2026-06-30",
